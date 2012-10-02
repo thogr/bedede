@@ -37,7 +37,7 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 	
 	@Start
 	public static class State0 extends AbstractState {
-		public static final Given<State0> IS = new Given<State0>() {
+		public static final Given<State0> REACHED = new Given<State0>() {
 			@Override
 			protected void perform() {
 			}			
@@ -60,10 +60,10 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 	}
 	
 	public static class State1 extends AbstractState {
-		public static final Given<State1> IS = new Given<State1>() {
+		public static final Given<State1> REACHED = new Given<State1>() {
 			@Override
 			protected void perform() {
-				given(State0.IS);
+				given(State0.REACHED);
 				when(State0.class).perform(State0.start());
 			}
 		};
@@ -85,10 +85,10 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 	}
 	
 	public static class State2 extends AbstractState {
-		public static final Given<State2> IS = new Given<State2>() {
+		public static final Given<State2> REACHED = new Given<State2>() {
 			@Override
 			protected void perform() {
-				given(State1.IS);
+				given(State1.REACHED);
 				when(State1.class).perform(State1.gotoNext());
 			}
 		};
@@ -114,28 +114,28 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 	
 	@Test
 	public void shouldGotoState2WhenInState1PerformingGotoNext() throws Exception {
-		given(State1.IS);
+		given(State1.REACHED);
 		when(State1.class).perform(State1.gotoNext());
 		then(State2.class);
 	}
 	
 	@Test
 	public void shouldGotoState1WhenInState2PerformingGoBack() throws Exception {
-		given(State2.IS);
+		given(State2.REACHED);
 		when(State2.class).perform(State2.update("1"));
 		then(State1.class);
 	}
 	
 	@Test
 	public void shouldStayWhenInState2PerformingGoBackAfterUpdatingWithWrongValue() throws Exception {
-		given(State2.IS);
+		given(State2.REACHED);
 		when(State2.class).perform(State2.update("1234"));
 		then(State2.class); // TODO: WHY?
 	}
 	
 	@Test
 	public void shouldGotoState1WhenInState2PerformingGoBackAfterUpdatingCorrectly() throws Exception {
-		given(State2.IS);
+		given(State2.REACHED);
 		when(State2.class).perform(State2.update("1"));
 		then(State1.class);
 	}

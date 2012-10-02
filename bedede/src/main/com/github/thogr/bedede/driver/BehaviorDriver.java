@@ -29,8 +29,4 @@ public final class BehaviorDriver {
 	public void then(Class<?> state) {
 		machine.next(state);
 	}
-
-	void next(Class<?> state) {
-		machine.verify(state);
-	}
 }

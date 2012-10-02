@@ -29,7 +29,7 @@ public abstract class Given<Target> {
 	}
 
 	public void then(Class<Target> state) {
-		bdd.next(state);
+		bdd.then(state);
 	}
 
 	public <T> ActionPerformer<T> when(Class<T> state) {

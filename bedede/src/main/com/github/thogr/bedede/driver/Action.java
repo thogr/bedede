@@ -13,6 +13,6 @@ public abstract class Action<Before, After> {
 	protected abstract void perform(Before state);
 	
 	protected void then(Class<After> next) {
-		bdd.next(next);
+		bdd.then(next);
 	}
 }
