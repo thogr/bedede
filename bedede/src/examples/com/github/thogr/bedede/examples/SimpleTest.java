@@ -5,30 +5,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.thogr.bedede.driver.Action;
 import com.github.thogr.bedede.driver.Given;
+import com.github.thogr.bedede.driver.TransitionAction;
 import com.github.thogr.bedede.state.Start;
-import com.github.thogr.bedede.state.State;
-import com.github.thogr.bedede.state.Verifyer;
+import com.github.thogr.bedede.util.AbstractState;
 import com.github.thogr.bedede.util.BehaviorDrivenTestCase;
 
 
 public class SimpleTest extends BehaviorDrivenTestCase {
 	
 	private static String name = "0";
-	
-	@State(verifyer = AbstractState.StateVerifier.class)
-	public static abstract class AbstractState {
-		public static class StateVerifier implements Verifyer<AbstractState> {
-
-			@Override
-			public void verify(AbstractState state) {
-				state.verify();
-			}
-		}
-		
-		protected abstract void verify();
-	}
 	
 	@Before
 	public void returnToStartState() {
@@ -43,8 +29,8 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 			}			
 		};
 		
-		public static Action<State0, State1> start() {
-			return new Action<State0, State1>() {
+		public static TransitionAction<State0, State1> start() {
+			return new TransitionAction<State0, State1>() {
 				@Override
 				protected void perform(State0 self) {
 					name = "1";
@@ -73,8 +59,8 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 			assertEquals("Wrong State!", "1", name); 
 		}
 
-		public static Action<State1, State2> gotoNext() {
-			return new Action<State1, State2>() {
+		public static TransitionAction<State1, State2> gotoNext() {
+			return new TransitionAction<State1, State2>() {
 				@Override
 				protected void perform(State1 self) {
 					name = "2";
@@ -100,8 +86,8 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 			assertEquals("Wrong State!", "2", name); 
 		}
 
-		public static Action<State2, State2> update(final String data) {
-			return new Action<State2, State2>() {
+		public static TransitionAction<State2, State2> update(final String data) {
+			return new TransitionAction<State2, State2>() {
 				@Override
 				protected void perform(State2 self) {
 					if ("1".equals(data)) {

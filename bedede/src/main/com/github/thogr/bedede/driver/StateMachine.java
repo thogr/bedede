@@ -1,7 +1,10 @@
-package com.github.thogr.bedede.state;
+package com.github.thogr.bedede.driver;
 
+import com.github.thogr.bedede.state.Start;
+import com.github.thogr.bedede.state.State;
+import com.github.thogr.bedede.state.Verifyer;
 
-public class StateMachine {
+class StateMachine {
 
 	private Object current;
 	private StateFactory factory;
@@ -16,7 +19,8 @@ public class StateMachine {
 			if (isStartState(state)) {
 				next(state);
 			} else {
-				throw new IllegalStateException(state + " not a start state");
+				throw new IllegalStateException(
+						state + " not a start state");
 			}
 		} else {
 			if (!isInState(state)) {
@@ -50,7 +54,8 @@ public class StateMachine {
 	private Verifyer<?> verifyerOf(Class<?> state) {
 		State stateAnnotation = state.getAnnotation(State.class);
 		if (stateAnnotation != null) {
-			Class<? extends Verifyer<?>> verifyer = stateAnnotation.verifyer();
+			Class<? extends Verifyer<?>> verifyer = 
+				stateAnnotation.verifyer();
 			try {
 				return (Verifyer<?>) verifyer.newInstance();
 			} catch (InstantiationException e) {
@@ -63,7 +68,10 @@ public class StateMachine {
 			if (superClass != null) {
 				return verifyerOf(superClass);
 			} else {
-				throw new IllegalStateException("Class " + state + " is not a State class");
+				throw new IllegalStateException(
+						"Class " + 
+						state + 
+						" is not a State class");
 			}
 		}
 	}

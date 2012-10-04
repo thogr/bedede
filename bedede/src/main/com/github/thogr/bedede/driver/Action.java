@@ -1,18 +1,30 @@
 package com.github.thogr.bedede.driver;
 
+import com.github.thogr.bedede.state.InternalState;
 
-public abstract class Action<Before, After> {
+
+/**
+ * An action performed in a state
+ * @author thogr
+ *
+ * @param <S> the state class where the action is performed
+ */
+public abstract class Action<S> {
 	
 	private BehaviorDriver bdd;
 
-	void perform(BehaviorDriver bdd, Before state) {
+	protected BehaviorDriver getDriver() {
+		return bdd;
+	}
+
+	protected void perform(BehaviorDriver bdd, S state) {
 		this.bdd = bdd;
 		perform(state);
 	}
-	
-	protected abstract void perform(Before state);
-	
-	protected void then(Class<After> next) {
-		bdd.then(next);
+
+	protected abstract void perform(S state);
+
+	protected ActionPerformer<S> when(InternalState<S> state) {
+		return bdd.when(state);
 	}
 }

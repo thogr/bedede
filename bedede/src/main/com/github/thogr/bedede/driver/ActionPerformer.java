@@ -1,6 +1,7 @@
 package com.github.thogr.bedede.driver;
 
 
+
 public class ActionPerformer<Current> {
 	private final Current current;
 	private final BehaviorDriver bdd;
@@ -10,7 +11,7 @@ public class ActionPerformer<Current> {
 		this.current = current;
 	}
 	
-	public void perform(Action<Current, ?> action) {
+	public void perform(TransitionAction<Current, ?> action) {
 		action.perform(bdd, current);
 	}
 	

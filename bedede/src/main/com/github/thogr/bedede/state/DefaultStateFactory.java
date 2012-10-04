@@ -1,5 +1,7 @@
 package com.github.thogr.bedede.state;
 
+import com.github.thogr.bedede.driver.StateFactory;
+
 
 public class DefaultStateFactory implements StateFactory {
 
