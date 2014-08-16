@@ -43,18 +43,18 @@ public class StateMachine {
 	private <T> T check(Class<T> state) {
 		T next = factory.createState(state);
 		@SuppressWarnings("unchecked")
-		Verifyer<T> verifyer = (Verifyer<T>) verifyerOf(state);
+		StateVerifier<T> verifyer = (StateVerifier<T>) verifyerOf(state);
 		verifyer.verify(next);
 		return next;
 	}
 	
-	private Verifyer<?> verifyerOf(Class<?> state) {
+	private StateVerifier<?> verifyerOf(Class<?> state) {
 		State stateAnnotation = state.getAnnotation(State.class);
 		if (stateAnnotation != null) {
-			Class<? extends Verifyer<?>> verifyer = 
+			Class<? extends StateVerifier<?>> verifyer = 
 				stateAnnotation.verifyer();
 			try {
-				return (Verifyer<?>) verifyer.newInstance();
+				return (StateVerifier<?>) verifyer.newInstance();
 			} catch (InstantiationException e) {
 				throw new IllegalStateException(e);
 			} catch (IllegalAccessException e) {

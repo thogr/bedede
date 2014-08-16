@@ -1,5 +1,5 @@
 package com.github.thogr.bedede.state;
 
-public interface Verifyer<T> {
+public interface StateVerifier<T> {
 	void verify(T state);
 }

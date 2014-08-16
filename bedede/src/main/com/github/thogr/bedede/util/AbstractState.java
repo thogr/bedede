@@ -1,11 +1,11 @@
 package com.github.thogr.bedede.util;
 
 import com.github.thogr.bedede.state.State;
-import com.github.thogr.bedede.state.Verifyer;
+import com.github.thogr.bedede.state.StateVerifier;
 
-@State(verifyer = AbstractState.StateVerifier.class)
+@State(verifyer = AbstractState.DefaltStateVerifier.class)
 public abstract class AbstractState {
-	public static class StateVerifier implements Verifyer<AbstractState> {
+	public static class DefaltStateVerifier implements StateVerifier<AbstractState> {
 
 		@Override
 		public void verify(AbstractState state) {

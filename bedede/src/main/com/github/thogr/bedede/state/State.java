@@ -5,5 +5,5 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface State {
-	Class<? extends Verifyer<?>> verifyer();
+	Class<? extends StateVerifier<?>> verifyer();
 }
