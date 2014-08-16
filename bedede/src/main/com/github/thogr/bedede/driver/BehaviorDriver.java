@@ -1,7 +1,8 @@
 package com.github.thogr.bedede.driver;
 
 import com.github.thogr.bedede.state.DefaultStateFactory;
-import com.github.thogr.bedede.state.InternalState;
+import com.github.thogr.bedede.state.StateFactory;
+import com.github.thogr.bedede.state.StateMachine;
 
 
 public final class BehaviorDriver {
@@ -19,18 +20,11 @@ public final class BehaviorDriver {
 	public void given(Given<?> given) {
 		given.perform(this);
 	}
+	
+	public <T> void when(Action<T> action) {
+		action.perform(this);
+	}
 
-	public <T> ActionPerformer<T> when(Class<T> state) {
-		T current = machine.verify(state);
-		return new ActionPerformer<T>(this, current);
-	}
-	
-	<T> ActionPerformer<T> when(InternalState<?> state) {
-		@SuppressWarnings("unchecked")
-		T current = (T) machine.verify(state.getClass());
-		return new ActionPerformer<T>(this, current);
-	}
-	
 	public void then(Class<?> state) {
 		machine.next(state);
 	}

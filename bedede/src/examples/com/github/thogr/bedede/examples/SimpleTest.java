@@ -32,7 +32,7 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 		public static TransitionAction<State0, State1> start() {
 			return new TransitionAction<State0, State1>() {
 				@Override
-				protected void perform(State0 self) {
+				protected void perform() {
 					name = "1";
 					then(State1.class);
 				}
@@ -40,7 +40,7 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 		}
 
 		@Override
-		protected void verify() {
+		protected void onEntry() {
 			assertEquals("Wrong State!", "0", name); 
 		}
 	}
@@ -50,19 +50,19 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 			@Override
 			protected void perform() {
 				given(State0.REACHED);
-				when(State0.class).perform(State0.start());
+				when(State0.start());
 			}
 		};
 		
 		@Override
-		protected void verify() {
+		protected void onEntry() {
 			assertEquals("Wrong State!", "1", name); 
 		}
 
 		public static TransitionAction<State1, State2> gotoNext() {
 			return new TransitionAction<State1, State2>() {
 				@Override
-				protected void perform(State1 self) {
+				protected void perform() {
 					name = "2";
 					then(State2.class);
 				}
@@ -75,21 +75,21 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 			@Override
 			protected void perform() {
 				given(State1.REACHED);
-				when(State1.class).perform(State1.gotoNext());
+				when(State1.gotoNext());
 			}
 		};
 		
 		
 		
 		@Override
-		protected void verify() {
+		protected void onEntry() {
 			assertEquals("Wrong State!", "2", name); 
 		}
 
 		public static TransitionAction<State2, State2> update(final String data) {
 			return new TransitionAction<State2, State2>() {
 				@Override
-				protected void perform(State2 self) {
+				protected void perform() {
 					if ("1".equals(data)) {
 						name = data;
 					}
@@ -101,28 +101,28 @@ public class SimpleTest extends BehaviorDrivenTestCase {
 	@Test
 	public void shouldGotoState2WhenInState1PerformingGotoNext() throws Exception {
 		given(State1.REACHED);
-		when(State1.class).perform(State1.gotoNext());
+		when(State1.gotoNext());
 		then(State2.class);
 	}
 	
 	@Test
 	public void shouldGotoState1WhenInState2PerformingGoBack() throws Exception {
 		given(State2.REACHED);
-		when(State2.class).perform(State2.update("1"));
+		when(State2.update("1"));
 		then(State1.class);
 	}
 	
 	@Test
 	public void shouldStayWhenInState2PerformingGoBackAfterUpdatingWithWrongValue() throws Exception {
 		given(State2.REACHED);
-		when(State2.class).perform(State2.update("1234"));
+		when(State2.update("1234"));
 		then(State2.class); // TODO: WHY?
 	}
 	
 	@Test
 	public void shouldGotoState1WhenInState2PerformingGoBackAfterUpdatingCorrectly() throws Exception {
 		given(State2.REACHED);
-		when(State2.class).perform(State2.update("1"));
+		when(State2.update("1"));
 		then(State1.class);
 	}
 }

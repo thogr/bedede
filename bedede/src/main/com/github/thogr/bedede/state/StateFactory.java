@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.driver;
+package com.github.thogr.bedede.state;
 
 
 public interface StateFactory {

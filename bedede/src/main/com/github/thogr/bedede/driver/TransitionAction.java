@@ -11,8 +11,6 @@ package com.github.thogr.bedede.driver;
 public abstract class TransitionAction<Before, After> 
 extends Action<Before> {
 	
-	protected abstract void perform(Before state);
-	
 	protected void then(Class<After> next) {
 		getDriver().then(next);
 	}

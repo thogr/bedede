@@ -1,7 +1,5 @@
 package com.github.thogr.bedede.driver;
 
-import com.github.thogr.bedede.state.InternalState;
-
 
 /**
  * An action performed in a state
@@ -17,14 +15,11 @@ public abstract class Action<S> {
 		return bdd;
 	}
 
-	protected void perform(BehaviorDriver bdd, S state) {
+	protected void perform(BehaviorDriver bdd) {
 		this.bdd = bdd;
-		perform(state);
+		perform();
 	}
 
-	protected abstract void perform(S state);
+	protected abstract void perform();
 
-	protected ActionPerformer<S> when(InternalState<S> state) {
-		return bdd.when(state);
-	}
 }

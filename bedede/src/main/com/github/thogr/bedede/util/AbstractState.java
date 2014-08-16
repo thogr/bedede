@@ -9,9 +9,9 @@ public abstract class AbstractState {
 
 		@Override
 		public void verify(AbstractState state) {
-			state.verify();
+			state.onEntry();
 		}
 	}
 	
-	protected abstract void verify();
+	protected abstract void onEntry();
 }

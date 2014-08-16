@@ -29,11 +29,13 @@ public abstract class Given<Target> {
 		bdd.given(given);
 	}
 
-	public void then(Class<Target> state) {
+	public <T> void when(Action<T> action) {
+		bdd.when(action);
+	}
+
+	public void then(Class<?> state) {
 		bdd.then(state);
 	}
 
-	public <T> ActionPerformer<T> when(Class<T> state) {
-		return bdd.when(state);
-	}
+	
 }

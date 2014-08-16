@@ -1,10 +1,7 @@
-package com.github.thogr.bedede.driver;
+package com.github.thogr.bedede.state;
 
-import com.github.thogr.bedede.state.Start;
-import com.github.thogr.bedede.state.State;
-import com.github.thogr.bedede.state.Verifyer;
 
-class StateMachine {
+public class StateMachine {
 
 	private Object current;
 	private StateFactory factory;
