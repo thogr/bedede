@@ -1,15 +1,15 @@
 package com.github.thogr.bedede.examples;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
-import com.github.thogr.bedede.state.ConditionVerifier;
-import com.github.thogr.bedede.state.Otherwise;
+import com.github.thogr.bedede.ConditionVerifier;
+import com.github.thogr.bedede.Otherwise;
 
 public class MyConditionVerifier implements ConditionVerifier<MyCondition<Boolean>> {
 
-	@Override
-	public void verify(MyCondition<Boolean> condition, Otherwise otherwise) {
-		Assert.assertTrue(otherwise.getMessage(), condition.value());
-	}
+    @Override
+    public void verify(final MyCondition<Boolean> condition, final Otherwise otherwise) {
+        Assert.assertTrue(otherwise.getMessage(), condition.value());
+    }
 
 }

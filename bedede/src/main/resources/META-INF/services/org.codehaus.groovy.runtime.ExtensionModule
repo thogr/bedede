@@ -1,0 +1,4 @@
+moduleName=bedede-goovy-module
+moduleVersion=1.0
+extensionClasses=com.github.thogr.bedede.EntryExtension
+staticExtensionClasses=com.github.thogr.bedede.EntryStaticExtension

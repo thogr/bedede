@@ -1,3 +1,9 @@
 /target
 /build/
 /bin/
+/*~
+/pom.xml
+/.gradle/
+/.settings/
+/.project
+/.classpath
