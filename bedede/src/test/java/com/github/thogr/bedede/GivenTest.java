@@ -2,18 +2,18 @@ package com.github.thogr.bedede;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.verification.VerificationMode;
 
+import com.github.thogr.bedede.annotations.DefaultEntry;
+import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.test.View2;
 
 public class GivenTest {
@@ -24,15 +24,17 @@ public class GivenTest {
 
     private InitialStateFactory initialStateFactory;
 
-    @Mock
     private StateFactory factory;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        controller = new BehaviorController(machine);
+        View1.mocked = Mockito.mock(Entry.class);
+        factory = new DefaultStateFactory();
         initialStateFactory = new DefaultInitialStateFactory();
         machine = new StateMachine(factory, initialStateFactory);
+        controller = new BehaviorController(machine);
     }
 
     public static class AbstractTestBaseState extends AbstractState {
@@ -43,23 +45,24 @@ public class GivenTest {
         }
     }
 
+    @InitialState(config="a=0")
     public static class View0 extends AbstractTestBaseState {
 
     }
 
+    @InitialState(config="a=0")
     public static class View1 extends AbstractTestBaseState {
 
+        @DefaultEntry
         public static final Entry<View1> PUBLIC = new Entry<View1>() {
-
             @Override
             protected void perform() {
-                MOCKED.perform();
+                mocked.perform();
                 then(View1.class);
             }
         };
 
-        @SuppressWarnings("unchecked")
-        private static final Entry<View1> MOCKED = Mockito.mock(Entry.class);
+        private static Entry<View1> mocked;
 
         public void openingView2() {
         }
@@ -67,7 +70,6 @@ public class GivenTest {
 
     public <T> void givenCurrentState(final Class<T> state) throws Exception {
         machine.go(state);
-        given(factory.createState(state)).willReturn(state.newInstance());
         assertThat(machine.was(state), is(true));
     }
 
@@ -76,7 +78,7 @@ public class GivenTest {
         givenCurrentState(View1.class);
         whenExecuted(View2.REACHED);
         thenCurrentState(View2.class);
-        thenExecuted(View1.MOCKED, never());
+        thenExecuted(View1.mocked, never());
     }
 
     public void thenCurrentState(final Class<?> state) {
@@ -88,7 +90,7 @@ public class GivenTest {
         givenCurrentState(View0.class);
         whenExecuted(View2.REACHED);
         thenCurrentState(View2.class);
-        thenExecuted(View1.MOCKED, times(1));
+        thenExecuted(View1.mocked, times(1));
     }
 
     public void thenExecuted(final Entry<View1> given, final VerificationMode verification) {
@@ -96,6 +98,6 @@ public class GivenTest {
     }
 
     public void whenExecuted(final Entry<?> entry) {
-        entry.perform(controller);
+        controller.given(entry);
     }
 }

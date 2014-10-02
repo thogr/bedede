@@ -37,7 +37,7 @@ final class BehaviorController {
     }
 
     <T> GivenResult<T> assuming(final Class<T> state) {
-        return new GivenResult<T>(this);
+        return new GivenResult<T>(this, state);
     }
 
     <T> void when(final Action<? super T> action) {

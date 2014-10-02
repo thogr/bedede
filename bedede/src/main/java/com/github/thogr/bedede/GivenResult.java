@@ -3,9 +3,11 @@ package com.github.thogr.bedede;
 public final class GivenResult<T> {
 
     private final BehaviorController controller;
+    private final Class<T> state;
 
-    GivenResult(final BehaviorController controller) {
+    GivenResult(final BehaviorController controller, final Class<T> state) {
         this.controller = controller;
+        this.state = state;
     }
 
     public void when(final Action<? super T> action) {
@@ -17,6 +19,6 @@ public final class GivenResult<T> {
     }
 
     public T when() {
-        return controller.go(TypeArguments.typeArgument(this));
+        return controller.go(state);
     }
 }

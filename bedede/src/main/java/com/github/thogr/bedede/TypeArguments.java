@@ -32,7 +32,7 @@ final class TypeArguments<T> {
             final Type superclass = getGenericSuperClass(cClass);
             return getGenericType(superclass);
         } else {
-            throw new IllegalArgumentException("Not a ParameterizedType");
+            throw new IllegalArgumentException("Not a ParameterizedType:" + cClass);
         }
     }
 
@@ -51,9 +51,9 @@ final class TypeArguments<T> {
        final Type t = args[i];
        if (t instanceof TypeVariable<?>) {
            final TypeVariable<?> v = (TypeVariable<?>) t;
-           System.out.println("Class: " + obj.getClass().getName());
-           System.out.println("TypeVariable: " + v);
-           System.out.println("TypeName: " + v.getTypeName());
+           System.err.println("Class: " + obj.getClass().getName());
+           System.err.println("TypeVariable: " + v);
+           System.err.println("TypeName: " + v.getTypeName());
        }
 
        return (Class<T>) t;

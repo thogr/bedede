@@ -40,7 +40,9 @@ final class StateMachine {
     }
 
     private <T> void initial(final Class<T> state) {
-        advance(state, initialStateFactory.createInitialState(factory, state, getConfigParameters(state)));
+        final T initialState =
+                initialStateFactory.createInitialState(factory, state, getConfigParameters(state));
+        advance(state, initialState);
     }
 
     private static <T> Parameter[] getConfigParameters(final Class<T> state) {
@@ -60,8 +62,8 @@ final class StateMachine {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> void advance(final Class<T> state, final T next) {
-        final StateVerifier<T> verifier = (StateVerifier<T>) StateVerifier.verifierOf(state);
+    private <T> void advance(final Class<T> currentState, final T next) {
+        final StateVerifier<T> verifier = (StateVerifier<T>) StateVerifier.verifierOf(currentState);
         verifier.verify(next);
         current = next;
     }
