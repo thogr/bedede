@@ -1,0 +1,20 @@
+
+group = 'bedede'
+version = '1.0-SNAPSHOT'
+
+wrapper {
+    gradleVersion = '2.1'
+
+    def jvmOpts = "-Xmx1024m"
+    inputs.property("jvmOpts", jvmOpts)
+    doLast {
+        def optsEnvVar = "DEFAULT_JVM_OPTS"
+        scriptFile.write scriptFile.text.replace("$optsEnvVar=\"\"", "$optsEnvVar=\"$jvmOpts\"")
+        batchScript.write batchScript.text.replace("set $optsEnvVar=", "set $optsEnvVar=$jvmOpts")
+    }
+}
+
+ext.libraries = [
+  junit: 'junit:junit:4.11',
+  mockito : 'org.mockito:mockito-all:1.9.5'
+]

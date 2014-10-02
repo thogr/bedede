@@ -4,48 +4,33 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
-repositories {
-	mavenCentral()
-}
-
-ext.libraries = [
-	junit : 'junit:junit:4.11',
-	mockito : 'org.mockito:mockito-all:1.9.5'
-]
+repositories { mavenCentral() }
 
 sourceSets {
-	examples {
-        java {
-            srcDir 'src/examples/java'
-        }
-		groovy {
-			srcDir 'src/examples/groovy'
-		}
-		resources {
-			srcDir 'src/examples/resources'
-		}
-	}
+    examples {
+        java { srcDir 'src/examples/java' }
+        groovy { srcDir 'src/examples/groovy' }
+        resources { srcDir 'src/examples/resources' }
+    }
 
-	test
-	main
-
+    test
+    main
 }
 
 dependencies {
-	testCompile libraries.junit
-	testCompile libraries.mockito
+    testCompile libraries.junit
+    testCompile libraries.mockito
 
-	examplesCompile sourceSets.main.output
-	examplesCompile libraries.junit
-	examplesCompile libraries.mockito
+    examplesCompile sourceSets.main.output
+    examplesCompile libraries.junit
+    examplesCompile libraries.mockito
 
-	compile localGroovy()
-	testCompile localGroovy()
-	examplesCompile localGroovy()
-
+    compile localGroovy()
+    testCompile localGroovy()
+    examplesCompile localGroovy()
 }
 
 task runExamples(type: Test) {
-	testClassesDir = sourceSets.examples.output.classesDir
-	classpath = sourceSets.examples.runtimeClasspath
+    testClassesDir = sourceSets.examples.output.classesDir
+    classpath = sourceSets.examples.runtimeClasspath
 }
