@@ -37,21 +37,13 @@ public class GivenTest {
         controller = new BehaviorController(machine);
     }
 
-    public static class AbstractTestBaseState extends AbstractState {
-
-        @Override
-        protected void onEntry() {
-
-        }
-    }
-
-    @InitialState(config="a=0")
-    public static class View0 extends AbstractTestBaseState {
+    @InitialState
+    public static class View0 {
 
     }
 
-    @InitialState(config="a=0")
-    public static class View1 extends AbstractTestBaseState {
+    @InitialState
+    public static class View1 {
 
         @DefaultEntry
         public static final Entry<View1> PUBLIC = new Entry<View1>() {

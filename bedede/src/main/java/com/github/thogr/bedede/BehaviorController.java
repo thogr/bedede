@@ -22,7 +22,7 @@ final class BehaviorController {
 
     <T> GivenResult<T> given(final Class<T> target) {
         if (!was(target)) {
-            return given(EntryUtil.getDefaultEntry(target));
+            return given(EntryFinder.getDefaultEntry(target));
         } else {
             return assuming(target);
         }
