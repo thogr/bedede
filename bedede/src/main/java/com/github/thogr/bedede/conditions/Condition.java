@@ -2,7 +2,6 @@ package com.github.thogr.bedede.conditions;
 
 import com.github.thogr.bedede.Otherwise;
 
-
 public abstract class Condition<T> {
 
     private final T condition;
@@ -29,5 +28,4 @@ public abstract class Condition<T> {
             }
         };
     }
-
 }

@@ -2,7 +2,7 @@ package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.Condition;
 import com.github.thogr.bedede.conditions.ConditionController;
-import com.github.thogr.bedede.conditions.ConditionMethod;
+import com.github.thogr.bedede.conditions.ConditionExpression;
 
 final class BehaviorController {
 
@@ -62,8 +62,8 @@ final class BehaviorController {
         return new Then<>(state, this);
     }
 
-    <S, V> void should(final Class<S> state, final ConditionMethod<S, V> expression) {
-        should(expression.condition(go(state)));
+    <S, T> void should(final Class<S> state, final ConditionExpression <S, T> expression) {
+        should(expression.apply(go(state)));
     }
 
     <V> void should(final Condition<V> condition) {

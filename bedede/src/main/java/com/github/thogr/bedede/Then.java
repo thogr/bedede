@@ -1,6 +1,6 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.conditions.ConditionMethod;
+import com.github.thogr.bedede.conditions.ConditionExpression;
 
 public class Then<T> {
     private final BehaviorController controller;
@@ -11,7 +11,7 @@ public class Then<T> {
         this.controller = controller;
     }
 
-    public <V> Then<T> should(final ConditionMethod<T, V> condition) {
+    public <V> Then<T> should(final ConditionExpression<T, V> condition) {
         controller.should(state, condition);
         return new Then<>(state, controller);
     }
