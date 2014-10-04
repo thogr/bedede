@@ -15,11 +15,7 @@ public final class Assuming<T> {
     }
 
     public void when(final ActionMethod<T> action) {
-        controller.when(action);
-    }
-
-    public T when() {
-        return controller.go(state);
+        controller.when(action, state);
     }
 
     public Then<T> then() {

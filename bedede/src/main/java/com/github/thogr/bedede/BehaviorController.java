@@ -53,8 +53,8 @@ final class BehaviorController {
         action.perform(this);
     }
 
-    <T> void when(final ActionMethod<T> action) {
-        action.perform(go(target(action)));
+    <T> void when(final ActionMethod<T> action, final Class<T> target) {
+        action.perform(go(target));
     }
 
     <T> Then<T> then(final Class<T> state) {
@@ -62,8 +62,9 @@ final class BehaviorController {
         return new Then<>(state, this);
     }
 
-    <S, T> void should(final Class<S> state, final ConditionExpression <S, T> expression) {
+    <S, T> Then<S> should(final Class<S> state, final ConditionExpression <S, T> expression) {
         should(expression.apply(go(state)));
+        return new Then<>(state, this);
     }
 
     <V> void should(final Condition<V> condition) {
@@ -72,10 +73,6 @@ final class BehaviorController {
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
-    }
-
-    private <T> Class<T> target(final ActionMethod<T> action) {
-        return TypeArguments.typeArgument(action);
     }
 
     private <T> Class<T> target(final Action<? super T> action) {

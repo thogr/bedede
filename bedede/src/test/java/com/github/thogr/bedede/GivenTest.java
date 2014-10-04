@@ -60,7 +60,7 @@ public class GivenTest {
 
         private static Entry<View1> mocked;
 
-        public void openingView2() {
+        public void opensView2() {
         }
     }
 

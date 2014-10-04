@@ -9,7 +9,7 @@ public class View2 {
         @Override
         protected void perform() {
             given(View1.class)
-            .when().openingView2();
+            .when(it -> it.opensView2());
             then(View2.class);
         }
     };

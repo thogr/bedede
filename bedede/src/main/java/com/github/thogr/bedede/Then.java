@@ -12,7 +12,6 @@ public class Then<T> {
     }
 
     public <V> Then<T> should(final ConditionExpression<T, V> condition) {
-        controller.should(state, condition);
-        return new Then<>(state, controller);
+        return controller.should(state, condition);
     }
 }
