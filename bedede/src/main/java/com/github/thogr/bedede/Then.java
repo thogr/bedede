@@ -1,5 +1,7 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.conditions.ConditionMethod;
+
 public class Then<T> {
     private final BehaviorController controller;
     private final Class<T> state;

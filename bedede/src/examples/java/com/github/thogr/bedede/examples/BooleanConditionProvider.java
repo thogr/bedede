@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.examples;
 
-import com.github.thogr.bedede.ConditionProvider;
-import com.github.thogr.bedede.ConditionVerifier;
+import com.github.thogr.bedede.conditions.ConditionProvider;
+import com.github.thogr.bedede.conditions.ConditionVerifier;
 
 public final class BooleanConditionProvider implements ConditionProvider<SimpleCondition<Boolean>> {
 

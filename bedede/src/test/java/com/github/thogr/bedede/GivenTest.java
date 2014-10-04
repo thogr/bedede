@@ -8,11 +8,13 @@ import static org.mockito.Mockito.times;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
+import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.test.View2;
 
 public class GivenTest {
@@ -25,6 +27,9 @@ public class GivenTest {
 
     private StateFactory factory;
 
+    @Mock
+    private ConditionController conditionController;
+
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
@@ -33,7 +38,7 @@ public class GivenTest {
         factory = new DefaultStateFactory();
         initialStateFactory = new DefaultInitialStateFactory();
         machine = new StateMachine(factory, initialStateFactory);
-        controller = new BehaviorController(machine);
+        controller = new BehaviorController(machine, conditionController);
     }
 
     @InitialState

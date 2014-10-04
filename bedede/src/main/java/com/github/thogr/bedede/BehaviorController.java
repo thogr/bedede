@@ -1,22 +1,30 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.conditions.Condition;
+import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.conditions.ConditionMethod;
+
 final class BehaviorController {
 
     private final StateMachine machine;
+    private final ConditionController conditionController;
 
-    BehaviorController() {
-        this(Framework.getStateFactory());
+    BehaviorController(final Framework framework) {
+        this(framework, framework.getStateFactory());
     }
 
-    BehaviorController(final StateFactory factory, final InitialStateFactory initialStateFactory) {
-        this(new StateMachine(factory, initialStateFactory));
+    BehaviorController(final StateFactory factory,
+            final InitialStateFactory initialStateFactory,
+            final ConditionController conditionController) {
+        this(new StateMachine(factory, initialStateFactory), conditionController);
     }
 
-    BehaviorController(final StateFactory factory) {
-        this(factory, Framework.getInitialStateFactory());
+    BehaviorController(final Framework framework, final StateFactory factory) {
+        this(factory, framework.getInitialStateFactory(), framework.createConditionController());
     }
 
-    BehaviorController(final StateMachine machine) {
+    BehaviorController(final StateMachine machine, final ConditionController conditionController) {
+        this.conditionController = conditionController;
         this.machine = machine;
     }
 
@@ -59,15 +67,11 @@ final class BehaviorController {
     }
 
     <V> void should(final Condition<V> condition) {
-        then(condition, verifier(condition));
+        conditionController.verify(condition);
     }
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
-    }
-
-    private <T> void then(final Condition<T> condition, final ConditionVerifier<T> verifier) {
-        condition.verify(verifier);
     }
 
     private <T> Class<T> target(final ActionMethod<T> action) {
@@ -84,13 +88,5 @@ final class BehaviorController {
 
     private <T> boolean was(final Class<T> target) {
         return machine.was(target);
-    }
-
-    private <V> ConditionVerifier<V> verifier(final Condition<V> condition) {
-        return verifier(condition.getConditionClass());
-    }
-
-    private <V> ConditionVerifier<V> verifier(final Class<V> conditionClass) {
-        return Framework.getVerifier(conditionClass);
     }
 }

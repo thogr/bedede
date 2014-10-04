@@ -11,7 +11,7 @@ public final class Otherwise {
         return message;
     }
 
-    static Otherwise otherwise(final String message) {
+    public static Otherwise otherwise(final String message) {
         return new Otherwise(message);
     }
 }

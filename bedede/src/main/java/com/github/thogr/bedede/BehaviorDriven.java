@@ -1,8 +1,11 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.conditions.Condition;
+
+
 public abstract class BehaviorDriven {
 
-    private final BehaviorController controller = new BehaviorController();
+    private final BehaviorController controller = Framework.createBehaviorController();
 
     protected final <T> Assuming<T> given(final Class<T> target) {
         return controller.given(target);
@@ -24,7 +27,9 @@ public abstract class BehaviorDriven {
         return Otherwise.otherwise(message);
     }
 
-    public static <T> Condition<T> expecting(final T condition, final Otherwise otherwise) {
-        return Expecting.expecting(condition, otherwise);
+    public static <T> Condition<T> expecting(
+            final T condition, final Otherwise otherwise) {
+        return Condition.expecting(condition, otherwise);
     }
+
 }

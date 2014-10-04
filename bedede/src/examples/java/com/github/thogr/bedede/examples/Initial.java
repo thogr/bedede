@@ -4,11 +4,11 @@ import static com.github.thogr.bedede.BehaviorDriven.expecting;
 import static com.github.thogr.bedede.BehaviorDriven.otherwise;
 import static org.junit.Assert.assertTrue;
 
-import com.github.thogr.bedede.AbstractState;
-import com.github.thogr.bedede.Condition;
 import com.github.thogr.bedede.Entry;
+import com.github.thogr.bedede.annotations.OnEntry;
+import com.github.thogr.bedede.conditions.Condition;
 
-public class Initial extends AbstractState {
+public class Initial {
 
     public static Entry<Initial> DEFAULT_ENTRY = new Entry<Initial> () {
         @Override
@@ -19,7 +19,7 @@ public class Initial extends AbstractState {
         }
     };
 
-    @Override
+    @OnEntry
     protected void onEntry() {
         System.out.println("on entry");
         assertTrue(SystemTested.getState() == 1);
