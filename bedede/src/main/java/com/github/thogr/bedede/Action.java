@@ -7,4 +7,8 @@ package com.github.thogr.bedede;
  */
 public abstract class Action<S> extends Behavior<S> {
 
+    @Override
+    protected S when() {
+        return super.when();
+    }
 }

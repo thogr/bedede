@@ -9,11 +9,12 @@ final class Framework {
 
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     static <V> ConditionVerifier<V> getVerifier(final Class<V> conditionClass) {
         final ServiceLoader<ConditionProvider> sl = ServiceLoader.load(ConditionProvider.class);
-        for (final ConditionProvider framework : sl) {
+        for (final ConditionProvider<V> provider : sl) {
             try {
-                final ConditionVerifier<V> verifier = framework.getVerifier(conditionClass);
+                final ConditionVerifier<V> verifier = provider.getVerifier(conditionClass);
                 if (verifier != null) {
                     return verifier;
                 }

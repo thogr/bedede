@@ -32,6 +32,7 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
     public final void verify(final T state) {
         try {
             if (onEntryMethod != null) {
+                onEntryMethod.setAccessible(true);
                 onEntryMethod.invoke(state);
             }
         } catch (final IllegalAccessException e) {

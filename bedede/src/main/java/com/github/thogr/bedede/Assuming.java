@@ -1,11 +1,11 @@
 package com.github.thogr.bedede;
 
-public final class GivenResult<T> {
+public final class Assuming<T> {
 
     private final BehaviorController controller;
     private final Class<T> state;
 
-    GivenResult(final BehaviorController controller, final Class<T> state) {
+    Assuming(final Class<T> state, final BehaviorController controller) {
         this.controller = controller;
         this.state = state;
     }
@@ -20,5 +20,9 @@ public final class GivenResult<T> {
 
     public T when() {
         return controller.go(state);
+    }
+
+    public Then<T> then() {
+        return controller.then(state);
     }
 }

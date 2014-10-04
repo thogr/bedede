@@ -14,16 +14,20 @@ public abstract class Entry<S> extends Behavior<S> {
 
     }
 
-    protected final <T> GivenResult<T> given(final Class<T> state) {
+    protected final <T> Assuming<T> given(final Class<T> state) {
         return getController().given(state);
     }
 
-    protected final <T> GivenResult<T> given(final Entry<T> entry) {
+    protected final <T> Assuming<T> given(final Entry<T> entry) {
         return getController().given(entry);
     }
 
     protected final <T> void when(final Action<? super T> action) {
         getController().when(action);
+    }
+
+    protected final <T> Assuming<T> assuming(final Class<T> state) {
+        return getController().assuming(state);
     }
 
     protected final <T> void then(final Class<T> state) {

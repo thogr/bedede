@@ -15,6 +15,12 @@ wrapper {
 }
 
 ext.libraries = [
-  junit: 'junit:junit:4.11',
-  mockito : 'org.mockito:mockito-all:1.9.5'
+    junit: 'junit:junit:4.11',
+    mockito : 'org.mockito:mockito-all:1.10.4'
 ]
+subprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}

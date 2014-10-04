@@ -2,15 +2,14 @@ package com.github.thogr.bedede;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.verification.VerificationMode;
 
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
@@ -70,7 +69,7 @@ public class GivenTest {
         givenCurrentState(View1.class);
         whenExecuted(View2.REACHED);
         thenCurrentState(View2.class);
-        thenExecuted(View1.mocked, never());
+        then(View1.mocked).should(never()).perform();
     }
 
     public void thenCurrentState(final Class<?> state) {
@@ -82,11 +81,7 @@ public class GivenTest {
         givenCurrentState(View0.class);
         whenExecuted(View2.REACHED);
         thenCurrentState(View2.class);
-        thenExecuted(View1.mocked, times(1));
-    }
-
-    public void thenExecuted(final Entry<View1> given, final VerificationMode verification) {
-        verify(given, verification).perform();
+        then(View1.mocked).should(times(1)).perform();
     }
 
     public void whenExecuted(final Entry<?> entry) {

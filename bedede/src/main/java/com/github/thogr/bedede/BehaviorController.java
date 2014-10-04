@@ -20,7 +20,7 @@ final class BehaviorController {
         this.machine = machine;
     }
 
-    <T> GivenResult<T> given(final Class<T> target) {
+    <T> Assuming<T> given(final Class<T> target) {
         if (!was(target)) {
             return given(EntryFinder.getDefaultEntry(target));
         } else {
@@ -28,7 +28,7 @@ final class BehaviorController {
         }
     }
 
-    <T> GivenResult<T> given(final Entry<T> entry) {
+    <T> Assuming<T> given(final Entry<T> entry) {
         final Class<T> target = target(entry);
         if (!machine.was(target)) {
             entry.perform(this);
@@ -36,8 +36,8 @@ final class BehaviorController {
         return assuming(target);
     }
 
-    <T> GivenResult<T> assuming(final Class<T> state) {
-        return new GivenResult<T>(this, state);
+    <T> Assuming<T> assuming(final Class<T> state) {
+        return new Assuming<T>(state, this);
     }
 
     <T> void when(final Action<? super T> action) {
@@ -49,24 +49,21 @@ final class BehaviorController {
         action.perform(go(target(action)));
     }
 
-    <T> void then(final Class<T> state) {
+    <T> Then<T> then(final Class<T> state) {
         go(state);
+        return new Then<>(state, this);
     }
 
-    <S, V> void then(final Class<S> state, final ConditionMethod<S, V> condition) {
-        then(state, condition, verifier(condition));
+    <S, V> void should(final Class<S> state, final ConditionMethod<S, V> expression) {
+        should(expression.condition(go(state)));
     }
 
-    <V> void then(final Condition<V> condition) {
+    <V> void should(final Condition<V> condition) {
         then(condition, verifier(condition));
     }
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
-    }
-
-    private <T, V> void then(final Class<T> state, final ConditionMethod<T, V> condition, final ConditionVerifier<V> verifier) {
-        condition.condition(go(state)).verify(verifier);
     }
 
     private <T> void then(final Condition<T> condition, final ConditionVerifier<T> verifier) {
@@ -93,12 +90,7 @@ final class BehaviorController {
         return verifier(condition.getConditionClass());
     }
 
-    private <S, V> ConditionVerifier<V> verifier(final ConditionMethod<S, V> condition) {
-        return verifier(TypeArguments.typeArgument(condition, 1));
-    }
-
     private <V> ConditionVerifier<V> verifier(final Class<V> conditionClass) {
         return Framework.getVerifier(conditionClass);
     }
-
 }

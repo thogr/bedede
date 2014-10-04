@@ -57,10 +57,8 @@ final class StateMachine {
         advance(state, factory.createState(state));
     }
 
-    @SuppressWarnings("unchecked")
     private <T> void advance(final Class<T> currentState, final T next) {
-        final StateVerifier<T> verifier = (StateVerifier<T>) StateVerifier
-                .verifierOf(currentState);
+        final StateVerifier<T> verifier = new AnnotatedStateVerifier<>(currentState);
         if (verifier != null) {
             verifier.verify(next);
         }

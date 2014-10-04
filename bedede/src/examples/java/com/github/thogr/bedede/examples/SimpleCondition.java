@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples;
 
-public interface MyCondition<T> {
+public interface SimpleCondition<T> {
 
     T value();
 }

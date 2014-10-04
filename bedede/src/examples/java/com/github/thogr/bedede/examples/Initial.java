@@ -1,23 +1,32 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.BehaviorDriven.expecting;
+import static com.github.thogr.bedede.BehaviorDriven.otherwise;
+import static org.junit.Assert.assertTrue;
+
 import com.github.thogr.bedede.AbstractState;
+import com.github.thogr.bedede.Condition;
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.annotations.DefaultEntry;
 
 public class Initial extends AbstractState {
 
-    @DefaultEntry
     public static Entry<Initial> DEFAULT_ENTRY = new Entry<Initial> () {
-
         @Override
         protected void perform() {
-            SystemTested.state = 0;
+            assertTrue(SystemTested.getState() == 0);
+            SystemTested.doSomeThing();
+            then(Initial.class);
         }
     };
 
     @Override
     protected void onEntry() {
-        assert (SystemTested.state == 0);
+        System.out.println("on entry");
+        assertTrue(SystemTested.getState() == 1);
     }
 
+    public Condition<SimpleCondition<Boolean>> expectState(final int s) {
+        return expecting(() -> SystemTested.getState() == s,
+                otherwise("Something is wrong"));
+    }
 }

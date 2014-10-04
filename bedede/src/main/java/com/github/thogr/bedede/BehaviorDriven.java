@@ -4,28 +4,20 @@ public abstract class BehaviorDriven {
 
     private final BehaviorController controller = new BehaviorController();
 
-    protected final <T> GivenResult<T> given(final Class<T> target) {
+    protected final <T> Assuming<T> given(final Class<T> target) {
         return controller.given(target);
     }
 
-    protected final <T> GivenResult<T> given(final Entry<T> given) {
+    protected final <T> Assuming<T> given(final Entry<T> given) {
         return controller.given(given);
     }
 
-    protected final <T> GivenResult<T> assuming(final Class<T> state) {
+    protected final <T> Assuming<T> assuming(final Class<T> state) {
         return controller.assuming(state);
     }
 
-    protected final void then(final Class<?> state) {
-        controller.then(state);
-    }
-
-    protected final <S, V> void then(final Class<S> state, final ConditionMethod<S, V> c) {
-        controller.then(state, c);
-    }
-
-    protected final <V> void then(final Condition<V> condition) {
-        controller.then(condition);
+    protected final <T> Then<T> then(final Class<T> state) {
+        return controller.then(state);
     }
 
     public static Otherwise otherwise(final String message) {

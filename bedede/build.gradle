@@ -4,8 +4,6 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
-repositories { mavenCentral() }
-
 sourceSets {
     examples {
         java { srcDir 'src/examples/java' }
@@ -30,7 +28,7 @@ dependencies {
     examplesCompile localGroovy()
 }
 
-task runExamples(type: Test) {
+task examples(type: Test) {
     testClassesDir = sourceSets.examples.output.classesDir
     classpath = sourceSets.examples.runtimeClasspath
 }

@@ -47,11 +47,12 @@ final class TypeArguments<T> {
 
     @SuppressWarnings("unchecked")
     Class<T> get(final int i) {
-       final Type[] args = getActualTypeArguments(obj.getClass());
+       final Class<? extends Object> clazz = obj.getClass();
+       final Type[] args = getActualTypeArguments(clazz);
        final Type t = args[i];
        if (t instanceof TypeVariable<?>) {
            final TypeVariable<?> v = (TypeVariable<?>) t;
-           System.err.println("Class: " + obj.getClass().getName());
+           System.err.println("Class: " + clazz.getName());
            System.err.println("TypeVariable: " + v);
            System.err.println("TypeName: " + v.getTypeName());
        }
