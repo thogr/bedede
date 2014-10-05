@@ -2,6 +2,14 @@
 group = 'bedede'
 version = '1.0-SNAPSHOT'
 
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'eclipse'
+}
+
+sourceCompatibility = 1.8
+
 wrapper {
     gradleVersion = '2.1'
 
@@ -16,11 +24,45 @@ wrapper {
 
 ext.libraries = [
     junit: 'junit:junit:4.11',
-    mockito : 'org.mockito:mockito-all:1.10.4'
+    mockito : 'org.mockito:mockito-all:1.10.4',
+    selenium : 'org.seleniumhq.selenium:selenium-java:2.43.1'
 ]
+
 subprojects {
+
     repositories {
         jcenter()
         mavenCentral()
     }
+
+
+    sourceSets {
+        examples {
+            java { srcDir 'src/examples/java' }
+            groovy { srcDir 'src/examples/groovy' }
+            resources { srcDir 'src/examples/resources' }
+        }
+
+        test
+        main
+    }
+
+    dependencies {
+        testCompile libraries.junit
+        testCompile libraries.mockito
+
+        examplesCompile sourceSets.main.output
+        examplesCompile libraries.junit
+        examplesCompile libraries.mockito
+
+        compile localGroovy()
+        testCompile localGroovy()
+        examplesCompile localGroovy()
+    }
+
+    task examples(type: Test) {
+        testClassesDir = sourceSets.examples.output.classesDir
+        classpath = sourceSets.examples.runtimeClasspath
+    }
 }
+

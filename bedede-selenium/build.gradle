@@ -1,0 +1,7 @@
+
+dependencies {
+    compile libraries.selenium
+    testCompile libraries.selenium
+    examplesCompile libraries.selenium
+}
+
