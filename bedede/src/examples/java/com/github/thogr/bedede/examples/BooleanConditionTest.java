@@ -24,7 +24,7 @@ public class BooleanConditionTest extends BehaviorDriven {
             return expecting(this.name.equals(name), otherwise("Unexpected name: " + this.name));
         }
 
-        void changingNameTo(final String newName) {
+        void changesNameTo(final String newName) {
             this.name = newName;
         }
 
@@ -37,7 +37,7 @@ public class BooleanConditionTest extends BehaviorDriven {
     @Test
     public void test() {
         given(State1.class)
-        .when(it -> it.changingNameTo("Nisse"))
+        .when(it -> it.changesNameTo("Nisse"))
         .then()
         .expect(it -> it.hasStatus(1))
         .expect(it -> it.hasName("Nisse"));
