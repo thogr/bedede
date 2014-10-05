@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.examples;
+package com.github.thogr.bedede.conditions;
 
 public interface SimpleCondition<T> {
 
