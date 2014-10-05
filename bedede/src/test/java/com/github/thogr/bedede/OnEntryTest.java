@@ -6,10 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import com.github.thogr.bedede.annotations.OnEntry;
+import com.github.thogr.bedede.conditions.ConditionController;
 
 public class OnEntryTest {
+
+    @Mock
+    ConditionController conditionController;
 
     static boolean guardCalled = false;
     private StateMachine machine;
@@ -32,8 +38,10 @@ public class OnEntryTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         guardCalled = false;
-        machine = new StateMachine(new DefaultStateFactory(), new DefaultInitialStateFactory());
+        machine =
+                new StateMachine(new DefaultStateFactory(), new DefaultInitialStateFactory(), conditionController);
 
     }
 

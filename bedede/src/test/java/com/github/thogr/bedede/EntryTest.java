@@ -37,7 +37,7 @@ public class EntryTest {
         View1.mocked = Mockito.mock(Entry.class);
         factory = new DefaultStateFactory();
         initialStateFactory = new DefaultInitialStateFactory();
-        machine = new StateMachine(factory, initialStateFactory);
+        machine = new StateMachine(factory, initialStateFactory, conditionController);
         controller = new BehaviorController(machine, conditionController);
     }
 

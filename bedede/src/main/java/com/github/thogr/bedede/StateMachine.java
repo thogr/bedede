@@ -1,17 +1,21 @@
 package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.annotations.InitialState;
+import com.github.thogr.bedede.conditions.ConditionController;
 
 final class StateMachine {
 
     private Object current;
     private final StateFactory factory;
     private final InitialStateFactory initialStateFactory;
+    private final ConditionController conditionController;
 
     StateMachine(final StateFactory factory,
-            final InitialStateFactory initialStateFactory) {
+            final InitialStateFactory initialStateFactory,
+            final ConditionController conditionController) {
         this.factory = factory;
         this.initialStateFactory = initialStateFactory;
+        this.conditionController = conditionController;
     }
 
     @SuppressWarnings("unchecked")
@@ -57,8 +61,8 @@ final class StateMachine {
         advance(state, factory.createState(state));
     }
 
-    private <T> void advance(final Class<T> currentState, final T next) {
-        final StateVerifier<T> verifier = new AnnotatedStateVerifier<>(currentState);
+    private <T> void advance(final Class<T> state, final T next) {
+        final StateVerifier<T> verifier = new AnnotatedStateVerifier<>(state, conditionController);
         if (verifier != null) {
             verifier.verify(next);
         }

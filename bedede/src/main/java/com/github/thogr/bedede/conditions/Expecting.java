@@ -12,6 +12,17 @@ public abstract class Expecting<T> {
 
     abstract void verify(ConditionVerifier<T> verifier);
 
+    public Expecting<T> and(final Expecting<T> other) {
+        return new Expecting<T>(conditionClass) {
+
+            @Override
+            void verify(final ConditionVerifier<T> verifier) {
+                Expecting.this.verify(verifier);
+                other.verify(verifier);
+            }
+        };
+    }
+
     Class<T> getConditionClass() {
         return conditionClass;
     }

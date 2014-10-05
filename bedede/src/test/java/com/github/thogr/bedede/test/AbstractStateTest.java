@@ -9,6 +9,8 @@ import com.github.thogr.bedede.AbstractState;
 import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.annotations.OnEntry;
+import com.github.thogr.bedede.conditions.BooleanCondition;
+import com.github.thogr.bedede.conditions.Expecting;
 
 public class AbstractStateTest extends BehaviorDriven {
 
@@ -32,7 +34,7 @@ public class AbstractStateTest extends BehaviorDriven {
         }
     }
 
-    public static class State2 extends AbstractState {
+    public static class State2 extends AbstractState<BooleanCondition> {
         static boolean guardCalled;
 
         public static Entry<State2> REACHED = new Entry<State2>() {
@@ -44,9 +46,10 @@ public class AbstractStateTest extends BehaviorDriven {
         };
 
         @Override
-        protected void onEntry() {
+        protected Expecting<BooleanCondition> onEntry() {
             guardCalled = true;
             assertTrue(state == 2);
+            return null;
         }
     }
 

@@ -4,13 +4,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.github.thogr.bedede.annotations.OnEntry;
+import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.conditions.Expecting;
 
 class AnnotatedStateVerifier<T> implements StateVerifier<T> {
 
     private static final String VERIFY_FAILED = "Can't verify state ";
     private final Method onEntryMethod;
+    private final ConditionController conditionController;
 
-    AnnotatedStateVerifier(final Class<T> stateClass) {
+    AnnotatedStateVerifier(final Class<T> stateClass, final ConditionController conditionController) {
+        this.conditionController = conditionController;
         onEntryMethod = findOnEntryMethod(stateClass);
     }
 
@@ -33,7 +37,7 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
         try {
             if (onEntryMethod != null) {
                 onEntryMethod.setAccessible(true);
-                onEntryMethod.invoke(state);
+                verify((Expecting<?>) onEntryMethod.invoke(state));
             }
         } catch (final IllegalAccessException e) {
             verifyFailed(state, e);
@@ -45,6 +49,12 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
                 throw (AssertionError)cause;
             }
             verifyFailed(state, e);
+        }
+    }
+
+    private void verify(final Expecting<?> condition) {
+        if (condition != null) {
+            conditionController.verify(condition);
         }
     }
 
