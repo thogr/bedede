@@ -17,7 +17,7 @@ import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.test.View2;
 
-public class GivenTest {
+public class EntryTest {
 
     private StateMachine machine;
 
@@ -64,6 +64,16 @@ public class GivenTest {
         }
     }
 
+    @InitialState
+    public static class View3 {
+        public static Entry<View3> REACHED = new Entry<View3>() {
+            @Override
+            protected void perform() {
+                // no then(View3.class) here
+            }
+        };
+    }
+
     public <T> void givenCurrentState(final Class<T> state) throws Exception {
         machine.go(state);
         assertThat(machine.was(state), is(true));
@@ -87,6 +97,12 @@ public class GivenTest {
         whenExecuted(View2.REACHED);
         thenCurrentState(View2.class);
         then(View1.mocked).should(times(1)).perform();
+    }
+
+    @Test
+    public void shouldAdvanceState() throws Exception {
+        whenExecuted(View3.REACHED);
+        thenCurrentState(View3.class);
     }
 
     public void whenExecuted(final Entry<?> entry) {

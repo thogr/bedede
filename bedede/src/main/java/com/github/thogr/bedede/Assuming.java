@@ -9,13 +9,13 @@ public final class Assuming<T> {
         this.controller = controller;
         this.state = state;
     }
-
+/*
     public void when(final Action<? super T> action) {
         controller.when(action);
     }
-
-    public void when(final ActionMethod<T> action) {
-        controller.when(action, state);
+*/
+    public When when(final ActionExpression<T> action) {
+        return controller.when(action, state);
     }
 
     public Then<T> then() {

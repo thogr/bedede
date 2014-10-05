@@ -2,11 +2,18 @@ package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.EntryFinder.getDefaultEntry;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import com.github.thogr.bedede.annotations.InitialState;
+
 public class EntryFinderTest {
+
+    @InitialState
+    public static class InitialStateWithNoEntry {
+    }
 
     public static class StateWithNoEntry {
         public static final Integer OTHER_FIELD = 0;
@@ -50,6 +57,10 @@ public class EntryFinderTest {
         };
     }
 
+    @Test
+    public void shouldNotFindDefaultEntryWhenInitalStateWithNoEntry() {
+        assertNull(getDefaultEntry(InitialStateWithNoEntry.class));
+    }
 
     @Test
     public void shouldFindEntryWhenOnlyOneEntry() {

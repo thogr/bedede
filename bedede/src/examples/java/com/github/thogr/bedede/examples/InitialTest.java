@@ -7,10 +7,10 @@ import com.github.thogr.bedede.BehaviorDriven;
 public class InitialTest extends BehaviorDriven {
 
     @Test
-    public void exampleGivenThenShould() throws Exception {
+    public void exampleGivenThenExpect() throws Exception {
         given(Initial.class)
         .then()
-        .should(it -> it.expectState(1));
+        .expect(it -> it.hasState(1));
     }
 }
 

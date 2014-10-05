@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import com.github.thogr.bedede.annotations.DefaultEntry;
+import com.github.thogr.bedede.annotations.InitialState;
 
 final class EntryFinder {
 
@@ -15,20 +16,24 @@ final class EntryFinder {
 
     static <T> Entry<T> getDefaultEntry(final Class<T> state) {
         Entry<T> defaultEntry = null;
-        Field defaultEntyField = null;
+        Field defaultEntryField = null;
         for (final Field f : state.getDeclaredFields()) {
-            if (isPublicStatic(f)) {
+            if (isPublicStatic(f) && f.getType().equals(Entry.class)) {
                 if (f.getAnnotation(DefaultEntry.class) != null) {
                     defaultEntry = theOnlyDefaultEntry(state, defaultEntry, f);
-                    defaultEntyField = f;
+                    defaultEntryField = f;
                 } else {
-                    defaultEntry = theOnlyEntry(state, defaultEntry, defaultEntyField, f);
-                    defaultEntyField = f;
+                    defaultEntry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
+                    defaultEntryField = f;
                 }
             }
         }
         if (defaultEntry != null) {
             return defaultEntry;
+        } else if (defaultEntryField == null) {
+            if (state.isAnnotationPresent(InitialState.class)){
+                return null;
+            }
         }
         throw new IllegalArgumentException(String.format(NO_DEFAULT_ENTRY, state.toString()));
     }

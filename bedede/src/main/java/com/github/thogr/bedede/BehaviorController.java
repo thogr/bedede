@@ -1,8 +1,8 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.conditions.Condition;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.ConditionExpression;
+import com.github.thogr.bedede.conditions.Expecting;
 
 final class BehaviorController {
 
@@ -30,31 +30,45 @@ final class BehaviorController {
 
     <T> Assuming<T> given(final Class<T> target) {
         if (!was(target)) {
-            return given(EntryFinder.getDefaultEntry(target));
+            return given(EntryFinder.getDefaultEntry(target), target);
         } else {
             return assuming(target);
         }
     }
 
     <T> Assuming<T> given(final Entry<T> entry) {
-        final Class<T> target = target(entry);
+        return given(entry, target(entry));
+    }
+
+    private <T> Assuming<T> given(final Entry<T> entry, final Class<T> target) {
         if (!machine.was(target)) {
-            entry.perform(this);
+            perform(entry);
+            if (!machine.was(target)) {
+                go(target);
+            }
         }
         return assuming(target);
+    }
+
+    private <T> void perform(final Entry<T> entry) {
+        if (entry != null) {
+            entry.perform(this);
+        }
     }
 
     <T> Assuming<T> assuming(final Class<T> state) {
         return new Assuming<T>(state, this);
     }
-
+/*
     <T> void when(final Action<? super T> action) {
         go(target(action));
         action.perform(this);
     }
+    */
 
-    <T> void when(final ActionMethod<T> action, final Class<T> target) {
+    <T> When when(final ActionExpression<T> action, final Class<T> target) {
         action.perform(go(target));
+        return new When(this);
     }
 
     <T> Then<T> then(final Class<T> state) {
@@ -62,23 +76,23 @@ final class BehaviorController {
         return new Then<>(state, this);
     }
 
-    <S, T> Then<S> should(final Class<S> state, final ConditionExpression <S, T> expression) {
-        should(expression.apply(go(state)));
+    <S, T> Then<S> expect(final Class<S> state, final ConditionExpression <S, T> expression) {
+        expect(expression.apply(go(state)));
         return new Then<>(state, this);
     }
 
-    <V> void should(final Condition<V> condition) {
+    <V> void expect(final Expecting<V> condition) {
         conditionController.verify(condition);
     }
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
     }
-
+/*
     private <T> Class<T> target(final Action<? super T> action) {
         return TypeArguments.typeArgument(action);
     }
-
+*/
     private <T> Class<T> target(final Entry<? super T> entry) {
         return TypeArguments.typeArgument(entry);
     }

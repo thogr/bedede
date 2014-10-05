@@ -5,16 +5,26 @@ import static com.github.thogr.bedede.BehaviorDriven.otherwise;
 import static org.junit.Assert.assertTrue;
 
 import com.github.thogr.bedede.Entry;
+import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.OnEntry;
-import com.github.thogr.bedede.conditions.Condition;
+import com.github.thogr.bedede.conditions.BooleanCondition;
+import com.github.thogr.bedede.conditions.Expecting;
 
 public class Initial {
 
+    static SystemTested system = new SystemTested();
+
+    @DefaultEntry
     public static Entry<Initial> DEFAULT_ENTRY = new Entry<Initial> () {
         @Override
         protected void perform() {
-            assertTrue(SystemTested.getState() == 0);
-            SystemTested.doSomeThing();
+            system.doSomeThing();
+        }
+    };
+
+    public static Entry<Initial> OTHER_ENTRY = new Entry<Initial> () {
+        @Override
+        protected void perform() {
             then(Initial.class);
         }
     };
@@ -22,11 +32,11 @@ public class Initial {
     @OnEntry
     protected void onEntry() {
         System.out.println("on entry");
-        assertTrue(SystemTested.getState() == 1);
+        assertTrue(system.getState() == 1);
     }
 
-    public Condition<SimpleCondition<Boolean>> expectState(final int s) {
-        return expecting(() -> SystemTested.getState() == s,
+    public Expecting<BooleanCondition> hasState(final int s) {
+        return expecting(system.getState() == s,
                 otherwise("Something is wrong"));
     }
 }

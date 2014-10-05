@@ -11,7 +11,7 @@ public class Then<T> {
         this.controller = controller;
     }
 
-    public <V> Then<T> should(final ConditionExpression<T, V> condition) {
-        return controller.should(state, condition);
+    public <V> Then<T> expect(final ConditionExpression<T, V> condition) {
+        return controller.expect(state, condition);
     }
 }

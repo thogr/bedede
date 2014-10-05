@@ -2,14 +2,14 @@ package com.github.thogr.bedede.examples;
 
 public class SystemTested {
 
-    private static int state = 0;
+    private int state = 0;
 
-    public static int getState() {
+    public  int getState() {
         return state;
     }
 
-    public static void doSomeThing() {
-        state = 1;
+    public void doSomeThing() {
+        state++;
     }
 
 }

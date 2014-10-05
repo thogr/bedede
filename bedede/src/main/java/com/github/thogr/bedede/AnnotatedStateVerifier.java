@@ -40,6 +40,10 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
         } catch (final IllegalArgumentException e) {
             verifyFailed(state, e);
         } catch (final InvocationTargetException e) {
+            final Throwable cause = e.getCause();
+            if (cause instanceof AssertionError) {
+                throw (AssertionError)cause;
+            }
             verifyFailed(state, e);
         }
     }

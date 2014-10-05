@@ -1,6 +1,7 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.conditions.Condition;
+import com.github.thogr.bedede.conditions.BooleanCondition;
+import com.github.thogr.bedede.conditions.Expecting;
 
 
 public abstract class BehaviorDriven {
@@ -27,9 +28,16 @@ public abstract class BehaviorDriven {
         return Otherwise.otherwise(message);
     }
 
-    public static <T> Condition<T> expecting(
+    public static <T> Expecting<T> expecting(
             final T condition, final Otherwise otherwise) {
-        return Condition.expecting(condition, otherwise);
+        @SuppressWarnings("unchecked")
+        final Class<T> conditionClass = (Class<T>) condition.getClass();
+        return Expecting.expecting(condition, conditionClass, otherwise);
+    }
+
+    public static Expecting<BooleanCondition> expecting(
+            final Boolean condition, final Otherwise otherwise) {
+        return Expecting.expecting(() -> condition, BooleanCondition.class, otherwise);
     }
 
 }
