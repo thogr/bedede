@@ -14,7 +14,7 @@ public class BooleanConditionTest extends BehaviorDriven {
     public static class State1 {
         private final int status = 1;
 
-        private final String name = "Kalle";
+        private String name = "Kalle";
 
         Expecting<BooleanCondition> hasStatus(final int status) {
             return expecting(this.status == status, otherwise("Unexpected status: " + this.status));
@@ -22,6 +22,10 @@ public class BooleanConditionTest extends BehaviorDriven {
 
         Expecting<BooleanCondition> hasName(final String name) {
             return expecting(this.name.equals(name), otherwise("Unexpected name: " + this.name));
+        }
+
+        void changingNameTo(final String newName) {
+            this.name = newName;
         }
 
         @OnEntry
@@ -33,9 +37,10 @@ public class BooleanConditionTest extends BehaviorDriven {
     @Test
     public void test() {
         given(State1.class)
+        .when(it -> it.changingNameTo("Nisse"))
         .then()
         .expect(it -> it.hasStatus(1))
-        .expect(it -> it.hasName("Kalle"));
+        .expect(it -> it.hasName("Nisse"));
     }
 
 }

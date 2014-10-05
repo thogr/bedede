@@ -1,14 +1,20 @@
 package com.github.thogr.bedede;
 
-public class When {
+public final class When<S> {
 
     private final BehaviorController controller;
+    private final Class<S> state;
 
-    When(final BehaviorController controller) {
+    When(final Class<S> state, final BehaviorController controller) {
+        this.state = state;
         this.controller = controller;
     }
 
-    public final <T> Then<T> then(final Class<T> state) {
+    public Then<S> then() {
+        return then(state);
+    }
+
+    public <T> Then<T> then(final Class<T> state) {
         return controller.then(state);
     }
 }

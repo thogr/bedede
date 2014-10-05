@@ -14,7 +14,7 @@ public final class Assuming<T> {
         controller.when(action);
     }
 */
-    public When when(final ActionExpression<T> action) {
+    public When<T> when(final ActionExpression<T> action) {
         return controller.when(action, state);
     }
 

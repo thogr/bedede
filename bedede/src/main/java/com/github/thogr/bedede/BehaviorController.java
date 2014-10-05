@@ -66,9 +66,9 @@ final class BehaviorController {
     }
     */
 
-    <T> When when(final ActionExpression<T> action, final Class<T> target) {
+    <T> When<T> when(final ActionExpression<T> action, final Class<T> target) {
         action.perform(go(target));
-        return new When(this);
+        return new When<>(target, this);
     }
 
     <T> Then<T> then(final Class<T> state) {
