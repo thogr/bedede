@@ -4,7 +4,6 @@ import java.util.ServiceLoader;
 
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.ConditionProvider;
-import com.github.thogr.bedede.conditions.ConditionService;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
 
 public final class Framework {
@@ -25,11 +24,6 @@ public final class Framework {
 
     @SuppressWarnings({ "unchecked" })
     public <V> ConditionVerifier<V> getVerifier(final Class<V> conditionClass) {
-        final ServiceLoader<ConditionService> sl1 = ServiceLoader.load(ConditionService.class);
-        for (final ConditionService conditionService : sl1) {
-            System.out.println("Found ConditionService");
-        }
-
         final ServiceLoader<ConditionProvider> sl = ServiceLoader.load(ConditionProvider.class);
         for (final ConditionProvider provider : sl) {
             try {
