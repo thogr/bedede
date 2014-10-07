@@ -1,5 +1,8 @@
 package com.github.thogr.bedede;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
 
@@ -41,20 +44,17 @@ final class StateMachine {
         advance(state, initialState);
     }
 
-    private static <T> Parameter[] getConfigParameters(final Class<T> state) {
+    private static <T> Map<String, String> getConfigParameters(final Class<T> state) {
         final InitialState annotation = state.getAnnotation(InitialState.class);
+        final Map<String, String> parameters = new HashMap<>();
         if (annotation != null) {
             final String[] configs = annotation.config();
-            final Parameter[] parameters = new Parameter[configs.length];
-            int p = 0;
             for (final String config : configs) {
                 final String[] pair = config.split("=");
-                parameters[p++] = new Parameter(pair[0].trim(), pair[1].trim());
+                parameters.put(pair[0].trim(), pair[1].trim());
             }
-            return parameters;
-        } else {
-            return new Parameter[]{};
         }
+        return parameters;
     }
 
     private <T> void next(final Class<T> state) {
