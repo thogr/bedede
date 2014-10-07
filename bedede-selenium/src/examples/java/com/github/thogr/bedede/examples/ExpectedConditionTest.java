@@ -2,6 +2,7 @@ package com.github.thogr.bedede.examples;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -24,7 +25,7 @@ public class ExpectedConditionTest extends BehaviorDriven {
 
     }
 
-    @Test
+    @Test @Ignore
     public void test() {
         given(StartPage.class);
     }
