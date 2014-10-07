@@ -10,15 +10,15 @@ public abstract class Expecting<T> {
         this.conditionClass = conditionClass;
     }
 
-    abstract void verify(ConditionVerifier<T> verifier);
+    abstract Object verify(ConditionVerifier<T> verifier);
 
     public Expecting<T> and(final Expecting<T> other) {
         return new Expecting<T>(conditionClass) {
 
             @Override
-            void verify(final ConditionVerifier<T> verifier) {
+            Object verify(final ConditionVerifier<T> verifier) {
                 Expecting.this.verify(verifier);
-                other.verify(verifier);
+                return other.verify(verifier);
             }
         };
     }
@@ -33,8 +33,8 @@ public abstract class Expecting<T> {
         return new Expecting<T>(conditionClass) {
 
             @Override
-            void verify(final ConditionVerifier<T> verifier) {
-                verifier.verify(condition, otherwise);
+            Object verify(final ConditionVerifier<T> verifier) {
+                return verifier.verify(condition, otherwise);
             }
         };
     }

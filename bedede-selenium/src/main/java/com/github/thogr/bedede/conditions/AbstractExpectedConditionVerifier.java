@@ -10,6 +10,7 @@ import com.github.thogr.bedede.selenium.WebDriverProvider;
 public abstract class AbstractExpectedConditionVerifier<T>
     implements ConditionVerifier<ExpectedCondition<T>> {
 
+    // TODO make timeout configurable
     private static final long TIMEOUT_SECONDS = 40;
 
     public AbstractExpectedConditionVerifier() {
@@ -17,11 +18,11 @@ public abstract class AbstractExpectedConditionVerifier<T>
     }
 
     @Override
-    public void verify(final ExpectedCondition<T> condition, final Otherwise otherwise) {
+    public T verify(final ExpectedCondition<T> condition, final Otherwise otherwise) {
 
         final WebDriver driver = WebDriverProvider.getWebDriver();
         final WebDriverWait wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-        wait.until (new ExpectedCondition<T>() {
+        return wait.until (new ExpectedCondition<T>() {
 
             @Override
             public T apply(final WebDriver input) {
@@ -34,5 +35,4 @@ public abstract class AbstractExpectedConditionVerifier<T>
             };
         });
     }
-
 }
