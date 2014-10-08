@@ -38,7 +38,7 @@ public class BooleanConditionTest extends BehaviorDriven {
     }
 
     @Test
-    public void test() {
+    public void example() {
         given(State1.class)
         .when(it -> it.changesNameTo("Nisse"))
         .then(it -> it.hasStatus(1))

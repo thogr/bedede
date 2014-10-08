@@ -1,7 +1,8 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.conditions.Expecting;
+import static com.github.thogr.bedede.Framework.createConditionController;
 
+import com.github.thogr.bedede.conditions.Expecting;
 public final class GivenElement<T> {
 
     private final T elem;
@@ -18,7 +19,7 @@ public final class GivenElement<T> {
     static <E> GivenElement<E> given(
             final Expecting<?> expecting) {
         @SuppressWarnings("unchecked")
-        final E elem = (E) Framework.createConditionController().verify(expecting);
+        final E elem = (E) createConditionController().verify(expecting);
         return new GivenElement<E>(elem);
     }
 
