@@ -3,7 +3,7 @@ package com.github.thogr.bedede;
 import com.github.thogr.bedede.conditions.Expecting;
 
 
-public class WhenElement<E> {
+public final class WhenElement<E> {
 
     private final E elem;
 

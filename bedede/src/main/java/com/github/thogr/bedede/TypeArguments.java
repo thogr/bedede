@@ -1,7 +1,5 @@
 package com.github.thogr.bedede;
 
-import java.lang.invoke.SerializedLambda;
-import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -61,49 +59,4 @@ final class TypeArguments<T> {
 
        return (Class<T>) t;
     }
-
-
- // getting the SerializedLambda
-    static SerializedLambda getSerializedLambda(final Object function) {
-        if (function == null || !(function instanceof java.io.Serializable)) {
-            throw new IllegalArgumentException();
-        }
-
-        for (Class<?> clazz = function.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
-            try {
-                final Method replaceMethod = clazz.getDeclaredMethod("writeReplace");
-                replaceMethod.setAccessible(true);
-                final Object serializedForm = replaceMethod.invoke(function);
-
-                if (serializedForm instanceof SerializedLambda) {
-                    return (SerializedLambda) serializedForm;
-                }
-            }
-            catch (final NoSuchMethodError e) {
-                // fall through the loop and try the next class
-            }
-            catch (final Throwable t) {
-                throw new RuntimeException("Error while extracting serialized lambda", t);
-            }
-        }
-
-        throw new RuntimeException("writeReplace method not found");
-    }
-
- // getting the synthetic static lambda method
-    static Method getLambdaMethod(final SerializedLambda lambda) throws Exception {
-        final String implClassName = lambda.getImplClass().replace('/', '.');
-        final Class<?> implClass = Class.forName(implClassName);
-
-        final String lambdaName = lambda.getImplMethodName();
-
-        for (final Method m : implClass.getDeclaredMethods()) {
-            if (m.getName().equals(lambdaName)) {
-                return m;
-            }
-        }
-
-        throw new Exception("Lambda Method not found");
-    }
-
 }

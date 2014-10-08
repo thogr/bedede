@@ -2,7 +2,7 @@ package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.Expecting;
 
-public class ThenElement<S> {
+public final class ThenElement<S> {
 
     ThenElement() {
 
