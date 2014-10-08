@@ -1,5 +1,8 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.Bedede.expecting;
+import static com.github.thogr.bedede.Bedede.otherwise;
+
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
@@ -38,9 +41,8 @@ public class BooleanConditionTest extends BehaviorDriven {
     public void test() {
         given(State1.class)
         .when(it -> it.changesNameTo("Nisse"))
-        .then()
-        .expect(it -> it.hasStatus(1))
-        .expect(it -> it.hasName("Nisse"));
+        .then(it -> it.hasStatus(1))
+        .then(it -> it.hasName("Nisse"));
     }
 
 }

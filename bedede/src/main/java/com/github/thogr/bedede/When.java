@@ -1,5 +1,7 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.conditions.ExpectingExpression;
+
 public final class When<S> {
 
     private final BehaviorController controller;
@@ -10,8 +12,8 @@ public final class When<S> {
         this.controller = controller;
     }
 
-    public Then<S> then() {
-        return then(state);
+    public <V> Then<S> then(final ExpectingExpression<S, V> epression) {
+        return then(state).then(epression);
     }
 
     public <T> Then<T> then(final Class<T> state) {

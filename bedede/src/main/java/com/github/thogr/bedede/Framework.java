@@ -18,7 +18,7 @@ public final class Framework {
         return new BehaviorController(new Framework());
     }
 
-    ConditionController createConditionController() {
+    static ConditionController createConditionController() {
         return new ConditionController(new Framework());
     }
 

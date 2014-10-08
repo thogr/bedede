@@ -1,6 +1,6 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.conditions.ConditionExpression;
+import com.github.thogr.bedede.conditions.ExpectingExpression;
 
 public class Then<T> {
     private final BehaviorController controller;
@@ -11,7 +11,7 @@ public class Then<T> {
         this.controller = controller;
     }
 
-    public <V> Then<T> expect(final ConditionExpression<T, V> condition) {
-        return controller.expect(state, condition);
+    public <V> Then<T> then(final ExpectingExpression<T, V> epression) {
+        return controller.expect(state, epression);
     }
 }

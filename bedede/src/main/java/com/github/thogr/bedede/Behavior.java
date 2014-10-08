@@ -17,9 +17,4 @@ abstract class Behavior<T> {
         }
         throw new IllegalAccessError("Illegal call to perform()");
     }
-
-    T when() {
-        return getController().go(TypeArguments.typeArgument(this));
-    }
-
 }

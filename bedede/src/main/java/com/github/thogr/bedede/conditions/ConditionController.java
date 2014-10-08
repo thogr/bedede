@@ -10,7 +10,7 @@ public class ConditionController {
         this.framework = framework;
     }
 
-    public <T> void verify(final Expecting<T> condition) {
-        condition.verify(framework.getVerifier(condition.getConditionClass()));
+    public final <T> Object verify(final Expecting<T> condition) {
+        return condition.verify(framework.getVerifier(condition.getConditionClass()));
     }
 }

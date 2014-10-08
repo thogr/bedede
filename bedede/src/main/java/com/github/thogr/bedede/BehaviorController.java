@@ -1,7 +1,7 @@
 package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.ConditionController;
-import com.github.thogr.bedede.conditions.ConditionExpression;
+import com.github.thogr.bedede.conditions.ExpectingExpression;
 import com.github.thogr.bedede.conditions.Expecting;
 
 final class BehaviorController {
@@ -20,7 +20,7 @@ final class BehaviorController {
     }
 
     BehaviorController(final Framework framework, final StateFactory factory) {
-        this(factory, framework.getInitialStateFactory(), framework.createConditionController());
+        this(factory, framework.getInitialStateFactory(), Framework.createConditionController());
     }
 
     BehaviorController(final StateMachine machine, final ConditionController conditionController) {
@@ -76,13 +76,13 @@ final class BehaviorController {
         return new Then<>(state, this);
     }
 
-    <S, T> Then<S> expect(final Class<S> state, final ConditionExpression <S, T> expression) {
+    <S, T> Then<S> expect(final Class<S> state, final ExpectingExpression <S, T> expression) {
         expect(expression.apply(go(state)));
         return new Then<>(state, this);
     }
 
-    <V> void expect(final Expecting<V> condition) {
-        conditionController.verify(condition);
+    <V> Object expect(final Expecting<V> condition) {
+        return conditionController.verify(condition);
     }
 
     <T> T go(final Class<T> state) {

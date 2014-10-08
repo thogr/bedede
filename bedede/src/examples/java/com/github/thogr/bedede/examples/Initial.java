@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.BehaviorDriven.expecting;
-import static com.github.thogr.bedede.BehaviorDriven.otherwise;
+import static com.github.thogr.bedede.Bedede.expecting;
+import static com.github.thogr.bedede.Bedede.otherwise;
 import static org.junit.Assert.assertTrue;
 
 import com.github.thogr.bedede.Entry;
