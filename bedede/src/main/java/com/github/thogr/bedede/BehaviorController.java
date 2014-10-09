@@ -1,8 +1,8 @@
 package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.ConditionController;
-import com.github.thogr.bedede.conditions.ExpectingExpression;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.conditions.ExpectingExpression;
 
 final class BehaviorController {
 
@@ -59,12 +59,6 @@ final class BehaviorController {
     <T> Assuming<T> assuming(final Class<T> state) {
         return new Assuming<T>(state, this);
     }
-/*
-    <T> void when(final Action<? super T> action) {
-        go(target(action));
-        action.perform(this);
-    }
-    */
 
     <T> When<T> when(final ActionExpression<T> action, final Class<T> target) {
         action.perform(go(target));
@@ -88,11 +82,7 @@ final class BehaviorController {
     <T> T go(final Class<T> state) {
         return machine.go(state);
     }
-/*
-    private <T> Class<T> target(final Action<? super T> action) {
-        return TypeArguments.typeArgument(action);
-    }
-*/
+
     private <T> Class<T> target(final Entry<? super T> entry) {
         return TypeArguments.typeArgument(entry);
     }

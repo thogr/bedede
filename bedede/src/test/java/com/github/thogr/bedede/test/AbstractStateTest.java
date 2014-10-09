@@ -73,5 +73,4 @@ public class AbstractStateTest extends BehaviorDriven {
         assertTrue(state == 2);
         assertTrue(State2.guardCalled);
     }
-
 }

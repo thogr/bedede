@@ -4,12 +4,12 @@ import com.github.thogr.bedede.conditions.ExpectingExpression;
 
 public final class When<S> {
 
-    private final BehaviorController controller;
+    private final ThreadLocal<BehaviorController> controller = new ThreadLocal<>();
     private final Class<S> state;
 
     When(final Class<S> state, final BehaviorController controller) {
         this.state = state;
-        this.controller = controller;
+        this.controller.set(controller);
     }
 
     public <V> Then<S> then(final ExpectingExpression<S, V> epression) {
@@ -17,6 +17,6 @@ public final class When<S> {
     }
 
     public <T> Then<T> then(final Class<T> state) {
-        return controller.then(state);
+        return controller.get().then(state);
     }
 }

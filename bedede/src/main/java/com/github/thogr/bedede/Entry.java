@@ -6,6 +6,21 @@ package com.github.thogr.bedede;
  * by calling {@link #given(Entry)},
  * and then some actions, and finally a call to {@link #then(Class)}
  *
+ * <br><b>Example:</b>
+ * <pre>
+ * class TheState {
+ *      &#64;DefaultEntry
+ *      public static final Entry&lt;TheState&gt; REACHED = new Entry&lt;TheState&gt;() {
+ *
+ *          &#64;Override
+ *          protected void perform() {
+ *              given(SomeState.class)
+ *              .when(it -> it.doesSomeThing())
+ *              .then(TheState.class);
+ *          }
+ *      };
+ * }
+ * </pre>
  * @param <S> the target state
  */
 public abstract class Entry<S> extends Behavior<S> {
