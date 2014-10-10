@@ -2,6 +2,8 @@ package com.github.thogr.bedede;
 
 import java.util.Map;
 
+import com.github.thogr.bedede.internal.InitialStateFactory;
+import com.github.thogr.bedede.internal.StateFactory;
 import com.github.thogr.bedede.selenium.WebDriverProvider;
 
 public final class SeleniumInitialStateFactory implements InitialStateFactory {

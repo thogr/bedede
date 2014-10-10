@@ -5,7 +5,10 @@ import com.github.thogr.bedede.conditions.Expecting;
 
 public abstract class Bedede {
 
-    Bedede(final Framework only) {
+    protected Bedede(final Framework only) {
+        if (only == null) {
+            throw new NullPointerException();
+        }
     }
 
     public static Expecting<BooleanCondition> expecting(

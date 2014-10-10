@@ -11,6 +11,8 @@ import org.mockito.MockitoAnnotations;
 
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.internal.DefaultInitialStateFactory;
+import com.github.thogr.bedede.internal.DefaultStateFactory;
 
 public class OnEntryTest {
 

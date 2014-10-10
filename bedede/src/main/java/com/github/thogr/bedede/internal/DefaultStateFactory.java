@@ -1,4 +1,5 @@
-package com.github.thogr.bedede;
+package com.github.thogr.bedede.internal;
+
 
 public class DefaultStateFactory implements StateFactory {
 

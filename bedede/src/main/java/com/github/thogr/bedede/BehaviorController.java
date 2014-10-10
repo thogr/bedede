@@ -3,6 +3,8 @@ package com.github.thogr.bedede;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.ExpectingExpression;
+import com.github.thogr.bedede.internal.InitialStateFactory;
+import com.github.thogr.bedede.internal.StateFactory;
 
 final class BehaviorController {
 

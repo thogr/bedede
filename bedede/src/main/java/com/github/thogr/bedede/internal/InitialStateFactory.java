@@ -1,4 +1,4 @@
-package com.github.thogr.bedede;
+package com.github.thogr.bedede.internal;
 
 import java.util.Map;
 

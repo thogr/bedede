@@ -15,6 +15,10 @@ import org.mockito.MockitoAnnotations;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.internal.DefaultInitialStateFactory;
+import com.github.thogr.bedede.internal.DefaultStateFactory;
+import com.github.thogr.bedede.internal.InitialStateFactory;
+import com.github.thogr.bedede.internal.StateFactory;
 import com.github.thogr.bedede.test.View2;
 
 public class EntryTest {

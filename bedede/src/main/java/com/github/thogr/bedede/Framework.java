@@ -5,6 +5,8 @@ import java.util.ServiceLoader;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.ConditionProvider;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
+import com.github.thogr.bedede.internal.InitialStateFactory;
+import com.github.thogr.bedede.internal.StateFactory;
 
 public final class Framework {
     private static final String NO_SERVICE_PROVIDED =

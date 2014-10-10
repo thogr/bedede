@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.internal.InitialStateFactory;
+import com.github.thogr.bedede.internal.StateFactory;
 
 final class StateMachine {
 
