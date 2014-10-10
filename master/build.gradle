@@ -1,14 +1,16 @@
 
-group = 'bedede'
-version = '0.1-SNAPSHOT'
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'groovy'
     apply plugin: 'eclipse'
 }
 
-sourceCompatibility = 1.8
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    sourceCompatibility = 1.8
+    version = '0.1-SNAPSHOT'
+    group = 'bedede'
+}
 
 wrapper {
     gradleVersion = '2.1'
