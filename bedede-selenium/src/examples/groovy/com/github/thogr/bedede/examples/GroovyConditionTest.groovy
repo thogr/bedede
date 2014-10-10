@@ -15,18 +15,17 @@ import com.github.thogr.bedede.BehaviorDriven
 import com.github.thogr.bedede.annotations.InitialState
 import com.github.thogr.bedede.annotations.OnEntry
 import com.github.thogr.bedede.conditions.Expecting
-import com.github.thogr.bedede.selenium.WebDriverProvider
 
 class GroovyConditionTest extends BehaviorDriven {
 
     @BeforeClass
-    static void configure() {
-        WebDriverProvider.setWebDriver(new FirefoxDriver())
+    static void setUpClass() {
+        setWebDriver(new FirefoxDriver())
     }
 
     @AfterClass
-    static void close() {
-        WebDriverProvider.getWebDriver().close()
+    static void tearDownClass() {
+        getWebDriver().close()
     }
 
 

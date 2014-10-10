@@ -5,19 +5,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.github.thogr.bedede.BededeSelenium;
 import com.github.thogr.bedede.BehaviorDriven;
-import com.github.thogr.bedede.selenium.WebDriverProvider;
 
 public class ExpectedConditionTest extends BehaviorDriven {
 
     @BeforeClass
     public static void configure() {
-        WebDriverProvider.setWebDriver(new FirefoxDriver());
+        BededeSelenium.setWebDriver(new FirefoxDriver());
     }
 
     @AfterClass
     public static void close() {
-        WebDriverProvider.getWebDriver().close();
+        BededeSelenium.getWebDriver().close();
     }
 
     @Test
