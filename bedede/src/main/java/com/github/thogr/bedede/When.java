@@ -16,7 +16,7 @@ public final class When<S> {
         return then(state).then(epression);
     }
 
-    public <T> Then<T> then(final Class<T> state) {
-        return controller.get().then(state);
+    public <T> Then<T> then(final Class<T> target) {
+        return controller.get().then(target);
     }
 }

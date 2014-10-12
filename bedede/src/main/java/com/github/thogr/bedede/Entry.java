@@ -51,7 +51,7 @@ public abstract class Entry<S> extends Behavior<S> {
         return getController().assuming(state);
     }
 
-    protected final <T> void then(final Class<T> state) {
+    protected final void then(final Class<S> state) {
         getController().then(state);
     }
 

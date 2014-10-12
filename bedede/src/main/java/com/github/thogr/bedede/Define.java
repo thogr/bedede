@@ -31,7 +31,7 @@ public class Define<S> {
                     }
 
                     @Override
-                    public <T> void then(final Class<T> state) {
+                    public void then(final Class<S> state) {
                         self.then(state);
                     }
                 });

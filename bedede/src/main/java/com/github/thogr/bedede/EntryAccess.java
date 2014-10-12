@@ -8,6 +8,6 @@ public interface EntryAccess<S> {
 
     <T> Assuming<T> assuming(final Class<T> state);
 
-    <T> void then(final Class<T> state);
+    void then(final Class<S> state);
 
 }
