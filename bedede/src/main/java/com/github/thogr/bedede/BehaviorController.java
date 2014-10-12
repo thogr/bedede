@@ -39,7 +39,7 @@ final class BehaviorController {
     }
 
     <T> Assuming<T> given(final Entry<T> entry) {
-        return given(entry, target(entry));
+        return given(entry, entry.getTarget());
     }
 
     private <T> Assuming<T> given(final Entry<T> entry, final Class<T> target) {
@@ -83,10 +83,6 @@ final class BehaviorController {
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
-    }
-
-    private <T> Class<T> target(final Entry<? super T> entry) {
-        return TypeArguments.typeArgument(entry);
     }
 
     private <T> boolean was(final Class<T> target) {
