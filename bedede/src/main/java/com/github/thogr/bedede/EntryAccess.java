@@ -1,13 +1,13 @@
 package com.github.thogr.bedede;
 
-public interface EntryAccess<S> {
+public interface EntryAccess<T> {
 
-    <T> Assuming<T> given(final Class<T> state);
+    <S> TargetAssuming<T, S> given(final Class<S> state);
 
-    <T> Assuming<T> given(final Entry<T> entry);
+    <S> TargetAssuming<T, S> given(final Entry<S> entry);
 
-    <T> Assuming<T> assuming(final Class<T> state);
+    <S> TargetAssuming<T, S> assuming(final Class<S> state);
 
-    void then(final Class<S> state);
+    void then(final Class<T> state);
 
 }

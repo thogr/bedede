@@ -63,7 +63,7 @@ final class BehaviorController {
     }
 
     <T> When<T> when(final ActionExpression<T> action, final Class<T> target) {
-        action.perform(go(target));
+        perform(action, target);
         return new When<>(target, this);
     }
 
@@ -91,5 +91,9 @@ final class BehaviorController {
 
     private <T> boolean was(final Class<T> target) {
         return machine.was(target);
+    }
+
+    private <T> void perform(final ActionExpression<T> action, final Class<T> target) {
+        action.perform(go(target));
     }
 }
