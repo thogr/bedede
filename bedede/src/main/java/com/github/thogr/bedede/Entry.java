@@ -8,7 +8,7 @@ package com.github.thogr.bedede;
  *
  * <br><b>Example:</b>
  * <pre>
- * class TheState {
+ * public class TheState {
  *      &#64;DefaultEntry
  *      public static final Entry&lt;TheState&gt; REACHED = new Entry&lt;TheState&gt;() {
  *
@@ -25,8 +25,18 @@ package com.github.thogr.bedede;
  */
 public abstract class Entry<S> extends Behavior<S> {
 
-    public Entry() {
+    private final Class<S> target;
 
+    Entry(final Class<S> target) {
+        this.target = target;
+    }
+
+    public Entry() {
+        this.target = TypeArguments.typeArgument(this);
+    }
+
+    Class<S> getTarget() {
+        return target;
     }
 
     protected final <T> Assuming<T> given(final Class<T> state) {

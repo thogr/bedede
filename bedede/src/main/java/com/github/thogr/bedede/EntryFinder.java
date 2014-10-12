@@ -54,9 +54,10 @@ final class EntryFinder {
             }
             if (Entry.class.isAssignableFrom(f.getType())) {
                 final Object value = f.get(null);
-                final Class<T> target = TypeArguments.typeArgument(value);
+                final Entry<T> entry = (Entry<T>) value;
+                final Class<T> target = entry.getTarget();
                 if (target.equals(stateClass)) {
-                    return (Entry<T>) value;
+                    return entry;
                 } else {
                     throw new ClassCastException("Unexpected type Entry<" + target.getName() + ">");
                 }

@@ -3,7 +3,15 @@ package com.github.thogr.bedede;
 
 public abstract class BehaviorDriven {
 
-    private final BehaviorController controller = Framework.createBehaviorController();
+    private final BehaviorController controller;
+
+    public BehaviorDriven() {
+        this(Framework.createBehaviorController());
+    }
+
+    BehaviorDriven(final BehaviorController controller) {
+        this.controller = controller;
+    }
 
     /**
      * Sets the starting point for the further actions. If the state is
