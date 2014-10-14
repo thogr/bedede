@@ -16,11 +16,11 @@ public class AbstractWhen<S> {
         return thenState(state).then(epression);
     }
 
-    protected <T> Then<T> thenState(final Class<T> target) {
+    <T> Then<T> thenState(final Class<T> target) {
         return getController().then(target);
     }
 
-    protected BehaviorController getController() {
+    BehaviorController getController() {
         return controller.get();
     }
 

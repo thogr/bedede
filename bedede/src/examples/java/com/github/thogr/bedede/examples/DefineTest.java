@@ -6,27 +6,31 @@ import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.EntryDefinition;
+import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
 
 public class DefineTest extends BehaviorDriven {
 
     @InitialState
     public static class Initial {
+        void prepares() {
+            System.out.println("prep..");
+        }
         void moves() {
-
+            System.out.println("move..");
         }
     }
 
     public static class Moved {
         public static Entry<Moved> reached1() {
-            return defining(Moved.class).entry(e -> {e.
+            return defining().given(Moved.class).as().
                given(Initial.class)
+               .when(it -> it.prepares())
                .when(it -> it.moves())
                .then(Moved.class);
-            });
         }//7
 
+        @DefaultEntry
         public static Entry<Moved> REACHED2 = new Entry<Moved>() {
             @Override
             protected void perform() {
@@ -47,28 +51,10 @@ public class DefineTest extends BehaviorDriven {
             };
         }//10
 
-        public static EntryDefinition<Moved> reached4() {return e->e.
-            given(Initial.class)
-            .when(it -> it.moves())
-            .then(Moved.class);
-        }//5-6
-
-        public static final EntryDefinition<Moved> REACHED5 = e -> {e.
-            given(Initial.class)
-            .when(it -> it.moves())
-            .then(Moved.class);
-        };//5
-
-        public static final Entry<Moved> REACHED8 = defining(Moved.class).entry(e -> {e.
-            given(Initial.class)
-            .when(it -> it.moves())
-            .then(Moved.class);
-        });//5
-
-        public static final Entry<Moved> REACHED9 = defining(Moved.class).entry()
+        public static final Entry<Moved> REACHED9 = defining().given(Moved.class).as()
                 .given(Initial.class)
                 .when(it -> it.moves())
-                .then(Moved.class);
+                .then(Moved.class); // 4
 
     }
 
@@ -93,25 +79,6 @@ public class DefineTest extends BehaviorDriven {
     }
 
     @Test
-    public void test4() {
-        given(defining(Moved.class).entry(Moved.reached4()));
-    }
-
-    @Test
-    public void test5() {
-        given(defining(Moved.class).entry(Moved.REACHED5));
-    }
-
-    @Test
-    public void test6() {
-        given(defining(Moved.class).entry(e -> {e.
-            given(Initial.class)
-            .when(it -> it.moves())
-            .then(Moved.class);
-        }));
-    }
-
-    @Test
     public void test7() {
         given(new Entry<Moved>() {
             @Override
@@ -121,5 +88,10 @@ public class DefineTest extends BehaviorDriven {
                 .then(Moved.class);
             }
         });
+    }
+
+    @Test
+    public void test9() {
+        given(Moved.REACHED9);
     }
 }

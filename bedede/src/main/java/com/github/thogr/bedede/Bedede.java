@@ -27,7 +27,7 @@ public abstract class Bedede {
         return Otherwise.otherwise(message);
     }
 
-    public static <S> Defining<S> defining(final Class<S> state) {
-        return new Defining<S>(state);
+    public static Defining.EntryBuilder defining() {
+        return Defining.builder();
     }
 }

@@ -54,11 +54,10 @@ public class TelephoneExampleTest extends BehaviorDriven {
 
     public static class WaitingForFirstDigit extends OffHook {
         public static Entry<WaitingForFirstDigit> REACHED =
-                defining(WaitingForFirstDigit.class).entry(entry -> {entry.
+                defining().given(WaitingForFirstDigit.class).as().
                     given(OnHook.class)
                     .when(user -> user.pickingUpPhone())
                     .then(WaitingForFirstDigit.class);
-                });
 
         @OnEntry
         Expecting<BooleanCondition> hasDialTone() {
@@ -69,12 +68,10 @@ public class TelephoneExampleTest extends BehaviorDriven {
     public static class WaitingForMoreDigits extends OffHook  {
 
         public static Entry<WaitingForMoreDigits> afterPressingOneKey(final int key) {
-            return defining(WaitingForMoreDigits.class).entry(entry -> {entry.
-
+            return defining().given(WaitingForMoreDigits.class).as().
                     given(WaitingForFirstDigit.class)
                     .when(user -> user.pressingKeys(key))
                     .then(WaitingForMoreDigits.class);
-            });
         }
 
         @OnEntry
