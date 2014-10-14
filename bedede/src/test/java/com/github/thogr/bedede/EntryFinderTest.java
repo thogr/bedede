@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
 
 public class EntryFinderTest {
@@ -57,6 +58,46 @@ public class EntryFinderTest {
         };
     }
 
+
+    public static class StateWithFirstAnnotatedDefaultEntry {
+        @DefaultEntry
+        public static Entry<StateWithFirstAnnotatedDefaultEntry> DEFAULT =
+                new Entry<StateWithFirstAnnotatedDefaultEntry>() {
+            @Override
+            protected void perform() {
+
+            }
+        };
+
+        public static Entry<StateWithFirstAnnotatedDefaultEntry> OTHER =
+                new Entry<StateWithFirstAnnotatedDefaultEntry>() {
+            @Override
+            protected void perform() {
+
+            }
+        };
+    }
+
+
+    public static class StateWithLastAnnotatedDefaultEntry {
+        public static Entry<StateWithLastAnnotatedDefaultEntry> OTHER =
+                new Entry<StateWithLastAnnotatedDefaultEntry>() {
+            @Override
+            protected void perform() {
+
+            }
+        };
+
+        @DefaultEntry
+        public static Entry<StateWithLastAnnotatedDefaultEntry> DEFAULT =
+                new Entry<StateWithLastAnnotatedDefaultEntry>() {
+            @Override
+            protected void perform() {
+
+            }
+        };
+    }
+
     @Test
     public void shouldNotFindDefaultEntryWhenInitalStateWithNoEntry() {
         assertNull(getDefaultEntry(InitialStateWithNoEntry.class));
@@ -82,4 +123,13 @@ public class EntryFinderTest {
         getDefaultEntry(StateWithWrongEntryType.class);
     }
 
+    @Test
+    public void shouldFindEntryWhenFirstAnnotatedDefaultEntry() {
+        assertThat(getDefaultEntry(StateWithFirstAnnotatedDefaultEntry.class), is(StateWithFirstAnnotatedDefaultEntry.DEFAULT));
+    }
+
+    @Test
+    public void shouldFindEntryWhenLastAnnotatedDefaultEntry() {
+        assertThat(getDefaultEntry(StateWithLastAnnotatedDefaultEntry.class), is(StateWithLastAnnotatedDefaultEntry.DEFAULT));
+    }
 }

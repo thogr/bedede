@@ -20,11 +20,14 @@ final class EntryFinder {
         for (final Field f : state.getDeclaredFields()) {
             if (isPublicStatic(f) && f.getType().equals(Entry.class)) {
                 if (f.getAnnotation(DefaultEntry.class) != null) {
-                    defaultEntry = theOnlyDefaultEntry(state, defaultEntry, f);
+                    defaultEntry = theOnlyDefaultEntry(state, defaultEntry, defaultEntryField, f);
                     defaultEntryField = f;
                 } else {
-                    defaultEntry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
-                    defaultEntryField = f;
+                    final Entry<T> entry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
+                    if (entry != defaultEntry) {
+                        defaultEntry = entry;
+                        defaultEntryField = f;
+                    }
                 }
             }
         }
@@ -53,8 +56,7 @@ final class EntryFinder {
                 }
             }
             if (Entry.class.isAssignableFrom(f.getType())) {
-                final Object value = f.get(null);
-                final Entry<T> entry = (Entry<T>) value;
+                final Entry<T> entry = (Entry<T>) f.get(null);
                 final Class<T> target = entry.getTarget();
                 if (target.equals(stateClass)) {
                     return entry;
@@ -74,10 +76,13 @@ final class EntryFinder {
     private static <T> Entry<T> theOnlyDefaultEntry(
             final Class<T> stateClass,
             final Entry<T> defaultEntry,
+            final Field defaultEntryField,
             final Field f) {
         try {
-            if (defaultEntry != null) {
-                throw new IllegalArgumentException(String.format("The class % has multiple default entries", stateClass.toString()));
+            if (defaultEntry != null && defaultEntryField.isAnnotationPresent(DefaultEntry.class)) {
+                throw new IllegalArgumentException(
+                        String.format("The class %s has multiple default entries",
+                                stateClass.toString()));
             }
             return (Entry<T>) f.get(null);
         } catch (final IllegalAccessException e) {
