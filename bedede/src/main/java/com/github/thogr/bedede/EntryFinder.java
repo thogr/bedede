@@ -1,7 +1,13 @@
 package com.github.thogr.bedede;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
@@ -16,10 +22,11 @@ final class EntryFinder {
 
     static <T> Entry<T> getDefaultEntry(final Class<T> state) {
         Entry<T> defaultEntry = null;
-        Field defaultEntryField = null;
-        for (final Field f : state.getDeclaredFields()) {
-            if (isPublicStatic(f) && f.getType().equals(Entry.class)) {
-                if (f.getAnnotation(DefaultEntry.class) != null) {
+        Member defaultEntryField = null;
+        final List<Member> members = getMembers(state);
+        for (final Member f : members) {
+            if (isPublicStatic(f) && isEntry(f)) {
+                if (isAnnotatedDefault(f)) {
                     defaultEntry = theOnlyDefaultEntry(state, defaultEntry, defaultEntryField, f);
                     defaultEntryField = f;
                 } else {
@@ -41,22 +48,41 @@ final class EntryFinder {
         throw new IllegalArgumentException(String.format(NO_DEFAULT_ENTRY, state.toString()));
     }
 
-    @SuppressWarnings("unchecked")
+    private static boolean isEntry(final Member f) {
+        if (f instanceof Field) {
+            return Entry.class.isAssignableFrom(((Field)f).getType());
+        } else if (f instanceof Method){
+            return  Entry.class.isAssignableFrom(((Method) f).getReturnType());
+        }
+        return false;
+    }
+
+    private static <T> List<Member> getMembers(final Class<T> state) {
+        final List<Member> members = new ArrayList<>();
+        for (final Method m : state.getDeclaredMethods()) {
+            members.add(m);
+        }
+        for (final Field f : state.getDeclaredFields()) {
+            members.add(f);
+        }
+        return members;
+    }
+
     private static <T> Entry<T> theOnlyEntry(
             final Class<T> stateClass,
             final Entry<T> defaultEntry,
-            final Field defaultEntyField,
-            final Field f) {
+            final Member defaultEntyField,
+            final Member f) {
         try {
             if (defaultEntyField != null) {
-                if (defaultEntyField.isAnnotationPresent(DefaultEntry.class)) {
+                if (isAnnotatedDefault(defaultEntyField)) {
                     return defaultEntry;
                 } else {
                     return null;
                 }
             }
-            if (Entry.class.isAssignableFrom(f.getType())) {
-                final Entry<T> entry = (Entry<T>) f.get(null);
+            if (isEntry(f)) {
+                final Entry<T> entry = getValue(f);
                 final Class<T> target = entry.getTarget();
                 if (target.equals(stateClass)) {
                     return entry;
@@ -69,34 +95,57 @@ final class EntryFinder {
             throw new IllegalStateException(e);
         } catch (final ClassCastException e) {
             throw new IllegalArgumentException(errorWrongType(stateClass), e);
+        } catch (final InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 
     @SuppressWarnings("unchecked")
+    private static <T> Entry<T> getValue(final Member f)
+            throws IllegalAccessException, InvocationTargetException {
+        if (f instanceof Field) {
+            return (Entry<T>) ((Field)f).get(null);
+        } else {
+            final Method method = (Method)f;
+            if (method.getParameterTypes().length == 0) {
+                return (Entry<T>) method.invoke(null);
+            } else {
+                throw new IllegalArgumentException(
+                        "Default Entry method must not have any parameters");
+            }
+        }
+    }
+
     private static <T> Entry<T> theOnlyDefaultEntry(
             final Class<T> stateClass,
             final Entry<T> defaultEntry,
-            final Field defaultEntryField,
-            final Field f) {
+            final Member defaultEntryField,
+            final Member f) {
         try {
-            if (defaultEntry != null && defaultEntryField.isAnnotationPresent(DefaultEntry.class)) {
+            if (defaultEntry != null && isAnnotatedDefault(defaultEntryField)) {
                 throw new IllegalArgumentException(
                         String.format("The class %s has multiple default entries",
                                 stateClass.toString()));
             }
-            return (Entry<T>) f.get(null);
+            return getValue(f);
         } catch (final IllegalAccessException e) {
             throw new IllegalStateException(e);
         } catch (final ClassCastException e) {
             throw new IllegalArgumentException(errorWrongType(stateClass), e);
+        } catch (final InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
         }
+    }
+
+    private static boolean isAnnotatedDefault(final Member member) {
+        return ((AnnotatedElement)member).isAnnotationPresent(DefaultEntry.class);
     }
 
     private static String errorWrongType(final Class<?> type) {
         return "Default Entry of must be type: Entry<" + type.getName() + ">";
     }
 
-    private static boolean isPublicStatic(final Field f) {
+    private static boolean isPublicStatic(final Member f) {
         final int modifiers = f.getModifiers();
         final boolean isPublicStatic = Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers);
         return isPublicStatic;

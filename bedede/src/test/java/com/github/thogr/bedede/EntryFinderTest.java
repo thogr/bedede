@@ -2,6 +2,7 @@ package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.EntryFinder.getDefaultEntry;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
@@ -28,6 +29,17 @@ public class EntryFinderTest {
 
             }
         };
+    }
+
+    public static class StateWithOneEntryMethod {
+        public static Entry<StateWithOneEntryMethod> reached() {
+            return new Entry<StateWithOneEntryMethod>() {
+                @Override
+                protected void perform() {
+                    System.out.println("Hej");
+                }
+            };
+        }
     }
 
     public static class StateWithNoDefaultEntry {
@@ -57,7 +69,6 @@ public class EntryFinderTest {
             }
         };
     }
-
 
     public static class StateWithFirstAnnotatedDefaultEntry {
         @DefaultEntry
@@ -106,6 +117,11 @@ public class EntryFinderTest {
     @Test
     public void shouldFindEntryWhenOnlyOneEntry() {
         assertThat(getDefaultEntry(StateWithOneEntry.class), is(StateWithOneEntry.REACHED));
+    }
+
+    @Test
+    public void shouldFindEntryWhenOnlyOneEntryMethod() {
+        assertNotNull(getDefaultEntry(StateWithOneEntryMethod.class));
     }
 
     @Test(expected=IllegalArgumentException.class)
