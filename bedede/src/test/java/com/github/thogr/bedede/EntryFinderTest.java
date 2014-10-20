@@ -89,7 +89,6 @@ public class EntryFinderTest {
         };
     }
 
-
     public static class StateWithLastAnnotatedDefaultEntry {
         public static Entry<StateWithLastAnnotatedDefaultEntry> OTHER =
                 new Entry<StateWithLastAnnotatedDefaultEntry>() {
@@ -106,6 +105,23 @@ public class EntryFinderTest {
             protected void perform() {
 
             }
+        };
+    }
+
+
+    public static class StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry {
+        public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry> other(final int i) {
+            return new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {
+                @Override
+                protected void perform() {}
+            };
+        };
+
+        @DefaultEntry
+        public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry> DEFAULT =
+                new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {
+            @Override
+            protected void perform() {}
         };
     }
 
@@ -148,4 +164,11 @@ public class EntryFinderTest {
     public void shouldFindEntryWhenLastAnnotatedDefaultEntry() {
         assertThat(getDefaultEntry(StateWithLastAnnotatedDefaultEntry.class), is(StateWithLastAnnotatedDefaultEntry.DEFAULT));
     }
+
+    @Test
+    public void shouldFindEntryWhenLastAnnotatedDefaultEntryAndFirstIsParametrized() {
+        assertThat(getDefaultEntry(StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry.class),
+                is(StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry.DEFAULT));
+    }
+
 }

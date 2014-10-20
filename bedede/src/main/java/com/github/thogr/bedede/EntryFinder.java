@@ -51,8 +51,12 @@ final class EntryFinder {
     private static boolean isEntry(final Member f) {
         if (f instanceof Field) {
             return Entry.class.isAssignableFrom(((Field)f).getType());
-        } else if (f instanceof Method){
-            return  Entry.class.isAssignableFrom(((Method) f).getReturnType());
+        } else if (f instanceof Method) {
+            final Method method = (Method) f;
+            if (method.getParameterTypes().length > 0) {
+                return false;
+            }
+            return  Entry.class.isAssignableFrom(method.getReturnType());
         }
         return false;
     }
