@@ -13,11 +13,11 @@ But, to give you an idea what Bedede is:
 * BDD is really about describing transitions between states in a state machine.
 
 Example:
-
+```java
  given(LockedDoorState.class)
 .when(it -> it.turnsKey())
 .then(UnlockedDoorState.class);
-
+```
 
 
 
