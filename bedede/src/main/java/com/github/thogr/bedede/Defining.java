@@ -12,8 +12,8 @@ public class Defining<T> {
         this.target = state;
     }
 
-    DefiningEntry<T> entry() {
-        return new DefiningEntry<T>() {
+    private DefiningEntryAs<T> entryAs() {
+        return new DefiningEntryAs<T>() {
 
             @Override
             public <S> DefiningAssuming<T, S> given(final Class<S> state) {
@@ -53,36 +53,32 @@ public class Defining<T> {
         };
     }
 
-    private static <T> DefiningEntry<T> entryAs(final Class<T> target) {
-        final Defining<T> defining = new Defining<T>(target);
-        return defining.entry();
+    static EntryBuilder building() {
+        return new EntryBuilder();
     }
 
-    static EntryBuilder builder() {
-        return new EntryBuilder() {
-
-            @Override
-            public <T> DefiningGiven<T> given(final Class<T> target) {
-
-                return new DefiningGiven<T>() {
-                    @Override
-                    public DefiningEntry<T> as() {
-                        return entryAs(target);
-                    }
-                };
-            }
-        };
+    private static <T> DefiningEntryAs<T> entryAs(final Class<T> target) {
+        return new Defining<T>(target).entryAs();
     }
 
-    public interface EntryBuilder {
-        <T> DefiningGiven<T> given(Class<T> target);
-    }
+    static class EntryBuilder {
+        private EntryBuilder() {}
+        public <T> DefiningEntry<T> entry(final Class<T> target) {
 
-    public interface DefiningGiven<T> {
-        public DefiningEntry<T> as();
+            return new DefiningEntry<T>() {
+                @Override
+                public DefiningEntryAs<T> as() {
+                    return entryAs(target);
+                }
+            };
+        }
     }
 
     public interface DefiningEntry<T> {
+        public DefiningEntryAs<T> as();
+    }
+
+    public interface DefiningEntryAs<T> {
         <S> DefiningAssuming<T, S> given(final Class<S> state);
     }
 

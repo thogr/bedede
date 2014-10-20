@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.Bedede.defining;
+import static com.github.thogr.bedede.Bedede.entry;
 import static com.github.thogr.bedede.Bedede.expecting;
 import static com.github.thogr.bedede.Bedede.otherwise;
 
@@ -54,7 +54,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
 
     public static class WaitingForFirstDigit extends OffHook {
         public static Entry<WaitingForFirstDigit> REACHED =
-                defining().given(WaitingForFirstDigit.class).as().
+                entry(WaitingForFirstDigit.class).as().
                     given(OnHook.class)
                     .when(user -> user.pickingUpPhone())
                     .then(WaitingForFirstDigit.class);
@@ -68,7 +68,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
     public static class WaitingForMoreDigits extends OffHook  {
 
         public static Entry<WaitingForMoreDigits> afterPressingOneKey(final int key) {
-            return defining().given(WaitingForMoreDigits.class).as().
+            return entry(WaitingForMoreDigits.class).as().
                     given(WaitingForFirstDigit.class)
                     .when(user -> user.pressingKeys(key))
                     .then(WaitingForMoreDigits.class);

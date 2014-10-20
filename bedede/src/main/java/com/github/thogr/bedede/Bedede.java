@@ -1,5 +1,8 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Defining.building;
+
+import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 
@@ -27,7 +30,7 @@ public abstract class Bedede {
         return Otherwise.otherwise(message);
     }
 
-    public static Defining.EntryBuilder defining() {
-        return Defining.builder();
+    public static <T> DefiningEntry<T> entry(final Class<T> state) {
+        return building().entry(state);
     }
 }
