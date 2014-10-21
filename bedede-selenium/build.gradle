@@ -1,11 +1,11 @@
 
 dependencies {
     compile libraries.selenium
-    compile project(':bedede')
+    compile project(':bedede-core')
 
     testCompile libraries.selenium
 
     examplesCompile libraries.selenium
-    examplesCompile project(':bedede')
+    examplesCompile project(':bedede-core')
 }
 
