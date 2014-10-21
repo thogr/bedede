@@ -27,10 +27,8 @@ final class StateMachine {
     <T> T go(final Class<T> state) {
         if (current == null) {
             initial(state);
-        } else {
-            if (!was(state)) {
-                next(state);
-            }
+        } else if (!was(state)) {
+            next(state);
         }
 
         return (T) current;
@@ -59,15 +57,16 @@ final class StateMachine {
         return parameters;
     }
 
-    private <T> void next(final Class<T> state) {
-        advance(state, factory.createState(state));
+    <T> T next(final Class<T> state) {
+        return advance(state, factory.createState(state));
     }
 
-    private <T> void advance(final Class<T> state, final T next) {
+    private <T> T advance(final Class<T> state, final T next) {
         final StateVerifier<T> verifier = new AnnotatedStateVerifier<>(state, conditionController);
         if (verifier != null) {
             verifier.verify(next);
         }
         current = next;
+        return next;
     }
 }

@@ -14,7 +14,9 @@ import com.github.thogr.bedede.annotations.InitialState;
 
 final class EntryFinder {
 
-    private static final String NO_DEFAULT_ENTRY = "The class %s has no default Entry";
+    private static final String NO_DEFAULT_ENTRY = "The class %s has no default Entry, nor is it"
+            + " annotated @"
+            + InitialState.class.getSimpleName();
 
     private EntryFinder() {
 

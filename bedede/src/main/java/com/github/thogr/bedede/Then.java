@@ -12,6 +12,6 @@ public class Then<T> {
     }
 
     public <V> Then<T> then(final ExpectingExpression<T, V> epression) {
-        return controller.get().expect(state, epression);
+        return controller.get().then(state, epression);
     }
 }

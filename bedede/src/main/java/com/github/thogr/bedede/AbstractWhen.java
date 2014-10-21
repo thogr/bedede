@@ -12,8 +12,12 @@ public class AbstractWhen<S> {
         this.controller.set(controller);
     }
 
+    public When<S> when(final ActionExpression<S> action) {
+        return getController().when(action, state);
+    }
+
     public <V> Then<S> then(final ExpectingExpression<S, V> epression) {
-        return thenState(state).then(epression);
+        return getController().then(state, epression);
     }
 
     <T> Then<T> thenState(final Class<T> target) {

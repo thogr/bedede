@@ -68,11 +68,11 @@ final class BehaviorController {
     }
 
     <T> Then<T> then(final Class<T> state) {
-        go(state);
+        next(state);
         return new Then<>(state, this);
     }
 
-    <S, T> Then<S> expect(final Class<S> state, final ExpectingExpression <S, T> expression) {
+    <S, T> Then<S> then(final Class<S> state, final ExpectingExpression <S, T> expression) {
         expect(expression.apply(go(state)));
         return new Then<>(state, this);
     }
@@ -83,6 +83,10 @@ final class BehaviorController {
 
     <T> T go(final Class<T> state) {
         return machine.go(state);
+    }
+
+    <T> T next(final Class<T> state) {
+        return machine.next(state);
     }
 
     private <T> boolean was(final Class<T> target) {

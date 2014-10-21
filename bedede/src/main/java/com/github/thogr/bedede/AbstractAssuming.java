@@ -13,7 +13,7 @@ class AbstractAssuming<T> {
     }
 
     public <V> Then<T> then(final ExpectingExpression<T, V> condition) {
-        return getController().then(state).then(condition);
+        return getController().then(state, condition);
     }
 
     protected BehaviorController getController() {
