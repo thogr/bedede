@@ -33,4 +33,10 @@ public abstract class Bedede {
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
         return building().entry(state);
     }
+
+    protected static class Internal {
+        public static <E> GivenElement<E> given(final Expecting<?> expecting) {
+            return GivenElement.<E>given(expecting);
+        }
+    }
 }

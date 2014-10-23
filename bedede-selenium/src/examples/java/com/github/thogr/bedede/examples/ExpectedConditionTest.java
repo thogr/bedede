@@ -5,8 +5,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.github.thogr.bedede.BededeSelenium;
 import com.github.thogr.bedede.BehaviorDriven;
+import com.github.thogr.bedede.selenium.BededeSelenium;
 
 public class ExpectedConditionTest extends BehaviorDriven {
 

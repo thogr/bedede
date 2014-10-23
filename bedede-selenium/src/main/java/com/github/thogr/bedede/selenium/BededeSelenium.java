@@ -1,8 +1,11 @@
-package com.github.thogr.bedede;
+package com.github.thogr.bedede.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.thogr.bedede.Bedede;
+import com.github.thogr.bedede.Framework;
+import com.github.thogr.bedede.GivenElement;
 import com.github.thogr.bedede.conditions.Expecting;
 
 public final class BededeSelenium extends Bedede {
@@ -14,7 +17,7 @@ public final class BededeSelenium extends Bedede {
     }
 
     public static GivenElement<WebElement> given(final Expecting<?> exp) {
-        return GivenElement.<WebElement>given(exp);
+       return Bedede.Internal.<WebElement>given(exp);
     }
 
     public static WebDriver getWebDriver() {

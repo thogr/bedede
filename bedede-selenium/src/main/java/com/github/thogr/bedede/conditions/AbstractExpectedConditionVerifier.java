@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.thogr.bedede.BededeSelenium;
 import com.github.thogr.bedede.Otherwise;
+import com.github.thogr.bedede.selenium.BededeSelenium;
 
 public abstract class AbstractExpectedConditionVerifier<T>
     implements ConditionVerifier<ExpectedCondition<T>> {
