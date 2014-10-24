@@ -6,8 +6,8 @@ deploy:
   api_key:
     secure: z8HeT0DRcfJFUUfyeVkHhWmJ1gHod9tNJJYD9mj55cUeJE0hh7O4t3DY+HbG9j0H//LckRFNmVu+Bm/mMdR+58wvr4B6BrTYVDEMeMmuKMS5qUEdCBUJCoD/QuRekEPCXmi4PCItdnd87hwC+tEw7FIDhad5aE1TMWBRWyUbCQY=
   file:
-    - bedede-core/build/libs/bedede-core-0.1.jar
-    - bedede-selenium/build/libs/bedede-selenium-0.1.jar
+    - bedede-core/build/libs/bedede-core-0.2-SNAPSHOT.jar
+    - bedede-selenium/build/libs/bedede-selenium-0.2-SNAPSHOT.jar
   skip_cleanup: true
   on:
     repo: thogr/bedede
