@@ -11,3 +11,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: thogr/bedede
+    tags: true
+    all_branches: true
