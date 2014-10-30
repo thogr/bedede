@@ -16,7 +16,7 @@ But, to give you an idea what Bedede is:
 * Hence, the BDD keyworks **given**, **when**, and **then** are methods in the API.
 * Designed by the assumption that BDD is really about describing transitions between states in a state machine.
 
-The *given(S1.class).when(it->it.action()).then(S2.class)* syntax defines an expected transition from state S1 to S2 when the action is performed. As the *action()* is defined in the S1 class it can only be performed in state S1.
+The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
 Example:
 ```java
@@ -57,9 +57,9 @@ public class DoorLocked extends DoorState {
 The @OnEntry method is the guard that defines the entry condition that must be fulfilled when entering the state.
 
 #### Define Entries to states
-An Entry to a state defines the path to the state, as a *given().when().then* transition.
-By defining a @DefaultEntry in a state class you may access the states default entry with the given(State.class) syntax.
-But you may also use an entry explicitly, e.g given(DoorUnlocked.byUnlockingWith(someKey)
+An Entry to a state defines the path to the state, as a `given().when().then()` transition.
+By defining a `@DefaultEntry` in a state class you may access the state's default entry with the given(State.class) syntax.
+But you may also use an entry explicitly, e.g `given(DoorUnlocked.byUnlockingWith(someKey)`
 ```java
 
 public static class DoorUnlocked extends DoorState {
