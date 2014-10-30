@@ -1,16 +1,22 @@
 language: java
 jdk:
 - oraclejdk8
-env: dontRunSelenium=true
+env:
+  matrix:
+  - dontRunSelenium=true
+  global:
+    secure: jrPGZThId7DqFkxpG/CGN8XNz+vBSA5thRbVot2fiRg1fwKDZ1mn7OEjweJJR0TR5ISm/SHO4TbROXKU8ZrlDSlnZhwhycPu02Am8g/BE0W5JmZN03QT21V3LjqL1Mf0PYK75PFRzSHxs+ukcWVSkCXi6R+Z5PKtK4IxUUO4Pss=
 deploy:
   provider: releases
   api_key:
     secure: z8HeT0DRcfJFUUfyeVkHhWmJ1gHod9tNJJYD9mj55cUeJE0hh7O4t3DY+HbG9j0H//LckRFNmVu+Bm/mMdR+58wvr4B6BrTYVDEMeMmuKMS5qUEdCBUJCoD/QuRekEPCXmi4PCItdnd87hwC+tEw7FIDhad5aE1TMWBRWyUbCQY=
   file:
-    - bedede-core/build/libs/bedede-core-0.1.1.jar
-    - bedede-selenium/build/libs/bedede-selenium-0.1.1.jar
+  - bedede-core/build/libs/bedede-core-0.1.1.jar
+  - bedede-selenium/build/libs/bedede-selenium-0.1.1.jar
   skip_cleanup: true
   on:
     repo: thogr/bedede
     tags: true
     all_branches: true
+after_success:
+    "./gradlew publish -PbintrayUser=${BINTRAY_USER} -PbintrayKey=${BINTRAY_KEY}"
