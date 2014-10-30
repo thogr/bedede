@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-core:$version"
+    testCompile "com.github.thogr.bedede:bedede-core:0.1.1"
 }
