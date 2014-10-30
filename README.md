@@ -106,5 +106,5 @@ public class DoorExampleTest extends BehaviorDriven {
 }
 ```
 
-
-
+### Links
+[Uncle Bob: "The truth about BDD"](https://sites.google.com/site/unclebobconsultingllc/the-truth-about-bdd)
