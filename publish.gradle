@@ -6,14 +6,15 @@ publishing {
             from components.java
         }
     }
-}
 
-repositories {
-    maven {
-        url "https://api.bintray.com/${bintrayUser}/maven"
-        credentials {
-            username = "${bintrayUser}"
-            password = "${bintrayKey}"
+    repositories {
+        maven {
+            url "https://api.bintray.com/${bintrayUser}/maven"
+            credentials {
+                username = "${bintrayUser}"
+                password = "${bintrayKey}"
+            }
         }
     }
 }
+
