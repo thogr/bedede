@@ -1,11 +1,10 @@
 
 repositories {
-    mavenLocal();
     maven {
         url "http://dl.bintray.com/thogr/maven"
     }
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-core:0.1.1"
+    testCompile "com.github.thogr.bedede:bedede-core:0.2"
 }
