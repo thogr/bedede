@@ -9,7 +9,7 @@ subprojects {
     apply plugin: 'groovy'
     sourceCompatibility = 1.8
     version = '0.2-SNAPSHOT'
-    group = 'bedede'
+    group = 'com.github.thogr.bedede'
 }
 
 wrapper {
@@ -37,34 +37,12 @@ subprojects {
         mavenCentral()
     }
 
-
-    sourceSets {
-        examples {
-            java { srcDir 'src/examples/java' }
-            groovy { srcDir 'src/examples/groovy' }
-            resources { srcDir 'src/examples/resources' }
-        }
-
-        test
-        main
-    }
-
     dependencies {
         testCompile libraries.junit
         testCompile libraries.mockito
 
-        examplesCompile sourceSets.main.output
-        examplesCompile libraries.junit
-        examplesCompile libraries.mockito
-
         compile localGroovy()
         testCompile localGroovy()
-        examplesCompile localGroovy()
-    }
-
-    task examples(type: Test) {
-        testClassesDir = sourceSets.examples.output.classesDir
-        classpath = sourceSets.examples.runtimeClasspath
     }
 }
 

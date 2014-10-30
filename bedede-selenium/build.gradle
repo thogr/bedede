@@ -1,3 +1,4 @@
+apply from: rootProject.file("publish.gradle")
 
 dependencies {
     compile libraries.selenium
@@ -5,7 +6,7 @@ dependencies {
 
     testCompile libraries.selenium
 
-    examplesCompile libraries.selenium
-    examplesCompile project(':bedede-core')
+    //examplesCompile libraries.selenium
+    //examplesCompile project(':bedede-core')
 }
 

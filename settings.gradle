@@ -1,2 +1,2 @@
 println "root=" + rootProject.name
-include 'bedede-core', 'bedede-selenium'
+include 'bedede-core', 'bedede-selenium', 'bedede-core-examples', 'bedede-selenium-examples'
