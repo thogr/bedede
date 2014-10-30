@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
@@ -21,6 +22,11 @@ public class TransitionTest extends BehaviorDriven {
         void moves() {
             system.doSomeThing();
         }
+    }
+
+    @Before
+    public void setUp() {
+        system = new SystemTested();
     }
 
     public static class State2 {
