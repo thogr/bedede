@@ -9,7 +9,7 @@ publishing {
 
     repositories {
         maven {
-            url "https://api.bintray.com/${bintrayUser}/maven"
+            url "https://api.bintray.com/maven/${bintrayUser}/maven/bedede"
             credentials {
                 username = "${bintrayUser}"
                 password = "${bintrayKey}"
@@ -17,4 +17,6 @@ publishing {
         }
     }
 }
+
+
 

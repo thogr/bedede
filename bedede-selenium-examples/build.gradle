@@ -2,7 +2,7 @@
 repositories {
     mavenLocal();
     maven {
-        url "http://dl.bintray.com/thogr/maven"
+        url "http://dl.bintray.com/thogr/maven/"
     }
 }
 
