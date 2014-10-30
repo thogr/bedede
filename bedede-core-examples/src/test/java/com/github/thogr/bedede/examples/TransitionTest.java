@@ -24,16 +24,16 @@ public class TransitionTest extends BehaviorDriven {
         }
     }
 
-    @Before
-    public void setUp() {
-        system = new SystemTested();
-    }
-
     public static class State2 {
         @OnEntry
         void guard() {
             assert system.getState() == 1 : "Not state 2";
         }
+    }
+
+    @Before
+    public void setUp() {
+        system = new SystemTested();
     }
 
     @Test
