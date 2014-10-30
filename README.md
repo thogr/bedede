@@ -1,5 +1,8 @@
 # Bedede
 ======
+Uncle Bob said:
+> *The Given/When/Then syntax of BDD seemed eerily familiar when I first heard about it several years ago. It’s been tickling at the back of my brain since then. Something about that triplet was trying to resonate with something else in my brain.*
+> *This strange similarity caused me to realize that GIVEN/WHEN/THEN is simply a state transition, and that BDD is really just a way to describe a finite state machine.*
 
 ## A simple state based BDD framework for Java
 
