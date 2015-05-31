@@ -41,6 +41,16 @@ public abstract class BehaviorDriven {
     }
 
     /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * @param obj initial value
+     * @return the continued behavior expression
+     */
+    public <T> BehaviorExpression<T> given(final T obj) {
+        return Expressions.given(obj);
+    }
+
+    /**
      * Sets the starting point for the further actions. This sets the assumed current state.
      * The validity of this assumption is verified before when any action is performed,
      * but not until then, by execution the method annotated with &#64;OnEntry in the target

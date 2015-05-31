@@ -42,6 +42,11 @@ public abstract class Bedede {
         }
     }
 
+    public static <T> BehaviorExpression<T> given(final Class<T> clazz) {
+        throw new IllegalArgumentException(
+                "Use " + BehaviorDriven.class.getName() + ".given(Class state)");
+    }
+
     public static <T> BehaviorExpression<T> given(final T obj) {
         return Expressions.given(obj);
     }

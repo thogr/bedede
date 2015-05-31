@@ -24,8 +24,8 @@ public final class BehaviorExpression<T> {
     }
 
     public <S> BehaviorExpression<T> then(
-            final Function<? super T, S> expr, final Matcher<? super S> is) {
-        S result = expr.apply(obj);
+            final Function<? super T, S> it, final Matcher<? super S> is) {
+        S result = it.apply(obj);
         assertThat(result, is);
         return new BehaviorExpression<T>(obj);
     }
