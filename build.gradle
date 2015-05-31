@@ -26,7 +26,7 @@ wrapper {
 
 ext.libraries = [
     junit: 'junit:junit:4.11',
-    mockito : 'org.mockito:mockito-all:1.10.4',
+    mockito : 'org.mockito:mockito-core:1.10.4',
     selenium : 'org.seleniumhq.selenium:selenium-java:2.43.1'
 ]
 
