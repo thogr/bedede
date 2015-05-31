@@ -2,7 +2,7 @@ package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.ExpectingExpression;
 
-class AbstractAssuming<T> {
+abstract class AbstractAssuming<T> {
 
     private final ThreadLocal<BehaviorController> controller = new ThreadLocal<>();
     protected final Class<T> state;
