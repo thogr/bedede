@@ -42,13 +42,38 @@ public abstract class Bedede {
         }
     }
 
+    /**
+     * For future use. In the future this may be possible, but for now your test will need to
+     * extend BehaviorDriven, to be able to call given() on a state (i.e. a class)
+     * @deprecated for now - use {@link BehaviorDriven#given(Class)}
+     */
     public static <T> BehaviorExpression<T> given(final Class<T> clazz) {
         throw new IllegalArgumentException(
                 "Use " + BehaviorDriven.class.getName() + ".given(Class state)");
     }
 
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * The starting environment is any object, which further when() and then() expressions will
+     * operate on.
+     * @param obj initial value
+     * @return the continued behavior expression
+     */
     public static <T> BehaviorExpression<T> given(final T obj) {
         return Expressions.given(obj);
+    }
+
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * In this case the starting environment is represented by a behavior expression, typically
+     * returned by a method (perhaps extracted by a previous refactoring).
+     * @param obj initial value
+     * @return the continued behavior expression
+     */
+    public static <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+        return Expressions.given(expr);
     }
 
     public static <T> NonFunctional<T> performing(final ActionExpression<T> expr) {

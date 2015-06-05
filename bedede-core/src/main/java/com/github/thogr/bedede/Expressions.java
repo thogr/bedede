@@ -7,6 +7,10 @@ abstract class Expressions {
         return new BehaviorExpression<T>(obj);
     }
 
+    static <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+        return expr;
+    }
+
     static <T> NonFunctional<T> performing(final ActionExpression<T> expr) {
         return new NonFunctional<T>(expr);
     }

@@ -1,6 +1,6 @@
 package com.github.thogr.bedede;
 /**
- * The behavior needed reach a a target state.
+ * The behavior needed reach a target state.
  * The method {@link #perform()} is the implementation.
  * Typically the first step is to refer to some other Entry,
  * by calling {@link #given(Entry)},

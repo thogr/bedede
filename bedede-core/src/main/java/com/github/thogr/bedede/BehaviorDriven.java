@@ -43,10 +43,24 @@ public abstract class BehaviorDriven {
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test
      * but with behavior driven syntax - given().when()...then();
+     * The starting environment is any object, which further when() and then() expressions will
+     * operate on.
      * @param obj initial value
      * @return the continued behavior expression
      */
     public <T> BehaviorExpression<T> given(final T obj) {
+        return Expressions.given(obj);
+    }
+
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * In this case the starting environment is represented by a behavior expression, typically
+     * returned by a method (perhaps extracted by a previous refactoring).
+     * @param obj initial value
+     * @return the continued behavior expression
+     */
+    public <T> BehaviorExpression<T> given(final BehaviorExpression<T> obj) {
         return Expressions.given(obj);
     }
 
