@@ -11,11 +11,15 @@ Currently I'm experimenting a lot. So don't expect a stable API, just yet.
 
 But, to give you an idea what Bedede is:
 
-* It's State-based. (That's very much like Model-based testing, but without the auto-generated tests)
-* It's a BDD-test framework. (But as a Java/Groovy API, i.e. without the textual story telling)
+* It's a BDD-test framework.
+* It supports State-based tests. (That's very much like Model-based testing, but without the auto-generated tests)
+* But, it also supports "State-less" tests, e.g. unit tests.
+* It's an API for writing BDD tests (i.e. without the textual story telling)
 * Hence, the BDD keyworks **given**, **when**, and **then** are methods in the API.
 * Designed by the assumption that BDD is really about describing transitions between states in a state machine.
-
+* Supports Selenium, Mockito, Hamcrest
+### State-based tests
+State-based tests is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this frame work you define the states as classes, and it's actions as methods. The tests are the written as given-when-then rules.
 The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
 Example:
@@ -24,7 +28,23 @@ Example:
 .when(it -> it.turnsKey())
 .then(UnlockedDoorState.class);
 ```
-
+For testing web applications:
+```java
+given(GoogleSearchPage.class)
+.when(it -> it.searchesFor("Selenium"))
+.then(GoogleResultPage.class)
+.then(it -> it.hasTitle("Selenium"));
+```
+### State-less tests
+Well, it's not state-less really, since every object have its internal state. But you don't need to define a state machine to use the framework. The framework has behavior expressions, like this:
+``` java
+given(new BowlingGame())
+.when(performing(the -> the.roll(1))).times(20)
+.then(the -> the.score(), is(20));
+```
+These expressions use Hamcrest matchers, but in a more declarative, rule-based, easy-to-read way.
+And you don't need to declare any local variable, and a lot less helper functions, since the code
+reads well as it is.
 ### Usage
 #### Gradle
 ```groovy
@@ -36,7 +56,7 @@ repositories {
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-core:0.2"
+    testCompile "com.github.thogr.bedede:bedede-core:0.3"
 }
 ```
 
