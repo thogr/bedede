@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples.bowling;
 
-public class Game {
+public class BowlingGame {
     int[] rolls = new int[21];
     int current = 0;
 

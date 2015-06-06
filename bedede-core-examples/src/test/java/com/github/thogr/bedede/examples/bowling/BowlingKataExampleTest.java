@@ -17,14 +17,14 @@ public class BowlingKataExampleTest {
 
     @Test
     public void shouldGet20PointsForAllOnes() throws Exception {
-        given(new Game())
-        .when(performing(the -> the.roll((1)))).times(20)
+        given(new BowlingGame())
+        .when(performing(the -> the.roll(1))).times(20)
         .then(the -> the.score(), is(20));
     }
 
     @Test
     public void shouldGetBonusForOneSpare() throws Exception {
-        given(new Game())
+        given(new BowlingGame())
         .when(performing(the -> the.roll(5)))
         .when(performing(the -> the.roll(5))) // Spare
         .when(performing(the -> the.roll(3)))
@@ -34,7 +34,7 @@ public class BowlingKataExampleTest {
 
     @Test
     public void shouldGetBonusForOneStrike() throws Exception {
-        given(new Game())
+        given(new BowlingGame())
         .when(performing(the -> the.roll(10))) // Strike
         .when(performing(the -> the.roll(3)))
         .when(performing(the -> the.roll(4)))
@@ -42,8 +42,8 @@ public class BowlingKataExampleTest {
         .then(the -> the.score(), is(24));
     }
 
-    private <T> BehaviorExpression<Game> aGutterGame() {
-        return given(new Game())
+    private <T> BehaviorExpression<BowlingGame> aGutterGame() {
+        return given(new BowlingGame())
                 .when(performing(the -> the.roll(0))).times(20);
     }
 }
