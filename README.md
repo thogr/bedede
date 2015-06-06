@@ -18,7 +18,9 @@ But, to give you an idea what Bedede is:
 * Hence, the BDD keyworks **given**, **when**, and **then** are methods in the API.
 * Designed by the assumption that BDD is really about describing transitions between states in a state machine.
 * Supports Selenium, Mockito, Hamcrest
+
 ### State-based tests
+
 State-based tests is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this frame work you define the states as classes, and it's actions as methods. The tests are the written as given-when-then rules.
 The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
@@ -35,7 +37,9 @@ given(GoogleSearchPage.class)
 .then(GoogleResultPage.class)
 .then(it -> it.hasTitle("Selenium"));
 ```
+
 ### State-less tests
+
 Well, it's not state-less really, since every object have its internal state. But you don't need to define a state machine to use the framework. The framework has behavior expressions, like this:
 ``` java
 given(new BowlingGame())
@@ -77,6 +81,7 @@ public class DoorLocked extends DoorState {
 The @OnEntry method is the guard that defines the entry condition that must be fulfilled when entering the state.
 
 #### Define Entries to states
+
 An Entry to a state defines the path to the state, as a `given().when().then()` transition.
 By defining a `@DefaultEntry` in a state class you may access the state's default entry with the given(State.class) syntax.
 But you may also use an entry explicitly, e.g `given(DoorUnlocked.byUnlockingWith(someKey)`
@@ -130,4 +135,5 @@ public class DoorExampleTest extends BehaviorDriven {
 ```
 
 ### Links
+
 [Uncle Bob: "The truth about BDD"](https://sites.google.com/site/unclebobconsultingllc/the-truth-about-bdd)
