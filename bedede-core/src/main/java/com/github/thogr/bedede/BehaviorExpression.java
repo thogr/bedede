@@ -5,7 +5,11 @@ import static org.junit.Assert.assertThat;
 import java.util.function.Function;
 
 import org.hamcrest.Matcher;
-
+/**
+ * A BDD expression, e.g. given(...), or given(...).when(...), or given(...).when(...).then(...)
+ *
+ * @param <T> the type of object the actions operate on in the when() or then() expressions.
+ */
 public abstract class BehaviorExpression<T> {
     protected T obj;
 
@@ -18,15 +22,16 @@ public abstract class BehaviorExpression<T> {
      * with a return value. Further behavior operates on that returned object, which will be the
      * new current object.
      * <p>
-     * Example:<nl/>
+     * Example:
+     * </p>
      * <pre>
      *  given(new Integer(123))
-     *   .when(transforming(it -> it.toString()))
+     *   .when(transforming(it -&gt; it.toString()))
      *   .then(it(), is(equalTo("123")));
      *  </pre>
-     * </p>
-     * @param expr
-     * @return a new expression where the object in focus is the same
+     * @param <S> the type of object returned by the action
+     * @param expr the the action to be performed, wrapped like:<code> transforming(action) </code>
+     * @return a new expression where the object in focus is the result of the transformation
      */
     public final <S> BehaviorExpression<S> when(final TransformingExpression<? super T, S> expr) {
         S result = expr.function.apply(obj);
@@ -36,10 +41,13 @@ public abstract class BehaviorExpression<T> {
     /**
      * When performing an action on the current object. The action is non-functional, i.e. does not return
      * anything. Further behavior operates on the same current object.
-     * Example:<nl>
-     * <code>when(performing(the -> the.operation()))
-     * </code>
-     * @param expr an action wrapped like: performing(action)
+     * <p>
+     * Example:
+     * </p>
+     * <pre>
+     * when(performing(the -&gt; the.operation()))
+     * </pre>
+     * @param expr an action wrapped like: <code>performing(action)</code>
      * @return a new expression where the current object in focus is the same
      */
     public final WhenBehaviorExpression<T> when(final PerformingExpression<? super T> expr) {
@@ -51,11 +59,13 @@ public abstract class BehaviorExpression<T> {
      * The expression when(action) is exactly the same as when(performing(action)).
      * The expression of the form when(action) is more compact, but when(performing(action)) is
      * probably more easy to read grammatically correct. I all depends on the names of the methods
-     * called in the action.<nl>
-     * Example: when(it -> it.willStart()) may read well, but when(it -> it.start()) may not,
-     * thus consider when(performing(the -> the.start()))
+     * called in the action.
+     * <p>
+     * Example:<code>when(it -&gt; it.willStart())</code> may read well, but <code>when(it -&gt; it.start())</code> may not,
+     * thus consider <code>when(performing(the -&gt; the.start()))</code>
+     * </p>
      * @see #when(PerformingExpression)
-     * @param action
+     * @param action the action to be performed
      * @return a new expression where the current object in focus is the same
      */
     public final WhenBehaviorExpression<T> when(final ActionExpression<? super T> action) {
@@ -67,14 +77,13 @@ public abstract class BehaviorExpression<T> {
      * Verifies the current state of the current object, with a matcher. This corresponds to
      * an assertThat(currentObject.someValue(), matcher) expression.
      * <p>
-     *
-     * Example:<nl/>
+     * Example:
      * <pre>
      *  given(new Integer(5))
-     *  .then(the -> the.intValue(), is(5))
+     *  .then(the -&gt; the.intValue(), is(5))
      *  .then(it(), is(5));
      * </pre>
-     * </p>
+     * @param <S> the type of object returned by the action
      * @param it a function on the current object
      * @param is the matcher
      * @return the behavior expression

@@ -15,7 +15,7 @@ package com.github.thogr.bedede;
  *          &#64;Override
  *          protected void perform() {
  *              given(SomeState.class)
- *              .when(it -> it.doesSomeThing())
+ *              .when(it -&gt; it.doesSomeThing())
  *              .then(TheState.class);
  *          }
  *      };

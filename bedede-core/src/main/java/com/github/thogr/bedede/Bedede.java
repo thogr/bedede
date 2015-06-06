@@ -44,8 +44,12 @@ public abstract class Bedede {
      * For future use. In the future this may be possible, but for now your test will need to
      * extend BehaviorDriven, to be able to call given() on a state (i.e. a class)
      * @deprecated for now - use {@link BehaviorDriven#given(Class)}
+     * @param state a state class
+     * @param <T> the type of state
+     * @throws IllegalArgumentException always
+     * @return nothing
      */
-    public static <T> BehaviorExpression<T> given(final Class<T> clazz) {
+    public static <T> BehaviorExpression<T> given(final Class<T> state) {
         throw new IllegalArgumentException(
                 "Use " + BehaviorDriven.class.getName() + ".given(Class state)");
     }
@@ -55,11 +59,12 @@ public abstract class Bedede {
      * but with behavior driven syntax - given().when()...then();
      * The starting environment is any object, which further when() and then() expressions will
      * operate on.
-     * @param obj initial value
+     * @param <T> the type of object or the starting environment
+     * @param value initial value
      * @return the continued behavior expression
      */
-    public static <T> BehaviorExpression<T> given(final T obj) {
-        return Expressions.given(obj);
+    public static <T> BehaviorExpression<T> given(final T value) {
+        return Expressions.given(value);
     }
 
     /**
@@ -67,7 +72,8 @@ public abstract class Bedede {
      * but with behavior driven syntax - given().when()...then();
      * In this case the starting environment is represented by a behavior expression, typically
      * returned by a method (perhaps extracted by a previous refactoring).
-     * @param obj initial value
+     * @param expr initial value
+     * @param <T> the type of object the action is operating on
      * @return the continued behavior expression
      */
     public static <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
@@ -77,7 +83,8 @@ public abstract class Bedede {
     /**
      * Wraps an action into a performing expression.
      * @see BehaviorExpression#when(PerformingExpression)
-     * @param expr
+     * @param expr the action
+     * @param <T> the type of object the action is operating on
      * @return the wrapped action
      */
     public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
@@ -86,15 +93,16 @@ public abstract class Bedede {
 
     /**
      * The identify function.
-     * The same as writing  a lambda expression like <code>(it -> it) </code>
+     * The same as writing  a lambda expression like <code>(it -&gt; it) </code>
      * This is useful in <code>then()</code> expressions.
      * <p>
-     * Example:<nl/>
+     * Example:
+     * </p>
      * <pre>
      *   given(new Integer(5))
      *   .then(it(), is(5));
      * </pre>
-     * </p>
+     * @param <T> the type of object the action is operating on
      * @return the identify function
      */
     public static <T> Function<T, T> it() {
@@ -105,7 +113,9 @@ public abstract class Bedede {
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
      * @see BehaviorExpression#when(TransformingExpression)
-     * @param expr
+     * @param expr the action
+     * @param <T> the type of object the action is operating on
+     * @param <S> the type of object the next expression will be operating on
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
@@ -115,7 +125,9 @@ public abstract class Bedede {
     /**
      * Wraps an action into a transforming expression.
      * @see BehaviorExpression#when(TransformingExpression)
-     * @param expr
+     * @param expr the action
+     * @param <T> the type of object the action is operating on
+     * @param <S> the type of object the next expression will be operating on
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
