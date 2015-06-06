@@ -22,7 +22,7 @@ public class BehaviorExpressionExampleTest {
             @Override
             public void run() {
             }})
-        .when(performing(it-> it.run()));
+        .when(it-> it.run());
     }
 
     @Test
@@ -61,8 +61,8 @@ public class BehaviorExpressionExampleTest {
     @Test
     public void testName5() throws Exception {
         given(new Incrementable())
-        .when(performing(the->the.incrementBy(2)))
-        .when(performing(the->the.incrementBy(3)))
+        .when(it->it.incrementBy(2))
+        .when(it->it.incrementBy(3))
         .then(the -> the.getValue(), is(equalTo(5)));
     }
 

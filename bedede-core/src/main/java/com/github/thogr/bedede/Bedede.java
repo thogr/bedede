@@ -1,9 +1,7 @@
 package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Defining.building;
-
 import java.util.function.Function;
-
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
@@ -76,19 +74,51 @@ public abstract class Bedede {
         return Expressions.given(expr);
     }
 
-    public static <T> NonFunctional<T> performing(final ActionExpression<T> expr) {
+    /**
+     * Wraps an action into a performing expression.
+     * @see BehaviorExpression#when(PerformingExpression)
+     * @param expr
+     * @return the wrapped action
+     */
+    public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
         return Expressions.performing(expr);
     }
 
+    /**
+     * The identify function.
+     * The same as writing  a lambda expression like <code>(it -> it) </code>
+     * This is useful in <code>then()</code> expressions.
+     * <p>
+     * Example:<nl/>
+     * <pre>
+     *   given(new Integer(5))
+     *   .then(it(), is(5));
+     * </pre>
+     * </p>
+     * @return the identify function
+     */
     public static <T> Function<T, T> it() {
         return Expressions.it();
     }
 
-    public static <T,S> Functional<T, S> retrieving(Function<T, S> expr) {
+    /**
+     * Wraps an action into a transforming expression.This is an alias for
+     * {@link #transforming(Function)}, but with a name that reads better in some situations.
+     * @see BehaviorExpression#when(TransformingExpression)
+     * @param expr
+     * @return the wrapped action
+     */
+    public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
         return Expressions.retrieving(expr);
     }
 
-    public static <T,S> Functional<T, S> transforming(Function<T, S> expr) {
+    /**
+     * Wraps an action into a transforming expression.
+     * @see BehaviorExpression#when(TransformingExpression)
+     * @param expr
+     * @return the wrapped action
+     */
+    public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
         return Expressions.transforming(expr);
     }
 }

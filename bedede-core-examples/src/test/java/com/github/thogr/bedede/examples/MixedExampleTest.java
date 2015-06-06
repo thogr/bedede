@@ -17,4 +17,18 @@ public class MixedExampleTest extends BehaviorDriven {
         .then(it(), is(1));
     }
 
+    @Test
+    public void test2() {
+        given(new Integer(5))
+        .then(the -> the.intValue(), is(5))
+        .then(it(), is(5));
+    }
+
+    @Test
+    public void test3() {
+        given(new Integer(123))
+        .when(transforming(it -> it.toString()))
+        .then(it(), is(equalTo("123")));
+    }
+
 }
