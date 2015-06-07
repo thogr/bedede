@@ -39,7 +39,7 @@ class GroovyConditionTest extends BehaviorDriven {
         }
 
         def Expecting<ExpectedCondition<WebElement>> searchButton() {
-            expecting(visibilityOfElementLocated(By.id("gbqfb")),
+            expecting(visibilityOfElementLocated(By.xpath("//*[@type='submit']")),
                     otherwise("search button not found"))
         }
 
