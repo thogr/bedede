@@ -21,7 +21,7 @@ But, to give you an idea what Bedede is:
 
 ### State-based tests
 
-State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this frame work you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
+State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this framework you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
 The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
 Example:
