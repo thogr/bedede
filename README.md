@@ -21,7 +21,7 @@ But, to give you an idea what Bedede is:
 
 ### State-based tests
 
-State-based tests is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this frame work you define the states as classes, and it's actions as methods. The tests are the written as given-when-then rules.
+State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this frame work you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
 The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
 Example:
@@ -40,14 +40,14 @@ given(GoogleSearchPage.class)
 
 ### State-less tests
 
-Well, it's not state-less really, since every object have its internal state. But you don't need to define a state machine to use the framework. The framework has behavior expressions, like this:
+Well, it's not state-less really, since every object has its internal state. But you don't need to define a state machine to use the framework. The framework has behavior expressions, like this:
 ``` java
 given(new BowlingGame())
 .when(performing(the -> the.roll(1))).times(20)
 .then(the -> the.score(), is(20));
 ```
 These expressions use Hamcrest matchers, but in a more declarative, rule-based, easy-to-read way.
-And you don't need to declare any local variable, and a lot less helper functions, since the code
+And you don't need to declare any local variable, and you need a lot less helper functions, since the code
 reads well as it is.
 ### Usage
 #### Gradle
