@@ -23,7 +23,7 @@ public class GoogleSearchPage {
     }
 
     public Expecting<ExpectedCondition<WebElement>> searchButton() {
-        return expecting(visibilityOfElementLocated(By.id("gbqfb")),
+        return expecting(visibilityOfElementLocated(By.xpath("//*[@type='submit']")),
                 otherwise("search button not found"));
     }
 
