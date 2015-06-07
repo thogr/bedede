@@ -6,6 +6,6 @@ repositories {
 }
 
 dependencies {
-    //testCompile "com.github.thogr.bedede:bedede-core:0.3"
-    testCompile project(":bedede-core")
+    testCompile "com.github.thogr.bedede:bedede-core:0.3.2"
+    //testCompile project(":bedede-core")
 }
