@@ -26,7 +26,7 @@ The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an exp
 
 Example:
 ```java
- given(LockedDoorState.class)
+given(LockedDoorState.class)
 .when(it -> it.turnsKey())
 .then(UnlockedDoorState.class);
 ```
