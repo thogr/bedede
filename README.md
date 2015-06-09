@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-core:0.3"
+    testCompile "com.github.thogr.bedede:bedede-core:0.4"
 }
 ```
 
