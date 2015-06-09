@@ -39,8 +39,8 @@ public abstract class BehaviorExpression<T> {
     }
 
     /**
-     * When performing an action on the current object. The action is non-functional, i.e. does not return
-     * anything. Further behavior operates on the same current object.
+     * When performing an action on the current object. The action is non-functional,
+     * i.e. does not return anything. Further behavior operates on the same current object.
      * <p>
      * Example:
      * </p>
@@ -61,7 +61,8 @@ public abstract class BehaviorExpression<T> {
      * probably more easy to read grammatically correct. I all depends on the names of the methods
      * called in the action.
      * <p>
-     * Example:<code>when(it -&gt; it.willStart())</code> may read well, but <code>when(it -&gt; it.start())</code> may not,
+     * Example:<code>when(it -&gt; it.willStart())</code> may read well,
+     * but <code>when(it -&gt; it.start())</code> may not,
      * thus consider <code>when(performing(the -&gt; the.start()))</code>
      * </p>
      * @see #when(PerformingExpression)
@@ -88,7 +89,8 @@ public abstract class BehaviorExpression<T> {
      * @param is the matcher
      * @return the behavior expression
      */
-    public final <S> BehaviorExpression<T> then(final Function<? super T, S> it, final Matcher<? super S> is) {
+    public final <S> BehaviorExpression<T> then(
+            final Function<? super T, S> it, final Matcher<? super S> is) {
         S result = it.apply(obj);
         assertThat(result, is);
         return new BasicBehaviorExpression<T>(obj);
