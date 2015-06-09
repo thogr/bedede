@@ -1,8 +1,10 @@
 package com.github.thogr.bedede;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 /**
@@ -93,6 +95,24 @@ public abstract class BehaviorExpression<T> {
             final Function<? super T, S> it, final Matcher<? super S> is) {
         S result = it.apply(obj);
         assertThat(result, is);
+        return new BasicBehaviorExpression<T>(obj);
+    }
+
+    /**
+    * Verifies the current state of the current object, with a predicate. This corresponds to
+    * an assertThat(currentObject.predicate(), is(true)) expression.
+    * <p>
+    * Example:
+    * <pre>
+    *  given("")
+    *  .then(it -&gt; it.isEmpty());
+    * </pre>
+    * @param predicate a predicate function on the current object
+    * @return the behavior expression
+    */
+    public final BehaviorExpression<T> then(final Predicate<? super T> predicate) {
+        boolean result = predicate.test(obj);
+        assertThat(result, is(true));
         return new BasicBehaviorExpression<T>(obj);
     }
 }

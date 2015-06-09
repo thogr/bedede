@@ -34,4 +34,14 @@ public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
         }
         return new BasicBehaviorExpression<T>(obj);
     }
+
+    /**
+     * Repeats an action twice (2 times).
+     * @see #times
+     * @return a new expression where the current object in focus is the same
+     **/
+    public BehaviorExpression<T> twice() {
+        return times(2);
+    }
+
 }

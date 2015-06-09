@@ -1,14 +1,20 @@
 package com.github.thogr.bedede.examples;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
+
 import static com.github.thogr.bedede.Bedede.*;
 
 public class BehaviorExpressionExampleTest {
 
-    class Incrementable {
+    public static class Incrementable {
         private int value = 0;
-        void incrementBy(int i) {
+        public void increment() {
+            incrementBy(1);
+        }
+        public void incrementBy(int i) {
             value += i;
         }
         public int getValue() {
@@ -74,5 +80,27 @@ public class BehaviorExpressionExampleTest {
         .then(it(), is(equalTo("abc")))
         .when(transforming(it -> it.toUpperCase() + "123"))
         .then(it(), is(equalTo("ABC123")));
+    }
+
+    @Test
+    public void testName7() throws Exception {
+        given("abc")
+        .when(transforming(it("toUpperCase")))
+        .then(it(), is(equalTo("ABC")))
+        .then(the("length"), is(3));
+    }
+
+    @Test
+    public void testName8() throws Exception {
+        given(new Incrementable())
+        .when(performing(theAction("increment"))).twice()
+        .then(the("getValue"), is(equalTo(2)));
+    }
+
+    @Test
+    public void testName9() throws Exception {
+        given("    ")
+        .when(transforming(it -> it.trim()))
+        .then(it -> it.isEmpty());
     }
 }

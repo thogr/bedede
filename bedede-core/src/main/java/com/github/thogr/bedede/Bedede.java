@@ -1,7 +1,9 @@
 package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Defining.building;
+
 import java.util.function.Function;
+
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
@@ -132,5 +134,35 @@ public abstract class Bedede {
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
         return Expressions.transforming(expr);
+    }
+
+    /**
+     * Use carefully (alias for {@link #it(String)})
+     * @param <T> the type of object the function is operating on
+     * @param functionName
+     * @return the function
+     */
+    public static <T> Function<T, Object> the(String functionName) {
+        return Expressions.the(functionName);
+    }
+
+    /**
+     * Use carefully
+     * @param <T> the type of object the action is operating on
+     * @param functionName
+     * @return the action
+     */
+    public static <T> ActionExpression<T> theAction(String actionName) {
+        return Expressions.theAction(actionName);
+    }
+
+    /**
+     * Use carefully (alias for {@link #the(String)})
+     * @param <T> the type of object the action is operating on
+     * @param functionName
+     * @return the function
+     */
+    public static <T> Function<T, Object> it(String functionName) {
+        return Expressions.the(functionName);
     }
 }

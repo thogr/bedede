@@ -1,5 +1,7 @@
 package com.github.thogr.bedede;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.function.Function;
 
 abstract class Expressions {
@@ -17,6 +19,48 @@ abstract class Expressions {
 
     static <T> Function<T, T> it() {
         return (it -> it);
+    }
+
+    static <T> Function<T, Object> the(String functionName) {
+        return new Function<T, Object>() {
+            @Override
+            public Object apply(T obj) {
+                Class<?> clazz = obj.getClass();
+                try {
+                    Method method = clazz.getMethod(functionName);
+                    return method.invoke(obj);
+                } catch (NoSuchMethodException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (SecurityException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (IllegalAccessException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (InvocationTargetException e) {
+                    throw new IllegalArgumentException(e);
+                }
+            }
+        };
+    }
+
+    static <T> ActionExpression<T> theAction(String actionName) {
+        return new ActionExpression<T>() {
+            @Override
+            public void perform(T obj) {
+                Class<?> clazz = obj.getClass();
+                try {
+                    Method method = clazz.getMethod(actionName);
+                    method.invoke(obj);
+                } catch (NoSuchMethodException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (SecurityException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (IllegalAccessException e) {
+                    throw new IllegalArgumentException(e);
+                } catch (InvocationTargetException e) {
+                    throw new IllegalArgumentException(e);
+                }
+            }
+        };
     }
 
     static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
