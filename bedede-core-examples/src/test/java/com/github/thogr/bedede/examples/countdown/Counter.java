@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples.countdown;
 
-public class Countdown {
+public class Counter {
 
     private int seconds;
 
