@@ -38,17 +38,106 @@ given(GoogleSearchPage.class)
 .then(it -> it.hasTitle("Selenium"));
 ```
 
-### State-less tests
+### Behavior expressions
 
-Well, it's not state-less really, since every object has its internal state. But you don't need to define a state machine to use the framework. The framework has behavior expressions, like this:
+You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, you typical unit test won't. But the framework has behavior expressions, like this:
 ``` java
 given(new BowlingGame())
 .when(performing(the -> the.roll(1))).times(20)
 .then(the -> the.score(), is(20));
 ```
-These expressions use Hamcrest matchers, but in a more declarative, rule-based, easy-to-read way.
-And you don't need to declare any local variable, and you need a lot less helper functions, since the code
+Behavior expressions use Hamcrest matchers, as you can see in the example above (last line: the "is(20)").
+As you can see you don't need to declare any local variables, and you need a lot less helper functions, since the code
 reads well as it is.
+Java 8 has a new feature called Streams, which also works nicely with the framework. This is an example with streams:
+ ``` java
+public class PokerTest {
+
+  @Test
+  public void shouldSortCardsAccordingToRank() {
+      given(Stream.of("10H", "1H", "KD", "QS"))
+      .when(transforming(it->it.map(Card::new).sorted()))
+      .when(transforming(it->it.map(Card::toString).collect(toList())))
+      .then(it(), is(equalTo(asList("1H", "10H", "QS", "KD"))));
+  }
+}
+```
+#### Syntax
+Behavior expressions are really simple. You start with an object, the given(...). Then you perhaps transform it
+to something else, with when(transforming(...)), possibly in several steps.
+And lastly you verify the result, with a Hamcrest matcher in the then-clause:
+``` java
+given(<object>)
+.when(transforming(....))
+.then(it(), <matcher>)
+```
+
+Or perhaps you just perform operations on the objects, that will change its internal state, and verify the state lastly, in the then-clause:
+``` java
+given(<object>)
+.when(performing(....))
+.then(<function>, <matcher>)
+```
+Naturally, you may combine these any way you like. The main difference is that transforming() will give you a new object to operate on, and when(performing()) will keep the same object.
+
+Also, the Hamcrest matcher is optional, if you call a boolean method (i.e. a predicate):
+``` java
+given(new Counter())
+.then(it -> it.isStopped());
+```
+As you can see, Java 8 lambda expressions are used. But, since Java has Method references as well, you don't have to use lambda expressions. The above expression could have been written:
+``` java
+given(new Counter())
+.then(Counter::isStopped);
+```
+And for example:
+ ``` java
+given(new Counter())
+.when(performing(it -> it.start(2)))
+.when(performing(it -> it.decrease()))
+.then(it -> it.isStopped(), is(false));
+ ```
+ can be written:
+ ``` java
+given(new Counter())
+.when(performing(it -> it.start(2)))
+.when(performing(Counter::decrease))
+.then(Counter::isStopped, is(false));
+ ```
+You may even write it:
+``` java
+given(new Counter()).and(2)
+.when(performing(Counter::start))
+.when(performing(Counter::decrease))
+.then(Counter::isStopped, is(false));
+ ```
+You can also reuse a behavior expression in several test, e.g. to initialize several tests with the same "given" (or a parametrized), or just extract it for better readability:
+
+``` java
+
+@Test
+public void shouldNotBeStoppedWhenStartedAndDecreasedToZero() {
+    given(startedWith(3))
+    .when(decreasing(3))
+    .then(Counter::isStopped);
+}
+
+private BehaviorExpression<Counter> startedWith(int startval) {
+    return given(new Counter()).and(startval)
+            .when(performing(Counter::start));
+}
+
+private PerformingExpression<Counter> decreasing(int n) {
+    return performing(Counter::decrease).times(n);
+}
+
+private BehaviorExpression<Counter> initial() {
+    return
+        given(new Counter());
+}
+
+```
+
 ### Usage
 #### Gradle
 ```groovy
@@ -109,13 +198,13 @@ public static class DoorUnlocked extends DoorState {
 
 ```
 
-#### Junit Tests
+#### JUnit Tests
 
 ```java
 
-import com.github.thogr.bedede.BehaviorDriven;
+import static com.github.thogr.bedede.Bedede.*;
 
-public class DoorExampleTest extends BehaviorDriven {
+public class DoorExampleTest {
  //.....
 
     @Test
