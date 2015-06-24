@@ -40,7 +40,7 @@ given(GoogleSearchPage.class)
 
 ### Behavior expressions
 
-You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, you typical unit test won't. But the framework has behavior expressions, like this:
+You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, your typical unit test won't. But the framework has behavior expressions, like this:
 ``` java
 given(new BowlingGame())
 .when(performing(the -> the.roll(1))).times(20)
@@ -116,7 +116,7 @@ You can also reuse a behavior expression in several test, e.g. to initialize sev
 ``` java
 
 @Test
-public void shouldNotBeStoppedWhenStartedAndDecreasedToZero() {
+public void shouldBeStoppedWhenStartedAndDecreasedToZero() {
     given(startedWith(3))
     .when(decreasing(3))
     .then(Counter::isStopped);

@@ -33,7 +33,7 @@ public class CounterTest {
     }
 
     @Test
-    public void shouldNotBeStoppedWhenStartedAndDecreasedToZero() {
+    public void shouldBeStoppedWhenStartedAndDecreasedToZero() {
         given(startedWith(3))
         .when(decreasing(3))
         .then(Counter::isStopped);
