@@ -2,6 +2,7 @@ package com.github.thogr.bedede;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 abstract class Expressions {
@@ -17,8 +18,22 @@ abstract class Expressions {
         return new PerformingExpression<T>(expr);
     }
 
+    static <T1, T2> BiPerformingExpression<T1, T2>
+        performing(final BiActionExpression<T1, T2> expr) {
+        return new BiPerformingExpression<T1, T2>(expr);
+    }
+
+
     static <T> Function<T, T> it() {
         return (it -> it);
+    }
+
+    static <T, S> Function<T, S> the(Function<T, S> it) {
+        return it;
+    }
+
+    static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
+        return it;
     }
 
     static <T> Function<T, Object> the(String functionName) {

@@ -2,6 +2,7 @@ package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Defining.building;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.github.thogr.bedede.Defining.DefiningEntry;
@@ -43,17 +44,34 @@ public abstract class Bedede {
     }
 
     /**
-     * For future use. In the future this may be possible, but for now your test will need to
-     * extend BehaviorDriven, to be able to call given() on a state (i.e. a class)
-     * @deprecated for now - use {@link BehaviorDriven#given(Class)}
-     * @param state a state class
+     * Sets the starting point for the further actions. If the state is
+     * not the current assumed state it will possibly perform the actions needed to get
+     * there, if the target state class has a declared default Entry.
+     * The default Entry must be a public static field of type Entry&lt;T&gt; in the target
+     * class, where T is the target class type.
+     * If the class has more than one such field, one (and only one) must be annotated
+     * with &#64;DefaultEntry.
+     * @see Entry
      * @param <T> the type of state
-     * @throws IllegalArgumentException always
-     * @return nothing
+     * @param target starting point for the coming actions
+     * @return an Assuming which has methods to further actions.
      */
-    public static <T> BehaviorExpression<T> given(final Class<T> state) {
-        throw new IllegalArgumentException(
-                "Use " + BehaviorDriven.class.getName() + ".given(Class state)");
+    public static <T> Assuming<T> given(final Class<T> state) {
+        BehaviorDriver driver = new BehaviorDriver();
+        return driver.given(state);
+    }
+
+    /**
+     * Sets the starting point for the further actions. If the state is
+     * not the current assumed state it will perform the actions needed to get
+     * there, as specified by the entry.
+     * @param entry the entry that should be performed
+     * @param <T> the type of state
+     * @return an Assuming which has methods to further actions
+     */
+    public static final <T> Assuming<T> given(final Entry<T> entry) {
+        BehaviorDriver driver = new BehaviorDriver();
+        return driver.given(entry);
     }
 
     /**
@@ -90,6 +108,10 @@ public abstract class Bedede {
      * @return the wrapped action
      */
     public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
+        return Expressions.performing(expr);
+    }
+
+    public static <T1, T2> BiPerformingExpression<T1, T2> performing(final BiActionExpression<T1, T2> expr) {
         return Expressions.performing(expr);
     }
 
@@ -144,6 +166,14 @@ public abstract class Bedede {
      */
     public static <T> Function<T, Object> the(String functionName) {
         return Expressions.the(functionName);
+    }
+
+    public static <T> Function<T, Object> the(Function<T, Object> it) {
+        return Expressions.the(it);
+    }
+
+    public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
+        return Expressions.the(it);
     }
 
     /**

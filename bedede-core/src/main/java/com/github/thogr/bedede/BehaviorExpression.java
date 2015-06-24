@@ -19,6 +19,14 @@ public abstract class BehaviorExpression<T> {
         this.obj = obj;
     }
 
+    public final <T2> SecondBehaviorExpression<T, T2> given(final T2 other)  {
+        return new SecondBehaviorExpression<T, T2>(obj, other);
+    }
+
+    public final <T2> SecondBehaviorExpression<T, T2> and(final T2 other)  {
+        return given(other);
+    }
+
     /**
      * When transforming the current object to another object. The action is functional, i.e.
      * with a return value. Further behavior operates on that returned object, which will be the
@@ -35,7 +43,7 @@ public abstract class BehaviorExpression<T> {
      * @param expr the the action to be performed, wrapped like:<code> transforming(action) </code>
      * @return a new expression where the object in focus is the result of the transformation
      */
-    public final <S> BehaviorExpression<S> when(final TransformingExpression<? super T, S> expr) {
+    public final <S> BehaviorExpression<S> when(final TransformingExpression<? super T, ? extends S> expr) {
         S result = expr.function.apply(obj);
         return new BasicBehaviorExpression<S>(result);
     }
@@ -53,7 +61,8 @@ public abstract class BehaviorExpression<T> {
      * @return a new expression where the current object in focus is the same
      */
     public final WhenBehaviorExpression<T> when(final PerformingExpression<? super T> expr) {
-        return when(expr.action);
+        expr.perform(obj);
+        return new WhenBehaviorExpression<T>(obj, expr);
     }
 
     /**
@@ -73,7 +82,7 @@ public abstract class BehaviorExpression<T> {
      */
     public final WhenBehaviorExpression<T> when(final ActionExpression<? super T> action) {
         action.perform(obj);
-        return new WhenBehaviorExpression<T>(obj, action);
+        return new WhenBehaviorExpression<T>(obj, Expressions.performing(action));
     }
 
     /**
@@ -92,7 +101,7 @@ public abstract class BehaviorExpression<T> {
      * @return the behavior expression
      */
     public final <S> BehaviorExpression<T> then(
-            final Function<? super T, S> it, final Matcher<? super S> is) {
+            final Function<? super T, ? extends S> it, final Matcher<? super S> is) {
         S result = it.apply(obj);
         assertThat(result, is);
         return new BasicBehaviorExpression<T>(obj);

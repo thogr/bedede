@@ -7,9 +7,9 @@ package com.github.thogr.bedede;
  */
 public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
 
-    ActionExpression<? super T> action;
+    PerformingExpression<? super T> action;
 
-    WhenBehaviorExpression(T obj, ActionExpression<? super T> action) {
+    WhenBehaviorExpression(T obj, PerformingExpression<? super T> action) {
         super(obj);
         this.action = action;
     }

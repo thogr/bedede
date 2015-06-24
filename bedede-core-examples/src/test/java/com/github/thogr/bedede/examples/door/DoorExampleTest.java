@@ -1,13 +1,10 @@
 package com.github.thogr.bedede.examples.door;
 
-import static com.github.thogr.bedede.Bedede.entry;
-import static com.github.thogr.bedede.Bedede.expecting;
-import static com.github.thogr.bedede.Bedede.otherwise;
+import static com.github.thogr.bedede.Bedede.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
@@ -15,7 +12,7 @@ import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 
-public class DoorExampleTest extends BehaviorDriven {
+public class DoorExampleTest {
 
     static final int CODE = 123;
     static final Key CORRECT_KEY = new Key(CODE);
@@ -121,7 +118,7 @@ public class DoorExampleTest extends BehaviorDriven {
     public void shouldNotCloseWhenLocked() throws Exception {
         given(DoorOpen.class)
         .when(it -> it.turnsKey(CORRECT_KEY))
-        .when(it -> it.close())
+        .when(DoorState::close)
         .then(DoorOpen.class);
     }
 
@@ -129,7 +126,7 @@ public class DoorExampleTest extends BehaviorDriven {
     public void shouldCloseWhenWrongKey() throws Exception {
         given(DoorOpen.class)
         .when(it -> it.turnsKey(WRONG_KEY))
-        .when(it -> it.close())
+        .when(DoorState::close)
         .then(DoorUnlocked.class);
     }
 }

@@ -19,7 +19,7 @@ public class BowlingKataExampleTest {
     public void shouldGet20PointsForAllOnes() throws Exception {
         given(new BowlingGame())
         .when(performing(the -> the.roll(1))).times(20)
-        .then(the -> the.score(), is(20));
+        .then(the(BowlingGame::score), is(20));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class BowlingKataExampleTest {
         .when(performing(the -> the.roll(5))) // Spare
         .when(performing(the -> the.roll(3)))
         .when(performing(the -> the.roll(0))).times(17)
-        .then(the -> the.score(), is(16));
+        .then(BowlingGame::score, is(16));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class BowlingKataExampleTest {
         .when(performing(the -> the.roll(3)))
         .when(performing(the -> the.roll(4)))
         .when(performing(the -> the.roll(0))).times(16)
-        .then(the -> the.score(), is(24));
+        .then(the(BowlingGame::score), is(24));
     }
 
     private <T> BehaviorExpression<BowlingGame> aGutterGame() {
