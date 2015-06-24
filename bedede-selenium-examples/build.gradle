@@ -6,7 +6,7 @@ repositories {
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-selenium:0.4"
+    testCompile "com.github.thogr.bedede:bedede-selenium:0.5"
 }
 
 test {
