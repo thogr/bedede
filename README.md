@@ -111,7 +111,7 @@ given(new Counter()).and(2)
 .when(performing(Counter::decrease))
 .then(Counter::isStopped, is(false));
  ```
-You can also reuse a behavior expression in several test, e.g. to initialize several tests with the same "given" (or a parametrized), or just extract it for better readability:
+You can also reuse a behavior expression in several tests, e.g. to initialize several tests with the same "given" (or a parametrized one), or just extract it for better readability:
 
 ``` java
 
