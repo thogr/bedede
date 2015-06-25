@@ -1,15 +1,19 @@
 package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Bedede.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.*;
+
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.internal.InitialStateFactory;
 import com.github.thogr.bedede.internal.StateFactory;
@@ -25,10 +29,21 @@ public class StateMachineTest {
     @Mock
     private ConditionController conditionController;
 
+    @SuppressWarnings("rawtypes")
+    ArgumentCaptor<Map> parameters =
+            ArgumentCaptor.forClass(Map.class);
+
+
     private StateMachine machine;
 
+    private State0 state0;
     private State1 state1;
     private State2 state2;
+
+    @InitialState(config= {"param1=123", "param2=foo"})
+    public static class State0 {
+
+    }
 
     public static class State1 {
 
@@ -38,16 +53,24 @@ public class StateMachineTest {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         machine = new StateMachine(factory, initialStateFactory, conditionController);
+        state0 = new State0();
         state1 = new State1();
         state2 = new State2();
 
         BDDMockito
-        .given(initialStateFactory.createInitialState(eq(factory), eq(State1.class), any()))
+        .given(initialStateFactory.createInitialState(
+                eq(factory), eq(State1.class), parameters.capture()))
         .willReturn(state1);
+
+        BDDMockito
+        .given(initialStateFactory.createInitialState(
+                eq(factory), eq(State0.class), parameters.capture()))
+        .willReturn(state0);
 
         BDDMockito
         .given(factory.createState(State2.class))
@@ -59,6 +82,15 @@ public class StateMachineTest {
         given(atNoState())
         .when(retrieving(the -> the.go(State1.class)))
         .then(it(), is(sameInstance(state1)));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void shouldGetConfigFromInitialStateAnnotation() {
+        given(atNoState())
+        .when(performing(the -> the.go(State0.class)))
+        .then(the -> parameters.getValue(), hasEntry("param1", "123"))
+        .then(the -> parameters.getValue(), hasEntry("param2", "foo"));
     }
 
     @Test
