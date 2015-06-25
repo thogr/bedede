@@ -4,6 +4,7 @@ import static com.github.thogr.bedede.Defining.building;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
@@ -169,6 +170,10 @@ public abstract class Bedede {
     }
 
     public static <T> Function<T, Object> the(Function<T, Object> it) {
+        return Expressions.the(it);
+    }
+
+    public static <T> Predicate<T> the(Predicate<T> it) {
         return Expressions.the(it);
     }
 

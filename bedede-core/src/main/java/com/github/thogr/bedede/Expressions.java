@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 abstract class Expressions {
     static <T> BehaviorExpression<T> given(final T obj) {
@@ -23,12 +24,15 @@ abstract class Expressions {
         return new BiPerformingExpression<T1, T2>(expr);
     }
 
-
     static <T> Function<T, T> it() {
         return (it -> it);
     }
 
     static <T, S> Function<T, S> the(Function<T, S> it) {
+        return it;
+    }
+
+    static <T> Predicate<T> the(Predicate<T> it) {
         return it;
     }
 
