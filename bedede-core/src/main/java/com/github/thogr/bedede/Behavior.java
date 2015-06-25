@@ -38,5 +38,4 @@ public interface Behavior<T> {
      * @return the behavior expression
      */
     Behavior<T> then(Predicate<? super T> predicate);
-
 }
