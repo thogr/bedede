@@ -23,7 +23,7 @@ package com.github.thogr.bedede;
  * </pre>
  * @param <S> the target state
  */
-public abstract class Entry<S> extends Behavior<S> {
+public abstract class Entry<S> extends StateBehavior<S> {
 
     private final Class<S> target;
 

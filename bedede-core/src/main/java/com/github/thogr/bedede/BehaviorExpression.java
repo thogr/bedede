@@ -1,30 +1,14 @@
 package com.github.thogr.bedede;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
-import java.util.function.Function;
-import java.util.function.Predicate;
-
-import org.hamcrest.Matcher;
 /**
  * A BDD expression, e.g. given(...), or given(...).when(...), or given(...).when(...).then(...)
  *
  * @param <T> the type of object the actions operate on in the when() or then() expressions.
  */
-public abstract class BehaviorExpression<T> {
-    protected T obj;
+public abstract class BehaviorExpression<T> extends Behavior<T> {
 
     BehaviorExpression(final T obj) {
-        this.obj = obj;
-    }
-
-    public final <T2> SecondBehaviorExpression<T, T2> given(final T2 other)  {
-        return new SecondBehaviorExpression<T, T2>(obj, other);
-    }
-
-    public final <T2> SecondBehaviorExpression<T, T2> and(final T2 other)  {
-        return given(other);
+        super(obj);
     }
 
     /**
@@ -85,43 +69,4 @@ public abstract class BehaviorExpression<T> {
         return new WhenBehaviorExpression<T>(obj, Expressions.performing(action));
     }
 
-    /**
-     * Verifies the current state of the current object, with a matcher. This corresponds to
-     * an assertThat(currentObject.someValue(), matcher) expression.
-     * <p>
-     * Example:
-     * <pre>
-     *  given(new Integer(5))
-     *  .then(the -&gt; the.intValue(), is(5))
-     *  .then(it(), is(5));
-     * </pre>
-     * @param <S> the type of object returned by the action
-     * @param it a function on the current object
-     * @param is the matcher
-     * @return the behavior expression
-     */
-    public final <S> BehaviorExpression<T> then(
-            final Function<? super T, ? extends S> it, final Matcher<? super S> is) {
-        S result = it.apply(obj);
-        assertThat(result, is);
-        return new BasicBehaviorExpression<T>(obj);
-    }
-
-    /**
-    * Verifies the current state of the current object, with a predicate. This corresponds to
-    * an assertThat(currentObject.predicate(), is(true)) expression.
-    * <p>
-    * Example:
-    * <pre>
-    *  given("")
-    *  .then(it -&gt; it.isEmpty());
-    * </pre>
-    * @param predicate a predicate function on the current object
-    * @return the behavior expression
-    */
-    public final BehaviorExpression<T> then(final Predicate<? super T> predicate) {
-        boolean result = predicate.test(obj);
-        assertThat(result, is(true));
-        return new BasicBehaviorExpression<T>(obj);
-    }
 }

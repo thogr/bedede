@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 
 import org.hamcrest.Matcher;
 
-public class SecondBehaviorExpression<T1, T2> extends BehaviorExpression<T1> {
+public class SecondBehaviorExpression<T1, T2> extends GivenBehaviorExpression<T1> {
 
     private T1 first;
     private T2 second;

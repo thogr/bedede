@@ -7,11 +7,11 @@ package com.github.thogr.bedede;
  */
 public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
 
-    PerformingExpression<? super T> action;
+    private PerformingExpression<? super T> expr;
 
-    WhenBehaviorExpression(T obj, PerformingExpression<? super T> action) {
+    WhenBehaviorExpression(T obj, PerformingExpression<? super T> expr) {
         super(obj);
-        this.action = action;
+        this.expr = expr;
     }
 
     /**
@@ -30,7 +30,7 @@ public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
      */
     public BehaviorExpression<T> times(int n) {
         for (int i = 1; i < n; i++) {
-            action.perform(obj);
+            expr.perform(obj);
         }
         return new BasicBehaviorExpression<T>(obj);
     }

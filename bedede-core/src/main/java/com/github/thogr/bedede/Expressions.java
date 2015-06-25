@@ -7,12 +7,13 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 abstract class Expressions {
-    static <T> BehaviorExpression<T> given(final T obj) {
-        return new BasicBehaviorExpression<T>(obj);
+
+    static <T> GivenBehaviorExpression<T> given(final T obj) {
+        return new BasicGivenBehaviorExpression<T>(obj);
     }
 
-    static <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
-        return expr;
+    static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+        return new BasicGivenBehaviorExpression<T>(expr);
     }
 
     static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {

@@ -77,7 +77,9 @@ public class BehaviorExpressionExampleTest {
         given("abc")
         .then(the -> the.length(), is(equalTo(3)))
         .then(it -> it.toUpperCase(), is(equalTo("ABC")))
-        .then(it(), is(equalTo("abc")))
+        .then(it(), is(equalTo("abc")));
+
+        given("abc")
         .when(transforming(it -> it.toUpperCase() + "123"))
         .then(it(), is(equalTo("ABC123")));
     }

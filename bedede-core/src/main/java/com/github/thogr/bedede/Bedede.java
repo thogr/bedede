@@ -84,7 +84,7 @@ public abstract class Bedede {
      * @param value initial value
      * @return the continued behavior expression
      */
-    public static <T> BehaviorExpression<T> given(final T value) {
+    public static <T> GivenBehaviorExpression<T> given(final T value) {
         return Expressions.given(value);
     }
 
@@ -97,7 +97,7 @@ public abstract class Bedede {
      * @param <T> the type of object the action is operating on
      * @return the continued behavior expression
      */
-    public static <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+    public static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
         return Expressions.given(expr);
     }
 
