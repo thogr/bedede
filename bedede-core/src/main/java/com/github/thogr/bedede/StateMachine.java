@@ -63,9 +63,7 @@ final class StateMachine {
 
     private <T> T advance(final Class<T> state, final T next) {
         final StateVerifier<T> verifier = new AnnotatedStateVerifier<>(state, conditionController);
-        if (verifier != null) {
-            verifier.verify(next);
-        }
+        verifier.verify(next);
         current = next;
         return next;
     }
