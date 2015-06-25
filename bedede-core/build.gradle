@@ -3,4 +3,5 @@ apply from: rootProject.file("publish.gradle")
 dependencies {
     compile libraries.junit
     testCompile libraries.hamcrest
+    testCompile libraries.mockito
 }

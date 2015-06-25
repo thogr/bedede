@@ -62,5 +62,4 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
         final String name = state.getClass().getName();
         throw new IllegalArgumentException(VERIFY_FAILED + name, e);
     }
-
 }

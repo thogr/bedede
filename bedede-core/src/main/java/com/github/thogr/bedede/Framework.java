@@ -3,6 +3,7 @@ package com.github.thogr.bedede;
 import java.util.ServiceLoader;
 
 import com.github.thogr.bedede.conditions.ConditionController;
+import com.github.thogr.bedede.conditions.ConditionControllerImpl;
 import com.github.thogr.bedede.conditions.ConditionProvider;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
 import com.github.thogr.bedede.internal.InitialStateFactory;
@@ -21,7 +22,7 @@ public final class Framework {
     }
 
     static ConditionController createConditionController() {
-        return new ConditionController(new Framework());
+        return new ConditionControllerImpl(new Framework());
     }
 
     @SuppressWarnings({ "unchecked" })

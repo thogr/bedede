@@ -1,23 +1,31 @@
 package com.github.thogr.bedede;
 
-import static com.github.thogr.bedede.Bedede.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.*;
+import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.Bedede.it;
+import static com.github.thogr.bedede.Bedede.performing;
+import static com.github.thogr.bedede.Bedede.retrieving;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.mockito.Matchers.eq;
 
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
+import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.internal.InitialStateFactory;
 import com.github.thogr.bedede.internal.StateFactory;
 
+@RunWith(MockitoJUnitRunner.class)
 public class StateMachineTest {
 
     @Mock
@@ -29,10 +37,8 @@ public class StateMachineTest {
     @Mock
     private ConditionController conditionController;
 
-    @SuppressWarnings("rawtypes")
-    ArgumentCaptor<Map> parameters =
-            ArgumentCaptor.forClass(Map.class);
-
+    @Captor
+    ArgumentCaptor<Map<String, String>> parameters;
 
     private StateMachine machine;
 
@@ -53,10 +59,8 @@ public class StateMachineTest {
 
     }
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
         machine = new StateMachine(factory, initialStateFactory, conditionController);
         state0 = new State0();
         state1 = new State1();
@@ -84,7 +88,6 @@ public class StateMachineTest {
         .then(it(), is(sameInstance(state1)));
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void shouldGetConfigFromInitialStateAnnotation() {
         given(atNoState())
