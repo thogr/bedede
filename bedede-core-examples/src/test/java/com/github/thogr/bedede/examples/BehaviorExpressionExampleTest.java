@@ -1,8 +1,6 @@
 package com.github.thogr.bedede.examples;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import static com.github.thogr.bedede.Bedede.*;

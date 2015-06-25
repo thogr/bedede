@@ -9,11 +9,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class MixedTest extends BehaviorDriven {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowWhenGivenAClass() {
-        Bedede.given(Integer.class); // Illegal
-    }
-
     @Test
     public void shouldHaveAccessToBehaviorExpressions() throws Exception {
         given("A String")

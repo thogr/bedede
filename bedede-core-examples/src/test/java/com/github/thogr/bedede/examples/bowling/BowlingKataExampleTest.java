@@ -1,11 +1,11 @@
 package com.github.thogr.bedede.examples.bowling;
 
+import static com.github.thogr.bedede.Bedede.*;
+import static org.hamcrest.CoreMatchers.*;
+
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorExpression;
-
-import static com.github.thogr.bedede.Bedede.*;
-import static org.hamcrest.CoreMatchers.*;
 
 public class BowlingKataExampleTest {
 
