@@ -1,18 +1,6 @@
 package com.github.thogr.bedede;
 
-/**
- * The result of a non-transforming when() expression.
- *
- * @param <T> the type of the current object
- */
-public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
-
-    private PerformingExpression<? super T> expr;
-
-    WhenBehaviorExpression(T obj, PerformingExpression<? super T> expr) {
-        super(obj);
-        this.expr = expr;
-    }
+public interface WhenBehaviorExpression<T> extends BehaviorExpression<T> {
 
     /**
      * Repeats an action n times.
@@ -28,20 +16,13 @@ public final class WhenBehaviorExpression<T> extends BehaviorExpression<T> {
      * @param n the number of times in total to perform the action
      * @return a new expression where the current object in focus is the same
      */
-    public BehaviorExpression<T> times(int n) {
-        for (int i = 1; i < n; i++) {
-            expr.perform(obj);
-        }
-        return new BasicBehaviorExpression<T>(obj);
-    }
+    BehaviorExpression<T> times(int n);
 
     /**
      * Repeats an action twice (2 times).
      * @see #times
      * @return a new expression where the current object in focus is the same
      **/
-    public BehaviorExpression<T> twice() {
-        return times(2);
-    }
+    BehaviorExpression<T> twice();
 
 }

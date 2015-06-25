@@ -78,14 +78,14 @@ public abstract class Bedede {
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test
      * but with behavior driven syntax - given().when()...then();
-     * The starting environment is any object, which further when() and then() expressions will
-     * operate on.
+     * The starting environment is the object in focus, which further when() and then() expressions
+     * will operate on.
      * @param <T> the type of object or the starting environment
-     * @param value initial value
+     * @param object the initial object in focus
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final T value) {
-        return Expressions.given(value);
+    public static <T> GivenBehaviorExpression<T> given(final T object) {
+        return Expressions.given(object);
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class Bedede {
 
     /**
      * Wraps an action into a performing expression.
-     * @see BehaviorExpression#when(PerformingExpression)
+     * @see BehaviorExpressionImpl#when(PerformingExpression)
      * @param expr the action
      * @param <T> the type of object the action is operating on
      * @return the wrapped action
@@ -137,7 +137,7 @@ public abstract class Bedede {
     /**
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
-     * @see BehaviorExpression#when(TransformingExpression)
+     * @see BehaviorExpressionImpl#when(TransformingExpression)
      * @param expr the action
      * @param <T> the type of object the action is operating on
      * @param <S> the type of object the next expression will be operating on
@@ -149,7 +149,7 @@ public abstract class Bedede {
 
     /**
      * Wraps an action into a transforming expression.
-     * @see BehaviorExpression#when(TransformingExpression)
+     * @see BehaviorExpressionImpl#when(TransformingExpression)
      * @param expr the action
      * @param <T> the type of object the action is operating on
      * @param <S> the type of object the next expression will be operating on
@@ -169,14 +169,38 @@ public abstract class Bedede {
         return Expressions.the(functionName);
     }
 
+    /**
+     * Decorates a {@link Function}, retaining its behavior, but allowing tests
+     * to be slightly more expressive.
+     * This is useful in <code>then()</code> and <code>when()</code> expressions with method
+     * references, instead of lambda expressions.
+     * @param it the function
+     * @return the function
+     */
     public static <T> Function<T, Object> the(Function<T, Object> it) {
         return Expressions.the(it);
     }
 
+    /**
+     * Decorates a {@link Predicate}, retaining its behavior, but allowing tests
+     * to be slightly more expressive.
+     * This is useful in <code>then()</code> and <code>when()</code> expressions with method
+     * references, instead of lambda expressions.
+     * @param it the predicate
+     * @return the predicate
+     */
     public static <T> Predicate<T> the(Predicate<T> it) {
         return Expressions.the(it);
     }
 
+    /**
+     * Decorates a {@link BiFunction}, retaining its behavior, but allowing tests
+     * to be slightly more expressive.
+     * This is useful in <code>then()</code> and <code>when()</code> expressions with method
+     * references, instead of lambda expressions.
+     * @param it the function
+     * @return the function
+     */
     public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
         return Expressions.the(it);
     }

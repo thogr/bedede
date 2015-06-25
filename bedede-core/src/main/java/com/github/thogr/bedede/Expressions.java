@@ -9,11 +9,11 @@ import java.util.function.Predicate;
 abstract class Expressions {
 
     static <T> GivenBehaviorExpression<T> given(final T obj) {
-        return new BasicGivenBehaviorExpression<T>(obj);
+        return new GivenBehaviorExpressionImpl<T>(obj);
     }
 
     static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
-        return new BasicGivenBehaviorExpression<T>(expr);
+        return new GivenBehaviorExpressionImpl<T>(expr);
     }
 
     static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {

@@ -3,6 +3,7 @@ package com.github.thogr.bedede.examples.countdown;
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorExpression;
+import com.github.thogr.bedede.GivenBehaviorExpression;
 import com.github.thogr.bedede.PerformingExpression;
 
 import static com.github.thogr.bedede.Bedede.*;
@@ -46,7 +47,7 @@ public class CounterTest {
             given(new Counter());
     }
 
-    private BehaviorExpression<Counter> startedWith(int startval) {
+    private GivenBehaviorExpression<Counter> startedWith(int startval) {
         return given(new Counter()).and(startval)
                 .when(performing(Counter::start));
     }

@@ -5,11 +5,7 @@ package com.github.thogr.bedede;
  *
  * @param <T> the type of object the actions operate on in the when() or then() expressions.
  */
-public abstract class BehaviorExpression<T> extends Behavior<T> {
-
-    BehaviorExpression(final T obj) {
-        super(obj);
-    }
+public interface BehaviorExpression<T> extends Behavior<T> {
 
     /**
      * When transforming the current object to another object. The action is functional, i.e.
@@ -27,10 +23,8 @@ public abstract class BehaviorExpression<T> extends Behavior<T> {
      * @param expr the the action to be performed, wrapped like:<code> transforming(action) </code>
      * @return a new expression where the object in focus is the result of the transformation
      */
-    public final <S> BehaviorExpression<S> when(final TransformingExpression<? super T, ? extends S> expr) {
-        S result = expr.function.apply(obj);
-        return new BasicBehaviorExpression<S>(result);
-    }
+    <S> BehaviorExpression<S> when(
+            TransformingExpression<? super T, ? extends S> expr);
 
     /**
      * When performing an action on the current object. The action is non-functional,
@@ -44,10 +38,7 @@ public abstract class BehaviorExpression<T> extends Behavior<T> {
      * @param expr an action wrapped like: <code>performing(action)</code>
      * @return a new expression where the current object in focus is the same
      */
-    public final WhenBehaviorExpression<T> when(final PerformingExpression<? super T> expr) {
-        expr.perform(obj);
-        return new WhenBehaviorExpression<T>(obj, expr);
-    }
+    WhenBehaviorExpression<T> when(PerformingExpression<? super T> expr);
 
     /**
      * When performing an action on the current object.
@@ -64,9 +55,6 @@ public abstract class BehaviorExpression<T> extends Behavior<T> {
      * @param action the action to be performed
      * @return a new expression where the current object in focus is the same
      */
-    public final WhenBehaviorExpression<T> when(final ActionExpression<? super T> action) {
-        action.perform(obj);
-        return new WhenBehaviorExpression<T>(obj, Expressions.performing(action));
-    }
+    WhenBehaviorExpression<T> when(ActionExpression<? super T> action);
 
 }

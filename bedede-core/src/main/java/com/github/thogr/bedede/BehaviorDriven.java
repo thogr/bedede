@@ -50,7 +50,7 @@ public abstract class BehaviorDriven {
      * @param value initial value
      * @return the continued behavior expression
      */
-    public <T> BehaviorExpression<T> given(final T value) {
+    public <T> GivenBehaviorExpression<T> given(final T value) {
         return Expressions.given(value);
     }
 
@@ -63,7 +63,7 @@ public abstract class BehaviorDriven {
      * @param <T> the type of object the action is operating on
      * @return the continued behavior expression
      */
-    public <T> BehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+    public <T> GivenBehaviorExpression<T> given(final BehaviorExpressionImpl<T> expr) {
         return Expressions.given(expr);
     }
 
