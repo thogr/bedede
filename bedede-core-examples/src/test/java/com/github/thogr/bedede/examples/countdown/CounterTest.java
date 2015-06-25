@@ -7,10 +7,8 @@ import com.github.thogr.bedede.PerformingExpression;
 
 import static com.github.thogr.bedede.Bedede.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 public class CounterTest {
-
 
     @Test
     public void shouldBeStoppedInitially() {
