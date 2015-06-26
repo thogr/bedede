@@ -1,7 +1,9 @@
 package com.github.thogr.bedede.examples.bowling;
 
-import static com.github.thogr.bedede.Bedede.*;
-import static org.hamcrest.CoreMatchers.*;
+import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.Bedede.performing;
+import static com.github.thogr.bedede.Bedede.the;
+import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
@@ -42,7 +44,7 @@ public class BowlingKataExampleTest {
         .then(the(BowlingGame::score), is(24));
     }
 
-    private <T> BehaviorExpression<BowlingGame> aGutterGame() {
+    private BehaviorExpression<BowlingGame> aGutterGame() {
         return given(new BowlingGame())
                 .when(performing(the -> the.roll(0))).times(20);
     }
