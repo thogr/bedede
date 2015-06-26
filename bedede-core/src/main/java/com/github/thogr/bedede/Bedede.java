@@ -288,4 +288,8 @@ public abstract class Bedede {
         Assert.assertThat(it, is);
         return new BasicBehaviorExpressionImpl<>(it);
     }
+
+    public static <T> Behavior<T> then(Behavior<T> behavior) {
+        return Expressions.then(behavior);
+    }
 }

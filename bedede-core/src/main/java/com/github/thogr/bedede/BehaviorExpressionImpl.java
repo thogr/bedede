@@ -7,8 +7,8 @@ abstract class BehaviorExpressionImpl<T>
         super(obj);
     }
 
-    BehaviorExpressionImpl(BehaviorExpression<T> expr) {
-        super(expr);
+    public BehaviorExpressionImpl(Behavior<T> behavior) {
+        super(behavior);
     }
 
     /* (non-Javadoc)
