@@ -6,6 +6,9 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.hamcrest.Matcher;
+import org.junit.Assert;
+
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
@@ -114,7 +117,7 @@ public abstract class Bedede {
     }
 
     /**
-     * Wraps an action that operates on two object into a performing expression.
+     * Wraps an action that operates on two objects into a performing expression.
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
      * @see BehaviorExpression#when(PerformingExpression)
@@ -168,6 +171,38 @@ public abstract class Bedede {
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
+        return Expressions.transforming(expr);
+    }
+
+    /**
+     * Wraps an action that operates on two objects into a transforming expression.
+     * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
+     * better in some situations.
+     * @see BehaviorExpression#when(BiTransformingExpression)
+     * @param expr the action
+     * @param <T1> the type of the first object (in focus) the action operates on
+     * @param <T2> the type of the second object (in focus) the action operates on
+     * @param <S> the type of object the next expression will be operating on (next in focus)
+     * @return the wrapped action
+     */
+    public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
+        retrieving(BiFunction<T1, T2, S> expr) {
+        return Expressions.retrieving(expr);
+    }
+
+    /**
+     * Wraps an action that operates on two objects into a transforming expression.
+     * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
+     * better in some situations.
+     * @see BehaviorExpression#when(BiTransformingExpression)
+     * @param expr the action
+     * @param <T1> the type of the first object (in focus) the action operates on
+     * @param <T2> the type of the second object (in focus) the action operates on
+     * @param <S> the type of object the next expression will be operating on (next in focus)
+     * @return the wrapped action
+     */
+    public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
+        transforming(BiFunction<T1, T2, S> expr) {
         return Expressions.transforming(expr);
     }
 
@@ -242,5 +277,15 @@ public abstract class Bedede {
      */
     public static <T, S> Function<T, S> it(String functionName) {
         return Expressions.the(functionName);
+    }
+
+    /**
+     * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * @param it the static type accepted by the matcher
+     * @param is the matcher
+     */
+    public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
+        Assert.assertThat(it, is);
+        return new BasicBehaviorExpressionImpl<>(it);
     }
 }

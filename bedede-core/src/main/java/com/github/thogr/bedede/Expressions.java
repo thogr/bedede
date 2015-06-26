@@ -89,6 +89,14 @@ abstract class Expressions {
     }
 
     static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
-        return new TransformingExpression<T, S>(expr);
+        return new TransformingExpression<>(expr);
+    }
+
+    static <T1,T2,S> BiTransformingExpression<T1, T2, S> retrieving(BiFunction<T1, T2, S> expr) {
+        return new BiTransformingExpression<>(expr);
+    }
+
+    static <T1,T2,S> BiTransformingExpression<T1, T2, S> transforming(BiFunction<T1, T2, S> expr) {
+        return new BiTransformingExpression<>(expr);
     }
 }

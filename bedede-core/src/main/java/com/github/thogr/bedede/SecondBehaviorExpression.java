@@ -15,4 +15,7 @@ public interface SecondBehaviorExpression<T1, T2> extends GivenBehaviorExpressio
     SecondBehaviorExpression<T1, T2> when(
             BiPerformingExpression<? super T1, ? super T2> expr);
 
+    <S> BehaviorExpression<S> when(
+            BiTransformingExpression<? super T1, ? super T2, ? extends S> expr);
+
 }

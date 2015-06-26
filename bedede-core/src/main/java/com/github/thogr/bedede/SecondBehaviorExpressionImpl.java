@@ -46,4 +46,11 @@ class SecondBehaviorExpressionImpl<T1, T2>
             final BiPerformingExpression<? super T1, ? super T2> expr) {
         return when(expr.action);
     }
+
+    @Override
+    public <S> BehaviorExpression<S> when(
+            BiTransformingExpression<? super T1, ? super T2, ? extends S> expr) {
+        S result = expr.function.apply(first, second);
+        return new BasicBehaviorExpressionImpl<S>(result);
+    }
 }

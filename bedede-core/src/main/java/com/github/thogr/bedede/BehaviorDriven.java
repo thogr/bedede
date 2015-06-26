@@ -1,5 +1,8 @@
 package com.github.thogr.bedede;
 
+import org.hamcrest.Matcher;
+import org.junit.Assert;
+
 
 public abstract class BehaviorDriven {
 
@@ -91,4 +94,14 @@ public abstract class BehaviorDriven {
     protected final <T> Then<T> then(final Class<T> target) {
         return controller.then(target);
     }
+
+    /**
+     * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * @param it the static type accepted by the matcher
+     * @param is the matcher
+     */
+    protected final <T> Behavior<T> then(T it, Matcher<? super T> is) {
+        return Bedede.then(it, is);
+    }
+
 }

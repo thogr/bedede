@@ -1,5 +1,6 @@
 package com.github.thogr.bedede;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
     @Test
     public void shouldVerifyEntryOnGivenInitally() {
         given(Target.class);
-        assertEquals(1, entryVerified);
+        then(entryVerified, is(1));
     }
 
 
@@ -45,8 +46,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
     public void shouldVerifyEntryOnGivenOnlyOnce() {
         given(Target.class);
         given(Target.class);
-
-        assertEquals(1, entryVerified);
+        then(entryVerified, is(1));
     }
 
     @Test
@@ -61,16 +61,14 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         assuming(Target.class)
         .when(it -> it.performsAction())
         .when(it -> it.performsAction());
-
-        assertEquals(1, entryVerified);
+        then(entryVerified, is(1));
     }
 
     @Test
     public void shouldNotVerifyEntryOnWhenAfterGiven() {
         given(Target.class)
         .when(it -> it.performsAction());
-
-        assertEquals(1, entryVerified);
+        then(entryVerified, is(1));
     }
 
     @Test
@@ -78,8 +76,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         assuming(Target.class)
         .when(it -> it.performsAction())
         .then(Target.class);
-
-        assertEquals(2, entryVerified);
+        then(entryVerified, is(2));
     }
 
     @Test
@@ -88,8 +85,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         .when(it -> it.performsAction())
         .then(Target.class)
         .then(it -> it.hasCondition());
-
-        assertEquals(2, entryVerified);
+        then(entryVerified, is(2));
     }
 
     @Test
@@ -97,7 +93,6 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         assuming(Target.class)
         .when(it -> it.performsAction())
         .then(it -> it.hasCondition());
-
-        assertEquals(1, entryVerified);
+        then(entryVerified, is(1));
     }
 }
