@@ -22,8 +22,7 @@ public interface Behavior<T> {
      * @param is the matcher
      * @return the behavior expression
      */
-    <S> Behavior<T> then(Function<? super T, ? extends S> it,
-            Matcher<? super S> is);
+    <S> Behavior<T> then(Function<? super T, ? extends S> it, Matcher<? super S> is);
 
     /**
      * Verifies the current state of the current object, with a predicate. This corresponds to
