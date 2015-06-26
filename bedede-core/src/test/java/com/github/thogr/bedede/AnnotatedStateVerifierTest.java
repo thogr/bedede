@@ -28,18 +28,18 @@ public class AnnotatedStateVerifierTest {
     @Mock
     private ConditionController conditionController;
 
-    private State0 state0;
-    private State1 state1;
-    private State2 state2;
-    private State3 state3;
+    private StateWithNoEntry stateWithNoEntry;
+    private StateWithVoidEntry stateWithVoidEntry;
+    private StateWithEntryCondition stateWithEntryCondition;
+    private StateWithEntryInSuperClass stateWithEntryInSuperClass;
     private IllegalState1 illegalState1;
     private Throwable expected = null;
 
-    public static class State0 {
+    public static class StateWithNoEntry {
 
     }
 
-    public static class State1 {
+    public static class StateWithVoidEntry {
         public boolean isVerified = false;
         @OnEntry
         public void simpleEntryMethod() {
@@ -47,7 +47,7 @@ public class AnnotatedStateVerifierTest {
         }
     }
 
-    public static class State2 {
+    public static class StateWithEntryCondition {
         public static Expecting<BooleanCondition> condition =
                 expecting(true, otherwise("Very, very wrong"));
         @OnEntry
@@ -56,7 +56,7 @@ public class AnnotatedStateVerifierTest {
         }
     }
 
-    public static class State3 extends State2 {
+    public static class StateWithEntryInSuperClass extends StateWithEntryCondition {
 
     }
 
@@ -69,38 +69,38 @@ public class AnnotatedStateVerifierTest {
 
     @Before
     public void setUp() throws Exception {
-        state1 = new State1();
-        state2 = new State2();
-        state3 = new State3();
+        stateWithVoidEntry = new StateWithVoidEntry();
+        stateWithEntryCondition = new StateWithEntryCondition();
+        stateWithEntryInSuperClass = new StateWithEntryInSuperClass();
         illegalState1 = new IllegalState1();
     }
 
     @Test
     public void shouldNotVerifyWhenNoEntryMethod() {
-        given(aVerifierFor(State0.class))
-        .when(performing(the -> the.verify(state0)));
+        given(aVerifierFor(StateWithNoEntry.class))
+        .when(performing(the -> the.verify(stateWithNoEntry)));
         then(conditionController).should(never()).verify(any());
     }
 
     @Test
     public void shouldCallSimpleEntryMethod() {
-        given(aVerifierFor(State1.class))
-        .when(performing(the -> the.verify(state1)))
-        .then(the -> state1.isVerified);
+        given(aVerifierFor(StateWithVoidEntry.class))
+        .when(performing(the -> the.verify(stateWithVoidEntry)))
+        .then(the -> stateWithVoidEntry.isVerified);
     }
 
     @Test
     public void shouldVerifyConditionFromEntryMethod() {
-        given(aVerifierFor(State2.class))
-        .when(performing(the -> the.verify(state2)));
-        then(conditionController).should().verify(State2.condition);
+        given(aVerifierFor(StateWithEntryCondition.class))
+        .when(performing(the -> the.verify(stateWithEntryCondition)));
+        then(conditionController).should().verify(StateWithEntryCondition.condition);
     }
 
     @Test
     public void shouldVerifyConditionFromEntryMethodInSuperclass() {
-        given(aVerifierFor(State3.class))
-        .when(performing(the -> the.verify(state3)));
-        then(conditionController).should().verify(State2.condition);
+        given(aVerifierFor(StateWithEntryInSuperClass.class))
+        .when(performing(the -> the.verify(stateWithEntryInSuperClass)));
+        then(conditionController).should().verify(StateWithEntryCondition.condition);
     }
 
     @Test
