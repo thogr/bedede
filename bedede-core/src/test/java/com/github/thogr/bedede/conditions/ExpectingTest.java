@@ -9,7 +9,6 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,12 +20,8 @@ public class ExpectingTest {
     @Mock
     private ConditionVerifier<BooleanCondition> verifier;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
-    public void test() {
+    public void shouldVerifyBothOperands() {
         given(expecting(true, otherwise("left!")))
         .and(expecting(false, otherwise("right!")))
         .when(transforming((a, b)->a.and(b)))
@@ -35,5 +30,4 @@ public class ExpectingTest {
         then(verifier).should().verify(anyObject(), eq(otherwise("right!")));
 
     }
-
 }
