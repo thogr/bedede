@@ -10,15 +10,15 @@ public interface GivenBehaviorExpression<T> extends BehaviorExpression<T> {
      * {@link BiFunction} or {@link BiActionExpression}.
      * Note that other operations will still operate on the previous object in focus.
      * @param other the object to add to focus
-     * @param <T> the type of object or the starting environment
-     * @param value initial value
+     * @param <T2> the type of object to add to focus
      * @return the continued behavior expression
      */
     <T2> SecondBehaviorExpression<T, T2> given(T2 other);
 
     /**
      * Alias for {@link #given(Object)}
-     * @param other
+     * @param other the object to add to focus
+     * @param <T2> the type of object to add to focus
      * @return the continued behavior expression
      */
     <T2> SecondBehaviorExpression<T, T2> and(T2 other);

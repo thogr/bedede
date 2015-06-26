@@ -41,14 +41,15 @@ abstract class Expressions {
         return it;
     }
 
-    static <T> Function<T, Object> the(String functionName) {
-        return new Function<T, Object>() {
+    static <T, S> Function<T, S> the(String functionName) {
+        return new Function<T, S>() {
+            @SuppressWarnings("unchecked")
             @Override
-            public Object apply(T obj) {
+            public S apply(T obj) {
                 Class<?> clazz = obj.getClass();
                 try {
                     Method method = clazz.getMethod(functionName);
-                    return method.invoke(obj);
+                    return (S) method.invoke(obj);
                 } catch (NoSuchMethodException e) {
                     throw new IllegalArgumentException(e);
                 } catch (SecurityException e) {

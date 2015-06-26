@@ -54,7 +54,7 @@ public abstract class Bedede {
      * with &#64;DefaultEntry.
      * @see Entry
      * @param <T> the type of state
-     * @param target starting point for the coming actions
+     * @param state starting point for the coming actions
      * @return an Assuming which has methods to further actions.
      */
     public static <T> Assuming<T> given(final Class<T> state) {
@@ -80,7 +80,7 @@ public abstract class Bedede {
      * but with behavior driven syntax - given().when()...then();
      * The starting environment is the object in focus, which further when() and then() expressions
      * will operate on.
-     * @param <T> the type of object or the starting environment
+     * @param <T> the type of object (in focus) or the starting environment
      * @param object the initial object in focus
      * @return the continued behavior expression
      */
@@ -94,7 +94,7 @@ public abstract class Bedede {
      * In this case the starting environment is represented by a behavior expression, typically
      * returned by a method (perhaps extracted by a previous refactoring).
      * @param expr initial value
-     * @param <T> the type of object the action is operating on
+     * @param <T> the type of object (in focus) the action is operating on
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
@@ -102,17 +102,29 @@ public abstract class Bedede {
     }
 
     /**
-     * Wraps an action into a performing expression.
-     * @see BehaviorExpressionImpl#when(PerformingExpression)
+     * Wraps an action that operates on an object into a performing expression.
+     * The object originates from a given(object) expression.
+     * @see BehaviorExpression#when(PerformingExpression)
      * @param expr the action
-     * @param <T> the type of object the action is operating on
+     * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
      */
     public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
         return Expressions.performing(expr);
     }
 
-    public static <T1, T2> BiPerformingExpression<T1, T2> performing(final BiActionExpression<T1, T2> expr) {
+    /**
+     * Wraps an action that operates on two object into a performing expression.
+     * The objects originates from a given(object1).given(object2)
+     * or given(object1).and(object2) expression.
+     * @see BehaviorExpression#when(PerformingExpression)
+     * @param expr the action
+     * @param <T1> the type of the first object (in focus) the action operates on
+     * @param <T2> the type of the second object (in focus) the action operates on
+     * @return the wrapped action
+     */
+    public static <T1, T2> BiPerformingExpression<T1, T2> performing(
+            final BiActionExpression<T1, T2> expr) {
         return Expressions.performing(expr);
     }
 
@@ -127,7 +139,7 @@ public abstract class Bedede {
      *   given(new Integer(5))
      *   .then(it(), is(5));
      * </pre>
-     * @param <T> the type of object the action is operating on
+     * @param <T> the type of object (in focus) the action is operating on
      * @return the identify function
      */
     public static <T> Function<T, T> it() {
@@ -137,10 +149,10 @@ public abstract class Bedede {
     /**
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
-     * @see BehaviorExpressionImpl#when(TransformingExpression)
+     * @see BehaviorExpression#when(TransformingExpression)
      * @param expr the action
-     * @param <T> the type of object the action is operating on
-     * @param <S> the type of object the next expression will be operating on
+     * @param <T> the type of object (in focus) the action is operating on
+     * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
@@ -149,10 +161,10 @@ public abstract class Bedede {
 
     /**
      * Wraps an action into a transforming expression.
-     * @see BehaviorExpressionImpl#when(TransformingExpression)
+     * @see BehaviorExpression#when(TransformingExpression)
      * @param expr the action
-     * @param <T> the type of object the action is operating on
-     * @param <S> the type of object the next expression will be operating on
+     * @param <T> the type of object (in focus) the action is operating on
+     * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
@@ -160,9 +172,9 @@ public abstract class Bedede {
     }
 
     /**
-     * Use carefully (alias for {@link #it(String)})
-     * @param <T> the type of object the function is operating on
-     * @param functionName
+     * Use carefully (alias for {@link #it(String)}), consider {@link #the(Function)}.
+     * @param <T> the type of object (in focus) the function is operating on
+     * @param functionName the name of the function
      * @return the function
      */
     public static <T> Function<T, Object> the(String functionName) {
@@ -175,9 +187,11 @@ public abstract class Bedede {
      * This is useful in <code>then()</code> and <code>when()</code> expressions with method
      * references, instead of lambda expressions.
      * @param it the function
+     * @param <T> the type of the input to the function, i.e. the object in focus
+     * @param <S> the type of the result of the function
      * @return the function
      */
-    public static <T> Function<T, Object> the(Function<T, Object> it) {
+    public static <T, S> Function<T, S> the(Function<T, S> it) {
         return Expressions.the(it);
     }
 
@@ -187,6 +201,7 @@ public abstract class Bedede {
      * This is useful in <code>then()</code> and <code>when()</code> expressions with method
      * references, instead of lambda expressions.
      * @param it the predicate
+     * @param <T> the type of the input to the predicate, i.e. the object in focus
      * @return the predicate
      */
     public static <T> Predicate<T> the(Predicate<T> it) {
@@ -199,6 +214,9 @@ public abstract class Bedede {
      * This is useful in <code>then()</code> and <code>when()</code> expressions with method
      * references, instead of lambda expressions.
      * @param it the function
+     * @param <T1> the type of the first object (in focus) the function operates on
+     * @param <T2> the type of the second object (in focus) the function operates on
+     * @param <S> the type of the result of the function
      * @return the function
      */
     public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
@@ -206,9 +224,9 @@ public abstract class Bedede {
     }
 
     /**
-     * Use carefully
-     * @param <T> the type of object the action is operating on
-     * @param functionName
+     * Use carefully, consider {@link #the(Function)}.
+     * @param <T> the type of object (in focus) the action is operating on
+     * @param actionName the name of the action
      * @return the action
      */
     public static <T> ActionExpression<T> theAction(String actionName) {
@@ -216,12 +234,13 @@ public abstract class Bedede {
     }
 
     /**
-     * Use carefully (alias for {@link #the(String)})
-     * @param <T> the type of object the action is operating on
-     * @param functionName
+     * Use carefully (alias for {@link #the(String)}), consider {@link #the(Function)}.
+     * @param <T> the type of object (in focus) the action is operating on
+     * @param <S> the type of the result of the function
+     * @param functionName the name of the function
      * @return the function
      */
-    public static <T> Function<T, Object> it(String functionName) {
+    public static <T, S> Function<T, S> it(String functionName) {
         return Expressions.the(functionName);
     }
 }
