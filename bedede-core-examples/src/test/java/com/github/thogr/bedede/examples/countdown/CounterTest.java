@@ -1,13 +1,14 @@
 package com.github.thogr.bedede.examples.countdown;
 
+import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.Bedede.performing;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.GivenBehaviorExpression;
 import com.github.thogr.bedede.PerformingExpression;
-
-import static com.github.thogr.bedede.Bedede.*;
-import static org.hamcrest.Matchers.*;
 
 public class CounterTest {
 

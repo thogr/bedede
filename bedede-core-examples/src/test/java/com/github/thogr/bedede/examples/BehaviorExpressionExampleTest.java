@@ -3,6 +3,7 @@ package com.github.thogr.bedede.examples;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.it;
 import static com.github.thogr.bedede.Bedede.performing;
+import static com.github.thogr.bedede.Bedede.retrieving;
 import static com.github.thogr.bedede.Bedede.the;
 import static com.github.thogr.bedede.Bedede.theAction;
 import static com.github.thogr.bedede.Bedede.transforming;
@@ -33,13 +34,69 @@ public class BehaviorExpressionExampleTest {
         }
     }
 
+    public static class Person {
+        private String firstName;
+        private String familyName;
+
+        public void setFirstName(String name) {
+            this.firstName = name;
+        }
+
+        public void setFamilyName(String name) {
+            this.familyName = name;
+        }
+
+        public String getFullName() {
+            return firstName + " " + familyName;
+        }
+
+        private String getFirstName() {
+            return firstName;
+        }
+
+        private String getFamilyName() {
+            return familyName;
+        }
+    }
+
+    @Test
+    public void testName() throws Exception {
+        given(new Person()).with(it -> {
+            it.setFirstName("John");
+            it.setFamilyName("Smith");
+        })
+        .when(retrieving(Person::getFullName))
+        .then(it(), is("John Smith"));
+    }
+
+    @Test
+    public void testNameAgain() throws Exception {
+        given(new Person()).with(it -> {
+            it.setFirstName("John");
+            it.setFamilyName("Smith");
+        })
+        .then(Person::getFullName, is("John Smith"));
+    }
+
+    @Test
+    public void testNameWithTwo() throws Exception {
+        given(new Person()).and(new Person()).with((p1, p2) -> {
+            p1.setFirstName("John");
+            p1.setFamilyName("Smith");
+
+            p2.setFirstName("Jane");
+            p2.setFamilyName("Jones");
+        })
+        .then((p1, p2) -> p1.getFirstName() + " " + p2.getFamilyName(), is("John Jones"));
+    }
+
     @Test
     public void testName1() throws Exception {
         given(new Runnable(){
             @Override
             public void run() {
             }})
-        .when(it-> it.run());
+        .when(performing(it-> it.run()));
     }
 
     @Test
@@ -78,8 +135,8 @@ public class BehaviorExpressionExampleTest {
     @Test
     public void testName5() throws Exception {
         given(new Incrementable())
-        .when(it->it.incrementBy(2))
-        .when(it->it.incrementBy(3))
+        .when(performing(it->it.incrementBy(2)))
+        .when(performing(it->it.incrementBy(3)))
         .then(the -> the.getValue(), is(equalTo(5)));
     }
 

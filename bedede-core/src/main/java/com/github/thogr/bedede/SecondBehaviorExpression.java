@@ -9,7 +9,7 @@ public interface SecondBehaviorExpression<T1, T2> extends GivenBehaviorExpressio
     <S> SecondBehaviorExpression<T1, T2> then(
             BiFunction<? super T1, ? super T2, S> it, Matcher<? super S> is);
 
-    SecondBehaviorExpression<T1, T2> when(
+    SecondBehaviorExpression<T1, T2> with(
             BiActionExpression<? super T1, ? super T2> action);
 
     SecondBehaviorExpression<T1, T2> when(

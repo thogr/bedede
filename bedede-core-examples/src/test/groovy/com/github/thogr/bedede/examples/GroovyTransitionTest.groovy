@@ -42,7 +42,7 @@ class GroovyTransitionTest extends BehaviorDriven {
     @Test
     void exampleOneStatement() {
         given (State1)
-            .when {it.moves()}
+            .with {it.moves()}
             .then State2
     }
 

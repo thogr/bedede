@@ -28,14 +28,4 @@ abstract class BehaviorExpressionImpl<T>
         expr.perform(obj);
         return new WhenBehaviorExpressionImpl<T>(obj, expr);
     }
-
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.ActionExpression)
-     */
-    @Override
-    public final WhenBehaviorExpression<T> when(final ActionExpression<? super T> action) {
-        action.perform(obj);
-        return new WhenBehaviorExpressionImpl<T>(obj, Expressions.performing(action));
-    }
-
 }

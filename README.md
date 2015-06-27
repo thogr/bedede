@@ -49,6 +49,14 @@ given(new BowlingGame())
 Behavior expressions use Hamcrest matchers, as you can see in the example above (last line: the "is(20)").
 As you can see you don't need to declare any local variables, and you need a lot less helper functions, since the code
 reads well as it is.
+``` java
+ given(new Person()).with(it -> {
+       it.setFirstName("John");
+       it.setFamilyName("Smith");
+ })
+.when(retrieving(Person::getFullName))
+.then(it(), is("John Smith"));
+```
 Java 8 has a new feature called Streams, which also works nicely with the framework. This is an example with streams:
  ``` java
 public class PokerTest {
@@ -63,15 +71,16 @@ public class PokerTest {
 }
 ```
 #### Syntax
-Behavior expressions are really simple. You start with an object, the given(...). Then you perhaps transform it
-to something else, with when(transforming(...)), possibly in several steps.
+Behavior expressions are really simple. You start with an object, the given(...), possibly with at with()-clause to set it up. Then you perhaps transform it
+to something else, with when(transforming(...)), or retrieve something from it with the when(retrieving(...)), possibly in several when-steps.
 And lastly you verify the result, with a Hamcrest matcher in the then-clause:
 ``` java
 given(<object>)
 .when(transforming(....))
+.when(retrieving(....))
 .then(it(), <matcher>)
 ```
-
+Of course you may have as many when() and then() as you like.
 Or perhaps you just perform operations on the objects, that will change its internal state, and verify the state lastly, in the then-clause:
 ``` java
 given(<object>)

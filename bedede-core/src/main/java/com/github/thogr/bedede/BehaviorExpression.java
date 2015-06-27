@@ -40,21 +40,4 @@ public interface BehaviorExpression<T> extends Behavior<T> {
      */
     WhenBehaviorExpression<T> when(PerformingExpression<? super T> expr);
 
-    /**
-     * When performing an action on the current object.
-     * The expression when(action) is exactly the same as when(performing(action)).
-     * The expression of the form when(action) is more compact, but when(performing(action)) is
-     * probably more easy to read grammatically correct. I all depends on the names of the methods
-     * called in the action.
-     * <p>
-     * Example:<code>when(it -&gt; it.willStart())</code> may read well,
-     * but <code>when(it -&gt; it.start())</code> may not,
-     * thus consider <code>when(performing(the -&gt; the.start()))</code>
-     * </p>
-     * @see #when(PerformingExpression)
-     * @param action the action to be performed
-     * @return a new expression where the current object in focus is the same
-     */
-    WhenBehaviorExpression<T> when(ActionExpression<? super T> action);
-
 }

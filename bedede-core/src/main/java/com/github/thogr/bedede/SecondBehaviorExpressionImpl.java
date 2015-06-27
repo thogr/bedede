@@ -32,7 +32,7 @@ class SecondBehaviorExpressionImpl<T1, T2>
      * @see com.github.thogr.bedede.SecondBehaviorExpression#when(com.github.thogr.bedede.BiActionExpression)
      */
     @Override
-    public final SecondBehaviorExpression<T1, T2> when(
+    public final SecondBehaviorExpression<T1, T2> with(
             final BiActionExpression<? super T1, ? super T2> action) {
         action.perform(first, second);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
@@ -44,7 +44,7 @@ class SecondBehaviorExpressionImpl<T1, T2>
     @Override
     public final SecondBehaviorExpression<T1, T2> when(
             final BiPerformingExpression<? super T1, ? super T2> expr) {
-        return when(expr.action);
+        return with(expr.action);
     }
 
     @Override

@@ -27,4 +27,12 @@ class GivenBehaviorExpressionImpl<T>
         return given(other);
     }
 
+    /* (non-Javadoc)
+     * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.ActionExpression)
+     */
+    @Override
+    public final GivenBehaviorExpression<T> with(final ActionExpression<? super T> action) {
+        action.perform(obj);
+        return new GivenBehaviorExpressionImpl<T>(obj);
+    }
 }
