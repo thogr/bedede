@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.examples;
+package com.github.thogr.bedede.examples
 
 import static org.hamcrest.CoreMatchers.is
 import static org.junit.Assert.assertThat
@@ -42,7 +42,7 @@ class GroovyTransitionTest extends BehaviorDriven {
     @Test
     void exampleOneStatement() {
         given (State1)
-            .with {it.moves()}
+            .when {it.moves()}
             .then State2
     }
 

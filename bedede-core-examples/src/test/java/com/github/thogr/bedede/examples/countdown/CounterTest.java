@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.GivenBehaviorExpression;
 import com.github.thogr.bedede.PerformingExpression;
 
 public class CounterTest {
@@ -48,7 +47,7 @@ public class CounterTest {
             given(new Counter());
     }
 
-    private GivenBehaviorExpression<Counter> startedWith(int startval) {
+    private BehaviorExpression<Counter> startedWith(int startval) {
         return given(new Counter()).and(startval)
                 .when(performing(Counter::start));
     }

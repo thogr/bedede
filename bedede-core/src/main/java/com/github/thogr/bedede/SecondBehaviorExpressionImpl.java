@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.Matcher;
 
 class SecondBehaviorExpressionImpl<T1, T2>
-    extends GivenBehaviorExpressionImpl<T1> implements SecondBehaviorExpression<T1, T2> {
+    extends BehaviorExpressionImpl<T1> implements SecondBehaviorExpression<T1, T2> {
 
     private T1 first;
     private T2 second;
@@ -38,6 +38,13 @@ class SecondBehaviorExpressionImpl<T1, T2>
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
     }
 
+    @Override
+    public ContinuedBehaviorExpression<T1, T2> with(
+            ActionExpression<? super T2> action) {
+        action.perform(second);
+        return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
+    }
+
     /* (non-Javadoc)
      * @see com.github.thogr.bedede.SecondBehaviorExpression#when(com.github.thogr.bedede.BiPerformingExpression)
      */
@@ -53,4 +60,5 @@ class SecondBehaviorExpressionImpl<T1, T2>
         S result = expr.function.apply(first, second);
         return new BasicBehaviorExpressionImpl<S>(result);
     }
+
 }

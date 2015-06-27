@@ -35,8 +35,8 @@ public class BehaviorExpressionExampleTest {
     }
 
     public static class Person {
-        private String firstName;
-        private String familyName;
+        private String firstName = "";
+        private String familyName = "";
 
         public void setFirstName(String name) {
             this.firstName = name;
@@ -87,7 +87,21 @@ public class BehaviorExpressionExampleTest {
             p2.setFirstName("Jane");
             p2.setFamilyName("Jones");
         })
-        .then((p1, p2) -> p1.getFirstName() + " " + p2.getFamilyName(), is("John Jones"));
+        .when(performing((p1, p2) -> p1.setFamilyName(p2.getFamilyName())))
+        .then((p1, p2) -> p2.getFullName(), is("Jane Jones"))
+        .then(p1 -> p1.getFullName(), is("John Jones"));
+    }
+
+
+    @Test
+    public void testNameWithTwoTricky() throws Exception {
+        given(new Person()).and(new Person()).with(p2 -> {
+            p2.setFirstName("John");
+            p2.setFamilyName("Smith");
+        })
+        .when(performing((p1, p2) -> p1.setFirstName("Jack")))
+        .when(performing(p -> p.setFamilyName("Jones")))
+        .then(p -> p.getFullName(), is("Jack Jones"));
     }
 
     @Test
