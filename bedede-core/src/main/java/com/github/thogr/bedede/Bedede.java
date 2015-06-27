@@ -178,7 +178,7 @@ public abstract class Bedede {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see BehaviorExpression#when(BiTransformingExpression)
+     * @see ContinuedBehaviorExpression#when(BiTransformingExpression)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -194,7 +194,7 @@ public abstract class Bedede {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see BehaviorExpression#when(BiTransformingExpression)
+     * @see ContinuedBehaviorExpression#when(BiTransformingExpression)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -281,8 +281,10 @@ public abstract class Bedede {
 
     /**
      * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * @param <T> the type of object (in focus) the action is operating on
      * @param it the static type accepted by the matcher
      * @param is the matcher
+     * @return the behavior
      */
     public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
         Assert.assertThat(it, is);

@@ -97,8 +97,10 @@ public abstract class BehaviorDriven {
 
     /**
      * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * @param <T> the type of object in focus
      * @param it the static type accepted by the matcher
      * @param is the matcher
+     * @return the behavior
      */
     protected final <T> Behavior<T> then(T it, Matcher<? super T> is) {
         return Bedede.then(it, is);

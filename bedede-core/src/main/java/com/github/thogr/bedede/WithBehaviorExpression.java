@@ -10,16 +10,16 @@ public interface WithBehaviorExpression<T> {
      *
      * <p>
      * Example:
+     * </p>
      * <pre>
-     *   given(new Person()).with(it -> {
+     *   given(new Person()).with(it -&gt; {
      *       it.setFirstName("John");
      *       it.setFamilyName("Smith");
      *   })
      *   .when(retrieving(Person::getFullName))
      *   .then(it(), is("John Smith"));
      * </pre>
-     * </p>
-     * @see #when(PerformingExpression)
+     * @see BehaviorExpression#when(PerformingExpression)
      * @param action the action to be performed
      * @return a new expression where the current object in focus is the same
      */
