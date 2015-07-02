@@ -20,11 +20,18 @@ public class WireTest {
     private ChangeListener listener;
 
     @Test
-    public void shouldFireStateChanged() {
+    public void shouldFireStateChangedWhenAddingListener() {
+        given(new Wire())
+        .when(performing(it -> it.addChangeListener(listener)))
+        ;then(listener).should().stateChanged(any());
+    }
+
+    @Test
+    public void shouldFireStateChangedWhenSettingSignal() {
         given(new Wire()).with(it -> {
             it.addChangeListener(listener);
         })
-        .when(performing(the -> the.setSignal(true)));
-        then(listener).should(times(2)).stateChanged(any());
+        .when(performing(the -> the.setSignal(true)))
+        ;then(listener).should(times(2)).stateChanged(any());
     }
 }
