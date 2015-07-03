@@ -6,7 +6,7 @@ public class TargetWhen<T, S> extends AbstractWhen<S> {
         super(delegate.state, delegate.getController());
     }
 
-    public Then<T> then(final Class<T> target) {
+    public ThenExpecting<T> then(final Class<T> target) {
         return thenState(target);
     }
 }

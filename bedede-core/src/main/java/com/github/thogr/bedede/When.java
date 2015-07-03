@@ -7,7 +7,7 @@ public final class When<S> extends AbstractWhen<S> {
         super(state, controller);
     }
 
-    public <T> Then<T> then(final Class<T> target) {
+    public <T> ThenExpecting<T> then(final Class<T> target) {
         return thenState(target);
     }
 }

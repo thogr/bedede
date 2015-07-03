@@ -16,11 +16,11 @@ public class AbstractWhen<S> {
         return getController().when(action, state);
     }
 
-    public <V> Then<S> then(final ExpectingExpression<S, V> epression) {
+    public <V> ThenExpecting<S> then(final ExpectingExpression<S, V> epression) {
         return getController().then(state, epression);
     }
 
-    <T> Then<T> thenState(final Class<T> target) {
+    <T> ThenExpecting<T> thenState(final Class<T> target) {
         return getController().then(target);
     }
 

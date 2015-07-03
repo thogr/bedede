@@ -67,14 +67,14 @@ final class BehaviorController {
         return new When<>(target, this);
     }
 
-    <T> Then<T> then(final Class<T> state) {
+    <T> ThenExpecting<T> then(final Class<T> state) {
         next(state);
-        return new Then<>(state, this);
+        return new ThenExpecting<>(state, this);
     }
 
-    <S, T> Then<S> then(final Class<S> state, final ExpectingExpression <S, T> expression) {
+    <S, T> ThenExpecting<S> then(final Class<S> state, final ExpectingExpression <S, T> expression) {
         expect(expression.apply(go(state)));
-        return new Then<>(state, this);
+        return new ThenExpecting<>(state, this);
     }
 
     <V> Object expect(final Expecting<V> condition) {

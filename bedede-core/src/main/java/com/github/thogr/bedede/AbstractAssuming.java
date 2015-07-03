@@ -12,7 +12,7 @@ abstract class AbstractAssuming<T> {
         this.state = state;
     }
 
-    public <V> Then<T> then(final ExpectingExpression<T, V> condition) {
+    public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> condition) {
         return getController().then(state, condition);
     }
 

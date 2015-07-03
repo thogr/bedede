@@ -91,7 +91,7 @@ public abstract class BehaviorDriven {
      * @param <T> the type of state
      * @return an Assuming which has methods to further actions.
      */
-    protected final <T> Then<T> then(final Class<T> target) {
+    protected final <T> ThenExpecting<T> then(final Class<T> target) {
         return controller.then(target);
     }
 
