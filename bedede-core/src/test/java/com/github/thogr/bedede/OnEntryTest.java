@@ -20,7 +20,7 @@ public class OnEntryTest {
     ConditionController conditionController;
 
     static boolean guardCalled = false;
-    private StateMachine machine;
+    private StateMachineImpl machine;
 
     public static class State1 {
         @OnEntry
@@ -43,7 +43,7 @@ public class OnEntryTest {
         MockitoAnnotations.initMocks(this);
         guardCalled = false;
         machine =
-                new StateMachine(new DefaultStateFactory(), new DefaultInitialStateFactory(), conditionController);
+                new StateMachineImpl(new DefaultStateFactory(), new DefaultInitialStateFactory(), conditionController);
 
     }
 

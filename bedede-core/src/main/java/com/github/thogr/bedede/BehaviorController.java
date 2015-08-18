@@ -18,7 +18,7 @@ final class BehaviorController {
     BehaviorController(final StateFactory factory,
             final InitialStateFactory initialStateFactory,
             final ConditionController conditionController) {
-        this(new StateMachine(factory, initialStateFactory, conditionController), conditionController);
+        this(new StateMachineImpl(factory, initialStateFactory, conditionController), conditionController);
     }
 
     BehaviorController(final Framework framework, final StateFactory factory) {

@@ -40,7 +40,7 @@ public class StateMachineTest {
     @Captor
     ArgumentCaptor<Map<String, String>> parameters;
 
-    private StateMachine machine;
+    private StateMachineImpl machine;
 
     private State0 state0;
     private State1 state1;
@@ -61,7 +61,7 @@ public class StateMachineTest {
 
     @Before
     public void setUp() throws Exception {
-        machine = new StateMachine(factory, initialStateFactory, conditionController);
+        machine = new StateMachineImpl(factory, initialStateFactory, conditionController);
         state0 = new State0();
         state1 = new State1();
         state2 = new State2();
@@ -114,13 +114,13 @@ public class StateMachineTest {
         .then(it(), is(sameInstance(state1)));
     }
 
-    private BehaviorExpression<StateMachine> atState(Class<?> state) {
+    private BehaviorExpression<StateMachineImpl> atState(Class<?> state) {
         return
         given(atNoState())
         .when(performing(the -> the.go(state)));
     }
 
-    private GivenBehaviorExpression<StateMachine> atNoState() {
+    private GivenBehaviorExpression<StateMachineImpl> atNoState() {
         return given(machine);
     }
 

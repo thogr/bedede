@@ -15,9 +15,9 @@ abstract class BehaviorExpressionImpl<T>
      * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.TransformingExpression)
      */
     @Override
-    public final <S> BehaviorExpression<S> when(final TransformingExpression<? super T, ? extends S> expr) {
+    public final <S> TransformedBehaviorExpression<T, S> when(final TransformingExpression<? super T, ? extends S> expr) {
         S result = expr.function.apply(obj);
-        return new BasicBehaviorExpressionImpl<S>(result);
+        return new TransformedBehaviorExpressionImpl<T, S>(obj, result);
     }
 
     /* (non-Javadoc)
