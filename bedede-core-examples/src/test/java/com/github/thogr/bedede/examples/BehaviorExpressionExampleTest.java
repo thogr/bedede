@@ -92,6 +92,25 @@ public class BehaviorExpressionExampleTest {
         .then(p1 -> p1.getFullName(), is("John Jones"));
     }
 
+    @Test
+    public void testNameWithTransformedBehavior() throws Exception {
+        given(new Person()).with(it -> {
+            it.setFirstName("John");
+            it.setFamilyName("Smith");
+        })
+        .when(retrieving(Person::getFullName))
+        .then((the, fullname) -> is(the.getFirstName() + " " + the.getFamilyName()));
+    }
+
+    @Test
+    public void testNameWithTransformedBehavior2() throws Exception {
+        given(new Person()).with(it -> {
+            it.setFirstName("John");
+            it.setFamilyName("Smith");
+        })
+        .when(retrieving(Person::getFullName))
+        .then((it, name) -> is("John Smith"));
+    }
 
     @Test
     public void testNameWithTwoTricky() throws Exception {
