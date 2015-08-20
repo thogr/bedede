@@ -9,4 +9,5 @@ dependencies {
     //testCompile "com.github.thogr.bedede:bedede-core:0.5"
     testCompile libraries.hamcrest
     testCompile project(":bedede-core")
+    testCompile project(":bedede-mockito")
 }

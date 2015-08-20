@@ -12,6 +12,7 @@ import org.junit.Assert;
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.mocks.That;
 
 public abstract class Bedede {
 
@@ -102,6 +103,10 @@ public abstract class Bedede {
      */
     public static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
         return Expressions.given(expr);
+    }
+
+    public static <T> T given(That<T> mocked) {
+        return mocked.getStubbing();
     }
 
     /**

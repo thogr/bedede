@@ -1,7 +1,8 @@
 apply from: rootProject.file("publish.gradle")
 
 dependencies {
-    compile libraries.junit
+    compile project(':bedede-core')
+    //compile libraries.junit
+    compile libraries.mockito
     //testCompile libraries.hamcrest
-    //testCompile libraries.mockito
 }

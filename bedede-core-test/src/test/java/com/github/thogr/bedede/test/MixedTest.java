@@ -1,11 +1,10 @@
 package com.github.thogr.bedede.test;
 
+import static org.hamcrest.CoreMatchers.is;
+
 import org.junit.Test;
 
-import com.github.thogr.bedede.Bedede;
 import com.github.thogr.bedede.BehaviorDriven;
-
-import static org.hamcrest.CoreMatchers.*;
 
 public class MixedTest extends BehaviorDriven {
 

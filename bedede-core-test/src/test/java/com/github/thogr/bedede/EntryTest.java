@@ -1,7 +1,7 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Bedede.then;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -80,33 +80,33 @@ public class EntryTest {
 
     public <T> void givenCurrentState(final Class<T> state) throws Exception {
         machine.go(state);
-        assertThat(machine.was(state), is(true));
+        then(machine.was(state), is(true));
     }
 
     @Test
     public void shouldNotExecuteEntryForCurrentState() throws Exception {
         givenCurrentState(View1.class);
         whenExecuted(View2.REACHED);
-        thenCurrentState(View2.class);
+        then(currentStateIs(View2.class));
         then(View1.mocked).should(never()).perform();
     }
 
-    public void thenCurrentState(final Class<?> state) {
-        assertThat(machine.was(state), is(true));
+    public Behavior<Boolean> currentStateIs(final Class<?> state) {
+        return then(machine.was(state), is(true));
     }
 
     @Test
     public void shouldExecuteEntry() throws Exception {
         givenCurrentState(View0.class);
         whenExecuted(View2.REACHED);
-        thenCurrentState(View2.class);
+        then(currentStateIs(View2.class));
         then(View1.mocked).should(times(1)).perform();
     }
 
     @Test
     public void shouldAdvanceState() throws Exception {
         whenExecuted(View3.REACHED);
-        thenCurrentState(View3.class);
+        then(currentStateIs(View3.class));
     }
 
     public void whenExecuted(final Entry<?> entry) {

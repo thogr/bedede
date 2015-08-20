@@ -2,13 +2,13 @@ package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.retrieving;
+import static com.github.thogr.bedede.mockito.Expressions.that;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -30,8 +30,7 @@ public class BehaviorControllerTest {
 
     @Test
     public void test() {
-        BDDMockito
-        .given(machine.was(TargetState.class)).willReturn(true);
+        given(that(machine.was(TargetState.class))).willReturn(true);
         given(new BehaviorController(machine, conditionController))
         .when(retrieving(the -> the.given(Target.class)))
         .then((it, result) -> is(assuming(Target.class, it)));

@@ -4,6 +4,7 @@ import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.it;
 import static com.github.thogr.bedede.Bedede.performing;
 import static com.github.thogr.bedede.Bedede.retrieving;
+import static com.github.thogr.bedede.mockito.Expressions.that;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
@@ -15,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.BDDMockito;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -66,18 +66,15 @@ public class StateMachineTest {
         state1 = new State1();
         state2 = new State2();
 
-        BDDMockito
-        .given(initialStateFactory.createInitialState(
-                eq(factory), eq(State1.class), parameters.capture()))
+        given(that(initialStateFactory.createInitialState(
+                eq(factory), eq(State1.class), parameters.capture())))
         .willReturn(state1);
 
-        BDDMockito
-        .given(initialStateFactory.createInitialState(
-                eq(factory), eq(State0.class), parameters.capture()))
+        given(that(initialStateFactory.createInitialState(
+                eq(factory), eq(State0.class), parameters.capture())))
         .willReturn(state0);
 
-        BDDMockito
-        .given(factory.createState(State2.class))
+        given(that(factory.createState(State2.class)))
         .willReturn(state2);
     }
 
@@ -105,8 +102,7 @@ public class StateMachineTest {
 
     @Test
     public void shouldNotGoToNextStateIfAlreadyThere() {
-        BDDMockito
-        .given(factory.createState(State1.class))
+        given(that(factory.createState(State1.class)))
         .willReturn(new State1());
 
         given(atState(State1.class))
@@ -123,5 +119,4 @@ public class StateMachineTest {
     private GivenBehaviorExpression<StateMachineImpl> atNoState() {
         return given(machine);
     }
-
 }
