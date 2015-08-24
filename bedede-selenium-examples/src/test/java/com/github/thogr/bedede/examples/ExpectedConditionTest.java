@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.github.thogr.bedede.selenium.BededeSelenium;
+import com.github.thogr.bedede.BededeSelenium;
 
 public class ExpectedConditionTest {
 

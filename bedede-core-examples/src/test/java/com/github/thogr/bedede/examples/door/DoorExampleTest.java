@@ -1,6 +1,9 @@
 package com.github.thogr.bedede.examples.door;
 
-import static com.github.thogr.bedede.Bedede.*;
+import static com.github.thogr.bedede.Bedede.entry;
+import static com.github.thogr.bedede.Bedede.expecting;
+import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.Bedede.otherwise;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples
 
-import static com.github.thogr.bedede.selenium.BededeSelenium.*
+import static com.github.thogr.bedede.BededeSelenium.*
 import static org.openqa.selenium.support.ui.ExpectedConditions.*
 
 import org.junit.AfterClass

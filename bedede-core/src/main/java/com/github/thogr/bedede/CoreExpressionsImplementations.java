@@ -1,9 +1,8 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Defining.building;
 import static org.hamcrest.CoreMatchers.is;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -11,11 +10,17 @@ import java.util.function.Predicate;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 
+import com.github.thogr.bedede.Defining.DefiningEntry;
+import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
 abstract class CoreExpressionsImplementations {
+
+    static <E> GivenElement<E> given(final Expecting<?> precondition) {
+        return GivenElement.<E>given(precondition);
+    }
 
     static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
         return new GivenBehaviorExpressionImpl<T>(anObject.getWrapped());
@@ -52,27 +57,6 @@ abstract class CoreExpressionsImplementations {
 
     static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
         return it;
-    }
-
-    static <T> ActionExpression<T> theAction(String actionName) {
-        return new ActionExpression<T>() {
-            @Override
-            public void perform(T obj) {
-                Class<?> clazz = obj.getClass();
-                try {
-                    Method method = clazz.getMethod(actionName);
-                    method.invoke(obj);
-                } catch (NoSuchMethodException e) {
-                    throw new IllegalArgumentException(e);
-                } catch (SecurityException e) {
-                    throw new IllegalArgumentException(e);
-                } catch (IllegalAccessException e) {
-                    throw new IllegalArgumentException(e);
-                } catch (InvocationTargetException e) {
-                    throw new IllegalArgumentException(e);
-                }
-            }
-        };
     }
 
     static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
@@ -127,4 +111,14 @@ abstract class CoreExpressionsImplementations {
         final Class<T> conditionClass = (Class<T>) condition.getClass();
         return Expecting.expecting(condition, conditionClass, otherwise);
     }
+
+    static Expecting<BooleanCondition> expecting(
+            final Boolean condition, final Otherwise otherwise) {
+        return Expecting.expecting(() -> condition, BooleanCondition.class, otherwise);
+    }
+
+    static <T> DefiningEntry<T> entry(final Class<T> state) {
+        return building().entry(state);
+    }
+
 }

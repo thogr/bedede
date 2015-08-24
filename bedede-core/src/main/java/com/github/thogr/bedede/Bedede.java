@@ -1,7 +1,5 @@
 package com.github.thogr.bedede;
 
-import static com.github.thogr.bedede.Defining.building;
-
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -24,14 +22,8 @@ public abstract class Bedede {
     }
 
     public static Expecting<BooleanCondition> expecting(
-            final Boolean condition, final Otherwise otherwise) {
-        return Expecting.expecting(() -> condition, BooleanCondition.class, otherwise);
-    }
-
-    public static <T> Expecting<T> expecting(
-    final T condition, final Otherwise otherwise) {
-        return CoreExpressionsImplementations.expecting(condition,
-                otherwise);
+    final Boolean condition, final Otherwise otherwise) {
+        return CoreExpressionsImplementations.expecting(condition, otherwise);
     }
 
     public static Otherwise otherwise(final String message) {
@@ -39,15 +31,14 @@ public abstract class Bedede {
     }
 
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
-        return building().entry(state);
+        return CoreExpressionsImplementations.entry(state);
     }
-
-    protected static class Internal {
-        public static <E> GivenElement<E> given(final Expecting<?> expecting) {
-            return GivenElement.<E>given(expecting);
-        }
+/*
+    public static <T, S> GivenElement<T> given(
+            final Expecting<? super S> precondition) {
+        return CoreExpressionsImplementations.given(precondition);
     }
-
+*/
     /**
      * Sets the starting point for the further actions. If the state is
      * not the current assumed state it will possibly perform the actions needed to get
@@ -77,21 +68,6 @@ public abstract class Bedede {
     public static final <T> Assuming<T> given(final Entry<T> entry) {
         BehaviorDriver driver = new BehaviorDriver();
         return driver.given(entry);
-    }
-
-    /**
-     * Sets the starting environment for a state-less test, for a more traditional unit test
-     * but with behavior driven syntax - given().when()...then();
-     * The starting environment is the object in focus, which further when() and then() expressions
-     * will operate on.
-     * @param <T> the type of object (in focus) or the starting environment
-     * @param object the initial object in focus
-     * @return the continued behavior expression
-     * @deprecated use {@link #given(AnObject)}
-     */
-    @Deprecated
-    public static <T> GivenBehaviorExpression<T> given(final T object) {
-        return CoreExpressionsImplementations.given(an(object));
     }
 
     /**

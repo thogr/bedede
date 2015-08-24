@@ -1,7 +1,6 @@
 package com.github.thogr.bedede;
 
 import static com.github.thogr.bedede.Bedede.a;
-import static com.github.thogr.bedede.Bedede.expecting;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.otherwise;
 import static com.github.thogr.bedede.Bedede.performing;
@@ -51,7 +50,7 @@ public class AnnotatedStateVerifierTest {
 
     public static class StateWithEntryCondition {
         public static Expecting<BooleanCondition> condition =
-                expecting(true, otherwise("Very, very wrong"));
+                CoreExpressionsImplementations.expecting(true, otherwise("Very, very wrong"));
         @OnEntry
         public Expecting<BooleanCondition> entryMethod() {
             return condition;

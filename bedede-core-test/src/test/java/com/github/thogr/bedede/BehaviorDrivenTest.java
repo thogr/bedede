@@ -31,7 +31,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         }
 
         public Expecting<BooleanCondition> hasCondition() {
-            return Bedede.expecting(true, Bedede.otherwise("Very wrong"));
+            return CoreExpressionsImplementations.expecting(true, Bedede.otherwise("Very wrong"));
         }
     }
 

@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.Bedede.expecting;
 import static com.github.thogr.bedede.Bedede.otherwise;
-import static com.github.thogr.bedede.selenium.BededeSelenium.given;
+import static com.github.thogr.bedede.BededeSelenium.expecting;
+import static com.github.thogr.bedede.BededeSelenium.given;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 import org.openqa.selenium.By;
