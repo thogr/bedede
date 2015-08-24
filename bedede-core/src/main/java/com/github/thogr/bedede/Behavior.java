@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
+import com.github.thogr.bedede.mocks.Mocked;
+
 public interface Behavior<T> {
 
     /**
@@ -37,4 +39,10 @@ public interface Behavior<T> {
      * @return the behavior expression
      */
     Behavior<T> then(Predicate<? super T> predicate);
+
+    Behavior<T> then(Behavior<T> behavior);
+
+    <S> S then(Mocked<S> mocked);
+
+    Behavior<Boolean> then(boolean expr);
 }

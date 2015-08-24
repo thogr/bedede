@@ -1,14 +1,11 @@
 package com.github.thogr.bedede.mocks;
 
-public class That<T> {
+import com.github.thogr.bedede.Wrapped;
 
-    private T stubbing;
 
-    public That(T stubbing) {
-        this.stubbing = stubbing;
-    }
+public final class That<T> extends Wrapped<T> {
 
-    public T getStubbing() {
-        return stubbing;
+    That(T stubbing) {
+        super(stubbing);
     }
 }

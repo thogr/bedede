@@ -1,10 +1,11 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.it;
 import static com.github.thogr.bedede.Bedede.performing;
 import static com.github.thogr.bedede.Bedede.retrieving;
-import static com.github.thogr.bedede.mockito.Expressions.that;
+import static com.github.thogr.bedede.mocks.MockExpressions.that;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
@@ -117,6 +118,6 @@ public class StateMachineTest {
     }
 
     private GivenBehaviorExpression<StateMachineImpl> atNoState() {
-        return given(machine);
+        return given(a(machine));
     }
 }

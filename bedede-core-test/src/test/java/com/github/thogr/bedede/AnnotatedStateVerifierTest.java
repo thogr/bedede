@@ -1,10 +1,12 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.expecting;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.otherwise;
 import static com.github.thogr.bedede.Bedede.performing;
 import static com.github.thogr.bedede.Bedede.then;
+import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.then;
@@ -77,36 +79,36 @@ public class AnnotatedStateVerifierTest {
 
     @Test
     public void shouldNotVerifyWhenNoEntryMethod() {
-        given(aVerifierFor(StateWithNoEntry.class))
-        .when(performing(the -> the.verify(stateWithNoEntry)));
-        then(conditionController).should(never()).verify(any());
+        given(a(verifierFor(StateWithNoEntry.class)))
+        .when(performing(the -> the.verify(stateWithNoEntry)))
+        .then(theMocked(conditionController)).should(never()).verify(any());
     }
 
     @Test
     public void shouldCallSimpleEntryMethod() {
-        given(aVerifierFor(StateWithVoidEntry.class))
+        given(a(verifierFor(StateWithVoidEntry.class)))
         .when(performing(the -> the.verify(stateWithVoidEntry)))
         .then(the -> stateWithVoidEntry.isVerified);
     }
 
     @Test
     public void shouldVerifyConditionFromEntryMethod() {
-        given(aVerifierFor(StateWithEntryCondition.class))
-        .when(performing(the -> the.verify(stateWithEntryCondition)));
-        then(conditionController).should().verify(StateWithEntryCondition.condition);
+        given(a(verifierFor(StateWithEntryCondition.class)))
+        .when(performing(the -> the.verify(stateWithEntryCondition)))
+        .then(theMocked(conditionController)).should().verify(StateWithEntryCondition.condition);
     }
 
     @Test
     public void shouldVerifyConditionFromEntryMethodInSuperclass() {
-        given(aVerifierFor(StateWithEntryInSuperClass.class))
-        .when(performing(the -> the.verify(stateWithEntryInSuperClass)));
-        then(conditionController).should().verify(StateWithEntryCondition.condition);
+        given(a(verifierFor(StateWithEntryInSuperClass.class)))
+        .when(performing(the -> the.verify(stateWithEntryInSuperClass)))
+        .then(theMocked(conditionController)).should().verify(StateWithEntryCondition.condition);
     }
 
     @Test
     public void shouldFailWhenIllegalAccessExceptionOnEntryMethod() throws Exception {
         try {
-            given(aVerifierFor(IllegalState1.class))
+            given(a(verifierFor(IllegalState1.class)))
             .when(performing(the -> the.verify(illegalState1)));
         } catch (Exception e) {
             expected = e;
@@ -115,13 +117,13 @@ public class AnnotatedStateVerifierTest {
         then(cantVerify("IllegalState1"));
     }
 
-    private <T> AnnotatedStateVerifier<T> aVerifierFor(Class<T> state) {
+    private <T> AnnotatedStateVerifier<T> verifierFor(Class<T> state) {
         return new AnnotatedStateVerifier<>(state, conditionController);
     }
 
     private Behavior<?> cantVerify(String name) {
         return
-        then(expected, is(instanceOf(IllegalArgumentException.class)))
+        Expressions.then(expected, is(instanceOf(IllegalArgumentException.class)))
         .then(the -> expected.getMessage(),
                 is("Can't verify state com.github.thogr.bedede.AnnotatedStateVerifierTest$"
                         + name));

@@ -1,8 +1,9 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.retrieving;
-import static com.github.thogr.bedede.mockito.Expressions.that;
+import static com.github.thogr.bedede.mocks.MockExpressions.that;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.hamcrest.Description;
@@ -29,9 +30,9 @@ public class BehaviorControllerTest {
     private ConditionController conditionController;
 
     @Test
-    public void test() {
+    public void shouldAssumeTheGivenTarget() {
         given(that(machine.was(TargetState.class))).willReturn(true);
-        given(new BehaviorController(machine, conditionController))
+        given(a(new BehaviorController(machine, conditionController)))
         .when(retrieving(the -> the.given(Target.class)))
         .then((it, result) -> is(assuming(Target.class, it)));
     }

@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.conditions;
 
+import static com.github.thogr.bedede.Bedede.an;
 import static com.github.thogr.bedede.Bedede.expecting;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.otherwise;
@@ -22,8 +23,8 @@ public class ExpectingTest {
 
     @Test
     public void shouldVerifyBothOperands() {
-        given(expecting(true, otherwise("left!")))
-        .and(expecting(false, otherwise("right!")))
+        given(an(expecting(true, otherwise("left!"))))
+        .and(an(expecting(false, otherwise("right!"))))
         .when(transforming((a, b)->a.and(b)))
         .when(performing(the -> the.verify(verifier)));
         then(verifier).should().verify(anyObject(), eq(otherwise("left!")));

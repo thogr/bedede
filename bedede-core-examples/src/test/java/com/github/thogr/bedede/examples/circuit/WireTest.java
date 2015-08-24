@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples.circuit;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.performing;
 import static org.mockito.BDDMockito.then;
@@ -21,14 +22,14 @@ public class WireTest {
 
     @Test
     public void shouldFireStateChangedWhenAddingListener() {
-        given(new Wire())
+        given(a(new Wire()))
         .when(performing(it -> it.addChangeListener(listener)))
         ;then(listener).should().stateChanged(any());
     }
 
     @Test
     public void shouldFireStateChangedWhenSettingSignal() {
-        given(new Wire()).with(it -> {
+        given(a(new Wire())).with(it -> {
             it.addChangeListener(listener);
         })
         .when(performing(the -> the.setSignal(true)))

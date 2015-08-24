@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples.bowling;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.performing;
 import static com.github.thogr.bedede.Bedede.the;
@@ -19,14 +20,14 @@ public class BowlingKataExampleTest {
 
     @Test
     public void shouldGet20PointsForAllOnes() throws Exception {
-        given(new BowlingGame())
+        given(a(new BowlingGame()))
         .when(performing(the -> the.roll(1))).times(20)
         .then(the(BowlingGame::score), is(20));
     }
 
     @Test
     public void shouldGetBonusForOneSpare() throws Exception {
-        given(new BowlingGame())
+        given(a(new BowlingGame()))
         .when(performing(the -> the.roll(5)))
         .when(performing(the -> the.roll(5))) // Spare
         .when(performing(the -> the.roll(3)))
@@ -36,7 +37,7 @@ public class BowlingKataExampleTest {
 
     @Test
     public void shouldGetBonusForOneStrike() throws Exception {
-        given(new BowlingGame())
+        given(a(new BowlingGame()))
         .when(performing(the -> the.roll(10))) // Strike
         .when(performing(the -> the.roll(3)))
         .when(performing(the -> the.roll(4)))
@@ -45,7 +46,7 @@ public class BowlingKataExampleTest {
     }
 
     private BehaviorExpression<BowlingGame> aGutterGame() {
-        return given(new BowlingGame())
+        return given(a(new BowlingGame()))
                 .when(performing(the -> the.roll(0))).times(20);
     }
 }

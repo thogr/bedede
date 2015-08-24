@@ -11,12 +11,11 @@ import org.openqa.selenium.WebElement
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.support.ui.ExpectedCondition
 
-import com.github.thogr.bedede.BehaviorDriven
 import com.github.thogr.bedede.annotations.InitialState
 import com.github.thogr.bedede.annotations.OnEntry
 import com.github.thogr.bedede.conditions.Expecting
 
-class GroovyConditionTest extends BehaviorDriven {
+class GroovyConditionTest {
 
     @BeforeClass
     static void setUpClass() {
@@ -62,7 +61,7 @@ class GroovyConditionTest extends BehaviorDriven {
 
     @Test
     void test() {
-        this.given(GroovySearchPage)
+        given(GroovySearchPage)
         .when{it.searchesFor("Selenium")}
         .then(GroovyResultPage)
         .then{it.hasTitle("Selenium")}

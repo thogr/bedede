@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples.countdown;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static com.github.thogr.bedede.Bedede.given;
 import static com.github.thogr.bedede.Bedede.performing;
 import static org.hamcrest.Matchers.is;
@@ -44,11 +45,11 @@ public class CounterTest {
 
     private BehaviorExpression<Counter> initial() {
         return
-            given(new Counter());
+            given(a(new Counter()));
     }
 
     private BehaviorExpression<Counter> startedWith(int startval) {
-        return given(new Counter()).and(startval)
+        return given(a(new Counter())).and(a(startval))
                 .when(performing(Counter::start));
     }
 }

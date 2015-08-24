@@ -1,18 +1,30 @@
 package com.github.thogr.bedede;
 
+import static org.hamcrest.CoreMatchers.is;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.hamcrest.Matcher;
+import org.junit.Assert;
+
+import com.github.thogr.bedede.mocks.Mocked;
+import com.github.thogr.bedede.mocks.That;
+
 abstract class Expressions {
 
-    static <T> GivenBehaviorExpression<T> given(final T obj) {
-        return new GivenBehaviorExpressionImpl<T>(obj);
+    static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+        return new GivenBehaviorExpressionImpl<T>(anObject.getWrapped());
     }
 
     static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+        return new GivenBehaviorExpressionImpl<T>(expr);
+    }
+
+    static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
         return new GivenBehaviorExpressionImpl<T>(expr);
     }
 
@@ -101,7 +113,32 @@ abstract class Expressions {
     }
 
     static <T> Behavior<T> then(Behavior<T> behavior) {
-        return new BasicBehaviorExpressionImpl<T>(behavior);
+        return behavior;
     }
 
+    static <T> Behavior<T> then(T it, Matcher<? super T> is) {
+        Assert.assertThat(it, is);
+        return new BasicBehaviorExpressionImpl<>(it);
+    }
+
+    static Behavior<Boolean> then(Boolean expr) {
+        Assert.assertThat(expr, is(true));
+        return new BasicBehaviorExpressionImpl<>(expr);
+    }
+
+    static <T> T given(That<T> mocked) {
+        return mocked.getWrapped();
+    }
+
+    static <S> S then(Mocked<S> mocked) {
+        return mocked.getWrapped();
+    }
+
+    static <T> AnObject<T> a(T object) {
+        return new AnObject<>(object);
+    }
+
+    static <T> AnObject<T> an(T object) {
+        return a(object);
+    }
 }

@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.test;
 
+import static com.github.thogr.bedede.Bedede.a;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
@@ -10,7 +11,7 @@ public class MixedTest extends BehaviorDriven {
 
     @Test
     public void shouldHaveAccessToBehaviorExpressions() throws Exception {
-        given("A String")
+        given(a("A String"))
         .then(the->the.length(), is(8));
     }
 

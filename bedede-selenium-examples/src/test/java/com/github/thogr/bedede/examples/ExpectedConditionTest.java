@@ -1,14 +1,15 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.Bedede.given;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.selenium.BededeSelenium;
 
-public class ExpectedConditionTest extends BehaviorDriven {
+public class ExpectedConditionTest {
 
     @BeforeClass
     public static void configure() {

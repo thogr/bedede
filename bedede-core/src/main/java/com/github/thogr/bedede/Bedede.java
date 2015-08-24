@@ -12,6 +12,7 @@ import org.junit.Assert;
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
 public abstract class Bedede {
@@ -87,9 +88,27 @@ public abstract class Bedede {
      * @param <T> the type of object (in focus) or the starting environment
      * @param object the initial object in focus
      * @return the continued behavior expression
+     * @deprecated use {@link #given(AnObject)}
      */
+    @Deprecated
     public static <T> GivenBehaviorExpression<T> given(final T object) {
-        return Expressions.given(object);
+        return Expressions.given(an(object));
+    }
+
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * The starting environment is the object in focus, which further when() and then() expressions
+     * will operate on.
+     * <p><b>Syntax:</b></p>
+     * given(a(new Something()))
+     * </p>
+     * @param <T> the type of object (in focus) or the starting environment
+     * @param anObject the initial object in focus expressed as a(object)
+     * @return the continued behavior expression
+     */
+    public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+        return Expressions.given(anObject);
     }
 
     /**
@@ -101,12 +120,12 @@ public abstract class Bedede {
      * @param <T> the type of object (in focus) the action is operating on
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+    public static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
         return Expressions.given(expr);
     }
 
-    public static <T> T given(That<T> mocked) {
-        return mocked.getStubbing();
+    public static <T> T given(That<T> methodCall) {
+        return Expressions.given(methodCall);
     }
 
     /**
@@ -217,6 +236,7 @@ public abstract class Bedede {
      * @param functionName the name of the function
      * @return the function
      */
+    @Deprecated
     public static <T> Function<T, Object> the(String functionName) {
         return Expressions.the(functionName);
     }
@@ -269,6 +289,7 @@ public abstract class Bedede {
      * @param actionName the name of the action
      * @return the action
      */
+    @Deprecated
     public static <T> ActionExpression<T> theAction(String actionName) {
         return Expressions.theAction(actionName);
     }
@@ -280,23 +301,46 @@ public abstract class Bedede {
      * @param functionName the name of the function
      * @return the function
      */
+    @Deprecated
     public static <T, S> Function<T, S> it(String functionName) {
         return Expressions.the(functionName);
     }
 
+    public static <T> AnObject<T> a(T object) {
+        return Expressions.a(object);
+    }
+
+    public static <T> AnObject<T> an(T object) {
+        return Expressions.a(object);
+    }
+
     /**
      * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
-     * @param <T> the type of object (in focus) the action is operating on
-     * @param it the static type accepted by the matcher
+     * @param <T> the type of object (in focus) the action is operating on,
+     * the static type accepted by the matcher
+     * @param it the value being matched
      * @param is the matcher
      * @return the behavior
      */
     public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
-        Assert.assertThat(it, is);
-        return new BasicBehaviorExpressionImpl<>(it);
+        return Expressions.then(it, is);
     }
 
+    public static Behavior<Boolean> then(boolean expr) {
+        return Expressions.then(expr);
+    }
+
+    /**
+     * Convenience method when a behavior has been extracted to a method to be reused in another
+     * test.
+     * @param behavior
+     * @return
+     */
     public static <T> Behavior<T> then(Behavior<T> behavior) {
         return Expressions.then(behavior);
+    }
+
+    public static <S> S then(Mocked<S> mocked) {
+        return Expressions.then(mocked);
     }
 }

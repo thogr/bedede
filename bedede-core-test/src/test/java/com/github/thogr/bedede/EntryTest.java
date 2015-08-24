@@ -1,8 +1,9 @@
 package com.github.thogr.bedede;
 
-import static com.github.thogr.bedede.Bedede.then;
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.BDDMockito.then;
+import static com.github.thogr.bedede.Bedede.a;
+import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.Bedede.performing;
+import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
@@ -23,7 +24,7 @@ import com.github.thogr.bedede.test.View2;
 
 public class EntryTest {
 
-    private StateMachineImpl machine;
+    private StateMachine machine;
 
     private BehaviorController controller;
 
@@ -78,38 +79,43 @@ public class EntryTest {
         };
     }
 
-    public <T> void givenCurrentState(final Class<T> state) throws Exception {
-        machine.go(state);
-        then(machine.was(state), is(true));
+    public <T> Behavior<StateMachine> currentStateWas(final Class<T> state) throws Exception {
+        return
+        given(a(machine))
+        .when(performing(the -> machine.go(state)))
+        .then(it -> it.was(state));
     }
 
     @Test
     public void shouldNotExecuteEntryForCurrentState() throws Exception {
-        givenCurrentState(View1.class);
-        whenExecuted(View2.REACHED);
-        then(currentStateIs(View2.class));
-        then(View1.mocked).should(never()).perform();
+        given(a(controller))
+        .and(currentStateWas(View1.class))
+        .when(executingEntry(View2.REACHED))
+        .then(currentStateIs(View2.class))
+        .then(theMocked(View1.mocked)).should(never()).perform();
     }
 
-    public Behavior<Boolean> currentStateIs(final Class<?> state) {
-        return then(machine.was(state), is(true));
+    private PerformingExpression<BehaviorController> executingEntry(Entry<?> entry) {
+        return performing(it -> it.given(entry));
+    }
+
+    public boolean currentStateIs(final Class<?> state) {
+        return machine.was(state);
     }
 
     @Test
     public void shouldExecuteEntry() throws Exception {
-        givenCurrentState(View0.class);
-        whenExecuted(View2.REACHED);
-        then(currentStateIs(View2.class));
-        then(View1.mocked).should(times(1)).perform();
+        given(a(controller))
+        .and(currentStateWas(View0.class))
+        .when(executingEntry(View2.REACHED))
+        .then(currentStateIs(View2.class))
+        .then(theMocked(View1.mocked)).should(times(1)).perform();
     }
 
     @Test
     public void shouldAdvanceState() throws Exception {
-        whenExecuted(View3.REACHED);
-        then(currentStateIs(View3.class));
-    }
-
-    public void whenExecuted(final Entry<?> entry) {
-        controller.given(entry);
+        given(a(controller))
+        .when(executingEntry(View3.REACHED))
+        .then(currentStateIs(View3.class));
     }
 }

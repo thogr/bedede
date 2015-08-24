@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
+import com.github.thogr.bedede.mocks.Mocked;
+
 abstract class BehaviorImpl<T> implements Behavior<T> {
 
     protected T obj;
@@ -40,5 +42,20 @@ abstract class BehaviorImpl<T> implements Behavior<T> {
         boolean result = predicate.test(obj);
         assertThat(result, is(true));
         return new BasicBehaviorExpressionImpl<T>(obj);
+    }
+
+    @Override
+    public Behavior<T> then(Behavior<T> behavior) {
+        return Expressions.then(behavior);
+    }
+
+    @Override
+    public <S> S then(Mocked<S> mocked) {
+        return Expressions.then(mocked);
+    }
+
+    @Override
+    public Behavior<Boolean> then(boolean expr) {
+        return Expressions.then(expr);
     }
 }

@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
+import com.github.thogr.bedede.mocks.Mocked;
+
 class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpression<T, S> {
 
     private T obj;
@@ -47,8 +49,21 @@ class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpr
 
     @Override
     public Behavior<S> then(Predicate<? super S> predicate) {
-        // TODO Auto-generated method stub
-        return null;
+        return impl.then(predicate);
     }
 
+    @Override
+    public <V> V then(Mocked<V> mocked) {
+        return Expressions.then(mocked);
+    }
+
+    @Override
+    public Behavior<Boolean> then(boolean expr) {
+        return Expressions.then(expr);
+    }
+
+    @Override
+    public Behavior<S> then(Behavior<S> behavior) {
+        return impl.then(behavior);
+    }
 }

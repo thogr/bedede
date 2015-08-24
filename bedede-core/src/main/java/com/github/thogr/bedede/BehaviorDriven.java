@@ -52,9 +52,27 @@ public abstract class BehaviorDriven {
      * @param <T> the type of object or the starting environment
      * @param value initial value
      * @return the continued behavior expression
+     * @deprecated use {@link #given(AnObject)}
      */
+    @Deprecated
     public <T> GivenBehaviorExpression<T> given(final T value) {
-        return Expressions.given(value);
+        return Expressions.given(Expressions.a(value));
+    }
+
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
+     * The starting environment is the object in focus, which further when() and then() expressions
+     * will operate on.
+     * <p><b>Syntax:</b></p>
+     * given(a(new Something()))
+     * </p>
+     * @param <T> the type of object (in focus) or the starting environment
+     * @param anObject the initial object in focus expressed as a(object)
+     * @return the continued behavior expression
+     */
+    public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+        return Expressions.given(anObject);
     }
 
     /**
@@ -103,7 +121,7 @@ public abstract class BehaviorDriven {
      * @return the behavior
      */
     protected final <T> Behavior<T> then(T it, Matcher<? super T> is) {
-        return Bedede.then(it, is);
+        return Expressions.then(it, is);
     }
 
 }
