@@ -29,10 +29,9 @@ public abstract class Bedede {
     }
 
     public static <T> Expecting<T> expecting(
-            final T condition, final Otherwise otherwise) {
-        @SuppressWarnings("unchecked")
-        final Class<T> conditionClass = (Class<T>) condition.getClass();
-        return Expecting.expecting(condition, conditionClass, otherwise);
+    final T condition, final Otherwise otherwise) {
+        return CoreExpressionsImplementations.expecting(condition,
+                otherwise);
     }
 
     public static Otherwise otherwise(final String message) {
@@ -92,7 +91,7 @@ public abstract class Bedede {
      */
     @Deprecated
     public static <T> GivenBehaviorExpression<T> given(final T object) {
-        return Expressions.given(an(object));
+        return CoreExpressionsImplementations.given(an(object));
     }
 
     /**
@@ -108,7 +107,7 @@ public abstract class Bedede {
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
-        return Expressions.given(anObject);
+        return CoreExpressionsImplementations.given(anObject);
     }
 
     /**
@@ -121,11 +120,11 @@ public abstract class Bedede {
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
-        return Expressions.given(expr);
+        return CoreExpressionsImplementations.given(expr);
     }
 
     public static <T> T given(That<T> methodCall) {
-        return Expressions.given(methodCall);
+        return CoreExpressionsImplementations.given(methodCall);
     }
 
     /**
@@ -137,7 +136,7 @@ public abstract class Bedede {
      * @return the wrapped action
      */
     public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
-        return Expressions.performing(expr);
+        return CoreExpressionsImplementations.performing(expr);
     }
 
     /**
@@ -152,7 +151,7 @@ public abstract class Bedede {
      */
     public static <T1, T2> BiPerformingExpression<T1, T2> performing(
             final BiActionExpression<T1, T2> expr) {
-        return Expressions.performing(expr);
+        return CoreExpressionsImplementations.performing(expr);
     }
 
     /**
@@ -170,7 +169,7 @@ public abstract class Bedede {
      * @return the identify function
      */
     public static <T> Function<T, T> it() {
-        return Expressions.it();
+        return CoreExpressionsImplementations.it();
     }
 
     /**
@@ -183,7 +182,7 @@ public abstract class Bedede {
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
-        return Expressions.retrieving(expr);
+        return CoreExpressionsImplementations.retrieving(expr);
     }
 
     /**
@@ -195,7 +194,7 @@ public abstract class Bedede {
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
-        return Expressions.transforming(expr);
+        return CoreExpressionsImplementations.transforming(expr);
     }
 
     /**
@@ -211,7 +210,7 @@ public abstract class Bedede {
      */
     public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
         retrieving(BiFunction<T1, T2, S> expr) {
-        return Expressions.retrieving(expr);
+        return CoreExpressionsImplementations.retrieving(expr);
     }
 
     /**
@@ -227,18 +226,7 @@ public abstract class Bedede {
      */
     public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
         transforming(BiFunction<T1, T2, S> expr) {
-        return Expressions.transforming(expr);
-    }
-
-    /**
-     * Use carefully (alias for {@link #it(String)}), consider {@link #the(Function)}.
-     * @param <T> the type of object (in focus) the function is operating on
-     * @param functionName the name of the function
-     * @return the function
-     */
-    @Deprecated
-    public static <T> Function<T, Object> the(String functionName) {
-        return Expressions.the(functionName);
+        return CoreExpressionsImplementations.transforming(expr);
     }
 
     /**
@@ -252,7 +240,7 @@ public abstract class Bedede {
      * @return the function
      */
     public static <T, S> Function<T, S> the(Function<T, S> it) {
-        return Expressions.the(it);
+        return CoreExpressionsImplementations.the(it);
     }
 
     /**
@@ -265,7 +253,7 @@ public abstract class Bedede {
      * @return the predicate
      */
     public static <T> Predicate<T> the(Predicate<T> it) {
-        return Expressions.the(it);
+        return CoreExpressionsImplementations.the(it);
     }
 
     /**
@@ -280,38 +268,15 @@ public abstract class Bedede {
      * @return the function
      */
     public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
-        return Expressions.the(it);
-    }
-
-    /**
-     * Use carefully, consider {@link #the(Function)}.
-     * @param <T> the type of object (in focus) the action is operating on
-     * @param actionName the name of the action
-     * @return the action
-     */
-    @Deprecated
-    public static <T> ActionExpression<T> theAction(String actionName) {
-        return Expressions.theAction(actionName);
-    }
-
-    /**
-     * Use carefully (alias for {@link #the(String)}), consider {@link #the(Function)}.
-     * @param <T> the type of object (in focus) the action is operating on
-     * @param <S> the type of the result of the function
-     * @param functionName the name of the function
-     * @return the function
-     */
-    @Deprecated
-    public static <T, S> Function<T, S> it(String functionName) {
-        return Expressions.the(functionName);
+        return CoreExpressionsImplementations.the(it);
     }
 
     public static <T> AnObject<T> a(T object) {
-        return Expressions.a(object);
+        return CoreExpressionsImplementations.a(object);
     }
 
     public static <T> AnObject<T> an(T object) {
-        return Expressions.a(object);
+        return CoreExpressionsImplementations.a(object);
     }
 
     /**
@@ -323,11 +288,11 @@ public abstract class Bedede {
      * @return the behavior
      */
     public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
-        return Expressions.then(it, is);
+        return CoreExpressionsImplementations.then(it, is);
     }
 
     public static Behavior<Boolean> then(boolean expr) {
-        return Expressions.then(expr);
+        return CoreExpressionsImplementations.then(expr);
     }
 
     /**
@@ -337,10 +302,10 @@ public abstract class Bedede {
      * @return
      */
     public static <T> Behavior<T> then(Behavior<T> behavior) {
-        return Expressions.then(behavior);
+        return CoreExpressionsImplementations.then(behavior);
     }
 
     public static <S> S then(Mocked<S> mocked) {
-        return Expressions.then(mocked);
+        return CoreExpressionsImplementations.then(mocked);
     }
 }

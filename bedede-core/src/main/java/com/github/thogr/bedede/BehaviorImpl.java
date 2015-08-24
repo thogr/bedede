@@ -46,16 +46,16 @@ abstract class BehaviorImpl<T> implements Behavior<T> {
 
     @Override
     public Behavior<T> then(Behavior<T> behavior) {
-        return Expressions.then(behavior);
+        return CoreExpressionsImplementations.then(behavior);
     }
 
     @Override
     public <S> S then(Mocked<S> mocked) {
-        return Expressions.then(mocked);
+        return CoreExpressionsImplementations.then(mocked);
     }
 
     @Override
     public Behavior<Boolean> then(boolean expr) {
-        return Expressions.then(expr);
+        return CoreExpressionsImplementations.then(expr);
     }
 }

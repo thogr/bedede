@@ -54,12 +54,12 @@ class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpr
 
     @Override
     public <V> V then(Mocked<V> mocked) {
-        return Expressions.then(mocked);
+        return CoreExpressionsImplementations.then(mocked);
     }
 
     @Override
     public Behavior<Boolean> then(boolean expr) {
-        return Expressions.then(expr);
+        return CoreExpressionsImplementations.then(expr);
     }
 
     @Override

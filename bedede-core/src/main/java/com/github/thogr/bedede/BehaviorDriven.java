@@ -56,7 +56,7 @@ public abstract class BehaviorDriven {
      */
     @Deprecated
     public <T> GivenBehaviorExpression<T> given(final T value) {
-        return Expressions.given(Expressions.a(value));
+        return CoreExpressionsImplementations.given(CoreExpressionsImplementations.a(value));
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class BehaviorDriven {
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
-        return Expressions.given(anObject);
+        return CoreExpressionsImplementations.given(anObject);
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class BehaviorDriven {
      * @return the continued behavior expression
      */
     public <T> GivenBehaviorExpression<T> given(final BehaviorExpressionImpl<T> expr) {
-        return Expressions.given(expr);
+        return CoreExpressionsImplementations.given(expr);
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class BehaviorDriven {
      * @return the behavior
      */
     protected final <T> Behavior<T> then(T it, Matcher<? super T> is) {
-        return Expressions.then(it, is);
+        return CoreExpressionsImplementations.then(it, is);
     }
 
 }
