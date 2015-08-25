@@ -1,5 +1,5 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
-#Thu Aug 20 07:41:30 CEST 2015
-build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;bedede-core;bedede-core-examples;bedede-core-test;bedede-mockito;bedede-selenium;bedede-selenium-examples;
+#Tue Aug 25 09:03:23 CEST 2015
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;bedede-core;bedede-core-examples;bedede-core-test;bedede-lib;bedede-mockito;bedede-selenium;bedede-selenium-examples;
 org.springsource.ide.eclipse.gradle.linkedresources=
 org.springsource.ide.eclipse.gradle.rootprojectloc=
