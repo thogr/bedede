@@ -18,8 +18,26 @@ import com.github.thogr.bedede.mocks.That;
 
 abstract class CoreExpressionsImplementations {
 
+    static Otherwise otherwise(final String message) {
+        return Otherwise.otherwise(message);
+    }
+
     static <E> GivenElement<E> given(final Expecting<?> precondition) {
         return GivenElement.<E>given(precondition);
+    }
+
+    static GivenPrefix given() {
+        return Framework.createGivenPrefix();
+    }
+
+    static <T> Assuming<T> given(final Class<T> state) {
+        BehaviorDriver driver = new BehaviorDriver();
+        return driver.given(state);
+    }
+
+    static final <T> Assuming<T> given(final Entry<T> entry) {
+        BehaviorDriver driver = new BehaviorDriver();
+        return driver.given(entry);
     }
 
     static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {

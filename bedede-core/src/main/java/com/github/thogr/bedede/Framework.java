@@ -17,12 +17,22 @@ public final class Framework {
 
     }
 
+    public static void check(final Framework framework) {
+        if (framework == null) {
+            throw new NullPointerException();
+        }
+    }
+
     static BehaviorController createBehaviorController() {
         return new BehaviorController(new Framework());
     }
 
     static ConditionController createConditionController() {
         return new ConditionControllerImpl(new Framework());
+    }
+
+    static GivenPrefix createGivenPrefix() {
+        return new GivenPrefixImpl(new Framework());
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -59,5 +69,4 @@ public final class Framework {
 
         throw new IllegalArgumentException(String.format(NO_SERVICE_PROVIDED, StateFactory.class.getName()));
     }
-
 }

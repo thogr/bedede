@@ -13,12 +13,10 @@ import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
-public abstract class Bedede {
+public class Bedede {
 
-    protected Bedede(final Framework only) {
-        if (only == null) {
-            throw new NullPointerException();
-        }
+    protected Bedede(Framework only) {
+        Framework.check(only);
     }
 
     public static Expecting<BooleanCondition> expecting(
@@ -27,18 +25,17 @@ public abstract class Bedede {
     }
 
     public static Otherwise otherwise(final String message) {
-        return Otherwise.otherwise(message);
+        return CoreExpressionsImplementations.otherwise(message);
     }
 
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
         return CoreExpressionsImplementations.entry(state);
     }
-/*
-    public static <T, S> GivenElement<T> given(
-            final Expecting<? super S> precondition) {
-        return CoreExpressionsImplementations.given(precondition);
+
+    public static GivenPrefix given() {
+        return CoreExpressionsImplementations.given();
     }
-*/
+
     /**
      * Sets the starting point for the further actions. If the state is
      * not the current assumed state it will possibly perform the actions needed to get
@@ -53,8 +50,7 @@ public abstract class Bedede {
      * @return an Assuming which has methods to further actions.
      */
     public static <T> Assuming<T> given(final Class<T> state) {
-        BehaviorDriver driver = new BehaviorDriver();
-        return driver.given(state);
+        return CoreExpressionsImplementations.given(state);
     }
 
     /**
@@ -65,9 +61,8 @@ public abstract class Bedede {
      * @param <T> the type of state
      * @return an Assuming which has methods to further actions
      */
-    public static final <T> Assuming<T> given(final Entry<T> entry) {
-        BehaviorDriver driver = new BehaviorDriver();
-        return driver.given(entry);
+    public static <T> Assuming<T> given(final Entry<T> entry) {
+        return CoreExpressionsImplementations.given(entry);
     }
 
     /**
@@ -99,8 +94,8 @@ public abstract class Bedede {
         return CoreExpressionsImplementations.given(expr);
     }
 
-    public static <T> T given(That<T> methodCall) {
-        return CoreExpressionsImplementations.given(methodCall);
+    public static <T> T given(That<T> that) {
+        return CoreExpressionsImplementations.given(that);
     }
 
     /**

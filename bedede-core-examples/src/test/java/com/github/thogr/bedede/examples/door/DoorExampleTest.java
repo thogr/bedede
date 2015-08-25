@@ -105,21 +105,21 @@ public class DoorExampleTest {
 
     @Test
     public void shouldNotUnlockWithWrongKey() {
-        given(DoorLocked.class)
+        given().at(DoorLocked.class)
         .when(it -> it.turnsKey(WRONG_KEY))
         .then(DoorLocked.class);
     }
 
     @Test
     public void shouldNotUnlockWithWrongKeyAgain() {
-        given(DoorLocked.byLockingWith(CORRECT_KEY))
+        given().at(DoorLocked.byLockingWith(CORRECT_KEY))
         .when(it -> it.turnsKey(WRONG_KEY))
         .then(DoorLocked.class);
     }
 
     @Test
     public void shouldNotCloseWhenLocked() throws Exception {
-        given(DoorOpen.class)
+        given().at(DoorOpen.class)
         .when(it -> it.turnsKey(CORRECT_KEY))
         .when(DoorState::close)
         .then(DoorOpen.class);
@@ -127,7 +127,7 @@ public class DoorExampleTest {
 
     @Test
     public void shouldCloseWhenWrongKey() throws Exception {
-        given(DoorOpen.class)
+        given().at(DoorOpen.class)
         .when(it -> it.turnsKey(WRONG_KEY))
         .when(DoorState::close)
         .then(DoorUnlocked.class);

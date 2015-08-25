@@ -44,20 +44,6 @@ public abstract class BehaviorDriven {
     protected final <T> Assuming<T> given(final Entry<T> entry) {
         return controller.given(entry);
     }
-    /**
-     * Sets the starting environment for a state-less test, for a more traditional unit test
-     * but with behavior driven syntax - given().when()...then();
-     * The starting environment is any object, which further when() and then() expressions will
-     * operate on.
-     * @param <T> the type of object or the starting environment
-     * @param value initial value
-     * @return the continued behavior expression
-     * @deprecated use {@link #given(AnObject)}
-     */
-    @Deprecated
-    public <T> GivenBehaviorExpression<T> given(final T value) {
-        return CoreExpressionsImplementations.given(CoreExpressionsImplementations.a(value));
-    }
 
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test

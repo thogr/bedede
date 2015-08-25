@@ -15,6 +15,7 @@ public final class BededeSelenium extends Bedede {
             final Expecting<ExpectedCondition<T>> precondition) {
        return CoreExpressionsImplementations.given(precondition);
     }
+
     public static <T> Expecting<ExpectedCondition<T>> expecting(
             final ExpectedCondition<T> condition, final Otherwise otherwise) {
                 return CoreExpressionsImplementations.expecting(condition,
