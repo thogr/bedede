@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.examples.countdown;
 
-import static com.github.thogr.bedede.Bedede.a;
-import static com.github.thogr.bedede.Bedede.given;
-import static com.github.thogr.bedede.Bedede.performing;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;

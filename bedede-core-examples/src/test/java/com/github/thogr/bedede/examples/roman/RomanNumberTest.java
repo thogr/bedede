@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.examples.roman;
 
-import static com.github.thogr.bedede.Bedede.a;
-import static com.github.thogr.bedede.Bedede.given;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;

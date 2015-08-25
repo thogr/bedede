@@ -1,5 +1,6 @@
 package com.github.thogr.bedede;
 
+
 public class GivenPrefixImpl implements GivenPrefix {
 
     protected GivenPrefixImpl(final Framework only) {
@@ -11,7 +12,7 @@ public class GivenPrefixImpl implements GivenPrefix {
      */
     @Override
     public <T> Assuming<T> at(final Class<T> state) {
-        return Bedede.given(state);
+        return CoreExpressions.given(state);
     }
 
     /* (non-Javadoc)
@@ -19,7 +20,7 @@ public class GivenPrefixImpl implements GivenPrefix {
      */
     @Override
     public <T> Assuming<T> at(final Entry<T> entry) {
-        return Bedede.given(entry);
+        return CoreExpressions.given(entry);
     }
 
     /* (non-Javadoc)
@@ -27,7 +28,7 @@ public class GivenPrefixImpl implements GivenPrefix {
      */
     @Override
     public <T> GivenBehaviorExpression<T> a(final T object) {
-        return Bedede.given(Bedede.a(object));
+        return CoreExpressions.given(CoreExpressions.a(object));
     }
 
     /* (non-Javadoc)
@@ -38,4 +39,8 @@ public class GivenPrefixImpl implements GivenPrefix {
         return a(object);
     }
 
+    @Override
+    public <T> GivenBehaviorExpression<T> the(T object) {
+        return a(object);
+    }
 }

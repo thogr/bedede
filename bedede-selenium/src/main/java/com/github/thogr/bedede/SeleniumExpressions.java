@@ -5,20 +5,20 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.Expecting;
 
-public final class BededeSelenium extends Bedede {
+public final class SeleniumExpressions extends CoreExpressions {
 
-    private BededeSelenium(final Framework only) {
+    private SeleniumExpressions(Framework only) {
         super(only);
     }
 
     public static <T> GivenElement<T> given(
             final Expecting<ExpectedCondition<T>> precondition) {
-       return CoreExpressionsImplementations.given(precondition);
+       return SeleniumExpressionsImplementations.given(precondition);
     }
 
     public static <T> Expecting<ExpectedCondition<T>> expecting(
             final ExpectedCondition<T> condition, final Otherwise otherwise) {
-                return CoreExpressionsImplementations.expecting(condition,
+                return SeleniumExpressionsImplementations.expecting(condition,
                         otherwise);
     }
 

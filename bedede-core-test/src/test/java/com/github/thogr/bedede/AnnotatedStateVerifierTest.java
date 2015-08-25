@@ -1,10 +1,10 @@
 package com.github.thogr.bedede;
 
-import static com.github.thogr.bedede.Bedede.a;
-import static com.github.thogr.bedede.Bedede.given;
-import static com.github.thogr.bedede.Bedede.otherwise;
-import static com.github.thogr.bedede.Bedede.performing;
-import static com.github.thogr.bedede.Bedede.then;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.otherwise;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.then;
 import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;

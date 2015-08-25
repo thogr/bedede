@@ -10,4 +10,6 @@ public interface GivenPrefix {
 
     <T> GivenBehaviorExpression<T> an(T object);
 
+    <T> GivenBehaviorExpression<T> the(T object);
+
 }

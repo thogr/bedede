@@ -6,34 +6,38 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 import org.junit.Assert;
+import org.mockito.BDDMockito.BDDMyOngoingStubbing;
+import org.mockito.BDDMockito.Then;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.mocks.MockExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
-public class Bedede {
+public abstract class Expressions {
 
-    protected Bedede(Framework only) {
-        Framework.check(only);
-    }
+    // CoreExpressions
+    //-----------------------------------------------------------------
 
     public static Expecting<BooleanCondition> expecting(
     final Boolean condition, final Otherwise otherwise) {
-        return CoreExpressionsImplementations.expecting(condition, otherwise);
+        return CoreExpressions.expecting(condition, otherwise);
     }
 
     public static Otherwise otherwise(final String message) {
-        return CoreExpressionsImplementations.otherwise(message);
+        return CoreExpressions.otherwise(message);
     }
 
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
-        return CoreExpressionsImplementations.entry(state);
+        return CoreExpressions.entry(state);
     }
 
     public static GivenPrefix given() {
-        return CoreExpressionsImplementations.given();
+        return CoreExpressions.given();
     }
 
     /**
@@ -50,7 +54,7 @@ public class Bedede {
      * @return an Assuming which has methods to further actions.
      */
     public static <T> Assuming<T> given(final Class<T> state) {
-        return CoreExpressionsImplementations.given(state);
+        return CoreExpressions.given(state);
     }
 
     /**
@@ -62,7 +66,7 @@ public class Bedede {
      * @return an Assuming which has methods to further actions
      */
     public static <T> Assuming<T> given(final Entry<T> entry) {
-        return CoreExpressionsImplementations.given(entry);
+        return CoreExpressions.given(entry);
     }
 
     /**
@@ -78,7 +82,7 @@ public class Bedede {
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
-        return CoreExpressionsImplementations.given(anObject);
+        return CoreExpressions.given(anObject);
     }
 
     /**
@@ -91,11 +95,11 @@ public class Bedede {
      * @return the continued behavior expression
      */
     public static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
-        return CoreExpressionsImplementations.given(expr);
+        return CoreExpressions.given(expr);
     }
 
     public static <T> T given(That<T> that) {
-        return CoreExpressionsImplementations.given(that);
+        return CoreExpressions.given(that);
     }
 
     /**
@@ -107,7 +111,7 @@ public class Bedede {
      * @return the wrapped action
      */
     public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
-        return CoreExpressionsImplementations.performing(expr);
+        return CoreExpressions.performing(expr);
     }
 
     /**
@@ -122,7 +126,7 @@ public class Bedede {
      */
     public static <T1, T2> BiPerformingExpression<T1, T2> performing(
             final BiActionExpression<T1, T2> expr) {
-        return CoreExpressionsImplementations.performing(expr);
+        return CoreExpressions.performing(expr);
     }
 
     /**
@@ -140,7 +144,7 @@ public class Bedede {
      * @return the identify function
      */
     public static <T> Function<T, T> it() {
-        return CoreExpressionsImplementations.it();
+        return CoreExpressions.it();
     }
 
     /**
@@ -153,7 +157,7 @@ public class Bedede {
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
-        return CoreExpressionsImplementations.retrieving(expr);
+        return CoreExpressions.retrieving(expr);
     }
 
     /**
@@ -165,7 +169,7 @@ public class Bedede {
      * @return the wrapped action
      */
     public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
-        return CoreExpressionsImplementations.transforming(expr);
+        return CoreExpressions.transforming(expr);
     }
 
     /**
@@ -181,7 +185,7 @@ public class Bedede {
      */
     public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
         retrieving(BiFunction<T1, T2, S> expr) {
-        return CoreExpressionsImplementations.retrieving(expr);
+        return CoreExpressions.retrieving(expr);
     }
 
     /**
@@ -197,7 +201,7 @@ public class Bedede {
      */
     public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
         transforming(BiFunction<T1, T2, S> expr) {
-        return CoreExpressionsImplementations.transforming(expr);
+        return CoreExpressions.transforming(expr);
     }
 
     /**
@@ -211,7 +215,7 @@ public class Bedede {
      * @return the function
      */
     public static <T, S> Function<T, S> the(Function<T, S> it) {
-        return CoreExpressionsImplementations.the(it);
+        return CoreExpressions.the(it);
     }
 
     /**
@@ -224,7 +228,7 @@ public class Bedede {
      * @return the predicate
      */
     public static <T> Predicate<T> the(Predicate<T> it) {
-        return CoreExpressionsImplementations.the(it);
+        return CoreExpressions.the(it);
     }
 
     /**
@@ -239,15 +243,15 @@ public class Bedede {
      * @return the function
      */
     public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
-        return CoreExpressionsImplementations.the(it);
+        return CoreExpressions.the(it);
     }
 
     public static <T> AnObject<T> a(T object) {
-        return CoreExpressionsImplementations.a(object);
+        return CoreExpressions.a(object);
     }
 
     public static <T> AnObject<T> an(T object) {
-        return CoreExpressionsImplementations.a(object);
+        return CoreExpressions.a(object);
     }
 
     /**
@@ -259,11 +263,11 @@ public class Bedede {
      * @return the behavior
      */
     public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
-        return CoreExpressionsImplementations.then(it, is);
+        return CoreExpressions.then(it, is);
     }
 
     public static Behavior<Boolean> then(boolean expr) {
-        return CoreExpressionsImplementations.then(expr);
+        return CoreExpressions.then(expr);
     }
 
     /**
@@ -273,10 +277,44 @@ public class Bedede {
      * @return
      */
     public static <T> Behavior<T> then(Behavior<T> behavior) {
-        return CoreExpressionsImplementations.then(behavior);
+        return CoreExpressions.then(behavior);
     }
 
     public static <S> S then(Mocked<S> mocked) {
-        return CoreExpressionsImplementations.then(mocked);
+        return CoreExpressions.then(mocked);
     }
+
+    // Mocks
+    //-----------------------------------------------------------------
+
+    public static <T> That<BDDMyOngoingStubbing<T>> that(T methodCall) {
+        return MockExpressions.that(methodCall);
+    }
+
+    public static <T> Mocked<Then<T>> theMocked(T mock) {
+        return MockExpressions.theMocked(mock);
+    }
+
+    // Selenium
+    //-----------------------------------------------------------------
+
+    public static <T> GivenElement<T> given(
+            final Expecting<ExpectedCondition<T>> precondition) {
+       return SeleniumExpressions.given(precondition);
+    }
+
+    public static <T> Expecting<ExpectedCondition<T>> expecting(
+            final ExpectedCondition<T> condition, final Otherwise otherwise) {
+                return SeleniumExpressions.expecting(condition,
+                        otherwise);
+    }
+
+    public static WebDriver getWebDriver() {
+        return SeleniumExpressions.getWebDriver();
+    }
+
+    public static void setWebDriver(final WebDriver webdriver) {
+        SeleniumExpressions.setWebDriver(webdriver);
+    }
+
 }

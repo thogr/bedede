@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples
 
-import static com.github.thogr.bedede.Bedede.*
+import static com.github.thogr.bedede.CoreExpressions.*
 import static org.hamcrest.CoreMatchers.is
 
 import org.junit.Test

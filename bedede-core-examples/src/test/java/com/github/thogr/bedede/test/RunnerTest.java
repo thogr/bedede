@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.test;
 
-import static com.github.thogr.bedede.Bedede.expecting;
-import static com.github.thogr.bedede.Bedede.otherwise;
+import static com.github.thogr.bedede.CoreExpressions.expecting;
+import static com.github.thogr.bedede.CoreExpressions.otherwise;
 
 import org.junit.After;
 import org.junit.BeforeClass;
