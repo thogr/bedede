@@ -3,9 +3,9 @@ package com.github.thogr.bedede.mocks;
 import com.github.thogr.bedede.core.internal.Wrapped;
 
 
-public final class That<T> extends Wrapped<T> {
+public abstract class That<T> extends Wrapped<T> {
 
-    That(T stubbing) {
+    protected That(T stubbing) {
         super(stubbing);
     }
 }
