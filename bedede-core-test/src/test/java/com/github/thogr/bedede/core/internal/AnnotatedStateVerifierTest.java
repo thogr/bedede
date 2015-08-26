@@ -8,7 +8,6 @@ import static com.github.thogr.bedede.core.CoreExpressions.then;
 import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 
@@ -114,7 +113,7 @@ public class AnnotatedStateVerifierTest {
         } catch (Exception e) {
             expected = e;
         }
-        then(conditionController).should(never()).verify(any());
+        then(theMocked(conditionController)).should(never()).verify(any());
         then(cantVerify("IllegalState1"));
     }
 
