@@ -8,7 +8,7 @@ import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.GivenBehaviorExpression;
+import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.ThenExpecting;
 import com.github.thogr.bedede.core.CoreExpressions;
 
@@ -36,7 +36,7 @@ public class AbstractBehaviorDriven {
      * @param anObject the initial object in focus expressed as a(object)
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+    public static <T> Given<T> given(final AnObject<T> anObject) {
         return CoreExpressions.given(anObject);
     }
 
@@ -78,7 +78,7 @@ public class AbstractBehaviorDriven {
      * @param <T> the type of object the action is operating on
      * @return the continued behavior expression
      */
-    public final <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+    public final <T> Given<T> given(final BehaviorExpression<T> expr) {
         return CoreExpressions.given(expr);
     }
 

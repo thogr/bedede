@@ -22,7 +22,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.GivenBehaviorExpression;
+import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.core.internal.InitialStateFactory;
@@ -120,7 +120,7 @@ public class StateMachineTest {
         .when(performing(the -> the.go(state)));
     }
 
-    private GivenBehaviorExpression<StateMachineImpl> atNoState() {
+    private Given<StateMachineImpl> atNoState() {
         return given(a(machine));
     }
 }

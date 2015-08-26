@@ -10,11 +10,11 @@ import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.BiActionExpression;
 import com.github.thogr.bedede.BiPerforming;
 import com.github.thogr.bedede.BiTransforming;
-import com.github.thogr.bedede.ContinuedBehaviorExpression;
-import com.github.thogr.bedede.SecondBehaviorExpression;
+import com.github.thogr.bedede.SecondGiven;
+import com.github.thogr.bedede.SecondWith;
 
 class SecondBehaviorExpressionImpl<T1, T2>
-    extends BehaviorExpressionImpl<T1> implements SecondBehaviorExpression<T1, T2> {
+    extends BehaviorExpressionImpl<T1> implements SecondGiven<T1, T2> {
 
     private T1 first;
     private T2 second;
@@ -29,7 +29,7 @@ class SecondBehaviorExpressionImpl<T1, T2>
      * @see com.github.thogr.bedede.SecondBehaviorExpression#then(java.util.function.BiFunction, org.hamcrest.Matcher)
      */
     @Override
-    public final <S> SecondBehaviorExpression<T1, T2> then(
+    public final <S> SecondGiven<T1, T2> then(
             final BiFunction<? super T1, ? super T2, S> it, final Matcher<? super S> is) {
         S result = it.apply(first, second);
         assertThat(result, is);
@@ -40,14 +40,14 @@ class SecondBehaviorExpressionImpl<T1, T2>
      * @see com.github.thogr.bedede.SecondBehaviorExpression#when(com.github.thogr.bedede.BiActionExpression)
      */
     @Override
-    public final SecondBehaviorExpression<T1, T2> with(
+    public final SecondWith<T1, T2> with(
             final BiActionExpression<? super T1, ? super T2> action) {
         action.perform(first, second);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
     }
 
     @Override
-    public ContinuedBehaviorExpression<T1, T2> with(
+    public SecondWith<T1, T2> with(
             ActionExpression<? super T2> action) {
         action.perform(second);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
@@ -57,12 +57,12 @@ class SecondBehaviorExpressionImpl<T1, T2>
      * @see com.github.thogr.bedede.SecondBehaviorExpression#when(com.github.thogr.bedede.BiPerformingExpression)
      */
     @Override
-    public final SecondBehaviorExpression<T1, T2> when(
+    public final SecondWith<T1, T2> when(
             final BiPerforming<? super T1, ? super T2> expr) {
         return whenPerforming(expr);
     }
 
-    private SecondBehaviorExpression<T1, T2> whenPerforming(
+    private SecondWith<T1, T2> whenPerforming(
             final AbstractBiPerformer<? super T1, ? super T2> expr) {
         return with(expr.getAction());
     }

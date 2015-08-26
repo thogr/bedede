@@ -23,5 +23,5 @@ public interface WithBehaviorExpression<T> {
      * @param action the action to be performed
      * @return a new expression where the current object in focus is the same
      */
-    BehaviorExpression<T> with(ActionExpression<? super T> action);
+    With<T> with(ActionExpression<? super T> action);
 }

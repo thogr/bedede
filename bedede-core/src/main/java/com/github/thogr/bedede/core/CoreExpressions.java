@@ -17,7 +17,7 @@ import com.github.thogr.bedede.BiPerforming;
 import com.github.thogr.bedede.BiTransforming;
 import com.github.thogr.bedede.ContinuedBehaviorExpression;
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.GivenBehaviorExpression;
+import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.Performing;
@@ -101,7 +101,7 @@ public class CoreExpressions {
      * @param anObject the initial object in focus expressed as a(object)
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+    public static <T> Given<T> given(final AnObject<T> anObject) {
         return impl.given(anObject);
     }
 
@@ -114,7 +114,7 @@ public class CoreExpressions {
      * @param <T> the type of object (in focus) the action is operating on
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
+    public static <T> Given<T> given(final Behavior<T> expr) {
         return impl.given(expr);
     }
 

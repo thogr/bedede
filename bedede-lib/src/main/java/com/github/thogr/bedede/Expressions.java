@@ -82,7 +82,7 @@ public abstract class Expressions {
      * @param anObject the initial object in focus expressed as a(object)
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final AnObject<T> anObject) {
+    public static <T> Given<T> given(final AnObject<T> anObject) {
         return CoreExpressions.given(anObject);
     }
 
@@ -95,7 +95,7 @@ public abstract class Expressions {
      * @param <T> the type of object (in focus) the action is operating on
      * @return the continued behavior expression
      */
-    public static <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
+    public static <T> Given<T> given(final Behavior<T> expr) {
         return CoreExpressions.given(expr);
     }
 

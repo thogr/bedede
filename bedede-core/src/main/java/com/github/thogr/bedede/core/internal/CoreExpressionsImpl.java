@@ -17,7 +17,7 @@ import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.BiActionExpression;
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.GivenBehaviorExpression;
+import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.GivenElement;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
@@ -60,15 +60,15 @@ public final class CoreExpressionsImpl {
         return driver.given(entry);
     }
 
-    public <T> GivenBehaviorExpression<T> given(final Wrapped<T> anObject) {
+    public <T> Given<T> given(final Wrapped<T> anObject) {
         return new GivenBehaviorExpressionImpl<T>(anObject.getWrapped());
     }
 
-    public <T> GivenBehaviorExpression<T> given(final BehaviorExpression<T> expr) {
+    public <T> Given<T> given(final BehaviorExpression<T> expr) {
         return new GivenBehaviorExpressionImpl<T>(expr);
     }
 
-    public <T> GivenBehaviorExpression<T> given(final Behavior<T> expr) {
+    public <T> Given<T> given(final Behavior<T> expr) {
         return new GivenBehaviorExpressionImpl<T>(expr);
     }
 
