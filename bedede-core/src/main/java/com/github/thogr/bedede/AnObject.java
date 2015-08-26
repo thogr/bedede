@@ -1,8 +1,15 @@
 package com.github.thogr.bedede;
 
-public final class AnObject<T> extends Wrapped<T>{
+import com.github.thogr.bedede.core.internal.Wrapped;
 
-    AnObject(T wrapped) {
-        super(wrapped);
+public final class AnObject<T> extends Wrapped<T> {
+
+    AnObject(T object) {
+        super(object);
     }
+
+    public static <T> AnObject<T> a(T object) {
+        return new AnObject<T>(object);
+    }
+
 }

@@ -1,11 +1,11 @@
 package com.github.thogr.bedede.conditions;
 
-import static com.github.thogr.bedede.CoreExpressions.an;
-import static com.github.thogr.bedede.CoreExpressions.expecting;
-import static com.github.thogr.bedede.CoreExpressions.given;
-import static com.github.thogr.bedede.CoreExpressions.otherwise;
-import static com.github.thogr.bedede.CoreExpressions.performing;
-import static com.github.thogr.bedede.CoreExpressions.transforming;
+import static com.github.thogr.bedede.core.CoreExpressions.an;
+import static com.github.thogr.bedede.core.CoreExpressions.expecting;
+import static com.github.thogr.bedede.core.CoreExpressions.given;
+import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
+import static com.github.thogr.bedede.core.CoreExpressions.performing;
+import static com.github.thogr.bedede.core.CoreExpressions.transforming;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;

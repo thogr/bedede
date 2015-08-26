@@ -1,6 +1,6 @@
 package com.github.thogr.bedede
 
-import groovy.transform.*;
+import groovy.transform.*
 
 @CompileStatic
 class BehaviorDrivenExtension {

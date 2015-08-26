@@ -2,16 +2,8 @@ package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.ExpectingExpression;
 
-public class ThenExpecting<T> {
-    private final ThreadLocal<BehaviorController> controller = new ThreadLocal<>();
-    private final Class<T> state;
+public interface ThenExpecting<T> {
 
-    ThenExpecting(final Class<T> state, final BehaviorController controller) {
-        this.state = state;
-        this.controller.set(controller);
-    }
+	<V> ThenExpecting<T> then(ExpectingExpression<T, V> epression);
 
-    public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> epression) {
-        return controller.get().then(state, epression);
-    }
 }

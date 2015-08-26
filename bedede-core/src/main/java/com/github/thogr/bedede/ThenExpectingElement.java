@@ -2,17 +2,10 @@ package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.Expecting;
 
-public final class ThenExpectingElement<E> {
+public interface ThenExpectingElement<E> {
 
-    ThenExpectingElement(final Expecting<?> exp) {
-        GivenElement.<E>given(exp);
-    }
+	ThenExpectingElement<E> then(Expecting<?> exp);
 
-    public ThenExpectingElement<E> then(final Expecting<?> exp) {
-        return new ThenExpectingElement<>(exp);
-    }
+	ThenElement<E> then();
 
-    public ThenElement<E> then() {
-        return new ThenElement<E>();
-    }
 }

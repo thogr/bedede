@@ -11,9 +11,10 @@ import org.mockito.BDDMockito.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import com.github.thogr.bedede.Defining.DefiningEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.core.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.mocks.MockExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
@@ -105,12 +106,12 @@ public abstract class Expressions {
     /**
      * Wraps an action that operates on an object into a performing expression.
      * The object originates from a given(object) expression.
-     * @see BehaviorExpression#when(PerformingExpression)
+     * @see BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
      */
-    public static <T> PerformingExpression<T> performing(final ActionExpression<T> expr) {
+    public static <T> Performing<T> performing(final ActionExpression<T> expr) {
         return CoreExpressions.performing(expr);
     }
 
@@ -118,13 +119,13 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a performing expression.
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
-     * @see BehaviorExpression#when(PerformingExpression)
+     * @see BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @return the wrapped action
      */
-    public static <T1, T2> BiPerformingExpression<T1, T2> performing(
+    public static <T1, T2> BiPerforming<T1, T2> performing(
             final BiActionExpression<T1, T2> expr) {
         return CoreExpressions.performing(expr);
     }
@@ -150,25 +151,25 @@ public abstract class Expressions {
     /**
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
-     * @see BehaviorExpression#when(TransformingExpression)
+     * @see BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T,S> TransformingExpression<T, S> retrieving(Function<T, S> expr) {
+    public static <T,S> Transforming<T, S> retrieving(Function<T, S> expr) {
         return CoreExpressions.retrieving(expr);
     }
 
     /**
      * Wraps an action into a transforming expression.
-     * @see BehaviorExpression#when(TransformingExpression)
+     * @see BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T,S> TransformingExpression<T, S> transforming(Function<T, S> expr) {
+    public static <T,S> Transforming<T, S> transforming(Function<T, S> expr) {
         return CoreExpressions.transforming(expr);
     }
 
@@ -176,14 +177,14 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see ContinuedBehaviorExpression#when(BiTransformingExpression)
+     * @see ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
+    public static <T1,T2,S> BiTransforming<T1, T2, S>
         retrieving(BiFunction<T1, T2, S> expr) {
         return CoreExpressions.retrieving(expr);
     }
@@ -192,14 +193,14 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see ContinuedBehaviorExpression#when(BiTransformingExpression)
+     * @see ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T1,T2,S> BiTransformingExpression<T1, T2, S>
+    public static <T1,T2,S> BiTransforming<T1, T2, S>
         transforming(BiFunction<T1, T2, S> expr) {
         return CoreExpressions.transforming(expr);
     }

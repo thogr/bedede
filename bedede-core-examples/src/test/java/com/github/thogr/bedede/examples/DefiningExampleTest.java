@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.CoreExpressions.entry;
+import static com.github.thogr.bedede.core.CoreExpressions.entry;
 
 import org.junit.Test;
 

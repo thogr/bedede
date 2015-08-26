@@ -1,13 +1,14 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.core.internal.AbstractAssumedState;
+import com.github.thogr.bedede.core.internal.BehaviorController;
 
-public final class Assuming<T> extends AbstractAssuming<T> {
+public abstract class Assuming<T> extends AbstractAssumedState<T> {
 
-    Assuming(final Class<T> state, final BehaviorController controller) {
+    protected Assuming(Class<T> state, BehaviorController controller) {
         super(state, controller);
     }
 
-    public When<T> when(final ActionExpression<T> action) {
-        return getController().when(action, state);
-    }
+    public abstract StateBasedWhen<T> when(final ActionExpression<T> action);
+
 }

@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.conditions;
 
-import com.github.thogr.bedede.Framework;
+import com.github.thogr.bedede.core.internal.Framework;
 
 public class ConditionControllerImpl implements ConditionController {
 

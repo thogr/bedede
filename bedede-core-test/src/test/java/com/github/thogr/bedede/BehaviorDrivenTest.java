@@ -10,6 +10,7 @@ import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.CoreExpressions;
 
 public class BehaviorDrivenTest extends BehaviorDriven {
 
@@ -31,7 +32,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         }
 
         public Expecting<BooleanCondition> hasCondition() {
-            return CoreExpressionsImplementations.expecting(true, CoreExpressions.otherwise("Very wrong"));
+            return CoreExpressions.expecting(true, CoreExpressions.otherwise("Very wrong"));
         }
     }
 

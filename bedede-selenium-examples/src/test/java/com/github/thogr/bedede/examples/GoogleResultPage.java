@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.CoreExpressions.otherwise;
 import static com.github.thogr.bedede.SeleniumExpressions.expecting;
+import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleContains;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;

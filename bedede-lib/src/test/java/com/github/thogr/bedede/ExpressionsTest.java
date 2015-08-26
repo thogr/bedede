@@ -16,6 +16,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
+import com.github.thogr.bedede.core.CoreExpressions;
 import com.github.thogr.bedede.mocks.MockExpressions;
 
 public class ExpressionsTest {

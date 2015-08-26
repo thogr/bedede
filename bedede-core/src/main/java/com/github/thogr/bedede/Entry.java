@@ -1,4 +1,8 @@
 package com.github.thogr.bedede;
+
+import com.github.thogr.bedede.core.internal.AbstractInternalEntry;
+
+
 /**
  * The behavior needed reach a target state.
  * The method {@link #perform()} is the implementation.
@@ -23,36 +27,14 @@ package com.github.thogr.bedede;
  * </pre>
  * @param <S> the target state
  */
-public abstract class Entry<S> extends StateBehavior<S> {
+public abstract class Entry<S> extends AbstractInternalEntry<S> {
 
-    private final Class<S> target;
-
-    Entry(final Class<S> target) {
-        this.target = target;
+    public Entry(final Class<S> target) {
+        super(target);
     }
 
     public Entry() {
-        this.target = TypeArguments.typeArgument(this);
-    }
-
-    Class<S> getTarget() {
-        return target;
-    }
-
-    protected final <T> TargetAssuming<S, T> given(final Class<T> state) {
-        return new TargetAssuming<S, T>(target, getController().given(state));
-    }
-
-    protected final <T> TargetAssuming<S, T> given(final Entry<T> entry) {
-        return new TargetAssuming<S, T>(target, getController().given(entry));
-    }
-
-    protected final <T> TargetAssuming<S, T> assuming(final Class<T> state) {
-        return new TargetAssuming<S, T>(target, getController().assuming(state));
-    }
-
-    protected final void then(final Class<S> state) {
-        getController().then(state);
+        super();
     }
 
 }

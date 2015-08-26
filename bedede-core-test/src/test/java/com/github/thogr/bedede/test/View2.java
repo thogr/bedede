@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.test;
 
 import com.github.thogr.bedede.Entry;
-import com.github.thogr.bedede.EntryTest.View1;
+import com.github.thogr.bedede.core.internal.EntryTest.View1;
 
 public class View2 {
 

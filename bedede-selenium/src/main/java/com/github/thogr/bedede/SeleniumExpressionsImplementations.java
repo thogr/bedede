@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.internal.CoreExpressionsImpl;
 
 class SeleniumExpressionsImplementations {
 
@@ -19,12 +20,12 @@ class SeleniumExpressionsImplementations {
 
     static <T> GivenElement<T> given(
             final Expecting<ExpectedCondition<T>> precondition) {
-       return CoreExpressionsImplementations.given(precondition);
+       return CoreExpressionsImpl.given(precondition);
     }
 
     static <T> Expecting<ExpectedCondition<T>> expecting(
             final ExpectedCondition<T> condition, final Otherwise otherwise) {
-                return CoreExpressionsImplementations.expecting(condition,
+                return CoreExpressionsImpl.expecting(condition,
                         otherwise);
     }
 }

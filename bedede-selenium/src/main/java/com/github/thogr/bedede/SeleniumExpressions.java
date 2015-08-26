@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.CoreExpressions;
 
 public final class SeleniumExpressions extends CoreExpressions {
 
-    private SeleniumExpressions(Framework only) {
-        super(only);
+    private SeleniumExpressions() {
     }
 
     public static <T> GivenElement<T> given(

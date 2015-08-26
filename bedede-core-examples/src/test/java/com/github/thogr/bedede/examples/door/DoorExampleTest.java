@@ -1,9 +1,9 @@
 package com.github.thogr.bedede.examples.door;
 
-import static com.github.thogr.bedede.CoreExpressions.entry;
-import static com.github.thogr.bedede.CoreExpressions.expecting;
-import static com.github.thogr.bedede.CoreExpressions.given;
-import static com.github.thogr.bedede.CoreExpressions.otherwise;
+import static com.github.thogr.bedede.core.CoreExpressions.entry;
+import static com.github.thogr.bedede.core.CoreExpressions.expecting;
+import static com.github.thogr.bedede.core.CoreExpressions.given;
+import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
 
 import org.junit.Before;
 import org.junit.Test;
