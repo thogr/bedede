@@ -5,7 +5,7 @@ import com.github.thogr.bedede.TargetAssuming;
 
 public abstract class AbstractInternalEntry<S> extends StateBehavior<S> {
 
-    protected final Class<S> target;
+    private final Class<S> target;
 
     public AbstractInternalEntry(final Class<S> target) {
         this.target = target;
@@ -15,7 +15,7 @@ public abstract class AbstractInternalEntry<S> extends StateBehavior<S> {
         this.target = TypeArguments.typeArgument(this);
     }
 
-    protected Class<S> getTarget() {
+    Class<S> getTarget() {
         return target;
     }
 

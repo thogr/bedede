@@ -29,11 +29,11 @@ import com.github.thogr.bedede.core.internal.AbstractInternalEntry;
  */
 public abstract class Entry<S> extends AbstractInternalEntry<S> {
 
-    public Entry(final Class<S> target) {
+    protected Entry(final Class<S> target) {
         super(target);
     }
 
-    public Entry() {
+    protected Entry() {
         super();
     }
 

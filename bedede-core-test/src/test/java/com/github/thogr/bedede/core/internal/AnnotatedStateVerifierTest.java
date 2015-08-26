@@ -124,7 +124,7 @@ public class AnnotatedStateVerifierTest {
 
     private Behavior<?> cantVerify(String name) {
         return
-        CoreExpressions.then(expected, is(instanceOf(IllegalArgumentException.class)))
+        then(expected, is(instanceOf(IllegalArgumentException.class)))
         .then(the -> expected.getMessage(),
                 is("Can't verify state "
                         + "com.github.thogr.bedede.core.internal.AnnotatedStateVerifierTest$"

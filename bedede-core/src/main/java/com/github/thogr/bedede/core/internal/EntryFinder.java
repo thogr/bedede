@@ -23,8 +23,8 @@ final class EntryFinder {
 
     }
 
-    static <T> Entry<T> getDefaultEntry(final Class<T> state) {
-        Entry<T> defaultEntry = null;
+    static <T> AbstractInternalEntry<T> getDefaultEntry(final Class<T> state) {
+        AbstractInternalEntry<T> defaultEntry = null;
         Member defaultEntryField = null;
         final List<Member> members = getMembers(state);
         for (final Member f : members) {
@@ -33,7 +33,7 @@ final class EntryFinder {
                     defaultEntry = theOnlyDefaultEntry(state, defaultEntry, defaultEntryField, f);
                     defaultEntryField = f;
                 } else {
-                    final Entry<T> entry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
+                    final AbstractInternalEntry<T> entry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
                     if (entry != defaultEntry) {
                         defaultEntry = entry;
                         defaultEntryField = f;
@@ -75,9 +75,9 @@ final class EntryFinder {
         return members;
     }
 
-    private static <T> Entry<T> theOnlyEntry(
+    private static <T> AbstractInternalEntry<T> theOnlyEntry(
             final Class<T> stateClass,
-            final Entry<T> defaultEntry,
+            final AbstractInternalEntry<T> defaultEntry,
             final Member defaultEntyField,
             final Member f) {
         try {
@@ -89,7 +89,7 @@ final class EntryFinder {
                 }
             }
             if (isEntry(f)) {
-                final Entry<T> entry = getValue(f);
+                final AbstractInternalEntry<T> entry = getValue(f);
                 final Class<T> target = entry.getTarget();
                 if (target.equals(stateClass)) {
                     return entry;
@@ -123,9 +123,9 @@ final class EntryFinder {
         }
     }
 
-    private static <T> Entry<T> theOnlyDefaultEntry(
+    private static <T> AbstractInternalEntry<T> theOnlyDefaultEntry(
             final Class<T> stateClass,
-            final Entry<T> defaultEntry,
+            final AbstractInternalEntry<T> defaultEntry,
             final Member defaultEntryField,
             final Member f) {
         try {

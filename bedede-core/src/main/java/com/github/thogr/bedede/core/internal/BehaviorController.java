@@ -41,10 +41,14 @@ public final class BehaviorController {
     }
 
     <T> Assuming<T> given(final Entry<T> entry) {
+        return givenEntry(entry);
+    }
+
+    private <T> Assuming<T> givenEntry(final AbstractInternalEntry<T> entry) {
         return given(entry, entry.getTarget());
     }
 
-    private <T> Assuming<T> given(final Entry<T> entry, final Class<T> target) {
+    private <T> Assuming<T> given(final AbstractInternalEntry<T> entry, final Class<T> target) {
         if (!machine.was(target)) {
             perform(entry);
             if (!machine.was(target)) {
