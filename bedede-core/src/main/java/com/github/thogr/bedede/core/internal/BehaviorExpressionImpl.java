@@ -1,14 +1,15 @@
 package com.github.thogr.bedede.core.internal;
 
 import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.Performing;
-import com.github.thogr.bedede.TransformedBehaviorExpression;
+import com.github.thogr.bedede.Times;
 import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.WhenBehaviorExpression;
+import com.github.thogr.bedede.When;
+import com.github.thogr.bedede.WhenPerforming;
+import com.github.thogr.bedede.WhenTransforming;
 
 abstract class BehaviorExpressionImpl<T>
-    extends BehaviorImpl<T> implements BehaviorExpression<T> {
+    extends BehaviorImpl<T> implements When<T>, Times<T> {
 
     BehaviorExpressionImpl(final T obj) {
         super(obj);
@@ -22,11 +23,11 @@ abstract class BehaviorExpressionImpl<T>
      * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.Transforming)
      */
     @Override
-    public final <S> TransformedBehaviorExpression<T, S> when(final Transforming<? super T, ? extends S> expr) {
+    public final <S> WhenTransforming<T, S> when(final Transforming<? super T, ? extends S> expr) {
         return whenTransforming(expr);
     }
 
-    private <S> TransformedBehaviorExpression<T, S> whenTransforming(
+    private <S> WhenTransforming<T, S> whenTransforming(
             final AbstractTransformer<? super T, ? extends S> expr) {
         S result = expr.getFunction().apply(obj);
         return new TransformedBehaviorExpressionImpl<T, S>(obj, result);
@@ -36,11 +37,11 @@ abstract class BehaviorExpressionImpl<T>
      * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.PerformingExpression)
      */
     @Override
-    public final WhenBehaviorExpression<T> when(final Performing<T> expr) {
+    public final WhenPerforming<T> when(final Performing<T> expr) {
         return whenPerforming(expr);
     }
 
-    private WhenBehaviorExpression<T> whenPerforming(final AbstractPerformer<T> expr) {
+    private WhenPerforming<T> whenPerforming(final AbstractPerformer<T> expr) {
         expr.perform(obj);
         return new WhenBehaviorExpressionImpl<T>(obj, expr);
     }

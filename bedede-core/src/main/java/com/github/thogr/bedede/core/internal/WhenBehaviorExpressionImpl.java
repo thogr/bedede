@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.WhenBehaviorExpression;
+import com.github.thogr.bedede.Times;
+import com.github.thogr.bedede.WhenPerforming;
 
 /**
  * The result of a non-transforming when() expression.
@@ -9,7 +9,7 @@ import com.github.thogr.bedede.WhenBehaviorExpression;
  * @param <T> the type of the current object
  */
 final class WhenBehaviorExpressionImpl<T>
-    extends BehaviorExpressionImpl<T> implements WhenBehaviorExpression<T> {
+    extends BehaviorExpressionImpl<T> implements WhenPerforming<T> {
 
     private AbstractPerformer<T> expr;
 
@@ -22,7 +22,7 @@ final class WhenBehaviorExpressionImpl<T>
      * @see com.github.thogr.bedede.WhenBehaviorExpression#times(int)
      */
     @Override
-    public BehaviorExpression<T> times(int n) {
+    public Times<T> times(int n) {
         for (int i = 1; i < n; i++) {
             expr.perform(obj);
         }
@@ -33,7 +33,7 @@ final class WhenBehaviorExpressionImpl<T>
      * @see com.github.thogr.bedede.WhenBehaviorExpression#twice()
      */
     @Override
-    public BehaviorExpression<T> twice() {
+    public Times<T> twice() {
         return times(2);
     }
 

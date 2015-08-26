@@ -16,13 +16,13 @@ public interface WhenBehaviorExpression<T> extends BehaviorExpression<T> {
      * @param n the number of times in total to perform the action
      * @return a new expression where the current object in focus is the same
      */
-    BehaviorExpression<T> times(int n);
+    Times<T> times(int n);
 
     /**
      * Repeats an action twice (2 times).
      * @see #times
      * @return a new expression where the current object in focus is the same
      **/
-    BehaviorExpression<T> twice();
+    Times<T> twice();
 
 }

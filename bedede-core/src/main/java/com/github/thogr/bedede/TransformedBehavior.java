@@ -5,5 +5,5 @@ import java.util.function.BiFunction;
 import org.hamcrest.Matcher;
 
 public interface TransformedBehavior<T, S> extends Behavior<S> {
-    TransformedBehavior<T, S> then(BiFunction<? super T, ? super S, Matcher<? super S>> expr);
+    ThenMatches<T, S> then(BiFunction<? super T, ? super S, Matcher<? super S>> expr);
 }

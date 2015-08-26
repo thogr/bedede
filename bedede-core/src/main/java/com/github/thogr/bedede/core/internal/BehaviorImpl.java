@@ -9,10 +9,11 @@ import java.util.function.Predicate;
 import org.hamcrest.Matcher;
 
 import com.github.thogr.bedede.Behavior;
+import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.core.CoreExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 
-abstract class BehaviorImpl<T> implements Behavior<T> {
+abstract class BehaviorImpl<T> implements Behavior<T>, Then<T> {
 
     protected T obj;
 
@@ -29,7 +30,7 @@ abstract class BehaviorImpl<T> implements Behavior<T> {
      * @see com.github.thogr.bedede.Behavior#then(java.util.function.Function, org.hamcrest.Matcher)
      */
     @Override
-    public final <S> Behavior<T> then(
+    public final <S> Then<T> then(
             final Function<? super T, ? extends S> it, final Matcher<? super S> is) {
         S result = it.apply(obj);
         assertThat(result, is);
@@ -40,14 +41,14 @@ abstract class BehaviorImpl<T> implements Behavior<T> {
      * @see com.github.thogr.bedede.Behavior#then(java.util.function.Predicate)
      */
     @Override
-    public final Behavior<T> then(final Predicate<? super T> predicate) {
+    public final Then<T> then(final Predicate<? super T> predicate) {
         boolean result = predicate.test(obj);
         assertThat(result, is(true));
         return new BasicBehaviorExpressionImpl<T>(obj);
     }
 
     @Override
-    public Behavior<T> then(Behavior<T> behavior) {
+    public Then<T> then(Behavior<T> behavior) {
         return CoreExpressions.then(behavior);
     }
 
@@ -57,7 +58,7 @@ abstract class BehaviorImpl<T> implements Behavior<T> {
     }
 
     @Override
-    public Behavior<Boolean> then(boolean expr) {
+    public Then<Boolean> then(boolean expr) {
         return CoreExpressions.then(expr);
     }
 }

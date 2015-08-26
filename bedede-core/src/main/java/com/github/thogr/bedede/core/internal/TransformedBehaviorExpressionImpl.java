@@ -10,14 +10,15 @@ import org.hamcrest.Matcher;
 
 import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.Performing;
-import com.github.thogr.bedede.TransformedBehavior;
-import com.github.thogr.bedede.TransformedBehaviorExpression;
+import com.github.thogr.bedede.Then;
+import com.github.thogr.bedede.ThenMatches;
 import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.WhenBehaviorExpression;
+import com.github.thogr.bedede.WhenPerforming;
+import com.github.thogr.bedede.WhenTransforming;
 import com.github.thogr.bedede.core.CoreExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 
-class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpression<T, S> {
+class TransformedBehaviorExpressionImpl<T, S> implements WhenTransforming<T, S>, ThenMatches<T, S> {
 
     private T obj;
     private S result;
@@ -30,7 +31,7 @@ class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpr
     }
 
     @Override
-    public TransformedBehavior<T, S> then(
+    public ThenMatches<T, S> then(
             BiFunction<? super T, ? super S, Matcher<? super S>> expr) {
         Matcher<? super S> is = expr.apply(obj, result);
         assertThat(result, is);
@@ -38,24 +39,24 @@ class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpr
     }
 
     @Override
-    public <S2> TransformedBehaviorExpression<S, S2> when(
+    public <S2> WhenTransforming<S, S2> when(
             Transforming<? super S, ? extends S2> expr) {
         return impl.when(expr);
     }
 
     @Override
-    public WhenBehaviorExpression<S> when(Performing<S> expr) {
+    public WhenPerforming<S> when(Performing<S> expr) {
         return impl.when(expr);
     }
 
     @Override
-    public <S2> Behavior<S> then(Function<? super S, ? extends S2> it,
+    public <S2> Then<S> then(Function<? super S, ? extends S2> it,
             Matcher<? super S2> is) {
         return impl.then(it, is);
     }
 
     @Override
-    public Behavior<S> then(Predicate<? super S> predicate) {
+    public Then<S> then(Predicate<? super S> predicate) {
         return impl.then(predicate);
     }
 
@@ -65,12 +66,12 @@ class TransformedBehaviorExpressionImpl<T, S> implements TransformedBehaviorExpr
     }
 
     @Override
-    public Behavior<Boolean> then(boolean expr) {
+    public Then<Boolean> then(boolean expr) {
         return CoreExpressions.then(expr);
     }
 
     @Override
-    public Behavior<S> then(Behavior<S> behavior) {
+    public Then<S> then(Behavior<S> behavior) {
         return impl.then(behavior);
     }
 }

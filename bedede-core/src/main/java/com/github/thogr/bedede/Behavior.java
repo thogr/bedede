@@ -24,7 +24,7 @@ public interface Behavior<T> {
      * @param is the matcher
      * @return the behavior expression
      */
-    <S> Behavior<T> then(Function<? super T, ? extends S> it, Matcher<? super S> is);
+    <S> Then<T> then(Function<? super T, ? extends S> it, Matcher<? super S> is);
 
     /**
      * Verifies the current state of the current object, with a predicate. This corresponds to
@@ -38,11 +38,11 @@ public interface Behavior<T> {
      * @param predicate a predicate function on the current object
      * @return the behavior expression
      */
-    Behavior<T> then(Predicate<? super T> predicate);
+    Then<T> then(Predicate<? super T> predicate);
 
-    Behavior<T> then(Behavior<T> behavior);
+    Then<T> then(Behavior<T> behavior);
 
     <S> S then(Mocked<S> mocked);
 
-    Behavior<Boolean> then(boolean expr);
+    Then<Boolean> then(boolean expr);
 }

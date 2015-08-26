@@ -5,10 +5,10 @@ import org.junit.Assert;
 
 import com.github.thogr.bedede.AnObject;
 import com.github.thogr.bedede.Assuming;
-import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.Given;
+import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.ThenExpecting;
 import com.github.thogr.bedede.core.CoreExpressions;
 
@@ -114,7 +114,7 @@ public class AbstractBehaviorDriven {
      * @param is the matcher
      * @return the behavior
      */
-    public final <T> Behavior<T> then(T it, Matcher<? super T> is) {
+    public final <T> Then<T> then(T it, Matcher<? super T> is) {
         return CoreExpressions.then(it, is);
     }
 

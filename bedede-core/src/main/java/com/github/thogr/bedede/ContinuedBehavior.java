@@ -4,8 +4,8 @@ import java.util.function.BiFunction;
 
 import org.hamcrest.Matcher;
 
-public interface SecondBehavior<T1, T2> extends Behavior<T1> {
+public interface ContinuedBehavior<T1, T2> extends Behavior<T1> {
 
-    <S> SecondBehavior<T1, T2> then(
+    <S> ThenItMatches<T1, T2> then(
             BiFunction<? super T1, ? super T2, S> it, Matcher<? super S> is);
 }

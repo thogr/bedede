@@ -18,7 +18,7 @@ public interface WhenBehavior<T> {
      * @param expr the the action to be performed, wrapped like:<code> transforming(action) </code>
      * @return a new expression where the object in focus is the result of the transformation
      */
-    <S> TransformedBehaviorExpression<T, S> when(
+    <S> WhenTransforming<T, S> when(
             Transforming<? super T, ? extends S> expr);
 
     /**
@@ -33,6 +33,6 @@ public interface WhenBehavior<T> {
      * @param expr an action wrapped like: <code>performing(action)</code>
      * @return a new expression where the current object in focus is the same
      */
-    WhenBehaviorExpression<T> when(Performing<T> expr);
+    WhenPerforming<T> when(Performing<T> expr);
 
 }

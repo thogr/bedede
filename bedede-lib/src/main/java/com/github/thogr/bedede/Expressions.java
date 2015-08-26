@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 import org.junit.Assert;
+import org.mockito.BDDMockito;
 import org.mockito.BDDMockito.BDDMyOngoingStubbing;
-import org.mockito.BDDMockito.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -263,11 +263,11 @@ public abstract class Expressions {
      * @param is the matcher
      * @return the behavior
      */
-    public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
+    public static <T> Then<T> then(T it, Matcher<? super T> is) {
         return CoreExpressions.then(it, is);
     }
 
-    public static Behavior<Boolean> then(boolean expr) {
+    public static Then<Boolean> then(boolean expr) {
         return CoreExpressions.then(expr);
     }
 
@@ -277,7 +277,7 @@ public abstract class Expressions {
      * @param behavior
      * @return
      */
-    public static <T> Behavior<T> then(Behavior<T> behavior) {
+    public static <T> Then<T> then(Behavior<T> behavior) {
         return CoreExpressions.then(behavior);
     }
 
@@ -292,7 +292,7 @@ public abstract class Expressions {
         return MockExpressions.that(methodCall);
     }
 
-    public static <T> Mocked<Then<T>> theMocked(T mock) {
+    public static <T> Mocked<BDDMockito.Then<T>> theMocked(T mock) {
         return MockExpressions.theMocked(mock);
     }
 

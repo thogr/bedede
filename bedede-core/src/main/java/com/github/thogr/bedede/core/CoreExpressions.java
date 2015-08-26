@@ -21,6 +21,7 @@ import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.Performing;
+import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.Transforming;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
@@ -282,11 +283,11 @@ public class CoreExpressions {
      * @param is the matcher
      * @return the behavior
      */
-    public static <T> Behavior<T> then(T it, Matcher<? super T> is) {
+    public static <T> Then<T> then(T it, Matcher<? super T> is) {
         return impl.then(it, is);
     }
 
-    public static Behavior<Boolean> then(boolean expr) {
+    public static Then<Boolean> then(boolean expr) {
         return impl.then(expr);
     }
 
@@ -296,7 +297,7 @@ public class CoreExpressions {
      * @param behavior
      * @return
      */
-    public static <T> Behavior<T> then(Behavior<T> behavior) {
+    public static <T> Then<T> then(Behavior<T> behavior) {
         return impl.then(behavior);
     }
 

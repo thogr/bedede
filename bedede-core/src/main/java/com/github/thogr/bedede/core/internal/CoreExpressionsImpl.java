@@ -22,6 +22,7 @@ import com.github.thogr.bedede.GivenElement;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.Performing;
+import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.Transforming;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
@@ -113,16 +114,16 @@ public final class CoreExpressionsImpl {
         return new BiTransformingImpl<>(expr);
     }
 
-    public <T> Behavior<T> then(Behavior<T> behavior) {
-        return behavior;
+    public <T> Then<T> then(Behavior<T> behavior) {
+        return new BasicBehaviorExpressionImpl<>(behavior);
     }
 
-    public <T> Behavior<T> then(T it, Matcher<? super T> is) {
+    public <T> Then<T> then(T it, Matcher<? super T> is) {
         Assert.assertThat(it, is);
         return new BasicBehaviorExpressionImpl<>(it);
     }
 
-    public Behavior<Boolean> then(Boolean expr) {
+    public Then<Boolean> then(Boolean expr) {
         Assert.assertThat(expr, is(true));
         return new BasicBehaviorExpressionImpl<>(expr);
     }
