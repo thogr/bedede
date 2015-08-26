@@ -4,7 +4,7 @@ import org.mockito.BDDMockito.BDDMyOngoingStubbing;
 
 import com.github.thogr.bedede.mocks.That;
 
-public class MockitoThat<T> extends That<BDDMyOngoingStubbing<T>> {
+class MockitoThat<T> extends That<BDDMyOngoingStubbing<T>> {
 
     MockitoThat(BDDMyOngoingStubbing<T> stubbing) {
         super(stubbing);

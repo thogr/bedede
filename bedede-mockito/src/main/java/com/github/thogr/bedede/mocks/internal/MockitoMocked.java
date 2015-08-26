@@ -5,7 +5,7 @@ import org.mockito.BDDMockito.Then;
 import com.github.thogr.bedede.mocks.Mocked;
 
 
-public class MockitoMocked<T> extends Mocked<Then<T>> {
+class MockitoMocked<T> extends Mocked<Then<T>> {
     MockitoMocked(Then<T> spec) {
         super(spec);
     }
