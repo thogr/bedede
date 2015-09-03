@@ -12,17 +12,17 @@ import com.github.thogr.bedede.conditions.Expecting;
 
 public class Initial {
 
-    static SystemTested system = new SystemTested();
+    private static SystemTested system = new SystemTested();
 
     @DefaultEntry
-    public static Entry<Initial> DEFAULT_ENTRY = new Entry<Initial> () {
+    public static final Entry<Initial> DEFAULT_ENTRY = new Entry<Initial>() {
         @Override
         protected void perform() {
             system.doSomeThing();
         }
     };
 
-    public static Entry<Initial> OTHER_ENTRY = new Entry<Initial> () {
+    public static final Entry<Initial> OTHER_ENTRY = new Entry<Initial>() {
         @Override
         protected void perform() {
             then(Initial.class);
@@ -31,7 +31,6 @@ public class Initial {
 
     @OnEntry
     protected void onEntry() {
-        System.out.println("on entry");
         assertTrue(system.getState() == 1);
     }
 

@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;
@@ -22,12 +24,15 @@ public class BehaviorExpressionExampleTest {
 
     public static class Incrementable {
         private int value = 0;
+
         public void increment() {
             incrementBy(1);
         }
-        public void incrementBy(int i) {
+
+        public void incrementBy(final int i) {
             value += i;
         }
+
         public int getValue() {
             return value;
         }
@@ -37,11 +42,11 @@ public class BehaviorExpressionExampleTest {
         private String firstName = "";
         private String familyName = "";
 
-        public void setFirstName(String name) {
+        public void setFirstName(final String name) {
             this.firstName = name;
         }
 
-        public void setFamilyName(String name) {
+        public void setFamilyName(final String name) {
             this.familyName = name;
         }
 
@@ -124,7 +129,7 @@ public class BehaviorExpressionExampleTest {
 
     @Test
     public void testName1() throws Exception {
-        given(a(new Runnable(){
+        given(a(new Runnable() {
             @Override
             public void run() {
             }}))
@@ -209,41 +214,41 @@ public class BehaviorExpressionExampleTest {
     @Test
     public void testName10() throws Exception {
         given(a(new StringBuffer())).and(a("me"))
-        .when(transforming((s,a) -> s.append(a)))
+        .when(transforming((s, a) -> s.append(a)))
         .then(the->the.toString(), is("me"));
     }
 
     @Test
     public void testName11() throws Exception {
         given(a(new StringBuffer())).and(a("me"))
-        .when(performing((s,a) -> s.append(a)))
+        .when(performing((s, a) -> s.append(a)))
         .then(the->the.toString(), is("me"));
     }
 
     @Test
     public void testName12() throws Exception {
         given(a(new HashMap<String, Integer>())).and(a("me"))
-        .when(performing((s,a) -> s.put(a, 123)))
+        .when(performing((s, a) -> s.put(a, 123)))
         .then(the->the.get("me"), is(123));
     }
 
     @Test
     public void testName13() throws Exception {
         given(a(new HashSet<String>())).and(a(Arrays.asList("a", "b", "c")))
-        .when(performing((s,l) -> s.addAll(l)))
+        .when(performing((s, l) -> s.addAll(l)))
         .then(it(), contains("a", "b", "c"));
     }
 
     @Test
     public void testName14() throws Exception {
         given(a(new HashSet<String>())).and(a(Arrays.asList("a", "b", "c")))
-        .when(transforming((s,l) -> s.addAll(l)))
+        .when(transforming((s, l) -> s.addAll(l)))
         .then(it(), is(true));
     }
 
     @Test
-    public void testName14_2() throws Exception {
-        BiFunction<HashSet<String>, List<String>, Boolean> func = (s,l) -> s.addAll(l);
+    public void testName15() throws Exception {
+        final BiFunction<HashSet<String>, List<String>, Boolean> func = (s, l) -> s.addAll(l);
 
         given(a(new HashSet<String>())).and(a(Arrays.asList("a", "b", "c")))
         .when(transforming(func::apply))
@@ -251,7 +256,7 @@ public class BehaviorExpressionExampleTest {
     }
 
     @Test
-    public void testName15() throws Exception {
+    public void testName16() throws Exception {
         given(a(new StringBuffer("me")))
         .when(transforming(StringBuffer::toString))
         .then(it(), is("me"));

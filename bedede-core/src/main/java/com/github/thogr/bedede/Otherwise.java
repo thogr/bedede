@@ -15,6 +15,7 @@ public final class Otherwise {
         return new Otherwise(message);
     }
 
+    // CHECKSTYLE:OFF InlineConditionals
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -22,21 +23,27 @@ public final class Otherwise {
         result = prime * result + ((message == null) ? 0 : message.hashCode());
         return result;
     }
+    // CHECKSTYLE:ON
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Otherwise other = (Otherwise) obj;
+        }
+        final Otherwise other = (Otherwise) obj;
         if (message == null) {
-            if (other.message != null)
+            if (other.message != null) {
                 return false;
-        } else if (!message.equals(other.message))
+            }
+        } else if (!message.equals(other.message)) {
             return false;
+        }
         return true;
     }
 }

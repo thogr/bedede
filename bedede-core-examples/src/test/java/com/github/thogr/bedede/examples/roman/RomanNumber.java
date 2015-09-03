@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples.roman;
 
 import java.util.HashMap;
@@ -8,8 +10,8 @@ public class RomanNumber {
     private String value;
     private Map<Character, Integer> digits = new HashMap<>();
 
-    private static String ROMAN_DIGITS = "IVXLCDM";
-    private static int[] DECIMALS = {1, 5, 10, 50, 100, 500, 1000};
+    private static final String ROMAN_DIGITS = "IVXLCDM";
+    private static final int[] DECIMALS = {1, 5, 10, 50, 100, 500, 1000};
 
     public RomanNumber() {
         for (int i = 0; i < DECIMALS.length; i++) {
@@ -17,7 +19,7 @@ public class RomanNumber {
         }
     }
 
-    RomanNumber(String value) {
+    RomanNumber(final String value) {
         this();
         this.value = value;
     }
@@ -26,9 +28,9 @@ public class RomanNumber {
         int result = 0;
         int i = 0;
         do {
-            Integer current = getDigitAt(i);
-            if (i+1 < value.length()) {
-                Integer next = getDigitAt(i+1);
+            final Integer current = getDigitAt(i);
+            if (i + 1 < value.length()) {
+                final Integer next = getDigitAt(i + 1);
                 if (current < next) {
                     result += next - current;
                     i++;
@@ -43,7 +45,7 @@ public class RomanNumber {
         return result;
     }
 
-    private Integer getDigitAt(int i) {
+    private Integer getDigitAt(final int i) {
         return digits.get(value.charAt(i));
     }
 }

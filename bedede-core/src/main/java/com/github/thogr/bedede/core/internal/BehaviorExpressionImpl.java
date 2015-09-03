@@ -15,13 +15,10 @@ abstract class BehaviorExpressionImpl<T>
         super(obj);
     }
 
-    public BehaviorExpressionImpl(Behavior<T> behavior) {
+    public BehaviorExpressionImpl(final Behavior<T> behavior) {
         super(behavior);
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.Transforming)
-     */
     @Override
     public final <S> WhenTransforming<T, S> when(final Transforming<? super T, ? extends S> expr) {
         return whenTransforming(expr);
@@ -29,20 +26,17 @@ abstract class BehaviorExpressionImpl<T>
 
     private <S> WhenTransforming<T, S> whenTransforming(
             final AbstractTransformer<? super T, ? extends S> expr) {
-        S result = expr.getFunction().apply(obj);
-        return new TransformedBehaviorExpressionImpl<T, S>(obj, result);
+        final S result = expr.getFunction().apply(getFocusedObject());
+        return new TransformedBehaviorExpressionImpl<T, S>(getFocusedObject(), result);
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.PerformingExpression)
-     */
     @Override
     public final WhenPerforming<T> when(final Performing<T> expr) {
         return whenPerforming(expr);
     }
 
     private WhenPerforming<T> whenPerforming(final AbstractPerformer<T> expr) {
-        expr.perform(obj);
-        return new WhenBehaviorExpressionImpl<T>(obj, expr);
+        expr.perform(getFocusedObject());
+        return new WhenBehaviorExpressionImpl<T>(getFocusedObject(), expr);
     }
 }

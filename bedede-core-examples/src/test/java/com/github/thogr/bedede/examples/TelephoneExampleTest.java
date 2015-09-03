@@ -18,14 +18,14 @@ import com.github.thogr.bedede.examples.Telephone.Tone;
 public class TelephoneExampleTest extends BehaviorDriven {
 
     // System under test
-    static Telephone phone = new Telephone();
+    private static Telephone phone = new Telephone();
 
     @Before
     public void setUp() {
         phone = new Telephone();
     }
 
-    public static abstract class PhoneState {
+    public abstract static class PhoneState {
         void pressingKeys(final int ... key) {
             for (final int i : key) {
                 phone.pressKey(i);
@@ -40,7 +40,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
         }
     }
 
-    public static abstract class OffHook extends PhoneState {
+    public abstract static class OffHook extends PhoneState {
 
         void hangingUp() {
             phone.hangUp();
@@ -53,7 +53,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
     }
 
     public static class WaitingForFirstDigit extends OffHook {
-        public static Entry<WaitingForFirstDigit> REACHED =
+        public static final Entry<WaitingForFirstDigit> REACHED =
                 entry(WaitingForFirstDigit.class).as().
                     given(OnHook.class)
                     .when(user -> user.pickingUpPhone())
@@ -101,5 +101,4 @@ public class TelephoneExampleTest extends BehaviorDriven {
         .then(Calling.class)
         .then(user -> user.hasDialed("112"));
     }
-
 }

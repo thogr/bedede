@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples.countdown;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;
@@ -39,7 +41,7 @@ public class CounterTest {
         .then(Counter::isStopped);
     }
 
-    private Performing<Counter> decreasing(int n) {
+    private Performing<Counter> decreasing(final int n) {
         return performing(Counter::decrease).times(n);
     }
 
@@ -48,7 +50,7 @@ public class CounterTest {
             given(a(new Counter()));
     }
 
-    private BehaviorExpression<Counter> startedWith(int startval) {
+    private BehaviorExpression<Counter> startedWith(final int startval) {
         return given(a(new Counter())).and(a(startval))
                 .when(performing(Counter::start));
     }

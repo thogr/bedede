@@ -14,7 +14,7 @@ import com.github.thogr.bedede.core.CoreExpressions;
 
 public class BehaviorDrivenTest extends BehaviorDriven {
 
-    static int entryVerified = 0;
+    private static int entryVerified = 0;
 
     @Before
     public void setUp() {
@@ -41,7 +41,6 @@ public class BehaviorDrivenTest extends BehaviorDriven {
         given(Target.class);
         then(entryVerified, is(1));
     }
-
 
     @Test
     public void shouldVerifyEntryOnGivenOnlyOnce() {

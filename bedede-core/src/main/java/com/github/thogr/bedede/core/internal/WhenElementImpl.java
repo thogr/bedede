@@ -16,17 +16,17 @@ public final class WhenElementImpl<E> implements WhenElement<E> {
     }
 
     @Override
-	public WhenElement<E> when(final ActionExpression<E> expression) {
+    public WhenElement<E> when(final ActionExpression<E> expression) {
         return new GivenElementImpl<E>(elem).when(expression);
     }
 
     @Override
-	public ThenExpectingElement<E> then(final Expecting<?> exp) {
+    public ThenExpectingElement<E> then(final Expecting<?> exp) {
         return new ThenExpectingElementImpl<>(exp);
     }
 
     @Override
-	public ThenElement<E> then() {
+    public ThenElement<E> then() {
         return new ThenElementImpl<E>();
     }
 }

@@ -3,9 +3,9 @@ package com.github.thogr.bedede.mocks;
 import com.github.thogr.bedede.core.internal.Wrapped;
 
 
-public abstract class Mocked<T> extends Wrapped<T>{
+public abstract class Mocked<T> extends Wrapped<T> {
 
-    protected Mocked(T spec) {
+    protected Mocked(final T spec) {
         super(spec);
     }
 }

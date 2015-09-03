@@ -22,7 +22,7 @@ public class Telephone {
         return builder.toString();
     }
 
-    String[] phoneNumbers = {
+    private String[] phoneNumbers = {
       "112",
       "555123456",
       "555101010"

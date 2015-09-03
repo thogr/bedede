@@ -1,3 +1,6 @@
+//CHECKSTYLE:OFF FanOutComplexity
+//CHECKSTYLE:OFF ClassDataAbstractionCoupling
+
 package com.github.thogr.bedede.core.internal;
 
 import static com.github.thogr.bedede.core.internal.Wrapped.getWrapped;
@@ -33,7 +36,7 @@ import com.github.thogr.bedede.mocks.That;
 
 public final class CoreExpressionsImpl {
 
-    public CoreExpressionsImpl(CoreExpressions core) {
+    public CoreExpressionsImpl(final CoreExpressions core) {
         if (core == null) {
             throw new NullPointerException();
         }
@@ -52,12 +55,12 @@ public final class CoreExpressionsImpl {
     }
 
     public <T> Assuming<T> given(final Class<T> state) {
-        BehaviorDriver driver = new BehaviorDriver();
+        final BehaviorDriver driver = new BehaviorDriver();
         return driver.given(state);
     }
 
-    public final <T> Assuming<T> given(final Entry<T> entry) {
-        BehaviorDriver driver = new BehaviorDriver();
+    public <T> Assuming<T> given(final Entry<T> entry) {
+        final BehaviorDriver driver = new BehaviorDriver();
         return driver.given(entry);
     }
 
@@ -86,61 +89,62 @@ public final class CoreExpressionsImpl {
         return (it -> it);
     }
 
-    public <T, S> Function<T, S> the(Function<T, S> it) {
+    public <T, S> Function<T, S> the(final Function<T, S> it) {
         return it;
     }
 
-    public <T> Predicate<T> the(Predicate<T> it) {
+    public <T> Predicate<T> the(final Predicate<T> it) {
         return it;
     }
 
-    public <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
+    public <T1, T2, S> BiFunction<T1, T2, S> the(final BiFunction<T1, T2, S> it) {
         return it;
     }
 
-    public <T,S> Transforming<T, S> retrieving(Function<T, S> expr) {
+    public <T, S> Transforming<T, S> retrieving(final Function<T, S> expr) {
         return transforming(expr);
     }
 
-    public <T,S> Transforming<T, S> transforming(Function<T, S> expr) {
+    public <T, S> Transforming<T, S> transforming(final Function<T, S> expr) {
         return new TransformingImpl<>(expr);
     }
 
-    public <T1,T2,S> BiTransformingImpl<T1, T2, S> retrieving(BiFunction<T1, T2, S> expr) {
+    public <T1, T2, S> BiTransformingImpl<T1, T2, S> retrieving(final BiFunction<T1, T2, S> expr) {
         return new BiTransformingImpl<>(expr);
     }
 
-    public <T1,T2,S> BiTransformingImpl<T1, T2, S> transforming(BiFunction<T1, T2, S> expr) {
+    public <T1, T2, S> BiTransformingImpl<T1, T2, S> transforming(
+            final BiFunction<T1, T2, S> expr) {
         return new BiTransformingImpl<>(expr);
     }
 
-    public <T> Then<T> then(Behavior<T> behavior) {
+    public <T> Then<T> then(final Behavior<T> behavior) {
         return new BasicBehaviorExpressionImpl<>(behavior);
     }
 
-    public <T> Then<T> then(T it, Matcher<? super T> is) {
+    public <T> Then<T> then(final T it, final Matcher<? super T> is) {
         Assert.assertThat(it, is);
         return new BasicBehaviorExpressionImpl<>(it);
     }
 
-    public Then<Boolean> then(Boolean expr) {
+    public Then<Boolean> then(final Boolean expr) {
         Assert.assertThat(expr, is(true));
         return new BasicBehaviorExpressionImpl<>(expr);
     }
 
-    public <T> T given(That<T> mocked) {
+    public <T> T given(final That<T> mocked) {
         return getWrapped(mocked);
     }
 
-    public <S> S then(Mocked<S> mocked) {
+    public <S> S then(final Mocked<S> mocked) {
         return getWrapped(mocked);
     }
 
-    public <T> AnObject<T> a(T object) {
+    public <T> AnObject<T> a(final T object) {
         return AnObject.a(object);
     }
 
-    public <T> AnObject<T> an(T object) {
+    public <T> AnObject<T> an(final T object) {
         return a(object);
     }
 

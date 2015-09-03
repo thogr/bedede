@@ -6,7 +6,7 @@ public class AbstractBiPerformer<T1, T2> {
 
     private final BiActionExpression<T1, T2> action;
 
-    protected AbstractBiPerformer(BiActionExpression<T1, T2> expr) {
+    protected AbstractBiPerformer(final BiActionExpression<T1, T2> expr) {
         this.action = expr;
     }
 

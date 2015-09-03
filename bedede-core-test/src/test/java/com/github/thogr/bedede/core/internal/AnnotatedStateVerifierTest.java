@@ -42,7 +42,8 @@ public class AnnotatedStateVerifierTest {
     }
 
     public static class StateWithVoidEntry {
-        public boolean isVerified = false;
+        private boolean isVerified = false;
+
         @OnEntry
         public void simpleEntryMethod() {
             isVerified = true;
@@ -50,8 +51,9 @@ public class AnnotatedStateVerifierTest {
     }
 
     public static class StateWithEntryCondition {
-        public static Expecting<BooleanCondition> condition =
+        private static Expecting<BooleanCondition> condition =
                 CoreExpressions.expecting(true, otherwise("Very, very wrong"));
+
         @OnEntry
         public Expecting<BooleanCondition> entryMethod() {
             return condition;
@@ -110,23 +112,23 @@ public class AnnotatedStateVerifierTest {
         try {
             given(a(verifierFor(IllegalState1.class)))
             .when(performing(the -> the.verify(illegalState1)));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             expected = e;
         }
         then(theMocked(conditionController)).should(never()).verify(any());
         then(cantVerify("IllegalState1"));
     }
 
-    private <T> AnnotatedStateVerifier<T> verifierFor(Class<T> state) {
+    private <T> AnnotatedStateVerifier<T> verifierFor(final Class<T> state) {
         return new AnnotatedStateVerifier<>(state, conditionController);
     }
 
-    private Behavior<?> cantVerify(String name) {
+    private Behavior<?> cantVerify(final String name) {
         return
         then(expected, is(instanceOf(IllegalArgumentException.class)))
         .then(the -> expected.getMessage(),
-                is("Can't verify state "
-                        + "com.github.thogr.bedede.core.internal.AnnotatedStateVerifierTest$"
-                        + name));
+                is("Can't verify state " +
+                        "com.github.thogr.bedede.core.internal.AnnotatedStateVerifierTest$" +
+                        name));
     }
 }

@@ -4,9 +4,9 @@ import java.util.function.BiFunction;
 
 public class AbstractBiTransformer<T1, T2, S> {
 
-    private BiFunction<T1, T2, S> function;
+    private final BiFunction<T1, T2, S> function;
 
-    protected AbstractBiTransformer(BiFunction<T1, T2, S> function) {
+    protected AbstractBiTransformer(final BiFunction<T1, T2, S> function) {
         this.function = function;
     }
 

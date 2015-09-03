@@ -11,30 +11,23 @@ import com.github.thogr.bedede.WhenPerforming;
 final class WhenBehaviorExpressionImpl<T>
     extends BehaviorExpressionImpl<T> implements WhenPerforming<T> {
 
-    private AbstractPerformer<T> expr;
+    private final AbstractPerformer<T> expr;
 
-    WhenBehaviorExpressionImpl(T obj, AbstractPerformer<T> expr) {
+    WhenBehaviorExpressionImpl(final T obj, final AbstractPerformer<T> expr) {
         super(obj);
         this.expr = expr;
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.WhenBehaviorExpression#times(int)
-     */
     @Override
-    public Times<T> times(int n) {
+    public Times<T> times(final int n) {
         for (int i = 1; i < n; i++) {
-            expr.perform(obj);
+            expr.perform(getFocusedObject());
         }
-        return new BasicBehaviorExpressionImpl<T>(obj);
+        return new BasicBehaviorExpressionImpl<T>(getFocusedObject());
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.WhenBehaviorExpression#twice()
-     */
     @Override
     public Times<T> twice() {
         return times(2);
     }
-
 }

@@ -2,9 +2,9 @@ package com.github.thogr.bedede.core.internal;
 
 public abstract class Wrapped<T> {
 
-    private T obj;
+    private final T obj;
 
-    protected Wrapped(T obj) {
+    protected Wrapped(final T obj) {
         this.obj = obj;
     }
 
@@ -12,7 +12,7 @@ public abstract class Wrapped<T> {
         return obj;
     }
 
-    static <T> T getWrapped(Wrapped<T> wrapped) {
+    static <T> T getWrapped(final Wrapped<T> wrapped) {
         return wrapped.getWrapped();
     }
 }

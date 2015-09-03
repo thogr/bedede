@@ -46,7 +46,7 @@ class GivenPrefixImpl implements GivenPrefix {
     }
 
     @Override
-    public <T> Given<T> the(T object) {
+    public <T> Given<T> the(final T object) {
         return a(object);
     }
 }

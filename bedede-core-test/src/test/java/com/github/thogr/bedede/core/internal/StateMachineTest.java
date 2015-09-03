@@ -39,7 +39,7 @@ public class StateMachineTest {
     private ConditionController conditionController;
 
     @Captor
-    ArgumentCaptor<Map<String, String>> parameters;
+    private ArgumentCaptor<Map<String, String>> parameters;
 
     private StateMachineImpl machine;
 
@@ -47,7 +47,7 @@ public class StateMachineTest {
     private State1 state1;
     private State2 state2;
 
-    @InitialState(config= {"param1=123", "param2=foo"})
+    @InitialState(config = {"param1=123", "param2=foo"})
     public static class State0 {
 
     }
@@ -111,7 +111,7 @@ public class StateMachineTest {
         .then(it(), is(sameInstance(state1)));
     }
 
-    private BehaviorExpression<StateMachineImpl> atState(Class<?> state) {
+    private BehaviorExpression<StateMachineImpl> atState(final Class<?> state) {
         return
         given(atNoState())
         .when(performing(the -> the.go(state)));

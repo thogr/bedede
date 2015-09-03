@@ -6,9 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.internal.CoreExpressionsImpl;
 
-class SeleniumExpressionsImplementations {
+final class SeleniumExpressionsImplementations {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    private SeleniumExpressionsImplementations() {}
 
     static WebDriver getWebDriver() {
         return driver.get();

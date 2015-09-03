@@ -6,7 +6,7 @@ import com.github.thogr.bedede.mocks.Mocked;
 
 
 final class MockitoMocked<T> extends Mocked<Then<T>> {
-    MockitoMocked(Then<T> spec) {
+    MockitoMocked(final Then<T> spec) {
         super(spec);
     }
 }

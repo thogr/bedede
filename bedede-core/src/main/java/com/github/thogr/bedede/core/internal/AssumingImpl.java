@@ -11,7 +11,7 @@ class AssumingImpl<T> extends Assuming<T> {
     }
 
     @Override
-    public StateBasedWhen<T> when(ActionExpression<T> action) {
+    public StateBasedWhen<T> when(final ActionExpression<T> action) {
         return whenAction(action);
     }
 }

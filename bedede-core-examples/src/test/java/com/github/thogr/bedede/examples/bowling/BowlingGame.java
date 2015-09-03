@@ -1,10 +1,12 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples.bowling;
 
 public class BowlingGame {
-    int[] rolls = new int[21];
-    int current = 0;
+    private int[] rolls = new int[21];
+    private int current = 0;
 
-    public void roll(int pins) {
+    public void roll(final int pins) {
         rolls[current++] = pins;
     }
 
@@ -26,12 +28,11 @@ public class BowlingGame {
         return total;
     }
 
-    private boolean isStrike(int frameIndex) {
+    private boolean isStrike(final int frameIndex) {
         return rolls[frameIndex] == 10;
     }
 
-    private boolean isSpare(int frameIndex) {
+    private boolean isSpare(final int frameIndex) {
         return rolls[frameIndex] + rolls[frameIndex + 1] == 10;
     }
-
 }

@@ -11,16 +11,13 @@ import org.mockito.MockitoAnnotations;
 
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.ConditionController;
-import com.github.thogr.bedede.core.internal.DefaultInitialStateFactory;
-import com.github.thogr.bedede.core.internal.DefaultStateFactory;
-import com.github.thogr.bedede.core.internal.StateMachineImpl;
 
 public class OnEntryTest {
 
     @Mock
-    ConditionController conditionController;
+    private ConditionController conditionController;
 
-    static boolean guardCalled = false;
+    private static boolean guardCalled = false;
     private StateMachineImpl machine;
 
     public static class State1 {
@@ -30,7 +27,7 @@ public class OnEntryTest {
         }
     }
 
-    public static class State2 extends State1{
+    public static class State2 extends State1 {
     }
 
     public static class State3 extends State2 {
@@ -44,7 +41,9 @@ public class OnEntryTest {
         MockitoAnnotations.initMocks(this);
         guardCalled = false;
         machine =
-                new StateMachineImpl(new DefaultStateFactory(), new DefaultInitialStateFactory(), conditionController);
+                new StateMachineImpl(new DefaultStateFactory(),
+                        new DefaultInitialStateFactory(),
+                        conditionController);
 
     }
 
@@ -53,6 +52,7 @@ public class OnEntryTest {
         machine.go(State1.class);
         assertTrue(guardCalled);
     }
+
     @Test
     public void test4() {
         machine.go(State2.class);

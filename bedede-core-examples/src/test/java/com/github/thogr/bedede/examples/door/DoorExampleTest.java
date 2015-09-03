@@ -21,9 +21,9 @@ public class DoorExampleTest {
     static final Key CORRECT_KEY = new Key(CODE);
     static final Key WRONG_KEY = new Key(999);
 
-    protected static Door door;
+    private static Door door;
 
-    public static abstract class DoorState {
+    public abstract static class DoorState {
 
         void turnsKey(final Key key) {
             door.turnKey(key);
@@ -94,7 +94,6 @@ public class DoorExampleTest {
             return expecting(door.isOpen(), otherwise("Unexpected closed door"));
         }
     }
-
 
     @Test
     public void shouldNotLockWithWrongKey() {

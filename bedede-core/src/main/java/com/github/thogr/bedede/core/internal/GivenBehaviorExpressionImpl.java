@@ -16,40 +16,38 @@ class GivenBehaviorExpressionImpl<T>
         super(obj);
     }
 
-    GivenBehaviorExpressionImpl(BehaviorExpression<T> expr) {
+    GivenBehaviorExpressionImpl(final BehaviorExpression<T> expr) {
         super(expr);
     }
 
-    GivenBehaviorExpressionImpl(Behavior<T> expr) {
+    GivenBehaviorExpressionImpl(final Behavior<T> expr) {
         super(expr);
-    }
-
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.BehaviorExpression#when(com.github.thogr.bedede.ActionExpression)
-     */
-    @Override
-    public final With<T> with(final ActionExpression<? super T> action) {
-        action.perform(obj);
-        return new GivenBehaviorExpressionImpl<T>(obj);
     }
 
     @Override
-    public <S> Given<T> and(Behavior<S> expr) {
+    public final With<T> with(final ActionExpression<? super T> action) {
+        action.perform(getFocusedObject());
+        return new GivenBehaviorExpressionImpl<T>(getFocusedObject());
+    }
+
+    @Override
+    public <S> Given<T> and(final Behavior<S> expr) {
         return given(expr);
     }
 
     @Override
-    public <T2> SecondGiven<T, T2> given(AnObject<T2> other) {
-        return new SecondBehaviorExpressionImpl<T, T2>(obj, Wrapped.getWrapped(other));
+    public <T2> SecondGiven<T, T2> given(final AnObject<T2> other) {
+        return new SecondBehaviorExpressionImpl<T, T2>(
+                getFocusedObject(), Wrapped.getWrapped(other));
     }
 
     @Override
-    public <T2> SecondGiven<T, T2> and(AnObject<T2> other) {
+    public <T2> SecondGiven<T, T2> and(final AnObject<T2> other) {
         return given(other);
     }
 
     @Override
-    public <S> Given<T> given(Behavior<S> expr) {
-        return new GivenBehaviorExpressionImpl<>(obj);
+    public <S> Given<T> given(final Behavior<S> expr) {
+        return new GivenBehaviorExpressionImpl<>(getFocusedObject());
     }
 }

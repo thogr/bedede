@@ -4,7 +4,7 @@ import com.github.thogr.bedede.core.internal.AbstractBiPerformer;
 
 public class BiPerforming<T1, T2> extends AbstractBiPerformer<T1, T2> {
 
-    protected BiPerforming(BiActionExpression<T1, T2> expr) {
+    protected BiPerforming(final BiActionExpression<T1, T2> expr) {
         super(expr);
     }
 

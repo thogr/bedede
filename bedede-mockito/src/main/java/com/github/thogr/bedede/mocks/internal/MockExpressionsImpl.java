@@ -10,17 +10,17 @@ import com.github.thogr.bedede.mocks.That;
 
 public final class MockExpressionsImpl {
 
-    public MockExpressionsImpl(MockExpressions expressions) {
+    public MockExpressionsImpl(final MockExpressions expressions) {
         if (expressions == null) {
             throw new NullPointerException();
         }
     }
 
-    public <T> That<BDDMyOngoingStubbing<T>> that(T methodCall) {
+    public <T> That<BDDMyOngoingStubbing<T>> that(final T methodCall) {
         return new MockitoThat<>(BDDMockito.given(methodCall));
     }
 
-    public <T> Mocked<Then<T>> theMocked(T mock) {
+    public <T> Mocked<Then<T>> theMocked(final T mock) {
         return new MockitoMocked<>(BDDMockito.then(mock));
     }
 }

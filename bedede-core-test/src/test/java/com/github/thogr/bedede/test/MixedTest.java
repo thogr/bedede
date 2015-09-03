@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.test;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;

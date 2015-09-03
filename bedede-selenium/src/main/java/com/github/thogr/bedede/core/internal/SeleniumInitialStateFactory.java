@@ -3,8 +3,6 @@ package com.github.thogr.bedede.core.internal;
 import java.util.Map;
 
 import com.github.thogr.bedede.SeleniumExpressions;
-import com.github.thogr.bedede.core.internal.InitialStateFactory;
-import com.github.thogr.bedede.core.internal.StateFactory;
 
 public final class SeleniumInitialStateFactory implements InitialStateFactory {
 

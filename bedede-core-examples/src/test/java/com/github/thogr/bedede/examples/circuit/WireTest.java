@@ -3,7 +3,7 @@ package com.github.thogr.bedede.examples.circuit;
 import static com.github.thogr.bedede.core.CoreExpressions.a;
 import static com.github.thogr.bedede.core.CoreExpressions.given;
 import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static org.mockito.BDDMockito.then;
+import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 
@@ -24,7 +24,7 @@ public class WireTest {
     public void shouldFireStateChangedWhenAddingListener() {
         given(a(new Wire()))
         .when(performing(it -> it.addChangeListener(listener)))
-        ;then(listener).should().stateChanged(any());
+        .then(theMocked(listener)).should().stateChanged(any());
     }
 
     @Test
@@ -33,6 +33,6 @@ public class WireTest {
             it.addChangeListener(listener);
         })
         .when(performing(the -> the.setSignal(true)))
-        ;then(listener).should(times(2)).stateChanged(any());
+        .then(theMocked(listener)).should(times(2)).stateChanged(any());
     }
 }

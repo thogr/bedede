@@ -20,7 +20,8 @@ public final class BehaviorController {
     BehaviorController(final StateFactory factory,
             final InitialStateFactory initialStateFactory,
             final ConditionController conditionController) {
-        this(new StateMachineImpl(factory, initialStateFactory, conditionController), conditionController);
+        this(new StateMachineImpl(
+                factory, initialStateFactory, conditionController), conditionController);
     }
 
     BehaviorController(final Framework framework, final StateFactory factory) {
@@ -78,7 +79,8 @@ public final class BehaviorController {
         return new ThenExpectingImpl<>(state, this);
     }
 
-    public <S, T> ThenExpecting<S> then(final Class<S> state, final ExpectingExpression <S, T> expression) {
+    public <S, T> ThenExpecting<S> then(
+            final Class<S> state, final ExpectingExpression <S, T> expression) {
         expect(expression.apply(go(state)));
         return new ThenExpectingImpl<>(state, this);
     }

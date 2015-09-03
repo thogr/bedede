@@ -13,11 +13,11 @@ public final class MockExpressions {
     private MockExpressions() {
     }
 
-    public static <T> That<BDDMyOngoingStubbing<T>> that(T methodCall) {
+    public static <T> That<BDDMyOngoingStubbing<T>> that(final T methodCall) {
         return impl.that(methodCall);
     }
 
-    public static <T> Mocked<BDDMockito.Then<T>> theMocked(T mock) {
+    public static <T> Mocked<BDDMockito.Then<T>> theMocked(final T mock) {
         return impl.theMocked(mock);
     }
 }

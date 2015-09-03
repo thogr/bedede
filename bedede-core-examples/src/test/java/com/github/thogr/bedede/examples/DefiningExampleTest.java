@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples;
 
 import static com.github.thogr.bedede.core.CoreExpressions.entry;
@@ -15,6 +17,7 @@ public class DefiningExampleTest extends BehaviorDriven {
     public static class Initial {
         void prepares(final int i) {
         }
+
         void moves() {
         }
     }
@@ -29,7 +32,7 @@ public class DefiningExampleTest extends BehaviorDriven {
         }
 
         @DefaultEntry
-        public static Entry<Moved> REACHED = entry(Moved.class).as().
+        public static final Entry<Moved> REACHED = entry(Moved.class).as().
                 given(Initial.class)
                 .when(it -> it.moves())
                 .then(Moved.class);

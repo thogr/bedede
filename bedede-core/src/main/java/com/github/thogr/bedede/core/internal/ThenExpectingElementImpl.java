@@ -10,19 +10,13 @@ public final class ThenExpectingElementImpl<E> implements ThenExpectingElement<E
         GivenElementImpl.<E>given(exp);
     }
 
-    /* (non-Javadoc)
-	 * @see com.github.thogr.bedede.ThenExpectingElement#then(com.github.thogr.bedede.conditions.Expecting)
-	 */
     @Override
-	public ThenExpectingElement<E> then(final Expecting<?> exp) {
+    public ThenExpectingElement<E> then(final Expecting<?> exp) {
         return new ThenExpectingElementImpl<>(exp);
     }
 
-    /* (non-Javadoc)
-	 * @see com.github.thogr.bedede.ThenExpectingElement#then()
-	 */
     @Override
-	public ThenElement<E> then() {
+    public ThenElement<E> then() {
         return new ThenElementImpl<E>();
     }
 }

@@ -1,3 +1,6 @@
+// CHECKSTYLE:OFF FileLength
+// CHECKSTYLE:OFF FanOutComplexity
+
 package com.github.thogr.bedede;
 
 import java.util.function.BiFunction;
@@ -5,7 +8,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
-import org.junit.Assert;
 import org.mockito.BDDMockito;
 import org.mockito.BDDMockito.BDDMyOngoingStubbing;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +20,7 @@ import com.github.thogr.bedede.core.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.mocks.MockExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
+
 
 public abstract class Expressions {
 
@@ -99,7 +102,7 @@ public abstract class Expressions {
         return CoreExpressions.given(expr);
     }
 
-    public static <T> T given(That<T> that) {
+    public static <T> T given(final That<T> that) {
         return CoreExpressions.given(that);
     }
 
@@ -157,7 +160,7 @@ public abstract class Expressions {
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T,S> Transforming<T, S> retrieving(Function<T, S> expr) {
+    public static <T, S> Transforming<T, S> retrieving(final Function<T, S> expr) {
         return CoreExpressions.retrieving(expr);
     }
 
@@ -169,7 +172,7 @@ public abstract class Expressions {
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T,S> Transforming<T, S> transforming(Function<T, S> expr) {
+    public static <T, S> Transforming<T, S> transforming(final Function<T, S> expr) {
         return CoreExpressions.transforming(expr);
     }
 
@@ -184,8 +187,8 @@ public abstract class Expressions {
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T1,T2,S> BiTransforming<T1, T2, S>
-        retrieving(BiFunction<T1, T2, S> expr) {
+    public static <T1, T2, S> BiTransforming<T1, T2, S>
+        retrieving(final BiFunction<T1, T2, S> expr) {
         return CoreExpressions.retrieving(expr);
     }
 
@@ -200,8 +203,8 @@ public abstract class Expressions {
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T1,T2,S> BiTransforming<T1, T2, S>
-        transforming(BiFunction<T1, T2, S> expr) {
+    public static <T1, T2, S> BiTransforming<T1, T2, S>
+        transforming(final BiFunction<T1, T2, S> expr) {
         return CoreExpressions.transforming(expr);
     }
 
@@ -215,7 +218,7 @@ public abstract class Expressions {
      * @param <S> the type of the result of the function
      * @return the function
      */
-    public static <T, S> Function<T, S> the(Function<T, S> it) {
+    public static <T, S> Function<T, S> the(final Function<T, S> it) {
         return CoreExpressions.the(it);
     }
 
@@ -228,7 +231,7 @@ public abstract class Expressions {
      * @param <T> the type of the input to the predicate, i.e. the object in focus
      * @return the predicate
      */
-    public static <T> Predicate<T> the(Predicate<T> it) {
+    public static <T> Predicate<T> the(final Predicate<T> it) {
         return CoreExpressions.the(it);
     }
 
@@ -243,15 +246,15 @@ public abstract class Expressions {
      * @param <S> the type of the result of the function
      * @return the function
      */
-    public static <T1, T2, S> BiFunction<T1, T2, S> the(BiFunction<T1, T2, S> it) {
+    public static <T1, T2, S> BiFunction<T1, T2, S> the(final BiFunction<T1, T2, S> it) {
         return CoreExpressions.the(it);
     }
 
-    public static <T> AnObject<T> a(T object) {
+    public static <T> AnObject<T> a(final T object) {
         return CoreExpressions.a(object);
     }
 
-    public static <T> AnObject<T> an(T object) {
+    public static <T> AnObject<T> an(final T object) {
         return CoreExpressions.a(object);
     }
 
@@ -263,11 +266,11 @@ public abstract class Expressions {
      * @param is the matcher
      * @return the behavior
      */
-    public static <T> Then<T> then(T it, Matcher<? super T> is) {
+    public static <T> Then<T> then(final T it, final Matcher<? super T> is) {
         return CoreExpressions.then(it, is);
     }
 
-    public static Then<Boolean> then(boolean expr) {
+    public static Then<Boolean> then(final boolean expr) {
         return CoreExpressions.then(expr);
     }
 
@@ -277,22 +280,22 @@ public abstract class Expressions {
      * @param behavior
      * @return
      */
-    public static <T> Then<T> then(Behavior<T> behavior) {
+    public static <T> Then<T> then(final Behavior<T> behavior) {
         return CoreExpressions.then(behavior);
     }
 
-    public static <S> S then(Mocked<S> mocked) {
+    public static <S> S then(final Mocked<S> mocked) {
         return CoreExpressions.then(mocked);
     }
 
     // Mocks
     //-----------------------------------------------------------------
 
-    public static <T> That<BDDMyOngoingStubbing<T>> that(T methodCall) {
+    public static <T> That<BDDMyOngoingStubbing<T>> that(final T methodCall) {
         return MockExpressions.that(methodCall);
     }
 
-    public static <T> Mocked<BDDMockito.Then<T>> theMocked(T mock) {
+    public static <T> Mocked<BDDMockito.Then<T>> theMocked(final T mock) {
         return MockExpressions.theMocked(mock);
     }
 

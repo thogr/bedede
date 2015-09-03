@@ -3,18 +3,18 @@ package com.github.thogr.bedede.core.internal;
 
 public abstract class StateBehavior<T> {
 
-    private final ThreadLocal<BehaviorController> controller = new ThreadLocal<>();
+    private final ThreadLocal<BehaviorController> behaviorController = new ThreadLocal<>();
 
     protected abstract void perform();
 
     final void perform(final BehaviorController controller) {
-        this.controller.set(controller);
+        this.behaviorController.set(controller);
         perform();
     }
 
     final BehaviorController getController() {
-        if (controller.get() != null) {
-            return controller.get();
+        if (behaviorController.get() != null) {
+            return behaviorController.get();
         }
         throw new IllegalAccessError("Illegal call to perform()");
     }

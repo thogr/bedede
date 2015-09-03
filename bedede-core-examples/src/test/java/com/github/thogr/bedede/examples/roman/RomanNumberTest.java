@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples.roman;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;
@@ -5,6 +7,7 @@ import static com.github.thogr.bedede.core.CoreExpressions.given;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
+
 public class RomanNumberTest {
 
     @Test

@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.examples;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;
@@ -19,9 +21,9 @@ import com.github.thogr.bedede.examples.BehaviorExpressionExampleTest.Incrementa
 public class MockingExampleTest {
 
     static class Counter {
-        Incrementable inc;
+        private Incrementable inc;
 
-        public Counter(Incrementable inc) {
+        public Counter(final Incrementable inc) {
             this.inc = inc;
         }
 
@@ -32,7 +34,7 @@ public class MockingExampleTest {
     }
 
     @Mock
-    Incrementable mock;
+    private Incrementable mock;
 
     @Test
     public void shouldMock() throws Exception {

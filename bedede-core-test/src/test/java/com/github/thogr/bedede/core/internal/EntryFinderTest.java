@@ -23,7 +23,7 @@ public class EntryFinderTest {
     }
 
     public static class StateWithOneEntry {
-        public static Entry<StateWithOneEntry> REACHED =
+        public static final Entry<StateWithOneEntry> REACHED =
                 new Entry<StateWithOneEntry>() {
             @Override
             protected void perform() {
@@ -44,7 +44,7 @@ public class EntryFinderTest {
     }
 
     public static class StateWithNoDefaultEntry {
-        public static Entry<StateWithNoDefaultEntry> REACHED =
+        public static final Entry<StateWithNoDefaultEntry> REACHED =
                 new Entry<StateWithNoDefaultEntry>() {
             @Override
             protected void perform() {
@@ -52,7 +52,7 @@ public class EntryFinderTest {
             }
         };
 
-        public static Entry<StateWithNoDefaultEntry> REACHED2 =
+        public static final Entry<StateWithNoDefaultEntry> REACHED2 =
                 new Entry<StateWithNoDefaultEntry>() {
             @Override
             protected void perform() {
@@ -62,7 +62,7 @@ public class EntryFinderTest {
     }
 
     public static class StateWithWrongEntryType {
-        public static Entry<Integer> WRONG_TYPE_ENTRY =
+        public static final Entry<Integer> WRONG_TYPE_ENTRY =
                 new Entry<Integer>() {
             @Override
             protected void perform() {
@@ -73,7 +73,7 @@ public class EntryFinderTest {
 
     public static class StateWithFirstAnnotatedDefaultEntry {
         @DefaultEntry
-        public static Entry<StateWithFirstAnnotatedDefaultEntry> DEFAULT =
+        public static final Entry<StateWithFirstAnnotatedDefaultEntry> DEFAULT =
                 new Entry<StateWithFirstAnnotatedDefaultEntry>() {
             @Override
             protected void perform() {
@@ -81,7 +81,7 @@ public class EntryFinderTest {
             }
         };
 
-        public static Entry<StateWithFirstAnnotatedDefaultEntry> OTHER =
+        public static final Entry<StateWithFirstAnnotatedDefaultEntry> OTHER =
                 new Entry<StateWithFirstAnnotatedDefaultEntry>() {
             @Override
             protected void perform() {
@@ -91,7 +91,7 @@ public class EntryFinderTest {
     }
 
     public static class StateWithLastAnnotatedDefaultEntry {
-        public static Entry<StateWithLastAnnotatedDefaultEntry> OTHER =
+        public static final Entry<StateWithLastAnnotatedDefaultEntry> OTHER =
                 new Entry<StateWithLastAnnotatedDefaultEntry>() {
             @Override
             protected void perform() {
@@ -100,7 +100,7 @@ public class EntryFinderTest {
         };
 
         @DefaultEntry
-        public static Entry<StateWithLastAnnotatedDefaultEntry> DEFAULT =
+        public static final Entry<StateWithLastAnnotatedDefaultEntry> DEFAULT =
                 new Entry<StateWithLastAnnotatedDefaultEntry>() {
             @Override
             protected void perform() {
@@ -109,18 +109,18 @@ public class EntryFinderTest {
         };
     }
 
-
     public static class StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry {
-        public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry> other(final int i) {
+        public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>
+        other(final int i) {
             return new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {
                 @Override
                 protected void perform() {}
             };
-        };
+        }
 
         @DefaultEntry
-        public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry> DEFAULT =
-                new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {
+        public static final Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>
+        DEFAULT =  new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {
             @Override
             protected void perform() {}
         };
@@ -141,34 +141,37 @@ public class EntryFinderTest {
         assertNotNull(getDefaultEntry(StateWithOneEntryMethod.class));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowWhenNoEntry() throws Exception {
         getDefaultEntry(StateWithNoEntry.class);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowWhenNoDefaultEntry() throws Exception {
         getDefaultEntry(StateWithNoDefaultEntry.class);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowWhenWrongEntryType() throws Exception {
         getDefaultEntry(StateWithWrongEntryType.class);
     }
 
     @Test
     public void shouldFindEntryWhenFirstAnnotatedDefaultEntry() {
-        assertThat(getDefaultEntry(StateWithFirstAnnotatedDefaultEntry.class), is(StateWithFirstAnnotatedDefaultEntry.DEFAULT));
+        assertThat(getDefaultEntry(StateWithFirstAnnotatedDefaultEntry.class),
+                is(StateWithFirstAnnotatedDefaultEntry.DEFAULT));
     }
 
     @Test
     public void shouldFindEntryWhenLastAnnotatedDefaultEntry() {
-        assertThat(getDefaultEntry(StateWithLastAnnotatedDefaultEntry.class), is(StateWithLastAnnotatedDefaultEntry.DEFAULT));
+        assertThat(getDefaultEntry(StateWithLastAnnotatedDefaultEntry.class),
+                is(StateWithLastAnnotatedDefaultEntry.DEFAULT));
     }
 
     @Test
     public void shouldFindEntryWhenLastAnnotatedDefaultEntryAndFirstIsParametrized() {
-        assertThat(getDefaultEntry(StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry.class),
+        assertThat(
+                getDefaultEntry(StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry.class),
                 is(StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry.DEFAULT));
     }
 

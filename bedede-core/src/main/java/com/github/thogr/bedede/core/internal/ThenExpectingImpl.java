@@ -12,11 +12,8 @@ public class ThenExpectingImpl<T> implements ThenExpecting<T> {
         this.controller.set(controller);
     }
 
-    /* (non-Javadoc)
-	 * @see com.github.thogr.bedede.ThenExpecting#then(com.github.thogr.bedede.conditions.ExpectingExpression)
-	 */
     @Override
-	public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> epression) {
+    public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> epression) {
         return controller.get().then(state, epression);
     }
 }

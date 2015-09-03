@@ -2,6 +2,7 @@
 
 allprojects {
     apply plugin: 'eclipse'
+    apply plugin: 'checkstyle'
 }
 
 subprojects {
@@ -10,10 +11,15 @@ subprojects {
     apply from: rootProject.file('version.gradle')
     sourceCompatibility = 1.8
     group = 'com.github.thogr.bedede'
+
+    checkstyle {
+        toolVersion = "6.9"
+        config = rootProject.checkstyle.config
+    }
 }
 
 wrapper {
-    gradleVersion = '2.4'
+    gradleVersion = '2.7-rc-1'
 
     def jvmOpts = "-Xmx1024m"
     inputs.property("jvmOpts", jvmOpts)

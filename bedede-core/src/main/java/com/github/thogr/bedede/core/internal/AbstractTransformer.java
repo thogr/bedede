@@ -4,13 +4,13 @@ import java.util.function.Function;
 
 public abstract class AbstractTransformer<T, S> {
 
-    private Function<T, S> function;
+    private final Function<T, S> function;
 
-    protected AbstractTransformer(Function<T,S> function) {
+    protected AbstractTransformer(final Function<T, S> function) {
         this.function = function;
     }
 
-    Function<T,S> getFunction() {
+    Function<T, S> getFunction() {
         return function;
     }
 

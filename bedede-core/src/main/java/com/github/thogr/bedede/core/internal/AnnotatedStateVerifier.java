@@ -13,8 +13,8 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
     private final Method onEntryMethod;
     private final ConditionController conditionController;
 
-    AnnotatedStateVerifier(final Class<T> stateClass, final ConditionController conditionController) {
-        this.conditionController = conditionController;
+    AnnotatedStateVerifier(final Class<T> stateClass, final ConditionController controller) {
+        this.conditionController = controller;
         onEntryMethod = findOnEntryMethod(stateClass);
     }
 
@@ -46,7 +46,7 @@ class AnnotatedStateVerifier<T> implements StateVerifier<T> {
         } catch (final InvocationTargetException e) {
             final Throwable cause = e.getCause();
             if (cause instanceof AssertionError) {
-                throw (AssertionError)cause;
+                throw (AssertionError) cause;
             }
             verifyFailed(state, e);
         }

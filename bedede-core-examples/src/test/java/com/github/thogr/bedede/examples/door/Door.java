@@ -16,9 +16,9 @@ public class Door {
         }
     }
 
-	private boolean isCorrectKey(final Key key) {
-		return code == key.getCode();
-	}
+    private boolean isCorrectKey(final Key key) {
+        return code == key.getCode();
+    }
 
     public boolean isLocked() {
         return locked;

@@ -8,8 +8,8 @@ public class Counter {
         return seconds == 0;
     }
 
-    public void start(int seconds) {
-        this.seconds = seconds;
+    public void start(final int secs) {
+        this.seconds = secs;
     }
 
     public void decrease() {

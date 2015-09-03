@@ -7,7 +7,7 @@ public class AbstractStateControlled<S> {
     private final ThreadLocal<BehaviorController> controller = new ThreadLocal<>();
     private final Class<S> state;
 
-    protected AbstractStateControlled(Class<S> state, final BehaviorController controller) {
+     protected AbstractStateControlled(final Class<S> state, final BehaviorController controller) {
         this.state = state;
         this.controller.set(controller);
     }

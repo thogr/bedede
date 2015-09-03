@@ -5,7 +5,7 @@ import com.github.thogr.bedede.core.internal.BehaviorController;
 
 public abstract class Assuming<T> extends AbstractAssumedState<T> {
 
-    protected Assuming(Class<T> state, BehaviorController controller) {
+    protected Assuming(final Class<T> state, final BehaviorController controller) {
         super(state, controller);
     }
 

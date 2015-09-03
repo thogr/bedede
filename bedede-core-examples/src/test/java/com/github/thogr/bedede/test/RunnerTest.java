@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF MagicNumber
+
 package com.github.thogr.bedede.test;
 
 import static com.github.thogr.bedede.core.CoreExpressions.expecting;
@@ -16,7 +18,7 @@ import com.github.thogr.bedede.conditions.Expecting;
 
 public class RunnerTest {
 
-    static int state = 0;
+    private static int state = 0;
 
     @BeforeClass
     public static void init() {
@@ -25,7 +27,7 @@ public class RunnerTest {
 
     @InitialState
     public static class State1 {
-        public static Entry<State1> REACHED = new Entry<State1>() {
+        public static final Entry<State1> REACHED = new Entry<State1>() {
             @Override
             protected void perform() {
                 state = 1;
@@ -49,9 +51,9 @@ public class RunnerTest {
 
     public static class State2 {
 
-        int internal = 0;
+        private int internal = 0;
 
-        public static Entry<State2> REACHED = new Entry<State2>() {
+        public static final Entry<State2> REACHED = new Entry<State2>() {
             @Override
             protected void perform() {
                 given(State1.class)
@@ -76,12 +78,11 @@ public class RunnerTest {
 
     }
 
-    BehaviorRunner runner;
+    private BehaviorRunner runner;
 
     @After
     public void runTest() {
         runner.run();
-        //new Thread(runner).start();
     }
 
     @Test

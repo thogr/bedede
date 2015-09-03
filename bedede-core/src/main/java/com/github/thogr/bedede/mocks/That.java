@@ -4,7 +4,7 @@ import com.github.thogr.bedede.core.internal.Wrapped;
 
 public abstract class That<T> extends Wrapped<T> {
 
-    protected That(T stubbing) {
+    protected That(final T stubbing) {
         super(stubbing);
     }
 }

@@ -11,7 +11,7 @@ public class Wire {
     private boolean signal;
     private List<ChangeListener> listeners = new ArrayList<>();
 
-    public void setSignal(boolean signal) {
+    public void setSignal(final boolean signal) {
         this.signal = signal;
         fireStateChanged();
     }
@@ -26,7 +26,7 @@ public class Wire {
         return signal;
     }
 
-    public void addChangeListener(ChangeListener listener) {
+    public void addChangeListener(final ChangeListener listener) {
         listeners.add(listener);
         fireStateChanged();
     }

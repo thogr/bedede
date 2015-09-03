@@ -9,7 +9,7 @@ import com.github.thogr.bedede.annotations.OnEntry;
 
 public class TransitionTest extends BehaviorDriven {
 
-    static SystemTested system = new SystemTested();
+    private static SystemTested system = new SystemTested();
 
     @InitialState
     public static class State1 {

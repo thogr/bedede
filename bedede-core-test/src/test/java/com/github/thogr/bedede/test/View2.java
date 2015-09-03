@@ -13,4 +13,6 @@ public class View2 {
             then(View2.class);
         }
     };
+
+    public void doesSomething() {}
 }

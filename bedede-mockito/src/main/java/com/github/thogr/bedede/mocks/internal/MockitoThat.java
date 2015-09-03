@@ -6,7 +6,7 @@ import com.github.thogr.bedede.mocks.That;
 
 final class MockitoThat<T> extends That<BDDMyOngoingStubbing<T>> {
 
-    MockitoThat(BDDMyOngoingStubbing<T> stubbing) {
+    MockitoThat(final BDDMyOngoingStubbing<T> stubbing) {
         super(stubbing);
     }
 }

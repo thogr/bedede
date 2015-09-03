@@ -43,27 +43,27 @@ public class BehaviorControllerTest {
         private Class<T> state;
         private BehaviorController ctrl;
 
-        public IsAssuming(Class<T> state, BehaviorController ctrl) {
+        public IsAssuming(final Class<T> state, final BehaviorController ctrl) {
             this.state = state;
             this.ctrl = ctrl;
         }
 
         @Override
-        public void describeTo(Description description) {
+        public void describeTo(final Description description) {
             description.appendText("is assuming");
         }
 
         @Override
-        protected boolean matchesSafely(Assuming<T> item) {
+        protected boolean matchesSafely(final Assuming<T> item) {
             return matchesItem(item);
         }
 
-        private boolean matchesItem(AbstractAssumedState<T> item) {
+        private boolean matchesItem(final AbstractAssumedState<T> item) {
             return item.getState() == state && item.getController() == ctrl;
         }
-    };
+    }
 
-    static <T> IsAssuming<T> assuming(Class<T> state, BehaviorController ctrl) {
+    static <T> IsAssuming<T> assuming(final Class<T> state, final BehaviorController ctrl) {
         return new IsAssuming<T>(state, ctrl);
     }
 }

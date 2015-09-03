@@ -1,11 +1,11 @@
 package com.github.thogr.bedede.examples.poker;
 
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card> {
 
     private Rank rank;
     private Suite suite;
 
-    public Card(Rank rank, Suite suite) {
+    public Card(final Rank rank, final Suite suite) {
         this.rank = rank;
         this.suite = suite;
     }
@@ -16,17 +16,20 @@ public class Card implements Comparable<Card>{
 
         private String str;
 
-        Rank(String str) {
+        Rank(final String str) {
             this.str = str;
         }
 
-        static Rank valueFrom(String str) {
-            for (Rank r : Rank.values()) {
-                if (r.str.equals(str)) return r;
+        static Rank valueFrom(final String str) {
+            for (final Rank r : Rank.values()) {
+                if (r.str.equals(str)) {
+                    return r;
+                }
             }
             throw new IllegalArgumentException("Unknown Rank " + str);
         }
 
+        @Override
         public String toString() {
             return str;
         }
@@ -37,23 +40,26 @@ public class Card implements Comparable<Card>{
 
         private String str;
 
-        Suite(String str) {
+        Suite(final String str) {
             this.str = str;
         }
 
-        static Suite valueFrom(String str) {
-            for (Suite r : Suite.values()) {
-                if (r.str.equals(str)) return r;
+        static Suite valueFrom(final String str) {
+            for (final Suite r : Suite.values()) {
+                if (r.str.equals(str)) {
+                    return r;
+                }
             }
             throw new IllegalArgumentException("Unknown Suite " + str);
         }
 
+        @Override
         public String toString() {
             return str;
         }
     }
 
-    public Card(String code) {
+    public Card(final String code) {
         if (!code.startsWith("10")) {
             rank = Rank.valueFrom("" + code.charAt(0));
             suite = Suite.valueFrom("" + code.charAt(1));
@@ -64,11 +70,12 @@ public class Card implements Comparable<Card>{
     }
 
     @Override
-    public int compareTo(Card other) {
-        Card otherCard = (Card) other;
+    public int compareTo(final Card other) {
+        final Card otherCard = other;
         return rank.compareTo(otherCard.rank);
     }
 
+    @Override
     public String toString() {
         return rank.toString() + suite.toString();
     }

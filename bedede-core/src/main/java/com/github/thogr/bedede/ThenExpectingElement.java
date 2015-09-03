@@ -4,8 +4,7 @@ import com.github.thogr.bedede.conditions.Expecting;
 
 public interface ThenExpectingElement<E> {
 
-	ThenExpectingElement<E> then(Expecting<?> exp);
+    ThenExpectingElement<E> then(Expecting<?> exp);
 
-	ThenElement<E> then();
-
+    ThenElement<E> then();
 }

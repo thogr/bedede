@@ -37,7 +37,7 @@ final class TypeArguments<T> {
     }
 
     private Type getGenericSuperClass(final Type cClass) {
-        if (cClass instanceof ParameterizedType){
+        if (cClass instanceof ParameterizedType) {
             final ParameterizedType parameterizedType = (ParameterizedType) cClass;
             final Class<?> raw = (Class<?>) parameterizedType.getRawType();
             return raw.getGenericSuperclass();

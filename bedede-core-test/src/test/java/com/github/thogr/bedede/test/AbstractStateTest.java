@@ -14,12 +14,12 @@ import com.github.thogr.bedede.conditions.Expecting;
 
 public class AbstractStateTest extends BehaviorDriven {
 
-    static int state = 0;
+    private static int state = 0;
 
     public static class State1 {
-        static boolean guardCalled;
+        private static boolean guardCalled;
 
-        public static Entry<State1> REACHED = new Entry<State1>() {
+        public static final Entry<State1> REACHED = new Entry<State1>() {
             @Override
             protected void perform() {
                 state = 1;
@@ -35,9 +35,9 @@ public class AbstractStateTest extends BehaviorDriven {
     }
 
     public static class State2 extends AbstractState<BooleanCondition> {
-        static boolean guardCalled;
+        private static boolean guardCalled;
 
-        public static Entry<State2> REACHED = new Entry<State2>() {
+        public static final Entry<State2> REACHED = new Entry<State2>() {
             @Override
             protected void perform() {
                 state = 2;

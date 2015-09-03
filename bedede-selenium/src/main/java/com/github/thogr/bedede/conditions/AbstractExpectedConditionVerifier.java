@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.thogr.bedede.SeleniumExpressions;
 import com.github.thogr.bedede.Otherwise;
+import com.github.thogr.bedede.SeleniumExpressions;
 
 public abstract class AbstractExpectedConditionVerifier<T>
     implements ConditionVerifier<ExpectedCondition<T>> {
@@ -22,7 +22,7 @@ public abstract class AbstractExpectedConditionVerifier<T>
 
         final WebDriver driver = SeleniumExpressions.getWebDriver();
         final WebDriverWait wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-        return wait.until (new ExpectedCondition<T>() {
+        return wait.until(new ExpectedCondition<T>() {
 
             @Override
             public T apply(final WebDriver input) {
@@ -32,7 +32,7 @@ public abstract class AbstractExpectedConditionVerifier<T>
             @Override
             public String toString() {
                 return otherwise.getMessage();
-            };
+            }
         });
     }
 }

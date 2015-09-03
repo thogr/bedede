@@ -15,25 +15,27 @@ import com.github.thogr.bedede.annotations.InitialState;
 
 final class EntryFinder {
 
-    private static final String NO_DEFAULT_ENTRY = "The class %s has no default Entry, nor is it"
-            + " annotated @"
-            + InitialState.class.getSimpleName();
+    private static final String NO_DEFAULT_ENTRY = "The class %s has no default Entry, nor is it" +
+            " annotated @" +
+            InitialState.class.getSimpleName();
 
     private EntryFinder() {
 
     }
 
+    // CHECKSTYLE:OFF MethodLength
     static <T> AbstractInternalEntry<T> getDefaultEntry(final Class<T> state) {
-        AbstractInternalEntry<T> defaultEntry = null;
         Member defaultEntryField = null;
         final List<Member> members = getMembers(state);
+        AbstractInternalEntry<T> defaultEntry = null;
         for (final Member f : members) {
             if (isPublicStatic(f) && isEntry(f)) {
                 if (isAnnotatedDefault(f)) {
                     defaultEntry = theOnlyDefaultEntry(state, defaultEntry, defaultEntryField, f);
                     defaultEntryField = f;
                 } else {
-                    final AbstractInternalEntry<T> entry = theOnlyEntry(state, defaultEntry, defaultEntryField, f);
+                    final AbstractInternalEntry<T> entry =
+                            theOnlyEntry(state, defaultEntry, defaultEntryField, f);
                     if (entry != defaultEntry) {
                         defaultEntry = entry;
                         defaultEntryField = f;
@@ -44,16 +46,17 @@ final class EntryFinder {
         if (defaultEntry != null) {
             return defaultEntry;
         } else if (defaultEntryField == null) {
-            if (state.isAnnotationPresent(InitialState.class)){
+            if (state.isAnnotationPresent(InitialState.class)) {
                 return null;
             }
         }
         throw new IllegalArgumentException(String.format(NO_DEFAULT_ENTRY, state.toString()));
     }
+    //CHECKSTYLE:ON
 
     private static boolean isEntry(final Member f) {
         if (f instanceof Field) {
-            return Entry.class.isAssignableFrom(((Field)f).getType());
+            return Entry.class.isAssignableFrom(((Field) f).getType());
         } else if (f instanceof Method) {
             final Method method = (Method) f;
             if (method.getParameterTypes().length > 0) {
@@ -111,9 +114,9 @@ final class EntryFinder {
     private static <T> Entry<T> getValue(final Member f)
             throws IllegalAccessException, InvocationTargetException {
         if (f instanceof Field) {
-            return (Entry<T>) ((Field)f).get(null);
+            return (Entry<T>) ((Field) f).get(null);
         } else {
-            final Method method = (Method)f;
+            final Method method = (Method) f;
             if (method.getParameterTypes().length == 0) {
                 return (Entry<T>) method.invoke(null);
             } else {
@@ -145,7 +148,7 @@ final class EntryFinder {
     }
 
     private static boolean isAnnotatedDefault(final Member member) {
-        return ((AnnotatedElement)member).isAnnotationPresent(DefaultEntry.class);
+        return ((AnnotatedElement) member).isAnnotationPresent(DefaultEntry.class);
     }
 
     private static String errorWrongType(final Class<?> type) {

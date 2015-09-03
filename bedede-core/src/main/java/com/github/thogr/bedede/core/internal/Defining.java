@@ -6,8 +6,7 @@ import java.util.List;
 import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.Entry;
 
-
-public class Defining<T> {
+public final class Defining<T> {
 
     private final Class<T> target;
 
@@ -15,14 +14,15 @@ public class Defining<T> {
         this.target = state;
     }
 
+    // CHECKSTYLE:OFF MethodLength
     private DefiningEntryAs<T> entryAs() {
         return new DefiningEntryAs<T>() {
 
             @Override
             public <S> DefiningAssuming<T, S> given(final Class<S> state) {
                 return new DefiningAssuming<T, S>() {
-                    List<ActionExpression<S>> actions = new ArrayList<>();
-                    final Entry<T> entry = new Entry<T>(target) {
+                    private final List<ActionExpression<S>> actions = new ArrayList<>();
+                    private final Entry<T> entry = new Entry<T>(target) {
 
                         @Override
                         protected void perform() {
@@ -34,9 +34,9 @@ public class Defining<T> {
                         }
                     };
 
-                    DefiningWhen<T, S> self = new DefiningWhen<T, S>() {
+                    private final DefiningWhen<T, S> self = new DefiningWhen<T, S>() {
                         @Override
-                        public Entry<T> then(final Class<T> target) {
+                        public Entry<T> then(final Class<T> targetState) {
                             return entry;
                         }
 
@@ -55,6 +55,7 @@ public class Defining<T> {
             }
         };
     }
+    // CHECKSTYLE:ON
 
     static EntryBuilder building() {
         return new EntryBuilder();
@@ -64,8 +65,9 @@ public class Defining<T> {
         return new Defining<T>(target).entryAs();
     }
 
-    static class EntryBuilder {
+    static final class EntryBuilder {
         private EntryBuilder() {}
+
         public <T> DefiningEntry<T> entry(final Class<T> target) {
 
             return new DefiningEntry<T>() {
@@ -78,7 +80,7 @@ public class Defining<T> {
     }
 
     public interface DefiningEntry<T> {
-        public DefiningEntryAs<T> as();
+         DefiningEntryAs<T> as();
     }
 
     public interface DefiningEntryAs<T> {
@@ -91,6 +93,7 @@ public class Defining<T> {
 
     public interface DefiningWhen<T, S> {
         DefiningWhen<T, S> when(final ActionExpression<S> action);
+
         Entry<T> then(Class<T> target);
     }
 

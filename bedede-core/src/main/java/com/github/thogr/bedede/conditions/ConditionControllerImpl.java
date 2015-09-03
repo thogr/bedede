@@ -10,9 +10,6 @@ public class ConditionControllerImpl implements ConditionController {
         this.framework = framework;
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.conditions.ConditionController#verify(com.github.thogr.bedede.conditions.Expecting)
-     */
     @Override
     public final <T> Object verify(final Expecting<T> condition) {
         return condition.verify(framework.getVerifier(condition.getConditionClass()));

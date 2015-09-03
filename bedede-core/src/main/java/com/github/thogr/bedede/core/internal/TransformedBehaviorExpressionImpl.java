@@ -20,11 +20,11 @@ import com.github.thogr.bedede.mocks.Mocked;
 
 class TransformedBehaviorExpressionImpl<T, S> implements WhenTransforming<T, S>, ThenMatches<T, S> {
 
-    private T obj;
-    private S result;
-    private BasicBehaviorExpressionImpl<S> impl;
+    private final T obj;
+    private final S result;
+    private final BasicBehaviorExpressionImpl<S> impl;
 
-    TransformedBehaviorExpressionImpl(T obj, S result) {
+    TransformedBehaviorExpressionImpl(final T obj, final S result) {
         this.obj = obj;
         this.result = result;
         impl = new BasicBehaviorExpressionImpl<>(result);
@@ -32,46 +32,46 @@ class TransformedBehaviorExpressionImpl<T, S> implements WhenTransforming<T, S>,
 
     @Override
     public ThenMatches<T, S> then(
-            BiFunction<? super T, ? super S, Matcher<? super S>> expr) {
-        Matcher<? super S> is = expr.apply(obj, result);
+            final BiFunction<? super T, ? super S, Matcher<? super S>> expr) {
+        final Matcher<? super S> is = expr.apply(obj, result);
         assertThat(result, is);
         return this;
     }
 
     @Override
     public <S2> WhenTransforming<S, S2> when(
-            Transforming<? super S, ? extends S2> expr) {
+            final Transforming<? super S, ? extends S2> expr) {
         return impl.when(expr);
     }
 
     @Override
-    public WhenPerforming<S> when(Performing<S> expr) {
+    public WhenPerforming<S> when(final Performing<S> expr) {
         return impl.when(expr);
     }
 
     @Override
-    public <S2> Then<S> then(Function<? super S, ? extends S2> it,
-            Matcher<? super S2> is) {
+    public <S2> Then<S> then(final Function<? super S, ? extends S2> it,
+            final Matcher<? super S2> is) {
         return impl.then(it, is);
     }
 
     @Override
-    public Then<S> then(Predicate<? super S> predicate) {
+    public Then<S> then(final Predicate<? super S> predicate) {
         return impl.then(predicate);
     }
 
     @Override
-    public <V> V then(Mocked<V> mocked) {
+    public <V> V then(final Mocked<V> mocked) {
         return CoreExpressions.then(mocked);
     }
 
     @Override
-    public Then<Boolean> then(boolean expr) {
+    public Then<Boolean> then(final boolean expr) {
         return CoreExpressions.then(expr);
     }
 
     @Override
-    public Then<S> then(Behavior<S> behavior) {
+    public Then<S> then(final Behavior<S> behavior) {
         return impl.then(behavior);
     }
 }

@@ -4,11 +4,11 @@ import com.github.thogr.bedede.core.internal.Wrapped;
 
 public final class AnObject<T> extends Wrapped<T> {
 
-    AnObject(T object) {
+    AnObject(final T object) {
         super(object);
     }
 
-    public static <T> AnObject<T> a(T object) {
+    public static <T> AnObject<T> a(final T object) {
         return new AnObject<T>(object);
     }
 

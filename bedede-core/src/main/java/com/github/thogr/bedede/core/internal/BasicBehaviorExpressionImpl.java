@@ -9,7 +9,7 @@ final class BasicBehaviorExpressionImpl<T> extends BehaviorExpressionImpl<T> {
         super(obj);
     }
 
-    public BasicBehaviorExpressionImpl(Behavior<T> behavior) {
+    public BasicBehaviorExpressionImpl(final Behavior<T> behavior) {
         super(behavior);
     }
 }

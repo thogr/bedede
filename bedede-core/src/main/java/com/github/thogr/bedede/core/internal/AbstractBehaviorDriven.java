@@ -1,7 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
 import org.hamcrest.Matcher;
-import org.junit.Assert;
 
 import com.github.thogr.bedede.AnObject;
 import com.github.thogr.bedede.Assuming;
@@ -108,14 +107,13 @@ public class AbstractBehaviorDriven {
     }
 
     /**
-     * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * Alias for {@link org.junit.Assert#assertThat(Object, Matcher)} BDD style
      * @param <T> the type of object in focus
      * @param it the static type accepted by the matcher
      * @param is the matcher
      * @return the behavior
      */
-    public final <T> Then<T> then(T it, Matcher<? super T> is) {
+    public final <T> Then<T> then(final T it, final Matcher<? super T> is) {
         return CoreExpressions.then(it, is);
     }
-
 }

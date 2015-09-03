@@ -70,7 +70,7 @@ public class EntryTest {
 
     @InitialState
     public static class View3 {
-        public static Entry<View3> REACHED = new Entry<View3>() {
+        public static final Entry<View3> REACHED = new Entry<View3>() {
             @Override
             protected void perform() {
                 // no then(View3.class) here
@@ -94,7 +94,7 @@ public class EntryTest {
         .then(theMocked(View1.mocked)).should(never()).perform();
     }
 
-    private Performing<BehaviorController> executingEntry(Entry<?> entry) {
+    private Performing<BehaviorController> executingEntry(final Entry<?> entry) {
         return performing(it -> it.given(entry));
     }
 

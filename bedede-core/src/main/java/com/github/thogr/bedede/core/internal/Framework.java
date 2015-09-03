@@ -43,7 +43,8 @@ public final class Framework {
                 // continue
             }
         }
-        throw new IllegalArgumentException(String.format(NO_SERVICE_PROVIDED, ConditionProvider.class.getName()));
+        throw new IllegalArgumentException(
+                String.format(NO_SERVICE_PROVIDED, ConditionProvider.class.getName()));
     }
 
     InitialStateFactory getInitialStateFactory() {
@@ -52,7 +53,8 @@ public final class Framework {
             return initialStateFactory;
         }
 
-        throw new IllegalArgumentException(String.format(NO_SERVICE_PROVIDED, InitialStateFactory.class.getName()));
+        throw new IllegalArgumentException(
+                String.format(NO_SERVICE_PROVIDED, InitialStateFactory.class.getName()));
     }
 
     StateFactory getStateFactory() {
@@ -61,6 +63,7 @@ public final class Framework {
             return stateFactory;
         }
 
-        throw new IllegalArgumentException(String.format(NO_SERVICE_PROVIDED, StateFactory.class.getName()));
+        throw new IllegalArgumentException(
+                String.format(NO_SERVICE_PROVIDED, StateFactory.class.getName()));
     }
 }
