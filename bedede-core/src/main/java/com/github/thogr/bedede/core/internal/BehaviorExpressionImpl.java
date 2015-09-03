@@ -4,12 +4,12 @@ import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.Performing;
 import com.github.thogr.bedede.Times;
 import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.When;
+import com.github.thogr.bedede.WhenBiTransforming;
 import com.github.thogr.bedede.WhenPerforming;
 import com.github.thogr.bedede.WhenTransforming;
 
 abstract class BehaviorExpressionImpl<T>
-    extends BehaviorImpl<T> implements When<T>, Times<T> {
+    extends BehaviorImpl<T> implements WhenBiTransforming<T>, Times<T> {
 
     BehaviorExpressionImpl(final T obj) {
         super(obj);

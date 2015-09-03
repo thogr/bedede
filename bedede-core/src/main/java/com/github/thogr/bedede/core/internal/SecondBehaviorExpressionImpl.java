@@ -13,7 +13,7 @@ import com.github.thogr.bedede.ContinuedWhen;
 import com.github.thogr.bedede.SecondGiven;
 import com.github.thogr.bedede.SecondWith;
 import com.github.thogr.bedede.ThenItMatches;
-import com.github.thogr.bedede.When;
+import com.github.thogr.bedede.WhenBiTransforming;
 
 class SecondBehaviorExpressionImpl<T1, T2>
     extends BehaviorExpressionImpl<T1>
@@ -76,12 +76,12 @@ class SecondBehaviorExpressionImpl<T1, T2>
     }
 
     @Override
-    public <S> When<S> when(
+    public <S> WhenBiTransforming<S> when(
             BiTransforming<? super T1, ? super T2, ? extends S> expr) {
         return whenTransforming(expr);
     }
 
-    private <S> When<S> whenTransforming(
+    private <S> WhenBiTransforming<S> whenTransforming(
             AbstractBiTransformer<? super T1, ? super T2, ? extends S> expr) {
         S result = expr.getFunction().apply(first, second);
         return new BasicBehaviorExpressionImpl<S>(result);

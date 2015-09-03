@@ -7,7 +7,7 @@ public interface ContinuedBehaviorExpression<T1, T2>
     ContinuedWhen<T1, T2> when(
             BiPerforming<? super T1, ? super T2> expr);
 
-    <S> When<S> when(
+    <S> WhenBiTransforming<S> when(
             BiTransforming<? super T1, ? super T2, ? extends S> expr);
 
 }
