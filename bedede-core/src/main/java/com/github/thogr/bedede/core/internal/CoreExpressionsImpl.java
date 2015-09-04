@@ -180,13 +180,13 @@ public final class CoreExpressionsImpl {
             final T condition, final Otherwise otherwise) {
         @SuppressWarnings("unchecked")
         final Class<T> conditionClass = (Class<T>) condition.getClass();
-        return Expecting.expecting(condition, conditionClass, otherwise);
+        return ExpectingImpl.expecting(condition, conditionClass, otherwise);
     }
 
     @Internal
     public Expecting<BooleanCondition> expecting(
             final Boolean condition, final Otherwise otherwise) {
-        return Expecting.expecting(() -> condition, BooleanCondition.class, otherwise);
+        return ExpectingImpl.expecting(() -> condition, BooleanCondition.class, otherwise);
     }
 
     @Internal

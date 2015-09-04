@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.conditions;
+package com.github.thogr.bedede.core.internal;
 
 import static com.github.thogr.bedede.core.CoreExpressions.an;
 import static com.github.thogr.bedede.core.CoreExpressions.expecting;
@@ -15,6 +15,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.github.thogr.bedede.conditions.BooleanCondition;
+import com.github.thogr.bedede.conditions.ConditionVerifier;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpectingTest {
@@ -27,7 +30,10 @@ public class ExpectingTest {
         given(an(expecting(true, otherwise("left!"))))
         .and(an(expecting(false, otherwise("right!"))))
         .when(transforming((a, b)->a.and(b)))
-        .when(performing(the -> the.verify(verifier)));
+        .when(performing(it -> {
+            final Verifiable<BooleanCondition> the = it;
+            the.verify(verifier);
+        }));
         then(verifier).should().verify(anyObject(), eq(otherwise("left!")));
         then(verifier).should().verify(anyObject(), eq(otherwise("right!")));
 

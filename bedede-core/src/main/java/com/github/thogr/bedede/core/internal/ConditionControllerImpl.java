@@ -1,6 +1,6 @@
-package com.github.thogr.bedede.conditions;
+package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.core.internal.Framework;
+import com.github.thogr.bedede.conditions.ConditionController;
 
 public class ConditionControllerImpl implements ConditionController {
 
@@ -11,7 +11,7 @@ public class ConditionControllerImpl implements ConditionController {
     }
 
     @Override
-    public final <T> Object verify(final Expecting<T> condition) {
+    public final <T> Object verify(final Verifiable<T> condition) {
         return condition.verify(framework.getVerifier(condition.getConditionClass()));
     }
 }
