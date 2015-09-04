@@ -3,6 +3,8 @@ package com.github.thogr.bedede.core.internal;
 import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.StateBasedWhen;
+import com.github.thogr.bedede.ThenExpecting;
+import com.github.thogr.bedede.conditions.ExpectingExpression;
 
 class AssumingImpl<T> extends Assuming<T> {
 
@@ -13,5 +15,10 @@ class AssumingImpl<T> extends Assuming<T> {
     @Override
     public StateBasedWhen<T> when(final ActionExpression<T> action) {
         return whenAction(action);
+    }
+
+    @Override
+    public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> condition) {
+        return thenExpecting(condition);
     }
 }

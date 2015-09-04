@@ -1,7 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
-
-public abstract class StateBehavior<T> {
+abstract class StateBehavior<T> {
 
     private final ThreadLocal<BehaviorController> behaviorController = new ThreadLocal<>();
 

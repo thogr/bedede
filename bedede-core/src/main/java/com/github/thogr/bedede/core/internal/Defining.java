@@ -79,22 +79,30 @@ public final class Defining<T> {
         }
     }
 
+    @Internal
     public interface DefiningEntry<T> {
-         DefiningEntryAs<T> as();
+        @Internal
+        DefiningEntryAs<T> as();
     }
 
+    @Internal
     public interface DefiningEntryAs<T> {
+        @Internal
         <S> DefiningAssuming<T, S> given(final Class<S> state);
     }
 
+    @Internal
     public interface DefiningAssuming<T, S> {
+        @Internal
         DefiningWhen<T, S> when(final ActionExpression<S> action);
     }
 
+    @Internal
     public interface DefiningWhen<T, S> {
+        @Internal
         DefiningWhen<T, S> when(final ActionExpression<S> action);
 
+        @Internal
         Entry<T> then(Class<T> target);
     }
-
 }

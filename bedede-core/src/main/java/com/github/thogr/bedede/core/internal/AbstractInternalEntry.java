@@ -7,11 +7,11 @@ public abstract class AbstractInternalEntry<S> extends StateBehavior<S> {
 
     private final Class<S> target;
 
-    public AbstractInternalEntry(final Class<S> target) {
+    protected AbstractInternalEntry(final Class<S> target) {
         this.target = target;
     }
 
-    public AbstractInternalEntry() {
+    protected AbstractInternalEntry() {
         this.target = TypeArguments.typeArgument(this);
     }
 

@@ -7,6 +7,7 @@ import com.github.thogr.bedede.conditions.ConditionControllerImpl;
 import com.github.thogr.bedede.conditions.ConditionProvider;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
 
+@Internal
 public final class Framework {
     private static final String NO_SERVICE_PROVIDED =
             "No appropriate %s provided in META-INF/services";
@@ -15,6 +16,7 @@ public final class Framework {
 
     }
 
+    @Internal
     public static void check(final Framework framework) {
         if (framework == null) {
             throw new NullPointerException();
@@ -30,6 +32,7 @@ public final class Framework {
     }
 
     @SuppressWarnings({ "unchecked" })
+    @Internal
     public <V> ConditionVerifier<V> getVerifier(final Class<V> conditionClass) {
         final ServiceLoader<ConditionProvider> sl = ServiceLoader.load(ConditionProvider.class);
         for (final ConditionProvider provider : sl) {

@@ -9,9 +9,6 @@ public class TargetWhenImpl<T, S> extends AbstractWhenImpl<S> implements TargetW
         super(delegate.getState(), delegate.getController());
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.TargetWhen#then(java.lang.Class)
-     */
     @Override
     public ThenExpecting<T> then(final Class<T> target) {
         return thenState(target);

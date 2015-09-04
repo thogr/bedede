@@ -27,19 +27,48 @@ public abstract class Expressions {
     // CoreExpressions
     //-----------------------------------------------------------------
 
+    /**
+     * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
+     * <p>Example:<p>
+     * <pre>
+     *   &#64;OnEntry
+     *   public Expecting<BooleanCondition> shouldBeLocked() {
+     *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
+     *   }
+     * </pre>
+     * @param condition the boolean condition
+     * @param otherwise description of otherwise
+     * @return the expecting
+     */
     public static Expecting<BooleanCondition> expecting(
     final Boolean condition, final Otherwise otherwise) {
         return CoreExpressions.expecting(condition, otherwise);
     }
 
+    /**
+     * Wraps a description of the unexpected
+     * @see CoreExpressions#expecting(Boolean, Otherwise)
+     * @param message the text to be used as error message
+     * @return the wrapped description
+     */
     public static Otherwise otherwise(final String message) {
         return CoreExpressions.otherwise(message);
     }
 
+    /**
+     * Start defining an entry.
+     * @param state the state class, where the entry should be
+     * @param <T> the type of the state class
+     * @return the start (to be continued) defining the entry
+     */
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
         return CoreExpressions.entry(state);
     }
 
+    /**
+     * Start defining a behavior.
+     * @return the prefix for continued definition of the behavior
+     */
     public static GivenPrefix given() {
         return CoreExpressions.given();
     }
@@ -102,6 +131,13 @@ public abstract class Expressions {
         return CoreExpressions.given(expr);
     }
 
+    /**
+     * Sets the starting environment for a test using mocks. This method merely calls the mocking
+     * framework, but is needed because of possible name conflicts in the mock framework.
+     * @param that a wrapped mocked object
+     * @param <T> the type of the mock
+     * @return the mock
+     */
     public static <T> T given(final That<T> that) {
         return CoreExpressions.given(that);
     }
@@ -109,7 +145,7 @@ public abstract class Expressions {
     /**
      * Wraps an action that operates on an object into a performing expression.
      * The object originates from a given(object) expression.
-     * @see BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
@@ -122,7 +158,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a performing expression.
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
-     * @see BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -154,7 +190,7 @@ public abstract class Expressions {
     /**
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
-     * @see BehaviorExpression#when(Transforming)
+     * @see com.github.thogr.bedede.BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
@@ -166,7 +202,7 @@ public abstract class Expressions {
 
     /**
      * Wraps an action into a transforming expression.
-     * @see BehaviorExpression#when(Transforming)
+     * @see com.github.thogr.bedede.BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
@@ -180,7 +216,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -196,7 +232,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -250,16 +286,32 @@ public abstract class Expressions {
         return CoreExpressions.the(it);
     }
 
+    /**
+     * Wraps the object that will be in focus.
+     * <p>Example:</p>
+     * <pre>
+     * given(a(new Something()))
+     * </pre>
+     * @param object any object
+     * @param <T> the type of the object in focus
+     * @return the wrapped object
+     */
     public static <T> AnObject<T> a(final T object) {
         return CoreExpressions.a(object);
     }
 
+    /**
+     * Alias for {@link CoreExpressions#a(Object)}
+     * @param object any object
+     * @param <T> the type of the object in focus
+     * @return the wrapped object
+     */
     public static <T> AnObject<T> an(final T object) {
         return CoreExpressions.a(object);
     }
 
     /**
-     * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * Alias for {@link org.junit.Assert#assertThat(Object, Matcher)} BDD style
      * @param <T> the type of object (in focus) the action is operating on,
      * the static type accepted by the matcher
      * @param it the value being matched
@@ -270,6 +322,11 @@ public abstract class Expressions {
         return CoreExpressions.then(it, is);
     }
 
+   /**
+    * Convenience method corresponding to a call to {@link org.junit.Assert#assertTrue(boolean)}
+    * @param expr boolean expression
+    * @return the behavior
+    */
     public static Then<Boolean> then(final boolean expr) {
         return CoreExpressions.then(expr);
     }
@@ -277,13 +334,24 @@ public abstract class Expressions {
     /**
      * Convenience method when a behavior has been extracted to a method to be reused in another
      * test.
-     * @param behavior
-     * @return
+     * @param behavior the other (reused) behavior
+     * @param <T> the type of the object in focus
+     * @return this behavior
      */
     public static <T> Then<T> then(final Behavior<T> behavior) {
         return CoreExpressions.then(behavior);
     }
 
+    /**
+     * Verify call to mock.
+     * <p>Example:</p>
+     * <pre>then(theMocked(mock)).should().someMethod()</pre>
+     * This method merely calls the mocking
+     * framework, but is needed because of possible name conflicts in the mock framework.
+     * @param mocked the mocked object (wrapped)
+     * @param <S> mocking framework dependent type
+     * @return the framework dependent continuation
+     */
     public static <S> S then(final Mocked<S> mocked) {
         return CoreExpressions.then(mocked);
     }

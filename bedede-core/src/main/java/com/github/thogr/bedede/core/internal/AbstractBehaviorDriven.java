@@ -15,7 +15,7 @@ public class AbstractBehaviorDriven {
 
     private final BehaviorController controller;
 
-    public AbstractBehaviorDriven() {
+    protected AbstractBehaviorDriven() {
             this(Framework.createBehaviorController());
     }
 

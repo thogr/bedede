@@ -11,7 +11,7 @@ public class AbstractAssumedState<T> extends AbstractStateControlled<T> {
        super(state, controller);
     }
 
-    public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> condition) {
+    protected <V> ThenExpecting<T> thenExpecting(final ExpectingExpression<T, V> condition) {
         return getController().then(getState(), condition);
     }
 

@@ -22,6 +22,7 @@ public final class GivenElementImpl<T> implements GivenElement<T> {
         return new WhenElementImpl<T>(elem);
     }
 
+    @Internal
     public static <E> GivenElement<E> given(final Expecting<?> expecting) {
         @SuppressWarnings("unchecked")
         final E elem = (E) createConditionController().verify(expecting);

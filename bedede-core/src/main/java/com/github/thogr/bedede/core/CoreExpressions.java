@@ -39,19 +39,48 @@ public class CoreExpressions {
 
     }
 
+    /**
+     * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
+     * <p>Example:<p>
+     * <pre>
+     *   &#64;OnEntry
+     *   public Expecting<BooleanCondition> shouldBeLocked() {
+     *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
+     *   }
+     * </pre>
+     * @param condition the boolean condition
+     * @param otherwise description of otherwise
+     * @return the expecting
+     */
     public static Expecting<BooleanCondition> expecting(
     final Boolean condition, final Otherwise otherwise) {
         return impl.expecting(condition, otherwise);
     }
 
+    /**
+     * Wraps a description of the unexpected
+     * @see CoreExpressions#expecting(Boolean, Otherwise)
+     * @param message the text to be used as error message
+     * @return the wrapped description
+     */
     public static Otherwise otherwise(final String message) {
         return impl.otherwise(message);
     }
 
+    /**
+     * Start defining an entry.
+     * @param state the state class, where the entry should be
+     * @param <T> the type of the state class
+     * @return the start (to be continued) defining the entry
+     */
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
         return impl.entry(state);
     }
 
+    /**
+     * Start defining a behavior.
+     * @return the prefix for continued definition of the behavior
+     */
     public static GivenPrefix given() {
         return impl.given();
     }
@@ -114,6 +143,13 @@ public class CoreExpressions {
         return impl.given(expr);
     }
 
+    /**
+     * Sets the starting environment for a test using mocks. This method merely calls the mocking
+     * framework, but is needed because of possible name conflicts in the mock framework.
+     * @param that a wrapped mocked object
+     * @param <T> the type of the mock
+     * @return the mock
+     */
     public static <T> T given(final That<T> that) {
         return impl.given(that);
     }
@@ -262,16 +298,32 @@ public class CoreExpressions {
         return impl.the(it);
     }
 
+    /**
+     * Wraps the object that will be in focus.
+     * <p>Example:</p>
+     * <pre>
+     * given(a(new Something()))
+     * </pre>
+     * @param object any object
+     * @param <T> the type of the object in focus
+     * @return the wrapped object
+     */
     public static <T> AnObject<T> a(final T object) {
         return impl.a(object);
     }
 
+    /**
+     * Alias for {@link CoreExpressions#a(Object)}
+     * @param object any object
+     * @param <T> the type of the object in focus
+     * @return the wrapped object
+     */
     public static <T> AnObject<T> an(final T object) {
         return impl.a(object);
     }
 
     /**
-     * Alias for {@link Assert#assertThat(Object, Matcher)} BDD style
+     * Alias for {@link org.junit.Assert#assertThat(Object, Matcher)} BDD style
      * @param <T> the type of object (in focus) the action is operating on,
      * the static type accepted by the matcher
      * @param it the value being matched
@@ -282,6 +334,11 @@ public class CoreExpressions {
         return impl.then(it, is);
     }
 
+   /**
+    * Convenience method corresponding to a call to {@link org.junit.Assert#assertTrue(boolean)}
+    * @param expr boolean expression
+    * @return the behavior
+    */
     public static Then<Boolean> then(final boolean expr) {
         return impl.then(expr);
     }
@@ -289,13 +346,24 @@ public class CoreExpressions {
     /**
      * Convenience method when a behavior has been extracted to a method to be reused in another
      * test.
-     * @param behavior
-     * @return
+     * @param behavior the other (reused) behavior
+     * @param <T> the type of the object in focus
+     * @return this behavior
      */
     public static <T> Then<T> then(final Behavior<T> behavior) {
         return impl.then(behavior);
     }
 
+    /**
+     * Verify call to mock.
+     * <p>Example:</p>
+     * <pre>then(theMocked(mock)).should().someMethod()</pre>
+     * This method merely calls the mocking
+     * framework, but is needed because of possible name conflicts in the mock framework.
+     * @param mocked the mocked object (wrapped)
+     * @param <S> mocking framework dependent type
+     * @return the framework dependent continuation
+     */
     public static <S> S then(final Mocked<S> mocked) {
         return impl.then(mocked);
     }
