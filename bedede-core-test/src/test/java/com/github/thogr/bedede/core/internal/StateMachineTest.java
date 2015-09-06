@@ -24,7 +24,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.annotations.InitialState;
-import com.github.thogr.bedede.conditions.ConditionController;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StateMachineTest {

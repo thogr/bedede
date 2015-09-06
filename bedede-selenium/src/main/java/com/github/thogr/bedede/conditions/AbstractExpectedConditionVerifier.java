@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.SeleniumExpressions;
+import com.github.thogr.bedede.core.internal.Internal;
 
 public abstract class AbstractExpectedConditionVerifier<T>
     implements ConditionVerifier<ExpectedCondition<T>> {
@@ -13,6 +14,7 @@ public abstract class AbstractExpectedConditionVerifier<T>
     // TODO make timeout configurable
     private static final long TIMEOUT_SECONDS = 40;
 
+    @Internal
     public AbstractExpectedConditionVerifier() {
         super();
     }

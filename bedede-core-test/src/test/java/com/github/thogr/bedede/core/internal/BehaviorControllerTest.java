@@ -15,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.BehaviorDrivenTest.Target;
-import com.github.thogr.bedede.conditions.ConditionController;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BehaviorControllerTest {

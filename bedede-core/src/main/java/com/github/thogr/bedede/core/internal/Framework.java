@@ -2,7 +2,6 @@ package com.github.thogr.bedede.core.internal;
 
 import java.util.ServiceLoader;
 
-import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.ConditionProvider;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
 

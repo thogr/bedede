@@ -22,11 +22,19 @@ public class GoogleSearchPage {
                 otherwise("No query field"));
     }
 
+    /**
+     * Example
+     * @return the expecting
+     */
     public Expecting<ExpectedCondition<WebElement>> searchButton() {
         return expecting(visibilityOfElementLocated(By.xpath("//*[@type='submit']")),
                 otherwise("search button not found"));
     }
 
+    /**
+     * Example
+     * @param searchString the searched string
+     */
     public void searchesFor(final String searchString) {
         given(queryField())
         .when(it -> it.sendKeys(searchString))

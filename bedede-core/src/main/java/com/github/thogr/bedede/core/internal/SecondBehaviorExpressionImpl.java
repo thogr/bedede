@@ -10,15 +10,15 @@ import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.BiActionExpression;
 import com.github.thogr.bedede.BiPerforming;
 import com.github.thogr.bedede.BiTransforming;
-import com.github.thogr.bedede.ContinuedWhen;
 import com.github.thogr.bedede.SecondGiven;
 import com.github.thogr.bedede.SecondWith;
 import com.github.thogr.bedede.ThenItMatches;
+import com.github.thogr.bedede.WhenBiPerforming;
 import com.github.thogr.bedede.WhenBiTransforming;
 
 class SecondBehaviorExpressionImpl<T1, T2>
     extends BehaviorExpressionImpl<T1>
-    implements SecondGiven<T1, T2>, ContinuedWhen<T1, T2>, ThenItMatches<T1, T2> {
+    implements SecondGiven<T1, T2>, WhenBiPerforming<T1, T2>, ThenItMatches<T1, T2> {
 
     private final T1 first;
     private final T2 second;
@@ -57,12 +57,12 @@ class SecondBehaviorExpressionImpl<T1, T2>
     }
 
     @Override
-    public final ContinuedWhen<T1, T2> when(
+    public final WhenBiPerforming<T1, T2> when(
             final BiPerforming<? super T1, ? super T2> expr) {
         return whenPerforming(expr);
     }
 
-    private ContinuedWhen<T1, T2> whenPerforming(
+    private WhenBiPerforming<T1, T2> whenPerforming(
             final AbstractBiPerformer<? super T1, ? super T2> expr) {
         return perform(expr.getAction());
     }

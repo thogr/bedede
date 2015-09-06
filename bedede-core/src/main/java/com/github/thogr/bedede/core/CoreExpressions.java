@@ -338,6 +338,7 @@ public class CoreExpressions {
     * Convenience method corresponding to a call to {@link org.junit.Assert#assertTrue(boolean)}
     * @param expr boolean expression
     * @return the behavior
+    * @see Behavior#then(boolean)
     */
     public static Then<Boolean> then(final boolean expr) {
         return impl.then(expr);
@@ -349,6 +350,7 @@ public class CoreExpressions {
      * @param behavior the other (reused) behavior
      * @param <T> the type of the object in focus
      * @return this behavior
+     * @see Behavior#then(Behavior)
      */
     public static <T> Then<T> then(final Behavior<T> behavior) {
         return impl.then(behavior);
@@ -363,6 +365,7 @@ public class CoreExpressions {
      * @param mocked the mocked object (wrapped)
      * @param <S> mocking framework dependent type
      * @return the framework dependent continuation
+     * @see Behavior#then(Mocked)
      */
     public static <S> S then(final Mocked<S> mocked) {
         return impl.then(mocked);

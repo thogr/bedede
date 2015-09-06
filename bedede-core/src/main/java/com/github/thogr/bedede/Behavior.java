@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
+import com.github.thogr.bedede.core.internal.Proxy;
 import com.github.thogr.bedede.mocks.Mocked;
 
 public interface Behavior<T> {
@@ -40,9 +41,21 @@ public interface Behavior<T> {
      */
     Then<T> then(Predicate<? super T> predicate);
 
+    /**
+     * See {@link com.github.thogr.bedede.core.CoreExpressions#then(Behavior)}
+     */
+    @Proxy
     Then<T> then(Behavior<T> behavior);
 
+    /**
+     * See {@link com.github.thogr.bedede.core.CoreExpressions#then(Mocked)}
+     */
+    @Proxy
     <S> S then(Mocked<S> mocked);
 
+    /**
+     * See {@link com.github.thogr.bedede.core.CoreExpressions#then(boolean)}
+     */
+    @Proxy
     Then<Boolean> then(boolean expr);
 }

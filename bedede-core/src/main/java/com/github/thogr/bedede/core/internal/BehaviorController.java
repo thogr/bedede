@@ -4,7 +4,6 @@ import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.ThenExpecting;
-import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.ExpectingExpression;
 

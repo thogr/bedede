@@ -33,6 +33,8 @@ public class EntryFinderTest {
     }
 
     public static class StateWithOneEntryMethod {
+
+        @Internal
         public static Entry<StateWithOneEntryMethod> reached() {
             return new Entry<StateWithOneEntryMethod>() {
                 @Override
@@ -110,6 +112,8 @@ public class EntryFinderTest {
     }
 
     public static class StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry {
+
+        @Internal
         public static Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>
         other(final int i) {
             return new Entry<StateWithParametrizedMethodFirstAndLastAnnotatedDefaultEntry>() {

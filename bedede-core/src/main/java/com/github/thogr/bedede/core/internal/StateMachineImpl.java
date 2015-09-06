@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.thogr.bedede.annotations.InitialState;
-import com.github.thogr.bedede.conditions.ConditionController;
 
 final class StateMachineImpl implements StateMachine {
 

@@ -14,5 +14,6 @@ public class View2 {
         }
     };
 
+    /**  */
     public void doesSomething() {}
 }

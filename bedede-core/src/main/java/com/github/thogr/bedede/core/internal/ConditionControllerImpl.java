@@ -1,12 +1,11 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.conditions.ConditionController;
 
 public class ConditionControllerImpl implements ConditionController {
 
     private final Framework framework;
 
-    public ConditionControllerImpl(final Framework framework) {
+    ConditionControllerImpl(final Framework framework) {
         this.framework = framework;
     }
 

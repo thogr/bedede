@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.github.thogr.bedede.annotations.OnEntry;
-import com.github.thogr.bedede.conditions.ConditionController;
 
 public class OnEntryTest {
 

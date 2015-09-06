@@ -18,7 +18,6 @@ import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.Performing;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
-import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.test.View2;
 
 public class EntryTest {
@@ -64,6 +63,7 @@ public class EntryTest {
 
         private static Entry<View1> mocked;
 
+        /**   */
         public void opensView2() {
         }
     }
@@ -78,7 +78,7 @@ public class EntryTest {
         };
     }
 
-    public <T> Behavior<StateMachine> currentStateWas(final Class<T> state) throws Exception {
+    private <T> Behavior<StateMachine> currentStateWas(final Class<T> state) throws Exception {
         return
         given(a(machine))
         .when(performing(the -> machine.go(state)))
@@ -98,7 +98,7 @@ public class EntryTest {
         return performing(it -> it.given(entry));
     }
 
-    public boolean currentStateIs(final Class<?> state) {
+    private boolean currentStateIs(final Class<?> state) {
         return machine.was(state);
     }
 

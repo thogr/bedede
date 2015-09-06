@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.github.thogr.bedede.annotations.OnEntry;
-import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.Expecting;
 
 class AnnotatedStateVerifier<T> implements StateVerifier<T> {

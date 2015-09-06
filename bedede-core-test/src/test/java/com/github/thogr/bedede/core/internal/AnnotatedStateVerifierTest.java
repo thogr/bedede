@@ -20,7 +20,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
-import com.github.thogr.bedede.conditions.ConditionController;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.CoreExpressions;
 
