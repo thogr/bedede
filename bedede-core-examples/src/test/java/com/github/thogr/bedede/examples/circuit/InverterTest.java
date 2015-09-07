@@ -27,8 +27,7 @@ public class InverterTest {
 
     @Test
     public void shouldInvertInputAfterCreatingInverterWithInputSignal() {
-        given(a(new Wire())).and(a(new Wire()))
-        .when(performing(Inverter::new))
+        given(a(new Wire())).and(a(new Wire())).with(Inverter::new)
         .when(performing((in, out) -> in.setSignal(true)))
         .then((in, out) -> out.getSignal(), is(false));
     }

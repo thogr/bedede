@@ -14,11 +14,9 @@
     <property name="tabWidth" value="4"/>
     <module name="FileContentsHolder"/>
     <module name="JavadocMethod">
-      <property name="severity" value="ignore"/>
-      <property name="allowedAnnotations" value="Test,Before,BeforeClass,After,AfterClass,Override,Internal"/>
+      <property name="allowedAnnotations" value="Test,Before,BeforeClass,After,AfterClass,Override,Internal,Proxy,OnEntry"/>
       <property name="scope" value="public"/>
       <property name="suppressLoadErrors" value="true"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="JavadocType">
       <property name="severity" value="ignore"/>

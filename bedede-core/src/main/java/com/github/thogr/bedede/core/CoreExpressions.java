@@ -163,7 +163,7 @@ public class CoreExpressions {
      * @return the wrapped action
      */
     public static <T> Performing<T> performing(final ActionExpression<T> expr) {
-        return impl.performing(expr);
+        return impl.performingAction(expr);
     }
 
     /**
@@ -178,7 +178,7 @@ public class CoreExpressions {
      */
     public static <T1, T2> BiPerforming<T1, T2> performing(
             final BiActionExpression<T1, T2> expr) {
-        return impl.performing(expr);
+        return impl.performingBiAction(expr);
     }
 
     /**

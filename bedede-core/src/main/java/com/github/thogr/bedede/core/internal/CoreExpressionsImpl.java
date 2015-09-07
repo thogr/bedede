@@ -87,13 +87,13 @@ public final class CoreExpressionsImpl {
     }
 
     @Internal
-    public <T> Performing<T> performing(final ActionExpression<T> expr) {
+    public <T> Performing<T> performingAction(final ActionExpression<T> expr) {
         return new PerformingImpl<T>(expr);
     }
 
     @Internal
     public <T1, T2> BiPerformingImpl<T1, T2>
-        performing(final BiActionExpression<T1, T2> expr) {
+        performingBiAction(final BiActionExpression<T1, T2> expr) {
         return new BiPerformingImpl<T1, T2>(expr);
     }
 
