@@ -24,7 +24,7 @@ abstract class BehaviorExpressionImpl<T>
         return whenTransforming(expr);
     }
 
-    private <S> WhenTransforming<T, S> whenTransforming(
+    <S> WhenTransforming<T, S> whenTransforming(
             final AbstractTransformer<? super T, ? extends S> expr) {
         final S result = expr.getFunction().apply(getFocusedObject());
         return new TransformedBehaviorExpressionImpl<T, S>(getFocusedObject(), result);
@@ -35,7 +35,7 @@ abstract class BehaviorExpressionImpl<T>
         return whenPerforming(expr);
     }
 
-    private WhenPerforming<T> whenPerforming(final AbstractPerformer<T> expr) {
+    WhenPerforming<T> whenPerforming(final AbstractPerformer<T> expr) {
         expr.perform(getFocusedObject());
         return new WhenBehaviorExpressionImpl<T>(getFocusedObject(), expr);
     }

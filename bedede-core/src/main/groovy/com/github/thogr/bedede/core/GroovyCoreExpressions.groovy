@@ -13,10 +13,17 @@ class GroovyCoreExpressions extends CoreExpressions {
 
     def static given(Map spec) {
         if (spec.a) {
-            current = CoreExpressions.given(CoreExpressions.a(spec.a))
+            current = impl.given(CoreExpressions.a(spec.a))
             return current
         }
         throw new IllegalArgumentException("Syntax error at 'given'")
+    }
+
+    def static and(Map spec) {
+        if (spec.a) {
+            current = current.given(CoreExpressions.a(spec.a))
+            return current
+        }
     }
 
     def static when(Map spec) {
@@ -25,11 +32,18 @@ class GroovyCoreExpressions extends CoreExpressions {
             return current
         }
         if (spec.performing) {
+            def performing
+            Closure closure = spec.performing
+            if (closure.parameterTypes.length == 2) {
+                performing = impl.performingBiAction(spec.performing)
+            } else {
+                performing = impl.performingAction(context(spec.performing))
+            }
             if (spec.times) {
-                current.when(impl.performingAction(context(spec.performing))).times(spec.times)
+                current.when(performing).times(spec.times)
                 return current
             }
-            current.when(impl.performingAction(context(spec.performing)))
+            current.whenPerforming(performing)
             return current
         }
 
@@ -47,8 +61,20 @@ class GroovyCoreExpressions extends CoreExpressions {
     }
 
     static then(Closure closure, Matcher matcher) {
-        current = current.then(context(closure), matcher)
+        if (closure.parameterTypes.length == 2) {
+            current = current.thenTheyMatch(closure, matcher)
+        } else {
+            current = current.then(context(closure), matcher)
+        }
         return current
+    }
+
+    static with(closure) {
+        if (closure.parameterTypes.length == 2) {
+            current = current.performBiAction(closure)
+        } else {
+            current = current.performAction(closure)
+        }
     }
 
     static class Context {

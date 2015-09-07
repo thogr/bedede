@@ -31,7 +31,14 @@ class SecondBehaviorExpressionImpl<T1, T2>
 
     @Override
     public final <S> ThenItMatches<T1, T2> then(
-            final BiFunction<? super T1, ? super T2, S> it, final Matcher<? super S> is) {
+            final BiFunction<? super T1, ? super T2, S> they, final Matcher<? super S> match) {
+        return thenTheyMatch(they, match);
+    }
+
+    <S> ThenItMatches<T1, T2> thenTheyMatch(
+            final BiFunction<? super T1, ? super T2, S> it,
+            final Matcher<? super S> is) {
+
         final S result = it.apply(first, second);
         assertThat(result, is);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
@@ -40,10 +47,10 @@ class SecondBehaviorExpressionImpl<T1, T2>
     @Override
     public final SecondWith<T1, T2> with(
             final BiActionExpression<? super T1, ? super T2> action) {
-        return perform(action);
+        return performBiAction(action);
     }
 
-    private SecondBehaviorExpressionImpl<T1, T2> perform(
+    SecondBehaviorExpressionImpl<T1, T2> performBiAction(
             final BiActionExpression<? super T1, ? super T2> action) {
         action.perform(first, second);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
@@ -51,6 +58,11 @@ class SecondBehaviorExpressionImpl<T1, T2>
 
     @Override
     public SecondWith<T1, T2> with(
+            final ActionExpression<? super T2> action) {
+        return performAction(action);
+    }
+
+    SecondWith<T1, T2> performAction(
             final ActionExpression<? super T2> action) {
         action.perform(second);
         return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
@@ -64,7 +76,7 @@ class SecondBehaviorExpressionImpl<T1, T2>
 
     private WhenBiPerforming<T1, T2> whenPerforming(
             final AbstractBiPerformer<? super T1, ? super T2> expr) {
-        return perform(expr.getAction());
+        return performBiAction(expr.getAction());
     }
 
     @Override
