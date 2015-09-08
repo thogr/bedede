@@ -32,7 +32,7 @@ public abstract class AbstractInternalEntry<S> extends StateBehavior<S> {
     }
 
     protected final void then(final Class<S> state) {
-        getController().then(state);
+        getController().thenState(state);
     }
 
 }

@@ -14,6 +14,6 @@ public class ThenExpectingImpl<T> implements ThenExpecting<T> {
 
     @Override
     public <V> ThenExpecting<T> then(final ExpectingExpression<T, V> epression) {
-        return controller.get().then(state, epression);
+        return controller.get().thenExpecting(state, epression);
     }
 }

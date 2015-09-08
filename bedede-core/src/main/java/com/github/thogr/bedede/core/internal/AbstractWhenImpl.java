@@ -16,6 +16,6 @@ abstract class AbstractWhenImpl<S> extends AbstractStateControlled<S> {
     }
 
     <V> ThenExpecting<S> thenExpecting(final ExpectingExpression<S, V> expression) {
-        return getController().then(getState(), expression);
+        return getController().thenExpecting(getState(), expression);
     }
 }

@@ -13,7 +13,7 @@ public class AbstractStateControlled<S> {
     }
 
     <T> ThenExpecting<T> thenState(final Class<T> target) {
-        return getController().then(target);
+        return getController().thenState(target);
     }
 
     BehaviorController getController() {

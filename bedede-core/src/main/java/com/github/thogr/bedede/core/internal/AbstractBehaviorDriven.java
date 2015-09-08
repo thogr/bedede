@@ -103,7 +103,7 @@ public class AbstractBehaviorDriven {
      * @return an Assuming which has methods to further actions.
      */
     public final <T> ThenExpecting<T> then(final Class<T> target) {
-        return controller.then(target);
+        return controller.thenState(target);
     }
 
     /**

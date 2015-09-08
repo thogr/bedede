@@ -73,12 +73,12 @@ public final class BehaviorController {
         return new StateBasedWhenImpl<>(target, this);
     }
 
-    <T> ThenExpecting<T> then(final Class<T> state) {
+    <T> ThenExpecting<T> thenState(final Class<T> state) {
         next(state);
         return new ThenExpectingImpl<>(state, this);
     }
 
-    <S, T> ThenExpecting<S> then(
+    <S, T> ThenExpecting<S> thenExpecting(
             final Class<S> state, final ExpectingExpression <S, T> expression) {
         expect(expression.apply(go(state)));
         return new ThenExpectingImpl<>(state, this);

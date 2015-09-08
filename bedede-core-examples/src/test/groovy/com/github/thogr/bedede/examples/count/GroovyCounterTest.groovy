@@ -37,7 +37,7 @@ class GroovyCounterTest {
     }
 
     def decreasing(final int n) {
-        return performing({it.decrease()}).times(n)
+        return performing({the.decrease()}).times(n)
     }
 
     def initial() {
