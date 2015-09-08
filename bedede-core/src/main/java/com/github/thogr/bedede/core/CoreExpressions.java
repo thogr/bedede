@@ -11,28 +11,24 @@ import org.hamcrest.Matcher;
 
 import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.AnObject;
-import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.BiActionExpression;
 import com.github.thogr.bedede.BiPerforming;
 import com.github.thogr.bedede.BiTransforming;
-import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.Performing;
 import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.conditions.BooleanCondition;
-import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.internal.CoreExpressionsImpl;
-import com.github.thogr.bedede.core.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
+import com.github.thogr.bedede.state.StateExpressions;
 
 public class CoreExpressions {
 
-    private static CoreExpressionsImpl impl =
+    public static CoreExpressionsImpl impl =
             new CoreExpressionsImpl(new CoreExpressions());
 
     protected CoreExpressions() {
@@ -40,26 +36,8 @@ public class CoreExpressions {
     }
 
     /**
-     * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
-     * <p>Example:<p>
-     * <pre>
-     *   &#64;OnEntry
-     *   public Expecting<BooleanCondition> shouldBeLocked() {
-     *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
-     *   }
-     * </pre>
-     * @param condition the boolean condition
-     * @param otherwise description of otherwise
-     * @return the expecting
-     */
-    public static Expecting<BooleanCondition> expecting(
-    final Boolean condition, final Otherwise otherwise) {
-        return impl.expecting(condition, otherwise);
-    }
-
-    /**
      * Wraps a description of the unexpected
-     * @see CoreExpressions#expecting(Boolean, Otherwise)
+     * @see StateExpressions#expecting(Boolean, Otherwise)
      * @param message the text to be used as error message
      * @return the wrapped description
      */
@@ -68,50 +46,11 @@ public class CoreExpressions {
     }
 
     /**
-     * Start defining an entry.
-     * @param state the state class, where the entry should be
-     * @param <T> the type of the state class
-     * @return the start (to be continued) defining the entry
-     */
-    public static <T> DefiningEntry<T> entry(final Class<T> state) {
-        return impl.entry(state);
-    }
-
-    /**
      * Start defining a behavior.
      * @return the prefix for continued definition of the behavior
      */
     public static GivenPrefix given() {
         return impl.given();
-    }
-
-    /**
-     * Sets the starting point for the further actions. If the state is
-     * not the current assumed state it will possibly perform the actions needed to get
-     * there, if the target state class has a declared default Entry.
-     * The default Entry must be a public static field of type Entry&lt;T&gt; in the target
-     * class, where T is the target class type.
-     * If the class has more than one such field, one (and only one) must be annotated
-     * with &#64;DefaultEntry.
-     * @see Entry
-     * @param <T> the type of state
-     * @param state starting point for the coming actions
-     * @return an Assuming which has methods to further actions.
-     */
-    public static <T> Assuming<T> given(final Class<T> state) {
-        return impl.given(state);
-    }
-
-    /**
-     * Sets the starting point for the further actions. If the state is
-     * not the current assumed state it will perform the actions needed to get
-     * there, as specified by the entry.
-     * @param entry the entry that should be performed
-     * @param <T> the type of state
-     * @return an Assuming which has methods to further actions
-     */
-    public static <T> Assuming<T> given(final Entry<T> entry) {
-        return impl.given(entry);
     }
 
     /**

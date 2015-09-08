@@ -1,5 +1,8 @@
 package com.github.thogr.bedede;
 
+import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.Entry;
+
 
 
 public interface GivenPrefix {

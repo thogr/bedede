@@ -15,22 +15,16 @@ import org.junit.Assert;
 
 import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.AnObject;
-import com.github.thogr.bedede.Assuming;
 import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.BehaviorExpression;
 import com.github.thogr.bedede.BiActionExpression;
-import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.Given;
-import com.github.thogr.bedede.GivenElement;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.Performing;
 import com.github.thogr.bedede.Then;
 import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.conditions.BooleanCondition;
-import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.CoreExpressions;
-import com.github.thogr.bedede.core.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
@@ -50,25 +44,8 @@ public final class CoreExpressionsImpl {
     }
 
     @Internal
-    public static <E> GivenElement<E> given(final Expecting<?> precondition) {
-        return GivenElementImpl.<E>given(precondition);
-    }
-
-    @Internal
     public GivenPrefix given() {
         return new GivenPrefixImpl();
-    }
-
-    @Internal
-    public <T> Assuming<T> given(final Class<T> state) {
-        final BehaviorDriver driver = new BehaviorDriver();
-        return driver.given(state);
-    }
-
-    @Internal
-    public <T> Assuming<T> given(final Entry<T> entry) {
-        final BehaviorDriver driver = new BehaviorDriver();
-        return driver.given(entry);
     }
 
     @Internal
@@ -173,24 +150,5 @@ public final class CoreExpressionsImpl {
     @Internal
     public <T> AnObject<T> an(final T object) {
         return a(object);
-    }
-
-    @Internal
-    public static <T> Expecting<T> expecting(
-            final T condition, final Otherwise otherwise) {
-        @SuppressWarnings("unchecked")
-        final Class<T> conditionClass = (Class<T>) condition.getClass();
-        return ExpectingImpl.expecting(condition, conditionClass, otherwise);
-    }
-
-    @Internal
-    public Expecting<BooleanCondition> expecting(
-            final Boolean condition, final Otherwise otherwise) {
-        return ExpectingImpl.expecting(() -> condition, BooleanCondition.class, otherwise);
-    }
-
-    @Internal
-    public <T> DefiningEntry<T> entry(final Class<T> state) {
-        return Defining.building().entry(state);
     }
 }

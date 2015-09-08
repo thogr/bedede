@@ -1,10 +1,11 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.Assuming;
-import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.Entry;
+import com.github.thogr.bedede.state.StateExpressions;
 
 
 class GivenPrefixImpl implements GivenPrefix {
@@ -18,7 +19,7 @@ class GivenPrefixImpl implements GivenPrefix {
      */
     @Override
     public <T> Assuming<T> at(final Class<T> state) {
-        return CoreExpressions.given(state);
+        return StateExpressions.given(state);
     }
 
     /* (non-Javadoc)
@@ -26,7 +27,7 @@ class GivenPrefixImpl implements GivenPrefix {
      */
     @Override
     public <T> Assuming<T> at(final Entry<T> entry) {
-        return CoreExpressions.given(entry);
+        return StateExpressions.given(entry);
     }
 
     /* (non-Javadoc)

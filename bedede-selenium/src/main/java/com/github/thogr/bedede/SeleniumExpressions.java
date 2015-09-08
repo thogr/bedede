@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.state.GivenElement;
 
 public final class SeleniumExpressions extends CoreExpressions {
 

@@ -1,5 +1,7 @@
 package com.github.thogr.bedede
 
+import com.github.thogr.bedede.state.Entry;
+
 class EntryStaticExtension {
 
     static <T> Entry<T> entry(@DelegatesTo(strategy = Closure.DELEGATE_FIRST, value = Entry) Closure closure) {

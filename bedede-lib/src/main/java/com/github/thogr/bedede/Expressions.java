@@ -16,10 +16,14 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.CoreExpressions;
-import com.github.thogr.bedede.core.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.mocks.MockExpressions;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
+import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.Entry;
+import com.github.thogr.bedede.state.GivenElement;
+import com.github.thogr.bedede.state.StateExpressions;
+import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
 
 
 public abstract class Expressions {
@@ -42,12 +46,12 @@ public abstract class Expressions {
      */
     public static Expecting<BooleanCondition> expecting(
     final Boolean condition, final Otherwise otherwise) {
-        return CoreExpressions.expecting(condition, otherwise);
+        return StateExpressions.expecting(condition, otherwise);
     }
 
     /**
      * Wraps a description of the unexpected
-     * @see CoreExpressions#expecting(Boolean, Otherwise)
+     * @see StateExpressions#expecting(Boolean, Otherwise)
      * @param message the text to be used as error message
      * @return the wrapped description
      */
@@ -62,7 +66,7 @@ public abstract class Expressions {
      * @return the start (to be continued) defining the entry
      */
     public static <T> DefiningEntry<T> entry(final Class<T> state) {
-        return CoreExpressions.entry(state);
+        return StateExpressions.entry(state);
     }
 
     /**
@@ -87,7 +91,7 @@ public abstract class Expressions {
      * @return an Assuming which has methods to further actions.
      */
     public static <T> Assuming<T> given(final Class<T> state) {
-        return CoreExpressions.given(state);
+        return StateExpressions.given(state);
     }
 
     /**
@@ -99,7 +103,7 @@ public abstract class Expressions {
      * @return an Assuming which has methods to further actions
      */
     public static <T> Assuming<T> given(final Entry<T> entry) {
-        return CoreExpressions.given(entry);
+        return StateExpressions.given(entry);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.conditions;
 
-import com.github.thogr.bedede.core.internal.Verifiable;
+import com.github.thogr.bedede.state.internal.Verifiable;
 
 public abstract class Expecting<T> extends Verifiable<T> {
 

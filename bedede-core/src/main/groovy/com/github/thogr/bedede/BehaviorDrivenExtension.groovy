@@ -1,5 +1,7 @@
 package com.github.thogr.bedede
 
+import com.github.thogr.bedede.state.Assuming;
+
 import groovy.transform.*
 
 @CompileStatic

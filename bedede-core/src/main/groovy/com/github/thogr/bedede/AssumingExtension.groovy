@@ -1,6 +1,7 @@
 package com.github.thogr.bedede;
 
-import com.github.thogr.bedede.core.internal.AssumingImpl;
+import com.github.thogr.bedede.state.ThenExpecting;
+import com.github.thogr.bedede.state.internal.AssumingImpl;
 
 
 class AssumingExtension {

@@ -4,7 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
-final class TypeArguments<T> {
+public final class TypeArguments<T> {
 
     private final Object obj;
 
@@ -17,7 +17,8 @@ final class TypeArguments<T> {
         return args.get(index);
     }
 
-    static <T> Class<T> typeArgument(final Object obj) {
+    @Internal
+    public static <T> Class<T> typeArgument(final Object obj) {
         return typeArgument(obj, 0);
     }
 

@@ -2,14 +2,13 @@
 
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.core.CoreExpressions.entry;
-
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
-import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
+import com.github.thogr.bedede.state.Entry;
+import com.github.thogr.bedede.state.StateExpressions;
 
 public class DefiningExampleTest extends BehaviorDriven {
 
@@ -24,7 +23,7 @@ public class DefiningExampleTest extends BehaviorDriven {
 
     public static class Moved {
         public static Entry<Moved> afterPreparation(final int i) {
-            return entry(Moved.class).as().
+            return StateExpressions.entry(Moved.class).as().
                given(Initial.class)
                .when(it -> it.prepares(i))
                .when(it -> it.moves())
@@ -32,7 +31,7 @@ public class DefiningExampleTest extends BehaviorDriven {
         }
 
         @DefaultEntry
-        public static final Entry<Moved> REACHED = entry(Moved.class).as().
+        public static final Entry<Moved> REACHED = StateExpressions.entry(Moved.class).as().
                 given(Initial.class)
                 .when(it -> it.moves())
                 .then(Moved.class);

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.github.thogr.bedede.SeleniumExpressions;
+import com.github.thogr.bedede.state.StateExpressions;
 
 public class ExpectedConditionTest {
 
@@ -23,7 +24,7 @@ public class ExpectedConditionTest {
 
     @Test
     public void test() {
-        given(GoogleSearchPage.class)
+        StateExpressions.given(GoogleSearchPage.class)
         .when(it -> it.searchesFor("Selenium"))
         .then(GoogleResultPage.class)
         .then(it -> it.hasTitle("Selenium"));

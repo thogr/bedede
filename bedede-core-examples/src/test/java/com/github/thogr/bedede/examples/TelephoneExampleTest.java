@@ -1,19 +1,18 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.core.CoreExpressions.entry;
-import static com.github.thogr.bedede.core.CoreExpressions.expecting;
 import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
-import com.github.thogr.bedede.Entry;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.examples.Telephone.Tone;
+import com.github.thogr.bedede.state.Entry;
+import com.github.thogr.bedede.state.StateExpressions;
 
 public class TelephoneExampleTest extends BehaviorDriven {
 
@@ -47,14 +46,14 @@ public class TelephoneExampleTest extends BehaviorDriven {
         }
 
         Expecting<BooleanCondition> hasTone(final Tone tone) {
-            return expecting(phone.getTone() == tone,
+            return StateExpressions.expecting(phone.getTone() == tone,
                     otherwise("Unexpected tone: " + phone.getTone()));
         }
     }
 
     public static class WaitingForFirstDigit extends OffHook {
         public static final Entry<WaitingForFirstDigit> REACHED =
-                entry(WaitingForFirstDigit.class).as().
+                StateExpressions.entry(WaitingForFirstDigit.class).as().
                     given(OnHook.class)
                     .when(user -> user.pickingUpPhone())
                     .then(WaitingForFirstDigit.class);
@@ -68,7 +67,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
     public static class WaitingForMoreDigits extends OffHook  {
 
         public static Entry<WaitingForMoreDigits> afterPressingOneKey(final int key) {
-            return entry(WaitingForMoreDigits.class).as().
+            return StateExpressions.entry(WaitingForMoreDigits.class).as().
                     given(WaitingForFirstDigit.class)
                     .when(user -> user.pressingKeys(key))
                     .then(WaitingForMoreDigits.class);
@@ -89,7 +88,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
 
         Expecting<BooleanCondition> hasDialed(final String number) {
             final String dialedNumber = phone.getDialedNumber();
-            return expecting(dialedNumber.equals(number),
+            return StateExpressions.expecting(dialedNumber.equals(number),
                     otherwise("Unexpected dialed number: " + dialedNumber));
         }
     }
