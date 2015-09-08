@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.examples.countdown;
+package com.github.thogr.bedede.examples.count;
 
 public class Counter {
 

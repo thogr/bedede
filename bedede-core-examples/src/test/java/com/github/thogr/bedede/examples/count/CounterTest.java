@@ -1,6 +1,6 @@
 // CHECKSTYLE:OFF MagicNumber
 
-package com.github.thogr.bedede.examples.countdown;
+package com.github.thogr.bedede.examples.count;
 
 import static com.github.thogr.bedede.core.CoreExpressions.a;
 import static com.github.thogr.bedede.core.CoreExpressions.given;
@@ -29,14 +29,14 @@ public class CounterTest {
 
     @Test
     public void shouldNotBeStoppedWhenStartedAndDecreasedTooFew() {
-        given(startedWith(3))
+        given(startedAt(3))
         .when(performing(Counter::decrease).twice())
         .then(Counter::isStopped, is(false));
     }
 
     @Test
     public void shouldBeStoppedWhenStartedAndDecreasedToZero() {
-        given(startedWith(3))
+        given(startedOn(3))
         .when(decreasing(3))
         .then(Counter::isStopped);
     }
@@ -52,6 +52,17 @@ public class CounterTest {
 
     private BehaviorExpression<Counter> startedWith(final int startval) {
         return given(a(new Counter())).and(a(startval))
+                .with(Counter::start);
+    }
+
+    private BehaviorExpression<Counter> startedAt(final int startval) {
+        return given(a(new Counter()))
+                .with(it -> it.start(startval));
+    }
+
+    private BehaviorExpression<Counter> startedOn(final int startval) {
+        return given(a(new Counter())).and(a(startval))
                 .when(performing(Counter::start));
     }
+
 }

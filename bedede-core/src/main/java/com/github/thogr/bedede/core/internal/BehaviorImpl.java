@@ -33,6 +33,11 @@ abstract class BehaviorImpl<T> implements Behavior<T>, Then<T> {
     @Override
     public final <S> Then<T> then(
             final Function<? super T, ? extends S> it, final Matcher<? super S> is) {
+        return thenItMatches(it, is);
+    }
+
+    <S> Then<T> thenItMatches(
+            final Function<? super T, ? extends S> it, final Matcher<? super S> is) {
         final S result = it.apply(obj);
         assertThat(result, is);
         return new BasicBehaviorExpressionImpl<T>(obj);

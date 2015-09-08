@@ -26,6 +26,10 @@ class GivenBehaviorExpressionImpl<T>
 
     @Override
     public final With<T> with(final ActionExpression<? super T> action) {
+        return performAction(action);
+    }
+
+    With<T> performAction(final ActionExpression<? super T> action) {
         action.perform(getFocusedObject());
         return new GivenBehaviorExpressionImpl<T>(getFocusedObject());
     }
