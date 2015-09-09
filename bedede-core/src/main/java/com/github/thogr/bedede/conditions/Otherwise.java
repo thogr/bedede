@@ -24,7 +24,7 @@ public final class Otherwise extends AbstractMessage {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((getMessage() == null) ? 0 : getMessage().hashCode());
         return result;
     }
     // CHECKSTYLE:ON
@@ -41,11 +41,11 @@ public final class Otherwise extends AbstractMessage {
             return false;
         }
         final Otherwise other = (Otherwise) obj;
-        if (message == null) {
-            if (other.message != null) {
+        if (getMessage() == null) {
+            if (other.getMessage() != null) {
                 return false;
             }
-        } else if (!message.equals(other.message)) {
+        } else if (!getMessage().equals(other.getMessage())) {
             return false;
         }
         return true;
