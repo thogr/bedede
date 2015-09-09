@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.state.internal;
 
-import com.github.thogr.bedede.conditions.ConditionVerifier;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
+import com.github.thogr.bedede.conditions.internal.ConditionVerifier;
 import com.github.thogr.bedede.core.internal.Internal;
 
 public abstract class ExpectingImpl<T> extends Expecting<T> {

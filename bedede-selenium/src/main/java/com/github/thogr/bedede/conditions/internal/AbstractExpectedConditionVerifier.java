@@ -1,10 +1,12 @@
-package com.github.thogr.bedede.conditions;
+package com.github.thogr.bedede.conditions.internal;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.thogr.bedede.SeleniumExpressions;
+import com.github.thogr.bedede.conditions.Otherwise;
+import com.github.thogr.bedede.conditions.internal.ConditionVerifier;
 import com.github.thogr.bedede.core.internal.Internal;
 
 public abstract class AbstractExpectedConditionVerifier<T>

@@ -2,8 +2,8 @@ package com.github.thogr.bedede.state.internal;
 
 import java.util.ServiceLoader;
 
-import com.github.thogr.bedede.conditions.ConditionProvider;
-import com.github.thogr.bedede.conditions.ConditionVerifier;
+import com.github.thogr.bedede.conditions.internal.ConditionProvider;
+import com.github.thogr.bedede.conditions.internal.ConditionVerifier;
 import com.github.thogr.bedede.core.internal.Internal;
 
 @Internal

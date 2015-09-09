@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.conditions;
+package com.github.thogr.bedede.conditions.internal;
 
 
 public final class BooleanConditionProvider implements ConditionProvider {

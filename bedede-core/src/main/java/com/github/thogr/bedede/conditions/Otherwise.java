@@ -1,15 +1,12 @@
 package com.github.thogr.bedede.conditions;
 
+import com.github.thogr.bedede.conditions.internal.AbstractMessage;
 
-public final class Otherwise {
-    private final String message;
+
+public final class Otherwise extends AbstractMessage {
 
     private Otherwise(final String message) {
-        this.message = message;
-    }
-
-    String getMessage() {
-        return message;
+        super(message);
     }
 
     /**

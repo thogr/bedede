@@ -1,4 +1,6 @@
-package com.github.thogr.bedede.conditions;
+package com.github.thogr.bedede.conditions.internal;
+
+import com.github.thogr.bedede.conditions.Otherwise;
 
 
 public interface ConditionVerifier <T> {

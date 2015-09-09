@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.thogr.bedede.conditions.BooleanCondition;
-import com.github.thogr.bedede.conditions.ConditionVerifier;
+import com.github.thogr.bedede.conditions.internal.ConditionVerifier;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpectingTest {
