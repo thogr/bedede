@@ -15,8 +15,20 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.CoreExpressions;
-import com.github.thogr.bedede.mocks.MockExpressions;
+import com.github.thogr.bedede.conditions.Otherwise;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.AnObject;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.BiActionExpression;
+import com.github.thogr.bedede.core.BiPerforming;
+import com.github.thogr.bedede.core.BiTransforming;
+import com.github.thogr.bedede.core.Given;
+import com.github.thogr.bedede.core.GivenPrefix;
+import com.github.thogr.bedede.core.Performing;
+import com.github.thogr.bedede.core.Then;
+import com.github.thogr.bedede.core.Transforming;
+import com.github.thogr.bedede.core.internal.Proxy;
+import com.github.thogr.bedede.internal.ExpressionsImpl;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 import com.github.thogr.bedede.state.Assuming;
@@ -26,85 +38,27 @@ import com.github.thogr.bedede.state.StateExpressions;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
 
 
-public abstract class Expressions {
+public final class Expressions {
 
-    // CoreExpressions
+    private Expressions() {
+    }
+
+    private static ExpressionsImpl expressions = new ExpressionsImpl(new Expressions());
+
+    // Expressions
     //-----------------------------------------------------------------
-
-    /**
-     * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
-     * <p>Example:<p>
-     * <pre>
-     *   &#64;OnEntry
-     *   public Expecting<BooleanCondition> shouldBeLocked() {
-     *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
-     *   }
-     * </pre>
-     * @param condition the boolean condition
-     * @param otherwise description of otherwise
-     * @return the expecting
-     */
-    public static Expecting<BooleanCondition> expecting(
-    final Boolean condition, final Otherwise otherwise) {
-        return StateExpressions.expecting(condition, otherwise);
-    }
-
-    /**
-     * Wraps a description of the unexpected
-     * @see StateExpressions#expecting(Boolean, Otherwise)
-     * @param message the text to be used as error message
-     * @return the wrapped description
-     */
-    public static Otherwise otherwise(final String message) {
-        return CoreExpressions.otherwise(message);
-    }
-
-    /**
-     * Start defining an entry.
-     * @param state the state class, where the entry should be
-     * @param <T> the type of the state class
-     * @return the start (to be continued) defining the entry
-     */
-    public static <T> DefiningEntry<T> entry(final Class<T> state) {
-        return StateExpressions.entry(state);
-    }
 
     /**
      * Start defining a behavior.
      * @return the prefix for continued definition of the behavior
      */
     public static GivenPrefix given() {
-        return CoreExpressions.given();
+        return expressions.given();
     }
 
-    /**
-     * Sets the starting point for the further actions. If the state is
-     * not the current assumed state it will possibly perform the actions needed to get
-     * there, if the target state class has a declared default Entry.
-     * The default Entry must be a public static field of type Entry&lt;T&gt; in the target
-     * class, where T is the target class type.
-     * If the class has more than one such field, one (and only one) must be annotated
-     * with &#64;DefaultEntry.
-     * @see Entry
-     * @param <T> the type of state
-     * @param state starting point for the coming actions
-     * @return an Assuming which has methods to further actions.
-     */
-    public static <T> Assuming<T> given(final Class<T> state) {
-        return StateExpressions.given(state);
-    }
+    // CoreExpressions
+    //-----------------------------------------------------------------
 
-    /**
-     * Sets the starting point for the further actions. If the state is
-     * not the current assumed state it will perform the actions needed to get
-     * there, as specified by the entry.
-     * @param entry the entry that should be performed
-     * @param <T> the type of state
-     * @return an Assuming which has methods to further actions
-     */
-    public static <T> Assuming<T> given(final Entry<T> entry) {
-        return StateExpressions.given(entry);
-    }
 
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test
@@ -149,7 +103,7 @@ public abstract class Expressions {
     /**
      * Wraps an action that operates on an object into a performing expression.
      * The object originates from a given(object) expression.
-     * @see com.github.thogr.bedede.BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
@@ -162,7 +116,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a performing expression.
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
-     * @see com.github.thogr.bedede.BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(PerformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -194,7 +148,7 @@ public abstract class Expressions {
     /**
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
-     * @see com.github.thogr.bedede.BehaviorExpression#when(Transforming)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
@@ -206,7 +160,7 @@ public abstract class Expressions {
 
     /**
      * Wraps an action into a transforming expression.
-     * @see com.github.thogr.bedede.BehaviorExpression#when(Transforming)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(Transforming)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
@@ -220,7 +174,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see com.github.thogr.bedede.ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -236,7 +190,7 @@ public abstract class Expressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see com.github.thogr.bedede.ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransformingImpl)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -330,6 +284,7 @@ public abstract class Expressions {
     * Convenience method corresponding to a call to {@link org.junit.Assert#assertTrue(boolean)}
     * @param expr boolean expression
     * @return the behavior
+    * @see Behavior#then(boolean)
     */
     public static Then<Boolean> then(final boolean expr) {
         return CoreExpressions.then(expr);
@@ -341,6 +296,7 @@ public abstract class Expressions {
      * @param behavior the other (reused) behavior
      * @param <T> the type of the object in focus
      * @return this behavior
+     * @see Behavior#then(Behavior)
      */
     public static <T> Then<T> then(final Behavior<T> behavior) {
         return CoreExpressions.then(behavior);
@@ -355,23 +311,92 @@ public abstract class Expressions {
      * @param mocked the mocked object (wrapped)
      * @param <S> mocking framework dependent type
      * @return the framework dependent continuation
+     * @see Behavior#then(Mocked)
      */
     public static <S> S then(final Mocked<S> mocked) {
         return CoreExpressions.then(mocked);
     }
 
-    // Mocks
+    // StateExpressions
+    //-----------------------------------------------------------------
+
+    /**
+     * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
+     * <p>Example:<p>
+     * <pre>
+     *   &#64;OnEntry
+     *   public Expecting<BooleanCondition> shouldBeLocked() {
+     *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
+     *   }
+     * </pre>
+     * @param condition the boolean condition
+     * @param otherwise description of otherwise
+     * @return the expecting
+     */
+    public static Expecting<BooleanCondition> expecting(
+            final Boolean condition, final Otherwise otherwise) {
+        return StateExpressions.expecting(condition, otherwise);
+    }
+
+    /**
+     * Start defining an entry.
+     * @param state the state class, where the entry should be
+     * @param <T> the type of the state class
+     * @return the start (to be continued) defining the entry
+     */
+    public static <T> DefiningEntry<T> entry(final Class<T> state) {
+        return StateExpressions.entry(state);
+    }
+
+    /**
+     * Sets the starting point for the further actions. If the state is
+     * not the current assumed state it will possibly perform the actions needed to get
+     * there, if the target state class has a declared default Entry.
+     * The default Entry must be a public static field of type Entry&lt;T&gt; in the target
+     * class, where T is the target class type.
+     * If the class has more than one such field, one (and only one) must be annotated
+     * with &#64;DefaultEntry.
+     * @see Entry
+     * @param <T> the type of state
+     * @param state starting point for the coming actions
+     * @return an Assuming which has methods to further actions.
+     */
+    public static <T> Assuming<T> given(final Class<T> state) {
+        return StateExpressions.given(state);
+    }
+
+    /**
+     * Sets the starting point for the further actions. If the state is
+     * not the current assumed state it will perform the actions needed to get
+     * there, as specified by the entry.
+     * @param entry the entry that should be performed
+     * @param <T> the type of state
+     * @return an Assuming which has methods to further actions
+     */
+    public static <T> Assuming<T> given(final Entry<T> entry) {
+        return StateExpressions.given(entry);
+    }
+
+    /**
+     * @see com.github.thogr.bedede.conditions.#otherwise(String)
+     */
+    @Proxy
+    public static Otherwise otherwise(final String message) {
+        return Otherwise.otherwise(message);
+    }
+
+    // MockExpressions
     //-----------------------------------------------------------------
 
     public static <T> That<BDDMyOngoingStubbing<T>> that(final T methodCall) {
-        return MockExpressions.that(methodCall);
+        return MockitoExpressions.that(methodCall);
     }
 
     public static <T> Mocked<BDDMockito.Then<T>> theMocked(final T mock) {
-        return MockExpressions.theMocked(mock);
+        return MockitoExpressions.theMocked(mock);
     }
 
-    // Selenium
+    // SeleniumExpressions
     //-----------------------------------------------------------------
 
     public static <T> GivenElement<T> given(

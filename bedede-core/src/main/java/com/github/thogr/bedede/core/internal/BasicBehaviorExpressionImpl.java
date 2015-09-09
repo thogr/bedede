@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.Behavior;
+import com.github.thogr.bedede.core.Behavior;
 
 
 final class BasicBehaviorExpressionImpl<T> extends BehaviorExpressionImpl<T> {

@@ -3,7 +3,7 @@ package com.github.thogr.bedede.state.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.thogr.bedede.ActionExpression;
+import com.github.thogr.bedede.core.ActionExpression;
 import com.github.thogr.bedede.core.internal.Internal;
 import com.github.thogr.bedede.state.Entry;
 

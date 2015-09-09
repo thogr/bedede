@@ -4,30 +4,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.conditions.Otherwise;
+import com.github.thogr.bedede.selenium.internal.SeleniumExpressionsImpl;
 import com.github.thogr.bedede.state.GivenElement;
+import com.github.thogr.bedede.state.StateExpressions;
 
-public final class SeleniumExpressions extends CoreExpressions {
+public final class SeleniumExpressions extends StateExpressions {
+
+    private static SeleniumExpressionsImpl impl =
+            new SeleniumExpressionsImpl(new SeleniumExpressions());
 
     private SeleniumExpressions() {
     }
 
     public static <T> GivenElement<T> given(
             final Expecting<ExpectedCondition<T>> precondition) {
-       return SeleniumExpressionsImplementations.given(precondition);
+       return impl.given(precondition);
     }
 
     public static <T> Expecting<ExpectedCondition<T>> expecting(
             final ExpectedCondition<T> condition, final Otherwise otherwise) {
-                return SeleniumExpressionsImplementations.expecting(condition,
+                return impl.expecting(condition,
                         otherwise);
     }
 
     public static WebDriver getWebDriver() {
-        return SeleniumExpressionsImplementations.getWebDriver();
+        return impl.getWebDriver();
     }
 
     public static void setWebDriver(final WebDriver webdriver) {
-        SeleniumExpressionsImplementations.setWebDriver(webdriver);
+        impl.setWebDriver(webdriver);
     }
 }

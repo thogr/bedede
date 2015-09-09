@@ -2,15 +2,15 @@
 
 package com.github.thogr.bedede.examples.count;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.Performing;
+import com.github.thogr.bedede.core.BehaviorExpression;
+import com.github.thogr.bedede.core.Performing;
 
 public class CounterTest {
 

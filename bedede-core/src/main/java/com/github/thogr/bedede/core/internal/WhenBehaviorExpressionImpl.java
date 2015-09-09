@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.Times;
-import com.github.thogr.bedede.WhenPerforming;
+import com.github.thogr.bedede.core.Times;
+import com.github.thogr.bedede.core.WhenPerforming;
 
 /**
  * The result of a non-transforming when() expression.

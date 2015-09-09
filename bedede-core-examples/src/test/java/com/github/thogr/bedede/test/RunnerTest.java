@@ -2,19 +2,19 @@
 
 package com.github.thogr.bedede.test;
 
-import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
+import static com.github.thogr.bedede.state.StateExpressions.expecting;
+import static com.github.thogr.bedede.state.StateExpressions.otherwise;
 
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.thogr.bedede.BehaviorRunner;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.BehaviorRunner;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.StateExpressions;
 
 public class RunnerTest {
 
@@ -36,12 +36,12 @@ public class RunnerTest {
 
         Expecting<BooleanCondition> isDone(final String test) {
             System.out.println(test + ": It's Done!");
-            return StateExpressions.expecting(true, otherwise("WTF!"));
+            return expecting(true, otherwise("WTF!"));
         }
 
         @OnEntry
         Expecting<BooleanCondition> isOnEntry() {
-            return StateExpressions.expecting(state == 1, otherwise("Wrong state"));
+            return expecting(state == 1, otherwise("Wrong state"));
         }
 
         public void moves() {
@@ -64,7 +64,7 @@ public class RunnerTest {
 
         @OnEntry
         Expecting<BooleanCondition> isOnEntry() {
-            return StateExpressions.expecting(state == 2, otherwise("Wrong state"));
+            return expecting(state == 2, otherwise("Wrong state"));
         }
 
         void doesSomething() {
@@ -73,7 +73,7 @@ public class RunnerTest {
         }
 
         Expecting<BooleanCondition> hasValue(final int val) {
-            return StateExpressions.expecting(val == internal, otherwise("Wrong value: " + val));
+            return expecting(val == internal, otherwise("Wrong value: " + val));
         }
 
     }

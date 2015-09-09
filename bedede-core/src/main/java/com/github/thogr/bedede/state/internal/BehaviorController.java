@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.state.internal;
 
-import com.github.thogr.bedede.ActionExpression;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.ExpectingExpression;
+import com.github.thogr.bedede.core.ActionExpression;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.ThenExpecting;

@@ -1,4 +1,4 @@
 moduleName=bedede-goovy-module
 moduleVersion=1.0
-extensionClasses=com.github.thogr.bedede.EntryExtension,com.github.thogr.bedede.BehaviorDrivenExtension,com.github.thogr.bedede.AssumingExtension
-staticExtensionClasses=com.github.thogr.bedede.EntryStaticExtension,com.github.thogr.bedede.core.GroovyCoreExpressions
+extensionClasses=com.github.thogr.bedede.support.EntryExtension,com.github.thogr.bedede.support.BehaviorDrivenExtension,com.github.thogr.bedede.support.AssumingExtension
+staticExtensionClasses=com.github.thogr.support.EntryStaticExtension,com.github.thogr.bedede.GroovyCoreExpressions

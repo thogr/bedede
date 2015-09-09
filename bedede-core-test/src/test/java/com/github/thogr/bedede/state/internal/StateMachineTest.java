@@ -1,11 +1,11 @@
 package com.github.thogr.bedede.state.internal;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.it;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static com.github.thogr.bedede.core.CoreExpressions.retrieving;
-import static com.github.thogr.bedede.mocks.MockExpressions.that;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.it;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.retrieving;
+import static com.github.thogr.bedede.MockitoExpressions.that;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
@@ -21,13 +21,9 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.Given;
 import com.github.thogr.bedede.annotations.InitialState;
-import com.github.thogr.bedede.state.internal.ConditionController;
-import com.github.thogr.bedede.state.internal.InitialStateFactory;
-import com.github.thogr.bedede.state.internal.StateFactory;
-import com.github.thogr.bedede.state.internal.StateMachineImpl;
+import com.github.thogr.bedede.core.BehaviorExpression;
+import com.github.thogr.bedede.core.Given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StateMachineTest {

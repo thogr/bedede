@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.ActionExpression;
-import com.github.thogr.bedede.Performing;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.Performing;
 
 final class PerformingImpl<T> extends Performing<T> {
     private ActionExpression<T> action;

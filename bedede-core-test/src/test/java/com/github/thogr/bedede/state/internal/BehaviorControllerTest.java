@@ -1,10 +1,10 @@
 package com.github.thogr.bedede.state.internal;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.retrieving;
-import static com.github.thogr.bedede.mocks.MockExpressions.that;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.retrieving;
+import static com.github.thogr.bedede.MockitoExpressions.that;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.never;
 
@@ -19,10 +19,6 @@ import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.internal.AbstractAssumedState;
-import com.github.thogr.bedede.state.internal.BehaviorController;
-import com.github.thogr.bedede.state.internal.ConditionController;
-import com.github.thogr.bedede.state.internal.StateMachine;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BehaviorControllerTest {

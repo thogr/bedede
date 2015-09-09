@@ -2,11 +2,11 @@ package com.github.thogr.bedede.state.internal;
 
 import org.hamcrest.Matcher;
 
-import com.github.thogr.bedede.AnObject;
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.Given;
-import com.github.thogr.bedede.Then;
-import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.core.AnObject;
+import com.github.thogr.bedede.core.BehaviorExpression;
+import com.github.thogr.bedede.core.Given;
+import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.ThenExpecting;

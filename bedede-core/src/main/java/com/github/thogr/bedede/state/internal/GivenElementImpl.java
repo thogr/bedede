@@ -2,9 +2,9 @@ package com.github.thogr.bedede.state.internal;
 
 import static com.github.thogr.bedede.state.internal.Framework.createConditionController;
 
-import com.github.thogr.bedede.ActionExpression;
-import com.github.thogr.bedede.WhenElement;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.WhenElement;
 import com.github.thogr.bedede.core.internal.Internal;
 import com.github.thogr.bedede.state.GivenElement;
 import com.github.thogr.bedede.state.ThenExpectingElement;

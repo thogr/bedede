@@ -6,15 +6,15 @@ import java.util.function.BiFunction;
 
 import org.hamcrest.Matcher;
 
-import com.github.thogr.bedede.ActionExpression;
-import com.github.thogr.bedede.BiActionExpression;
-import com.github.thogr.bedede.BiPerforming;
-import com.github.thogr.bedede.BiTransforming;
-import com.github.thogr.bedede.SecondGiven;
-import com.github.thogr.bedede.SecondWith;
-import com.github.thogr.bedede.ThenItMatches;
-import com.github.thogr.bedede.WhenBiPerforming;
-import com.github.thogr.bedede.WhenBiTransforming;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.BiActionExpression;
+import com.github.thogr.bedede.core.BiPerforming;
+import com.github.thogr.bedede.core.BiTransforming;
+import com.github.thogr.bedede.core.SecondGiven;
+import com.github.thogr.bedede.core.SecondWith;
+import com.github.thogr.bedede.core.ThenItMatches;
+import com.github.thogr.bedede.core.WhenBiPerforming;
+import com.github.thogr.bedede.core.WhenBiTransforming;
 
 class SecondBehaviorExpressionImpl<T1, T2>
     extends BehaviorExpressionImpl<T1>

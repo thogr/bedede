@@ -1,7 +1,9 @@
 package com.github.thogr.bedede.examples.door;
 
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
+import static com.github.thogr.bedede.state.StateExpressions.entry;
+import static com.github.thogr.bedede.state.StateExpressions.expecting;
+import static com.github.thogr.bedede.state.StateExpressions.given;
+import static com.github.thogr.bedede.state.StateExpressions.otherwise;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,6 @@ import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.StateExpressions;
 
 public class DoorExampleTest {
 
@@ -28,10 +29,12 @@ public class DoorExampleTest {
             door.turnKey(key);
         }
 
+        /** Opens the door */
         public void opens() {
             door.open();
         }
 
+        /** Closes the door */
         public void close() {
             door.close();
         }
@@ -47,11 +50,11 @@ public class DoorExampleTest {
 
         @OnEntry
         public Expecting<BooleanCondition> shouldBeLocked() {
-            return StateExpressions.expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
+            return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
         }
 
         public static Entry<DoorLocked> byLockingWith(final Key key) {
-            return StateExpressions.entry(DoorLocked.class).as()
+            return entry(DoorLocked.class).as()
                     .given(DoorUnlocked.class)
                     .when(it -> it.turnsKey(key))
                     .then(DoorLocked.class);
@@ -66,7 +69,7 @@ public class DoorExampleTest {
         }
 
         public static final Entry<DoorUnlocked> byUnlockingWith(final Key key) {
-            return StateExpressions.entry(DoorUnlocked.class).as()
+            return entry(DoorUnlocked.class).as()
                     .given(DoorLocked.class)
                     .when(it -> it.turnsKey(key))
                     .then(DoorUnlocked.class);
@@ -74,7 +77,7 @@ public class DoorExampleTest {
 
         @OnEntry
         public Expecting<BooleanCondition> shouldBeUnlocked() {
-            return StateExpressions.expecting(!door.isLocked(), otherwise("Unexpected locked door"));
+            return expecting(!door.isLocked(), otherwise("Unexpected locked door"));
         }
     }
 
@@ -82,7 +85,7 @@ public class DoorExampleTest {
 
         @DefaultEntry
         public static Entry<DoorOpen> byUnlockingFirst() {
-            return StateExpressions.entry(DoorOpen.class).as()
+            return entry(DoorOpen.class).as()
                     .given(DoorUnlocked.class)
                     .when(it -> it.opens())
                     .then(DoorOpen.class);
@@ -90,34 +93,34 @@ public class DoorExampleTest {
 
         @OnEntry
         public Expecting<BooleanCondition> shouldBeOpen() {
-            return StateExpressions.expecting(door.isOpen(), otherwise("Unexpected closed door"));
+            return expecting(door.isOpen(), otherwise("Unexpected closed door"));
         }
     }
 
     @Test
     public void shouldNotLockWithWrongKey() {
-        StateExpressions.given(DoorUnlocked.class)
+        given(DoorUnlocked.class)
         .when(it -> it.turnsKey(WRONG_KEY))
         .then(DoorUnlocked.class);
     }
 
     @Test
     public void shouldNotUnlockWithWrongKey() {
-        given().at(DoorLocked.class)
+        given(DoorLocked.class)
         .when(it -> it.turnsKey(WRONG_KEY))
         .then(DoorLocked.class);
     }
 
     @Test
     public void shouldNotUnlockWithWrongKeyAgain() {
-        given().at(DoorLocked.byLockingWith(CORRECT_KEY))
+        given(DoorLocked.byLockingWith(CORRECT_KEY))
         .when(it -> it.turnsKey(WRONG_KEY))
         .then(DoorLocked.class);
     }
 
     @Test
     public void shouldNotCloseWhenLocked() throws Exception {
-        given().at(DoorOpen.class)
+        given(DoorOpen.class)
         .when(it -> it.turnsKey(CORRECT_KEY))
         .when(DoorState::close)
         .then(DoorOpen.class);
@@ -125,7 +128,7 @@ public class DoorExampleTest {
 
     @Test
     public void shouldCloseWhenWrongKey() throws Exception {
-        given().at(DoorOpen.class)
+        given(DoorOpen.class)
         .when(it -> it.turnsKey(WRONG_KEY))
         .when(DoorState::close)
         .then(DoorUnlocked.class);

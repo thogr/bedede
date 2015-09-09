@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.examples.circuit;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;

@@ -13,18 +13,16 @@ import java.util.function.Predicate;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 
-import com.github.thogr.bedede.ActionExpression;
-import com.github.thogr.bedede.AnObject;
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.BiActionExpression;
-import com.github.thogr.bedede.Given;
-import com.github.thogr.bedede.GivenPrefix;
-import com.github.thogr.bedede.Otherwise;
-import com.github.thogr.bedede.Performing;
-import com.github.thogr.bedede.Then;
-import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.AnObject;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.BehaviorExpression;
+import com.github.thogr.bedede.core.BiActionExpression;
+import com.github.thogr.bedede.core.Given;
+import com.github.thogr.bedede.core.Performing;
+import com.github.thogr.bedede.core.Then;
+import com.github.thogr.bedede.core.Transforming;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 
@@ -36,16 +34,6 @@ public final class CoreExpressionsImpl {
         if (core == null) {
             throw new NullPointerException();
         }
-    }
-
-    @Internal
-    public Otherwise otherwise(final String message) {
-        return Otherwise.otherwise(message);
-    }
-
-    @Internal
-    public GivenPrefix given() {
-        return new GivenPrefixImpl();
     }
 
     @Internal

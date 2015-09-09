@@ -16,8 +16,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
-import com.github.thogr.bedede.core.CoreExpressions;
-import com.github.thogr.bedede.mocks.MockExpressions;
+import com.github.thogr.bedede.state.StateExpressions;
 
 public class ExpressionsTest {
 
@@ -25,12 +24,13 @@ public class ExpressionsTest {
     public void shouldHaveAllMethods() {
         given().the(Expressions.class)
         .when(retrieving(ExpressionsTest::allPublicStaticMethods))
-        .then(it(), containsAllMethodsIn(allPublicStaticMethods(MockExpressions.class)))
+        .then(it(), containsAllMethodsIn(allPublicStaticMethods(MockitoExpressions.class)))
+        .then(it(), containsAllMethodsIn(allPublicStaticMethods(StateExpressions.class)))
         .then(it(), containsAllMethodsIn(allPublicStaticMethods(SeleniumExpressions.class)))
         .then(it(), containsAllMethodsIn(allPublicStaticMethods(CoreExpressions.class)));
     }
 
-    public static Matcher<List<Method>> containsAllMethodsIn(final List<Method> methods) {
+    private static Matcher<List<Method>> containsAllMethodsIn(final List<Method> methods) {
         return new ContainsAllMethodsIn(methods);
     }
 
@@ -44,11 +44,11 @@ public class ExpressionsTest {
 
         @Override
         protected void describeMismatchSafely(
-                final List<Method> item, final Description mismatchDescription) {
+                final List<Method> allMethods, final Description mismatchDescription) {
 
-            methods.stream().forEach(it -> {
-                if (!contains(item, it)) {
-                    mismatchDescription.appendText("\nIt does not contain: " + it);
+            methods.stream().forEach(method -> {
+                if (!contains(allMethods, method)) {
+                    mismatchDescription.appendText("\nIt does not contain: " + method);
                 }
             });
         }
@@ -59,8 +59,11 @@ public class ExpressionsTest {
         }
 
         private static boolean equalMethods(final Method m1, final Method m2) {
-            return equalNames(m1, m2) &&
-                    equalTypes(m1.getParameterTypes(), m2.getParameterTypes());
+            return equalNames(m1, m2) && equalParameterTypes(m1, m2);
+        }
+
+        private static boolean equalParameterTypes(final Method m1, final Method m2) {
+            return equalTypes(m1.getParameterTypes(), m2.getParameterTypes());
         }
 
         private static boolean equalTypes(final Class<?>[] type1, final Class<?>[] type2) {
@@ -90,12 +93,17 @@ public class ExpressionsTest {
     }
 
     private static List<Method> allPublicStaticMethods(final Class<?> expressionsClass) {
+        System.out.println(expressionsClass.getName() + " has:");
         final Method[] methods = expressionsClass.getDeclaredMethods();
         final Predicate<Method> isPublicStatic =
                 (it -> Modifier.isPublic(it.getModifiers()) &&
                         Modifier.isStatic(it.getModifiers()));
 
-        return Stream.of(methods).filter(isPublicStatic).collect(toList());
+        final List<Method> list = Stream.of(methods).filter(isPublicStatic).collect(toList());
+        for (final Method m : list) {
+            System.out.println("   " + m.getName());
+        }
+        return list;
     }
 
 }

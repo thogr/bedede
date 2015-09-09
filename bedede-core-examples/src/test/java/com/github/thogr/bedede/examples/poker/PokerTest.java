@@ -1,10 +1,10 @@
 package com.github.thogr.bedede.examples.poker;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.it;
-import static com.github.thogr.bedede.core.CoreExpressions.the;
-import static com.github.thogr.bedede.core.CoreExpressions.transforming;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.it;
+import static com.github.thogr.bedede.CoreExpressions.the;
+import static com.github.thogr.bedede.CoreExpressions.transforming;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.equalTo;

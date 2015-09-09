@@ -1,7 +1,5 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -8,14 +8,14 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.Performing;
-import com.github.thogr.bedede.Then;
-import com.github.thogr.bedede.ThenMatches;
-import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.WhenPerforming;
-import com.github.thogr.bedede.WhenTransforming;
-import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.Performing;
+import com.github.thogr.bedede.core.Then;
+import com.github.thogr.bedede.core.ThenMatches;
+import com.github.thogr.bedede.core.Transforming;
+import com.github.thogr.bedede.core.WhenPerforming;
+import com.github.thogr.bedede.core.WhenTransforming;
 import com.github.thogr.bedede.mocks.Mocked;
 
 class TransformedBehaviorExpressionImpl<T, S> implements WhenTransforming<T, S>, ThenMatches<T, S> {

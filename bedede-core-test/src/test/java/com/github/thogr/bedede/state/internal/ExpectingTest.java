@@ -1,12 +1,13 @@
 package com.github.thogr.bedede.state.internal;
 
-import static com.github.thogr.bedede.core.CoreExpressions.an;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static com.github.thogr.bedede.core.CoreExpressions.then;
-import static com.github.thogr.bedede.core.CoreExpressions.transforming;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.an;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.then;
+import static com.github.thogr.bedede.CoreExpressions.transforming;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
+import static com.github.thogr.bedede.state.StateExpressions.expecting;
+import static com.github.thogr.bedede.state.StateExpressions.otherwise;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 
@@ -17,8 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.ConditionVerifier;
-import com.github.thogr.bedede.state.StateExpressions;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpectingTest {
@@ -28,8 +27,8 @@ public class ExpectingTest {
 
     @Test
     public void shouldVerifyBothOperands() {
-        given(an(StateExpressions.expecting(true, otherwise("left!"))))
-        .and(an(StateExpressions.expecting(false, otherwise("right!"))))
+        given(an(expecting(true, otherwise("left!"))))
+        .and(an(expecting(false, otherwise("right!"))))
         .when(transforming((first, second)->first.and(second)))
         .when(performing(result -> {
             final Verifiable<BooleanCondition> it = result;

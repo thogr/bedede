@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 import org.hamcrest.Matcher;
 
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.Then;
-import com.github.thogr.bedede.core.CoreExpressions;
+import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.mocks.Mocked;
 
 abstract class BehaviorImpl<T> implements Behavior<T>, Then<T> {

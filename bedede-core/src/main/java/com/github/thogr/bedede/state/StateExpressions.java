@@ -1,16 +1,15 @@
 package com.github.thogr.bedede.state;
 
-import com.github.thogr.bedede.Otherwise;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.internal.Internal;
+import com.github.thogr.bedede.conditions.Otherwise;
+import com.github.thogr.bedede.core.internal.Proxy;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
-import com.github.thogr.bedede.state.internal.GivenElementImpl;
 import com.github.thogr.bedede.state.internal.StateExpressionsImpl;
 
-public final class StateExpressions {
+public class StateExpressions {
 
-    private StateExpressions() {
+    protected StateExpressions() {
 
     }
 
@@ -73,8 +72,11 @@ public final class StateExpressions {
         return impl.given(entry);
     }
 
-	@Internal
-	public static <E> GivenElement<E> given(final Expecting<?> precondition) {
-	    return GivenElementImpl.<E>given(precondition);
-	}
+    /**
+     * @see com.github.thogr.bedede.conditions.#otherwise(String)
+     */
+    @Proxy
+    public static Otherwise otherwise(final String message) {
+        return Otherwise.otherwise(message);
+    }
 }

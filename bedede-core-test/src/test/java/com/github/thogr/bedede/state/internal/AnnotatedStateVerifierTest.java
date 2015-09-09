@@ -1,11 +1,10 @@
 package com.github.thogr.bedede.state.internal;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.otherwise;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static com.github.thogr.bedede.core.CoreExpressions.then;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.CoreExpressions.then;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
@@ -17,10 +16,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.github.thogr.bedede.Behavior;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
+import com.github.thogr.bedede.core.Behavior;
 import com.github.thogr.bedede.state.StateExpressions;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -51,7 +50,7 @@ public class AnnotatedStateVerifierTest {
 
     public static class StateWithEntryCondition {
         private static Expecting<BooleanCondition> condition =
-                StateExpressions.expecting(true, otherwise("Very, very wrong"));
+                StateExpressions.expecting(true, StateExpressions.otherwise("Very, very wrong"));
 
         @OnEntry
         public Expecting<BooleanCondition> entryMethod() {

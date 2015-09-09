@@ -2,12 +2,12 @@
 
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.it;
-import static com.github.thogr.bedede.core.CoreExpressions.retrieving;
-import static com.github.thogr.bedede.mocks.MockExpressions.that;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.it;
+import static com.github.thogr.bedede.CoreExpressions.retrieving;
+import static com.github.thogr.bedede.MockitoExpressions.that;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;

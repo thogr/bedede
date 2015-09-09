@@ -2,7 +2,7 @@
 
 package com.github.thogr.bedede.examples.count
 
-import static com.github.thogr.bedede.core.GroovyCoreExpressions.*
+import static com.github.thogr.bedede.GroovyCoreExpressions.*
 import static org.hamcrest.Matchers.is
 
 import org.junit.Test

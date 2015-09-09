@@ -2,12 +2,12 @@
 
 package com.github.thogr.bedede.test;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.a;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-import com.github.thogr.bedede.BehaviorDriven;
+import com.github.thogr.bedede.core.BehaviorDriven;
 
 public class MixedTest extends BehaviorDriven {
 

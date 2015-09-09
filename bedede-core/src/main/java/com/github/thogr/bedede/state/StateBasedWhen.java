@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.state;
 
-import com.github.thogr.bedede.ActionExpression;
+import com.github.thogr.bedede.core.ActionExpression;
 
 public interface StateBasedWhen<S> extends ThenExpecting<S>, ThenAnyTarget {
 

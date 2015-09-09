@@ -1,12 +1,12 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.Performing;
-import com.github.thogr.bedede.Times;
-import com.github.thogr.bedede.Transforming;
-import com.github.thogr.bedede.WhenBiTransforming;
-import com.github.thogr.bedede.WhenPerforming;
-import com.github.thogr.bedede.WhenTransforming;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.Performing;
+import com.github.thogr.bedede.core.Times;
+import com.github.thogr.bedede.core.Transforming;
+import com.github.thogr.bedede.core.WhenBiTransforming;
+import com.github.thogr.bedede.core.WhenPerforming;
+import com.github.thogr.bedede.core.WhenTransforming;
 
 abstract class BehaviorExpressionImpl<T>
     extends BehaviorImpl<T> implements WhenBiTransforming<T>, Times<T> {

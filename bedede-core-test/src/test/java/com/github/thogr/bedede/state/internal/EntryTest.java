@@ -1,9 +1,9 @@
 package com.github.thogr.bedede.state.internal;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
@@ -13,19 +13,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.Performing;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.internal.BehaviorController;
-import com.github.thogr.bedede.state.internal.ConditionController;
-import com.github.thogr.bedede.state.internal.DefaultInitialStateFactory;
-import com.github.thogr.bedede.state.internal.DefaultStateFactory;
-import com.github.thogr.bedede.state.internal.InitialStateFactory;
-import com.github.thogr.bedede.state.internal.StateFactory;
-import com.github.thogr.bedede.state.internal.StateMachine;
-import com.github.thogr.bedede.state.internal.StateMachineImpl;
 import com.github.thogr.bedede.test.View2;
 
 public class EntryTest {

@@ -61,7 +61,7 @@ class GroovyConditionTest {
 
     @Test
     void test() {
-        given().at(GroovySearchPage)
+        given(GroovySearchPage)
         .when{it.searchesFor("Selenium")}
         .then(GroovyResultPage)
         .then{it.hasTitle("Selenium")}

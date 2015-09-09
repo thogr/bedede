@@ -1,9 +1,9 @@
 package com.github.thogr.bedede.examples.circuit;
 
-import static com.github.thogr.bedede.core.CoreExpressions.a;
-import static com.github.thogr.bedede.core.CoreExpressions.given;
-import static com.github.thogr.bedede.core.CoreExpressions.performing;
-import static com.github.thogr.bedede.mocks.MockExpressions.theMocked;
+import static com.github.thogr.bedede.CoreExpressions.a;
+import static com.github.thogr.bedede.CoreExpressions.given;
+import static com.github.thogr.bedede.CoreExpressions.performing;
+import static com.github.thogr.bedede.MockitoExpressions.theMocked;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 

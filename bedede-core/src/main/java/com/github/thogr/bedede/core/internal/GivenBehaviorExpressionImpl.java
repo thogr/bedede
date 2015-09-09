@@ -1,12 +1,12 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.ActionExpression;
-import com.github.thogr.bedede.AnObject;
-import com.github.thogr.bedede.Behavior;
-import com.github.thogr.bedede.BehaviorExpression;
-import com.github.thogr.bedede.Given;
-import com.github.thogr.bedede.SecondGiven;
-import com.github.thogr.bedede.With;
+import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.AnObject;
+import com.github.thogr.bedede.core.Behavior;
+import com.github.thogr.bedede.core.BehaviorExpression;
+import com.github.thogr.bedede.core.Given;
+import com.github.thogr.bedede.core.SecondGiven;
+import com.github.thogr.bedede.core.With;
 
 
 class GivenBehaviorExpressionImpl<T>

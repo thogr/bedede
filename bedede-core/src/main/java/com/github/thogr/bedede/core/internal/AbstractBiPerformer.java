@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
-import com.github.thogr.bedede.BiActionExpression;
+import com.github.thogr.bedede.core.BiActionExpression;
 
 public class AbstractBiPerformer<T1, T2> {
 

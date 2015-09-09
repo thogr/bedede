@@ -2,7 +2,7 @@
 
 package com.github.thogr.bedede.examples.bowling
 
-import static com.github.thogr.bedede.core.GroovyCoreExpressions.*
+import static com.github.thogr.bedede.GroovyCoreExpressions.*
 import static org.hamcrest.CoreMatchers.*
 
 import org.junit.Test
