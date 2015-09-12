@@ -23,7 +23,7 @@ public interface Behavior<T> {
      * @param <S> the type of object returned by the action
      * @param it a function on the current object
      * @param is the matcher
-     * @return the behavior expression
+     * @return the behavior
      */
     <S> Then<T> then(Function<? super T, ? extends S> it, Matcher<? super S> is);
 

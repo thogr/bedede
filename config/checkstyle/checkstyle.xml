@@ -17,6 +17,7 @@
       <property name="allowedAnnotations" value="Test,Before,BeforeClass,After,AfterClass,Override,Internal,Proxy,OnEntry"/>
       <property name="scope" value="public"/>
       <property name="suppressLoadErrors" value="true"/>
+      <property name="ignoreMethodNamesRegex" value="(set|get|is)[A-Z].*"/>
     </module>
     <module name="JavadocType">
       <property name="severity" value="ignore"/>

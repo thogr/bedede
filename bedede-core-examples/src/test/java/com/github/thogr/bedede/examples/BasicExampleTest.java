@@ -17,9 +17,11 @@ public class BasicExampleTest {
     private static class SystemTested {
 
         private int state = 0;
+
         public int getState() {
             return state;
         }
+
         public void doSomeThing() {
             state = 1;
         }

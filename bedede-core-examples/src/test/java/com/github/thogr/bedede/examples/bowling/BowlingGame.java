@@ -3,13 +3,21 @@
 package com.github.thogr.bedede.examples.bowling;
 
 public class BowlingGame {
-    private int[] rolls = new int[21];
+    private final int[] rolls = new int[21];
     private int current = 0;
 
+    /**
+     * A roll that knocked down some pins
+     * @param pins the number of pins knocked down
+     */
     public void roll(final int pins) {
         rolls[current++] = pins;
     }
 
+    /**
+     * Calculates the total score for the game
+     * @return the total score
+     */
     public int score() {
         int total = 0;
         int frameIndex = 0;

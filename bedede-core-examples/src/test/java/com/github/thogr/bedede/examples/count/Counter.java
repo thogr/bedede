@@ -8,10 +8,17 @@ public class Counter {
         return seconds == 0;
     }
 
+    /**
+     * Starts the counter
+     * @param secs initial value
+     */
     public void start(final int secs) {
         this.seconds = secs;
     }
 
+    /**
+     * Decrease the value
+     */
     public void decrease() {
         this.seconds--;
     }

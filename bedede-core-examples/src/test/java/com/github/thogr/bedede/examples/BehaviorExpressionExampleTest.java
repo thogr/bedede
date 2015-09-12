@@ -22,47 +22,6 @@ import org.junit.Test;
 
 public class BehaviorExpressionExampleTest {
 
-    public static class Incrementable {
-        private int value = 0;
-
-        public void increment() {
-            incrementBy(1);
-        }
-
-        public void incrementBy(final int i) {
-            value += i;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    public static class Person {
-        private String firstName = "";
-        private String familyName = "";
-
-        public void setFirstName(final String name) {
-            this.firstName = name;
-        }
-
-        public void setFamilyName(final String name) {
-            this.familyName = name;
-        }
-
-        public String getFullName() {
-            return firstName + " " + familyName;
-        }
-
-        private String getFirstName() {
-            return firstName;
-        }
-
-        private String getFamilyName() {
-            return familyName;
-        }
-    }
-
     @Test
     public void testName() throws Exception {
         given(a(new Person())).with(it -> {

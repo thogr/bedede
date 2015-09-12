@@ -5,6 +5,25 @@ public class Card implements Comparable<Card> {
     private Rank rank;
     private Suite suite;
 
+    /**
+     * Creates a card from a string
+     * @param code the string
+     */
+    public Card(final String code) {
+        if (!code.startsWith("10")) {
+            rank = Rank.valueFrom("" + code.charAt(0));
+            suite = Suite.valueFrom("" + code.charAt(1));
+        } else {
+            rank = Rank.valueFrom("10");
+            suite = Suite.valueFrom(code.substring(2));
+        }
+    }
+
+    /**
+     * Creates a card
+     * @param rank the rank
+     * @param suite the suite
+     */
     public Card(final Rank rank, final Suite suite) {
         this.rank = rank;
         this.suite = suite;
@@ -56,16 +75,6 @@ public class Card implements Comparable<Card> {
         @Override
         public String toString() {
             return str;
-        }
-    }
-
-    public Card(final String code) {
-        if (!code.startsWith("10")) {
-            rank = Rank.valueFrom("" + code.charAt(0));
-            suite = Suite.valueFrom("" + code.charAt(1));
-        } else {
-            rank = Rank.valueFrom("10");
-            suite = Suite.valueFrom(code.substring(2));
         }
     }
 

@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 public class Wire {
 
     private boolean signal;
-    private List<ChangeListener> listeners = new ArrayList<>();
+    private final List<ChangeListener> listeners = new ArrayList<>();
 
     public void setSignal(final boolean signal) {
         this.signal = signal;
@@ -26,6 +26,10 @@ public class Wire {
         return signal;
     }
 
+    /**
+     * Add a ChangeListener to listen for state changes
+     * @param listener the change listener
+     */
     public void addChangeListener(final ChangeListener listener) {
         listeners.add(listener);
         fireStateChanged();

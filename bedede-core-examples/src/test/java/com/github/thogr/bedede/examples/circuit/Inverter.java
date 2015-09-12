@@ -8,6 +8,11 @@ public class Inverter {
     @SuppressWarnings("unused")
     private final Wire out;
 
+    /**
+     * Creates an inverter with two wires, the input and the output wires
+     * @param in the input wire
+     * @param out the output wire
+     */
     public Inverter(final Wire in, final Wire out) {
         this.in = in;
         this.out = out;

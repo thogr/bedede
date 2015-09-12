@@ -15,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.github.thogr.bedede.examples.BehaviorExpressionExampleTest.Incrementable;
-
 @RunWith(MockitoJUnitRunner.class)
 public class MockingExampleTest {
 
