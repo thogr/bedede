@@ -1,6 +1,7 @@
 apply from: rootProject.file("publish.gradle")
 
 dependencies {
+    testCompile project(':bedede-core')
     testCompile project(':bedede-state')
     testCompile project(':bedede-mockito')
     testCompile libraries.junit
