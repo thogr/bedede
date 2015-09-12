@@ -15,9 +15,9 @@ To give you an idea what Bedede is:
 * It supports state-based acceptance tests.
 * Supports Selenium, Mockito, Hamcrest
 
-A problem with many unit tests is that it's hard to tell what is the prepare (given), and that is the
+A problem with many unit tests is that it's hard to tell what is the prepare (given), and what is the
 execution (when). Normally the test starts with a lot of local variable declarations, and some
-method calls. This framework tries to solve this, making the tests read better.
+method calls. This framework tries to solve that, making the tests read better.
 
 ### Behavior expressions
 This is what behavior expressions looks like:
