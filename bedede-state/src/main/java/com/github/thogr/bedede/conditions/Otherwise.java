@@ -11,7 +11,7 @@ public final class Otherwise extends AbstractMessage {
 
     /**
      * Wraps a description of the unexpected
-     * @see com.github.thogr.bedede.state.StateExpressions#expecting(Boolean, Otherwise)
+     * @see com.github.thogr.bedede.StateExpressions#expecting(Boolean, Otherwise)
      * @param message the text to be used as error message
      * @return the wrapped description
      */

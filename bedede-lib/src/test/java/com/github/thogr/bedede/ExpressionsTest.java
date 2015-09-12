@@ -16,8 +16,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
-import com.github.thogr.bedede.state.StateExpressions;
-
 public class ExpressionsTest {
 
     @Test

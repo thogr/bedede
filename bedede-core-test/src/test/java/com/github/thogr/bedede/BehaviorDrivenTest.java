@@ -10,7 +10,6 @@ import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.state.StateExpressions;
 
 public class BehaviorDrivenTest extends BehaviorDriven {
 

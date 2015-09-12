@@ -5,10 +5,10 @@ import org.mockito.BDDMockito.BDDMyOngoingStubbing;
 import com.github.thogr.bedede.CoreExpressions;
 import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.MockitoExpressions;
+import com.github.thogr.bedede.StateExpressions;
 import com.github.thogr.bedede.core.Given;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.StateExpressions;
 
 
 class GivenPrefixImpl implements GivenPrefix {

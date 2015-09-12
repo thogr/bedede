@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.state.StateExpressions.entry;
-import static com.github.thogr.bedede.state.StateExpressions.expecting;
-import static com.github.thogr.bedede.state.StateExpressions.otherwise;
+import static com.github.thogr.bedede.StateExpressions.entry;
+import static com.github.thogr.bedede.StateExpressions.expecting;
+import static com.github.thogr.bedede.StateExpressions.otherwise;
 
 import org.junit.Before;
 import org.junit.Test;

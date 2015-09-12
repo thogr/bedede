@@ -7,7 +7,6 @@ import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
 import com.github.thogr.bedede.selenium.internal.SeleniumExpressionsImpl;
 import com.github.thogr.bedede.state.GivenElement;
-import com.github.thogr.bedede.state.StateExpressions;
 
 public final class SeleniumExpressions extends StateExpressions {
 

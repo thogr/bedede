@@ -16,11 +16,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.github.thogr.bedede.StateExpressions;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.Behavior;
-import com.github.thogr.bedede.state.StateExpressions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AnnotatedStateVerifierTest {

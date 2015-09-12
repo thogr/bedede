@@ -33,7 +33,6 @@ import com.github.thogr.bedede.mocks.That;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.GivenElement;
-import com.github.thogr.bedede.state.StateExpressions;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
 
 

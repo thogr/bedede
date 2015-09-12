@@ -6,8 +6,8 @@ import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.CoreExpressions.then;
 import static com.github.thogr.bedede.CoreExpressions.transforming;
 import static com.github.thogr.bedede.MockitoExpressions.theMocked;
-import static com.github.thogr.bedede.state.StateExpressions.expecting;
-import static com.github.thogr.bedede.state.StateExpressions.otherwise;
+import static com.github.thogr.bedede.StateExpressions.expecting;
+import static com.github.thogr.bedede.StateExpressions.otherwise;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 

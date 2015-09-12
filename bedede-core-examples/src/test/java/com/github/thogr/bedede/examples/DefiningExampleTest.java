@@ -5,10 +5,10 @@ package com.github.thogr.bedede.examples;
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
+import com.github.thogr.bedede.StateExpressions;
 import com.github.thogr.bedede.annotations.DefaultEntry;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.state.Entry;
-import com.github.thogr.bedede.state.StateExpressions;
 
 public class DefiningExampleTest extends BehaviorDriven {
 

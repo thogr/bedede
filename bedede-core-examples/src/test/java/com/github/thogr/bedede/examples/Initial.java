@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.examples;
 
-import static com.github.thogr.bedede.state.StateExpressions.expecting;
-import static com.github.thogr.bedede.state.StateExpressions.otherwise;
+import static com.github.thogr.bedede.StateExpressions.expecting;
+import static com.github.thogr.bedede.StateExpressions.otherwise;
 import static org.junit.Assert.assertTrue;
 
 import com.github.thogr.bedede.annotations.DefaultEntry;

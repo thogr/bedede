@@ -1,9 +1,11 @@
-package com.github.thogr.bedede.state;
+package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
 import com.github.thogr.bedede.core.internal.Proxy;
+import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.state.internal.StateExpressionsImpl;
 

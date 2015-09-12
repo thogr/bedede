@@ -2,8 +2,8 @@
 
 package com.github.thogr.bedede.test;
 
-import static com.github.thogr.bedede.state.StateExpressions.expecting;
-import static com.github.thogr.bedede.state.StateExpressions.otherwise;
+import static com.github.thogr.bedede.StateExpressions.expecting;
+import static com.github.thogr.bedede.StateExpressions.otherwise;
 
 import org.junit.After;
 import org.junit.BeforeClass;

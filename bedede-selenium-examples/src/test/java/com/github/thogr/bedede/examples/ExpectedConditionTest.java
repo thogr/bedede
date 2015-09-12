@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.github.thogr.bedede.SeleniumExpressions;
-import com.github.thogr.bedede.state.StateExpressions;
+import com.github.thogr.bedede.StateExpressions;
 
 public class ExpectedConditionTest {
 
