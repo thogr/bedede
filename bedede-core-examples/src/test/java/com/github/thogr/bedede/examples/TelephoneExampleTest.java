@@ -7,11 +7,11 @@ import static com.github.thogr.bedede.state.StateExpressions.otherwise;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.BehaviorDriven;
 import com.github.thogr.bedede.examples.Telephone.Tone;
 import com.github.thogr.bedede.state.Entry;
 

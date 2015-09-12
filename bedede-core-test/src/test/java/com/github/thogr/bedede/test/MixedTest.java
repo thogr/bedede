@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-import com.github.thogr.bedede.core.BehaviorDriven;
+import com.github.thogr.bedede.BehaviorDriven;
 
 public class MixedTest extends BehaviorDriven {
 

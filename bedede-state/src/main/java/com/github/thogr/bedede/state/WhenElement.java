@@ -1,8 +1,7 @@
-package com.github.thogr.bedede.core;
+package com.github.thogr.bedede.state;
 
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.state.ThenElement;
-import com.github.thogr.bedede.state.ThenExpectingElement;
+import com.github.thogr.bedede.core.ActionExpression;
 
 public interface WhenElement<E> {
 

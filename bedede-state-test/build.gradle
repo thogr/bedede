@@ -1,10 +1,8 @@
 apply from: rootProject.file("publish.gradle")
 
 dependencies {
-    compile project(':bedede-core')
-    compile project(':bedede-state')
-    compile project(':bedede-mockito')
-    compile project(':bedede-selenium')
+    testCompile project(':bedede-state')
+    testCompile project(':bedede-mockito')
     testCompile libraries.junit
     testCompile libraries.mockito
     testCompile libraries.hamcrest

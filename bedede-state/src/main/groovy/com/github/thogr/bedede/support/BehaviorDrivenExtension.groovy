@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.support
 
-import com.github.thogr.bedede.core.BehaviorDriven;
+import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.state.Assuming;
 
 import groovy.transform.*

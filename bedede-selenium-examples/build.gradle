@@ -8,6 +8,7 @@ repositories {
 dependencies {
     //testCompile "com.github.thogr.bedede:bedede-selenium:0.5"
     testCompile project(":bedede-selenium")
+    testCompile project(":bedede-state")
 
 }
 

@@ -2,9 +2,9 @@ package com.github.thogr.bedede.state.internal;
 
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.ActionExpression;
-import com.github.thogr.bedede.core.WhenElement;
 import com.github.thogr.bedede.state.ThenElement;
 import com.github.thogr.bedede.state.ThenExpectingElement;
+import com.github.thogr.bedede.state.WhenElement;
 
 
 public final class WhenElementImpl<E> implements WhenElement<E> {

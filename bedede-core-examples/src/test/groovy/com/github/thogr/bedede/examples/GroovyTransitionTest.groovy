@@ -6,9 +6,9 @@ import static org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 
+import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.annotations.InitialState
 import com.github.thogr.bedede.annotations.OnEntry
-import com.github.thogr.bedede.core.BehaviorDriven;
 
 class GroovyTransitionTest extends BehaviorDriven {
 

@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.BehaviorDriven;
 import com.github.thogr.bedede.state.AbstractState;
 import com.github.thogr.bedede.state.Entry;
 

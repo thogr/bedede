@@ -4,10 +4,10 @@ import static com.github.thogr.bedede.state.internal.Framework.createConditionCo
 
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.core.ActionExpression;
-import com.github.thogr.bedede.core.WhenElement;
 import com.github.thogr.bedede.core.internal.Internal;
 import com.github.thogr.bedede.state.GivenElement;
 import com.github.thogr.bedede.state.ThenExpectingElement;
+import com.github.thogr.bedede.state.WhenElement;
 
 public final class GivenElementImpl<T> implements GivenElement<T> {
 

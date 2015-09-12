@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.github.thogr.bedede.BehaviorRunner;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
-import com.github.thogr.bedede.core.BehaviorRunner;
 import com.github.thogr.bedede.state.Entry;
 
 public class RunnerTest {

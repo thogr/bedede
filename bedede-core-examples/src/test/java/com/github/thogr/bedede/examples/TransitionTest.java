@@ -3,9 +3,9 @@ package com.github.thogr.bedede.examples;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.thogr.bedede.BehaviorDriven;
 import com.github.thogr.bedede.annotations.InitialState;
 import com.github.thogr.bedede.annotations.OnEntry;
-import com.github.thogr.bedede.core.BehaviorDriven;
 
 public class TransitionTest extends BehaviorDriven {
 

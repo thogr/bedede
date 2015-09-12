@@ -1,4 +1,4 @@
-package com.github.thogr.bedede.core;
+package com.github.thogr.bedede;
 
 import com.github.thogr.bedede.state.internal.AbstractBehaviorDriven;
 
