@@ -1,10 +1,6 @@
 # Bedede
-======
-Uncle Bob said:
-> *The Given/When/Then syntax of BDD seemed eerily familiar when I first heard about it several years ago. It’s been tickling at the back of my brain since then. Something about that triplet was trying to resonate with something else in my brain.*
-> *This strange similarity caused me to realize that GIVEN/WHEN/THEN is simply a state transition, and that BDD is really just a way to describe a finite state machine.*
 
-## A simple state based BDD framework for Java
+## Bring BDD to your code
 
 **Note:**
 Currently I'm experimenting a lot. So don't expect a stable API, just yet.
@@ -12,40 +8,23 @@ Currently I'm experimenting a lot. So don't expect a stable API, just yet.
 But, to give you an idea what Bedede is:
 
 * It's a BDD-test framework.
-* It supports State-based tests. (That's very much like Model-based testing, but without the auto-generated tests)
-* But, it also supports "State-less" tests, e.g. unit tests.
-* It's an API for writing BDD tests (i.e. without the textual story telling)
+* But, with a fluent API test framework, not a framework for text based BDD specifications
 * Hence, the BDD keyworks **given**, **when**, and **then** are methods in the API.
-* Designed by the assumption that BDD is really about describing transitions between states in a state machine.
+* The purpose is to make your test code more readable
+* It supports unit tests
+* It supports state-based acceptance tests.
 * Supports Selenium, Mockito, Hamcrest
-
-### State-based tests
-
-State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this framework you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
-The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
-
-Example:
-```java
-given(LockedDoorState.class)
-.when(it -> it.turnsKey())
-.then(UnlockedDoorState.class);
-```
-For testing web applications:
-```java
-given(GoogleSearchPage.class)
-.when(it -> it.searchesFor("Selenium"))
-.then(GoogleResultPage.class)
-.then(it -> it.hasTitle("Selenium"));
-```
 
 ### Behavior expressions
 
 You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, your typical unit test won't. But the framework has behavior expressions, like this:
+
 ``` java
 given(a(new BowlingGame()))
 .when(performing(the -> the.roll(1))).times(20)
 .then(the -> the.score(), is(20));
 ```
+
 Behavior expressions use Hamcrest matchers, as you can see in the example above (last line: the "is(20)").
 As you can see you don't need to declare any local variables, and you need a lot less helper functions, since the code
 reads well as it is.
@@ -59,6 +38,8 @@ reads well as it is.
 ```
 Java 8 has a new feature called Streams, which also works nicely with the framework. This is an example with streams:
  ``` java
+import static com.github.thogr.bedede.Expressions.*;
+
 public class PokerTest {
 
   @Test
@@ -136,7 +117,7 @@ private BehaviorExpression<Counter> startedWith(int startval) {
             .when(performing(Counter::start));
 }
 
-private PerformingExpression<Counter> decreasing(int n) {
+private Performing<Counter> decreasing(int n) {
     return performing(Counter::decrease).times(n);
 }
 
@@ -147,25 +128,35 @@ private BehaviorExpression<Counter> initial() {
 
 ```
 
-### Usage
-#### Gradle
-```groovy
+### State-based tests
+======
+Uncle Bob said:
+> *The Given/When/Then syntax of BDD seemed eerily familiar when I first heard about it several years ago. It’s been tickling at the back of my brain since then. Something about that triplet was trying to resonate with something else in my brain.*
+> *This strange similarity caused me to realize that GIVEN/WHEN/THEN is simply a state transition, and that BDD is really just a way to describe a finite state machine.*
+* Designed by the assumption that BDD is really about describing transitions between states in a state machine.
+* I's very much like Model-based testing, but without the auto-generated tests
+State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this framework you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
+The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
-repositories {
-    maven {
-        url "http://dl.bintray.com/thogr/maven"
-    }
-}
-
-dependencies {
-    testCompile "com.github.thogr.bedede:bedede-core:0.7.1"
-}
+Example:
+```java
+given(LockedDoorState.class)
+.when(it -> it.turnsKey())
+.then(UnlockedDoorState.class);
+```
+For testing web applications:
+```java
+given(GoogleSearchPage.class)
+.when(it -> it.searchesFor("Selenium"))
+.then(GoogleResultPage.class)
+.then(it -> it.hasTitle("Selenium"));
 ```
 
 #### Define States as Java classes
 
 ```java
-import static com.github.thogr.bedede.Bedede.*;
+
+import static com.github.thogr.bedede.Expressions.*;
 
 @InitialState
 public class DoorLocked extends DoorState {
@@ -207,11 +198,11 @@ public static class DoorUnlocked extends DoorState {
 
 ```
 
-#### JUnit Tests
+#### Defaine state based cceptance tests as plain old JUnit Tests
 
 ```java
 
-import static com.github.thogr.bedede.Bedede.*;
+import static com.github.thogr.bedede.Expressions.*;
 
 public class DoorExampleTest {
  //.....
@@ -232,6 +223,20 @@ public class DoorExampleTest {
 }
 ```
 
+### Download
+#### Using Gradle
+```groovy
+
+repositories {
+    maven {
+        url "http://dl.bintray.com/thogr/maven"
+    }
+}
+
+dependencies {
+    testCompile "com.github.thogr.bedede:bedede-lib:0.8"
+}
+```
 ### Links
 
 [Uncle Bob: "The truth about BDD"](https://sites.google.com/site/unclebobconsultingllc/the-truth-about-bdd)
