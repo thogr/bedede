@@ -5,7 +5,7 @@
 **Note:**
 Currently I'm experimenting a lot. So don't expect a stable API, just yet.
 
-But, to give you an idea what Bedede is:
+To give you an idea what Bedede is:
 
 * It's a BDD-test framework.
 * But, with a fluent API test framework, not a framework for text based BDD specifications
@@ -15,19 +15,19 @@ But, to give you an idea what Bedede is:
 * It supports state-based acceptance tests.
 * Supports Selenium, Mockito, Hamcrest
 
+A problem with many unit tests is that it's hard to tell what is the prepare (given), and that is the
+execution (when). Normally the test starts with a lot of local variable declarations, and some
+method calls. This framework tries to solve this, making the tests read better.
+
 ### Behavior expressions
-
-You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, your typical unit test won't. But the framework has behavior expressions, like this:
-
+This is what behavior expressions looks like:
 ``` java
 given(a(new BowlingGame()))
 .when(performing(the -> the.roll(1))).times(20)
 .then(the -> the.score(), is(20));
 ```
-
 Behavior expressions use Hamcrest matchers, as you can see in the example above (last line: the "is(20)").
-As you can see you don't need to declare any local variables, and you need a lot less helper functions, since the code
-reads well as it is.
+One thing about behavior expressions is that you don't need to declare any local variables, and you need a lot less helper functions, since the code reads well as it is.
 ``` java
  given(a(new Person())).with(it -> {
        it.setFirstName("John");
