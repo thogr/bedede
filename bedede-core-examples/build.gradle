@@ -8,6 +8,5 @@ repositories {
 dependencies {
     testCompile libraries.hamcrest
     testCompile project(":bedede-core")
-    testCompile project(":bedede-state")
     testCompile project(":bedede-mockito")
 }

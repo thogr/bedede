@@ -14,6 +14,17 @@ import org.junit.Test;
 
 public class BasicExampleTest {
 
+    private static class SystemTested {
+
+        private int state = 0;
+        public int getState() {
+            return state;
+        }
+        public void doSomeThing() {
+            state = 1;
+        }
+    }
+
     @Test
     public void test1() {
         given(a(new SystemTested()))
