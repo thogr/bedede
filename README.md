@@ -234,7 +234,7 @@ repositories {
 }
 
 dependencies {
-    testCompile "com.github.thogr.bedede:bedede-lib:0.8"
+    testCompile "com.github.thogr.bedede:bedede-lib:0.8.2"
 }
 ```
 ### Links
