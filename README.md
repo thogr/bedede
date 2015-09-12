@@ -133,8 +133,9 @@ private BehaviorExpression<Counter> initial() {
 Uncle Bob said:
 > *The Given/When/Then syntax of BDD seemed eerily familiar when I first heard about it several years ago. It’s been tickling at the back of my brain since then. Something about that triplet was trying to resonate with something else in my brain.*
 > *This strange similarity caused me to realize that GIVEN/WHEN/THEN is simply a state transition, and that BDD is really just a way to describe a finite state machine.*
-* Designed by the assumption that BDD is really about describing transitions between states in a state machine.
-* I's very much like Model-based testing, but without the auto-generated tests
+
+* It's designed by the assumption that BDD is really about describing transitions between states in a state machine.
+* It's very much like Model-based testing, but without the auto-generated tests
 State-based testing is when you define the expected behavior of a system in terms of a state machine. That's just like model based testing. But in this framework you define the states as classes, and its actions as methods. The tests are the written as given-when-then rules.
 The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an expected transition from state S1 to S2 when the `action()` is performed. As the `action()` method is defined in the S1 class it can only be performed in state S1.
 
