@@ -19,7 +19,7 @@ public interface WithBehaviorExpression<T> {
      *   .when(retrieving(Person::getFullName))
      *   .then(it(), is("John Smith"));
      * </pre>
-     * @see com.github.thogr.bedede.core.BehaviorExpression#when(PerformingExpression)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(Performing)
      * @param action the action to be performed
      * @return a new expression where the current object in focus is the same
      */

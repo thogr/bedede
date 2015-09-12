@@ -5,10 +5,10 @@ import com.github.thogr.bedede.state.internal.AbstractInternalEntry;
 
 /**
  * The behavior needed reach a target state.
- * The method {@link #perform()} is the implementation.
+ * The method perform() is the implementation.
  * Typically the first step is to refer to some other Entry,
- * by calling {@link #given(Entry)},
- * and then some actions, and finally a call to {@link #then(Class)}
+ * by calling given(Entry),
+ * and then some actions, and finally a call to then(Class)
  *
  * <br><b>Example:</b>
  * <pre>

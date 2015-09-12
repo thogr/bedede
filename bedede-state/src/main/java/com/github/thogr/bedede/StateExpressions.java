@@ -3,7 +3,6 @@ package com.github.thogr.bedede;
 import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
-import com.github.thogr.bedede.core.internal.Proxy;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
@@ -19,10 +18,10 @@ public class StateExpressions {
 
     /**
      * Creates an "expecting" using a boolean condition. Typically in an &#64;OnEntry method.
-     * <p>Example:<p>
+     * <p>Example:</p>
      * <pre>
      *   &#64;OnEntry
-     *   public Expecting<BooleanCondition> shouldBeLocked() {
+     *   public Expecting&lt;BooleanCondition&gt; shouldBeLocked() {
      *       return expecting(door.isLocked(), otherwise("Unexpected unlocked door"));
      *   }
      * </pre>
@@ -75,9 +74,10 @@ public class StateExpressions {
     }
 
     /**
-     * @see com.github.thogr.bedede.conditions.#otherwise(String)
+     * @see com.github.thogr.bedede.conditions.Otherwise#otherwise(String)
+     * @param message the text to be used as error message
+     * @return the wrapped description
      */
-    @Proxy
     public static Otherwise otherwise(final String message) {
         return Otherwise.otherwise(message);
     }

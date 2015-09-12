@@ -38,8 +38,9 @@ public class CoreExpressions {
      * The starting environment is the object in focus, which further when() and then() expressions
      * will operate on.
      * <p><b>Syntax:</b></p>
+     * <pre>
      * given(a(new Something()))
-     * </p>
+     * </pre>
      * @param <T> the type of object (in focus) or the starting environment
      * @param anObject the initial object in focus expressed as a(object)
      * @return the continued behavior expression
@@ -75,7 +76,7 @@ public class CoreExpressions {
     /**
      * Wraps an action that operates on an object into a performing expression.
      * The object originates from a given(object) expression.
-     * @see com.github.thogr.bedede.core.BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(Performing)
      * @param expr the action
      * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
@@ -88,7 +89,7 @@ public class CoreExpressions {
      * Wraps an action that operates on two objects into a performing expression.
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
-     * @see com.github.thogr.bedede.core.BehaviorExpression#when(PerformingImpl)
+     * @see com.github.thogr.bedede.core.BehaviorExpression#when(Performing)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -146,7 +147,7 @@ public class CoreExpressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransforming)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
@@ -162,7 +163,7 @@ public class CoreExpressions {
      * Wraps an action that operates on two objects into a transforming expression.
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
-     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransformingImpl)
+     * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransforming)
      * @param expr the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on

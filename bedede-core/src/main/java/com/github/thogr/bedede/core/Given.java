@@ -1,6 +1,5 @@
 package com.github.thogr.bedede.core;
 
-import com.github.thogr.bedede.core.internal.Proxy;
 
 public interface Given<T>
     extends BehaviorExpression<T>, WithBehaviorExpression<T> {
@@ -17,8 +16,10 @@ public interface Given<T>
 
     /**
      * See {@link #given(Behavior)}
+     * @param expr the reused behavior
+     * @param <S> the type of object the reused behavior focuses on
+     * @return the continued behavior specification
      */
-    @Proxy
     <S> Given<T> and(final Behavior<S> expr);
 
     /**

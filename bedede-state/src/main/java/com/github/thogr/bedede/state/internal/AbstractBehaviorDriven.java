@@ -29,8 +29,9 @@ public class AbstractBehaviorDriven {
      * The starting environment is the object in focus, which further when() and then() expressions
      * will operate on.
      * <p><b>Syntax:</b></p>
+     * <pre>
      * given(a(new Something()))
-     * </p>
+     * </pre>
      * @param <T> the type of object (in focus) or the starting environment
      * @param anObject the initial object in focus expressed as a(object)
      * @return the continued behavior expression

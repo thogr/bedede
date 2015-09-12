@@ -14,7 +14,7 @@
     <property name="tabWidth" value="4"/>
     <module name="FileContentsHolder"/>
     <module name="JavadocMethod">
-      <property name="allowedAnnotations" value="Test,Before,BeforeClass,After,AfterClass,Override,Internal,Proxy,OnEntry"/>
+      <property name="allowedAnnotations" value="Test,Before,BeforeClass,After,AfterClass,Override,Internal,OnEntry"/>
       <property name="scope" value="public"/>
       <property name="suppressLoadErrors" value="true"/>
       <property name="ignoreMethodNamesRegex" value="(set|get|is)[A-Z].*"/>
