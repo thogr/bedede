@@ -42,7 +42,7 @@ given(GoogleSearchPage.class)
 
 You don't need to define a state machine to use the framework. While acceptance tests or end-to-end test may use state machines, your typical unit test won't. But the framework has behavior expressions, like this:
 ``` java
-given(new BowlingGame())
+given(a(new BowlingGame()))
 .when(performing(the -> the.roll(1))).times(20)
 .then(the -> the.score(), is(20));
 ```
@@ -50,7 +50,7 @@ Behavior expressions use Hamcrest matchers, as you can see in the example above 
 As you can see you don't need to declare any local variables, and you need a lot less helper functions, since the code
 reads well as it is.
 ``` java
- given(new Person()).with(it -> {
+ given(a(new Person())).with(it -> {
        it.setFirstName("John");
        it.setFamilyName("Smith");
  })
@@ -63,7 +63,7 @@ public class PokerTest {
 
   @Test
   public void shouldSortCardsAccordingToRank() {
-      given(Stream.of("10H", "1H", "KD", "QS"))
+      given(a(Stream.of("10H", "1H", "KD", "QS")))
       .when(transforming(it->it.map(Card::new).sorted()))
       .when(transforming(it->it.map(Card::toString).collect(toList())))
       .then(it(), is(equalTo(asList("1H", "10H", "QS", "KD"))));
@@ -75,7 +75,7 @@ Behavior expressions are really simple. You start with an object, the given(...)
 to something else, with when(transforming(...)), or retrieve something from it with the when(retrieving(...)), possibly in several when-steps.
 And lastly you verify the result, with a Hamcrest matcher in the then-clause:
 ``` java
-given(<object>)
+given(a(<object>))
 .when(transforming(....))
 .when(retrieving(....))
 .then(it(), <matcher>)
@@ -83,7 +83,7 @@ given(<object>)
 Of course you may have as many when() and then() as you like.
 Or perhaps you just perform operations on the objects, that will change its internal state, and verify the state lastly, in the then-clause:
 ``` java
-given(<object>)
+given(a(<object>))
 .when(performing(....))
 .then(<function>, <matcher>)
 ```
@@ -91,31 +91,31 @@ Naturally, you may combine these any way you like. The main difference is that t
 
 Also, the Hamcrest matcher is optional, if you call a boolean method (i.e. a predicate):
 ``` java
-given(new Counter())
+given(a(new Counter()))
 .then(it -> it.isStopped());
 ```
 As you can see, Java 8 lambda expressions are used. But, since Java has Method references as well, you don't have to use lambda expressions. The above expression could have been written:
 ``` java
-given(new Counter())
+given(a(new Counter()))
 .then(Counter::isStopped);
 ```
 And for example:
  ``` java
-given(new Counter())
+given(a(new Counter()))
 .when(performing(it -> it.start(2)))
 .when(performing(it -> it.decrease()))
 .then(it -> it.isStopped(), is(false));
  ```
  can be written:
  ``` java
-given(new Counter())
+given(a(new Counter()))
 .when(performing(it -> it.start(2)))
 .when(performing(Counter::decrease))
 .then(Counter::isStopped, is(false));
  ```
 You may even write it:
 ``` java
-given(new Counter()).and(2)
+given(a(new Counter())).and(a(2))
 .when(performing(Counter::start))
 .when(performing(Counter::decrease))
 .then(Counter::isStopped, is(false));
@@ -132,7 +132,7 @@ public void shouldBeStoppedWhenStartedAndDecreasedToZero() {
 }
 
 private BehaviorExpression<Counter> startedWith(int startval) {
-    return given(new Counter()).and(startval)
+    return given(a(new Counter())).and(a(startval))
             .when(performing(Counter::start));
 }
 
@@ -142,7 +142,7 @@ private PerformingExpression<Counter> decreasing(int n) {
 
 private BehaviorExpression<Counter> initial() {
     return
-        given(new Counter());
+        given(a(new Counter()));
 }
 
 ```

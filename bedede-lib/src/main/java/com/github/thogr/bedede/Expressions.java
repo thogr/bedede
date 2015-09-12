@@ -23,7 +23,6 @@ import com.github.thogr.bedede.core.BiActionExpression;
 import com.github.thogr.bedede.core.BiPerforming;
 import com.github.thogr.bedede.core.BiTransforming;
 import com.github.thogr.bedede.core.Given;
-import com.github.thogr.bedede.core.GivenPrefix;
 import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.core.Transforming;
@@ -135,7 +134,7 @@ public final class Expressions {
      * Example:
      * </p>
      * <pre>
-     *   given(new Integer(5))
+     *   given(a(new Integer(5)))
      *   .then(it(), is(5));
      * </pre>
      * @param <T> the type of object (in focus) the action is operating on

@@ -12,7 +12,7 @@ public interface ContinuedBehaviorExpression<T1, T2>
      * Example:
      * </p>
      * <pre>
-     * given(firstObject).and(secondObject)
+     * given(a(firstObject)).and(a(secondObject))
      * .when(performing((first, second) -&gt; first.operation(second)))
      * </pre>
      * @param expr an action wrapped like: <code>performing(action)</code>
@@ -29,7 +29,7 @@ public interface ContinuedBehaviorExpression<T1, T2>
      * Example:
      * </p>
      * <pre>
-     * given(firstObject).and(secondObject)
+     * given(a(firstObject)).and(a(secondObject))
      * .when(transforming((first, second) -&gt; first.combinedWith(second)))
      * </pre>
      * @param expr an action wrapped like: <code>performing(action)</code>

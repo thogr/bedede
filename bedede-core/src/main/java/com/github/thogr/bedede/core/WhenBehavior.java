@@ -10,7 +10,7 @@ public interface WhenBehavior<T> {
      * Example:
      * </p>
      * <pre>
-     *  given(new Integer(123))
+     *  given(a(new Integer(123)))
      *   .when(transforming(it -&gt; it.toString()))
      *   .then(it(), is(equalTo("123")));
      *  </pre>

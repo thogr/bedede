@@ -1,8 +1,11 @@
 package com.github.thogr.bedede.internal;
 
+import org.mockito.BDDMockito.BDDMyOngoingStubbing;
+
 import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.GivenPrefix;
+import com.github.thogr.bedede.MockitoExpressions;
 import com.github.thogr.bedede.core.Given;
-import com.github.thogr.bedede.core.GivenPrefix;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.StateExpressions;
@@ -14,25 +17,16 @@ class GivenPrefixImpl implements GivenPrefix {
 
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.GivenPrefix#at(java.lang.Class)
-     */
     @Override
     public <T> Assuming<T> at(final Class<T> state) {
         return StateExpressions.given(state);
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.GivenPrefix#at(com.github.thogr.bedede.Entry)
-     */
     @Override
     public <T> Assuming<T> at(final Entry<T> entry) {
         return StateExpressions.given(entry);
     }
 
-    /* (non-Javadoc)
-     * @see com.github.thogr.bedede.GivenPrefix#a(T)
-     */
     @Override
     public <T> Given<T> a(final T object) {
         return CoreExpressions.given(CoreExpressions.a(object));
@@ -49,5 +43,10 @@ class GivenPrefixImpl implements GivenPrefix {
     @Override
     public <T> Given<T> the(final T object) {
         return a(object);
+    }
+
+    @Override
+    public <T> BDDMyOngoingStubbing<T> that(final T call) {
+        return CoreExpressions.given(MockitoExpressions.that(call));
     }
 }

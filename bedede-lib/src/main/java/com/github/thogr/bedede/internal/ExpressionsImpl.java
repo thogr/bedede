@@ -1,7 +1,7 @@
 package com.github.thogr.bedede.internal;
 
 import com.github.thogr.bedede.Expressions;
-import com.github.thogr.bedede.core.GivenPrefix;
+import com.github.thogr.bedede.GivenPrefix;
 import com.github.thogr.bedede.core.internal.Internal;
 
 public class ExpressionsImpl {

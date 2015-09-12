@@ -10,7 +10,7 @@ public abstract class Performing<T> extends AbstractPerformer<T> {
      * Example:
      * </p>
      * <pre>
-     * given(new BowlingGame())
+     * given(a(new BowlingGame()))
      * .when(performing(the -&gt; the.roll(10)).times(21))
      * .then(the -&gt; the.score(), is(MAX_SCORE));
      * </pre>

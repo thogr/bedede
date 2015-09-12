@@ -107,7 +107,7 @@ public class CoreExpressions {
      * Example:
      * </p>
      * <pre>
-     *   given(new Integer(5))
+     *   given(a(new Integer(5)))
      *   .then(it(), is(5));
      * </pre>
      * @param <T> the type of object (in focus) the action is operating on

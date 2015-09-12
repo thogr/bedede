@@ -16,7 +16,7 @@ public interface Behavior<T> {
      * <p>
      * Example:
      * <pre>
-     *  given(new Integer(5))
+     *  given(a(new Integer(5)))
      *  .then(the -&gt; the.intValue(), is(5))
      *  .then(it(), is(5));
      * </pre>
@@ -33,7 +33,7 @@ public interface Behavior<T> {
      * <p>
      * Example:
      * <pre>
-     *  given("")
+     *  given(a(""))
      *  .then(it -&gt; it.isEmpty());
      * </pre>
      * @param predicate a predicate function on the current object

@@ -1,5 +1,8 @@
-package com.github.thogr.bedede.core;
+package com.github.thogr.bedede;
 
+import org.mockito.BDDMockito.BDDMyOngoingStubbing;
+
+import com.github.thogr.bedede.core.Given;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.Entry;
 
@@ -15,4 +18,5 @@ public interface GivenPrefix {
 
     <T> Given<T> the(T object);
 
+    <T> BDDMyOngoingStubbing<T> that(final T call);
 }
