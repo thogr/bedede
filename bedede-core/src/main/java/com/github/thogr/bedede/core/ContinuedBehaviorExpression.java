@@ -1,8 +1,8 @@
 package com.github.thogr.bedede.core;
 
 
-public interface ContinuedBehaviorExpression<T1, T2>
-    extends BehaviorExpression<T1>, ContinuedBehavior<T1, T2> {
+public interface ContinuedBehaviorExpression<F, T1, T2>
+    extends BehaviorExpression<F>, ContinuedBehavior<F, T1, T2> {
 
     /**
      * When performing an action on the current two objects. The action is non-functional,
@@ -18,7 +18,7 @@ public interface ContinuedBehaviorExpression<T1, T2>
      * @param expr an action wrapped like: <code>performing(action)</code>
      * @return a new expression where the current two objects in focus are the same
      */
-    WhenBiPerforming<T1, T2> when(BiPerforming<? super T1, ? super T2> expr);
+    WhenBiPerforming<F, T1, T2> when(BiPerforming<? super T1, ? super T2> expr);
 
     /**
      * When transforming the current two objects into one object. The action is functional, i.e.

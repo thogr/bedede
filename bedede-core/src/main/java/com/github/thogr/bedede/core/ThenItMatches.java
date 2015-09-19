@@ -1,5 +1,5 @@
 package com.github.thogr.bedede.core;
 
-public interface ThenItMatches<T1, T2> extends ContinuedBehavior<T1, T2> {
+public interface ThenItMatches<F, T1, T2> extends ContinuedBehavior<F, T1, T2> {
 
 }

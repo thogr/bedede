@@ -16,65 +16,65 @@ import com.github.thogr.bedede.core.ThenItMatches;
 import com.github.thogr.bedede.core.WhenBiPerforming;
 import com.github.thogr.bedede.core.WhenBiTransforming;
 
-class SecondBehaviorExpressionImpl<T1, T2>
-    extends BehaviorExpressionImpl<T1>
-    implements SecondGiven<T1, T2>, WhenBiPerforming<T1, T2>, ThenItMatches<T1, T2> {
+class SecondBehaviorExpressionImpl<F, T1, T2>
+    extends BehaviorExpressionImpl<F>
+    implements SecondGiven<F, T1, T2>, WhenBiPerforming<F, T1, T2>, ThenItMatches<F, T1, T2> {
 
     private final T1 first;
     private final T2 second;
 
-    SecondBehaviorExpressionImpl(final T1 first, final T2 second) {
-        super(first);
+    SecondBehaviorExpressionImpl(final F focus, final T1 first, final T2 second) {
+        super(focus);
         this.first = first;
         this.second = second;
     }
 
     @Override
-    public final <S> ThenItMatches<T1, T2> then(
+    public final <S> ThenItMatches<F, T1, T2> then(
             final BiFunction<? super T1, ? super T2, S> they, final Matcher<? super S> match) {
         return thenTheyMatch(they, match);
     }
 
-    <S> ThenItMatches<T1, T2> thenTheyMatch(
+    <S> ThenItMatches<F, T1, T2> thenTheyMatch(
             final BiFunction<? super T1, ? super T2, S> it,
             final Matcher<? super S> is) {
 
         final S result = it.apply(first, second);
         assertThat(result, is);
-        return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
+        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
     }
 
     @Override
-    public final SecondWith<T1, T2> with(
+    public final SecondWith<F, T1, T2> with(
             final BiActionExpression<? super T1, ? super T2> action) {
         return performBiAction(action);
     }
 
-    SecondBehaviorExpressionImpl<T1, T2> performBiAction(
+    SecondBehaviorExpressionImpl<F, T1, T2> performBiAction(
             final BiActionExpression<? super T1, ? super T2> action) {
         action.perform(first, second);
-        return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
+        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
     }
 
     @Override
-    public SecondWith<T1, T2> with(
+    public SecondWith<F, T1, T2> with(
             final ActionExpression<? super T2> action) {
         return performAction(action);
     }
 
-    SecondWith<T1, T2> performAction(
+    SecondWith<F, T1, T2> performAction(
             final ActionExpression<? super T2> action) {
         action.perform(second);
-        return new SecondBehaviorExpressionImpl<T1, T2>(first, second);
+        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
     }
 
     @Override
-    public final WhenBiPerforming<T1, T2> when(
+    public final WhenBiPerforming<F, T1, T2> when(
             final BiPerforming<? super T1, ? super T2> expr) {
         return whenPerforming(expr);
     }
 
-    private WhenBiPerforming<T1, T2> whenPerforming(
+    private WhenBiPerforming<F, T1, T2> whenPerforming(
             final AbstractBiPerformer<? super T1, ? super T2> expr) {
         return performBiAction(expr.getAction());
     }

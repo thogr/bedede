@@ -1,5 +1,7 @@
 package com.github.thogr.bedede.core.internal;
 
+import java.util.function.Function;
+
 import com.github.thogr.bedede.core.ActionExpression;
 import com.github.thogr.bedede.core.AnObject;
 import com.github.thogr.bedede.core.Behavior;
@@ -40,18 +42,30 @@ class GivenBehaviorExpressionImpl<T>
     }
 
     @Override
-    public <T2> SecondGiven<T, T2> given(final AnObject<T2> other) {
-        return new SecondBehaviorExpressionImpl<T, T2>(
-                getFocusedObject(), Wrapped.getWrapped(other));
+    public <T2> SecondGiven<T, T, T2> given(final AnObject<T2> other) {
+        return new SecondBehaviorExpressionImpl<T, T, T2>(
+                getFocusedObject(), getFocusedObject(), Wrapped.getWrapped(other));
     }
 
     @Override
-    public <T2> SecondGiven<T, T2> and(final AnObject<T2> other) {
+    public <T2> SecondGiven<T, T, T2> and(final AnObject<T2> other) {
         return given(other);
     }
 
     @Override
     public <S> Given<T> given(final Behavior<S> expr) {
         return new GivenBehaviorExpressionImpl<>(getFocusedObject());
+    }
+
+    @Override
+    public <T2> SecondGiven<T2, T, T2> given(final Function<T, T2> expr) {
+        final T2 other = expr.apply(getFocusedObject());
+        return new SecondBehaviorExpressionImpl<T2, T, T2>(
+                other, getFocusedObject(), other);
+    }
+
+    @Override
+    public <T2> SecondGiven<T2, T, T2> and(final Function<T, T2> expr) {
+        return given(expr);
     }
 }

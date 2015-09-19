@@ -1,6 +1,6 @@
 package com.github.thogr.bedede.core;
 
-public interface SecondWithBehaviorExpression<T1, T2> {
+public interface SecondWithBehaviorExpression<F, T1, T2> {
 
     /**
      * Similar to {@link com.github.thogr.bedede.core.SecondGiven#with(ActionExpression)}
@@ -10,6 +10,6 @@ public interface SecondWithBehaviorExpression<T1, T2> {
      * @param action the action to be performed
      * @return the continued behavior specification
      */
-    SecondWith<T1, T2> with(ActionExpression<? super T2> action);
+    SecondWith<F, T1, T2> with(ActionExpression<? super T2> action);
 
 }
