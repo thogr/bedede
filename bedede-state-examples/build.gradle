@@ -1,6 +1,13 @@
 apply from: rootProject.file("publish.gradle")
 
+repositories {
+    maven {
+        url "http://dl.bintray.com/thogr/maven/"
+    }
+}
+
 dependencies {
     testCompile libraries.hamcrest
-    testCompile project(":bedede-state")
+    //testCompile project(":bedede-state")
+    testCompile "com.github.thogr.bedede:bedede-state:0.9"
 }
