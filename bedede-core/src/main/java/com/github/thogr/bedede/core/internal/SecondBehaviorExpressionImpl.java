@@ -10,6 +10,7 @@ import com.github.thogr.bedede.core.ActionExpression;
 import com.github.thogr.bedede.core.BiActionExpression;
 import com.github.thogr.bedede.core.BiPerforming;
 import com.github.thogr.bedede.core.BiTransforming;
+import com.github.thogr.bedede.core.ContinuedBehaviorExpression;
 import com.github.thogr.bedede.core.SecondGiven;
 import com.github.thogr.bedede.core.SecondWith;
 import com.github.thogr.bedede.core.ThenItMatches;
@@ -41,7 +42,7 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
 
         final S result = it.apply(first, second);
         assertThat(result, is);
-        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
+        return new SecondBehaviorExpressionImpl<>(getFocusedObject(), first, second);
     }
 
     @Override
@@ -53,7 +54,7 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
     SecondBehaviorExpressionImpl<F, T1, T2> performBiAction(
             final BiActionExpression<? super T1, ? super T2> action) {
         action.perform(first, second);
-        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
+        return new SecondBehaviorExpressionImpl<>(getFocusedObject(), first, second);
     }
 
     @Override
@@ -65,7 +66,7 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
     SecondWith<F, T1, T2> performAction(
             final ActionExpression<? super T2> action) {
         action.perform(second);
-        return new SecondBehaviorExpressionImpl<F, T1, T2>(getFocusedObject(), first, second);
+        return new SecondBehaviorExpressionImpl<>(getFocusedObject(), first, second);
     }
 
     @Override
@@ -88,6 +89,19 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
     private <S> WhenBiTransforming<S> whenTransforming(
             final AbstractBiTransformer<? super T1, ? super T2, ? extends S> expr) {
         final S result = expr.getFunction().apply(first, second);
-        return new BasicBehaviorExpressionImpl<S>(result);
+        return new BasicBehaviorExpressionImpl<>(result);
+    }
+
+    @Override
+    public <S> ContinuedBehaviorExpression<S, T1, T2> given(
+            final BiFunction<? super T1, ? super T2, ? extends S> expr) {
+        final S result = expr.apply(first, second);
+        return new SecondBehaviorExpressionImpl<>(result, first, second);
+    }
+
+    @Override
+    public <S> ContinuedBehaviorExpression<S, T1, T2> and(
+            final BiFunction<? super T1, ? super T2, ? extends S> expr) {
+        return given(expr);
     }
 }

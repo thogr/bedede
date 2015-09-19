@@ -240,4 +240,28 @@ public class BehaviorExpressionExampleTest {
         .when(transforming(StringBuffer::toString))
         .then(it(), is("stringstring"));
     }
+
+    @Test
+    public void testName19() throws Exception {
+        given(a("string"))
+        .and(a(new StringBuffer()))
+        .and((string, buffer) -> {
+            buffer.append(string);
+            return buffer.toString();
+        })
+        .when(performing((string, buffer) -> buffer.append("xxxx")))
+        .when(transforming((string, buffer) -> buffer.toString()))
+        .then(it(), is("stringxxxx"));
+    }
+
+    @Test
+    public void testName20() throws Exception {
+        given(a("string"))
+        .and(a(new StringBuffer()))
+        .and((string, buffer) -> {
+            buffer.append(string);
+            return buffer.toString().length();
+        })
+        .then(it(), is(6));
+    }
 }
