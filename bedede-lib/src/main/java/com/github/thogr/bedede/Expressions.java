@@ -77,6 +77,31 @@ public final class Expressions {
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test
      * but with behavior driven syntax - given().when()...then();
+     * The starting environment is the object in focus, which further when() and then() expressions
+     * will operate on.
+     * This is typically used when several objects that are dependent on each other need to be in
+     * focus through out the whole specification.
+     * <p><b>Example:</b></p>
+     * <pre>
+     * given(a("1"), (first -&gt;
+     * given(a("2"), (second -&gt;
+     * given(a("3"))
+     * .when(transforming(third -&gt; first + second + third))
+     * .then(it(), is("123"))))));
+     * </pre>
+     * @param <T> the type of object (in focus) or the starting environment
+     * @param <S> the type of behavior returned
+     * @param anObject the initial object in focus expressed as a(object)
+     * @param nested a nested continued behavior specification
+     * @return the resulting behavior
+     */
+    public static <T,S> Behavior<S> given(final AnObject<T> anObject, final Function<T, Behavior<? extends S>> nested) {
+        return CoreExpressions.given(anObject, nested);
+    }
+
+    /**
+     * Sets the starting environment for a state-less test, for a more traditional unit test
+     * but with behavior driven syntax - given().when()...then();
      * In this case the starting environment is represented by a behavior expression, typically
      * returned by a method (perhaps extracted by a previous refactoring).
      * @param expr initial value
