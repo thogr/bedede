@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.function.BiFunction;
@@ -34,6 +35,12 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
     public final <S> ThenItMatches<F, T1, T2> then(
             final BiFunction<? super T1, ? super T2, S> they, final Matcher<? super S> match) {
         return thenTheyMatch(they, match);
+    }
+
+    @Override
+    public ThenItMatches<F, T1, T2> then(
+            final BiFunction<? super T1, ? super T2, Boolean> pred) {
+        return thenTheyMatch(pred, is(true));
     }
 
     <S> ThenItMatches<F, T1, T2> thenTheyMatch(

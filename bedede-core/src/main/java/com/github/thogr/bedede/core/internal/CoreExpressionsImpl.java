@@ -38,28 +38,34 @@ public final class CoreExpressionsImpl {
 
     @Internal
     public <T> Given<T> given(final Wrapped<T> anObject) {
-        return new GivenBehaviorExpressionImpl<T>(anObject.getWrapped());
+        return new GivenBehaviorExpressionImpl<>(anObject.getWrapped());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Internal
+    public <T,S> Behavior<S> given(final Wrapped<T> anObject, final Function<T, Behavior<? extends S>> nested) {
+        return (Behavior<S>) nested.apply(anObject.getWrapped());
     }
 
     @Internal
     public <T> Given<T> given(final BehaviorExpression<T> expr) {
-        return new GivenBehaviorExpressionImpl<T>(expr);
+        return new GivenBehaviorExpressionImpl<>(expr);
     }
 
     @Internal
     public <T> Given<T> given(final Behavior<T> expr) {
-        return new GivenBehaviorExpressionImpl<T>(expr);
+        return new GivenBehaviorExpressionImpl<>(expr);
     }
 
     @Internal
     public <T> Performing<T> performingAction(final ActionExpression<T> expr) {
-        return new PerformingImpl<T>(expr);
+        return new PerformingImpl<>(expr);
     }
 
     @Internal
     public <T1, T2> BiPerformingImpl<T1, T2>
         performingBiAction(final BiActionExpression<T1, T2> expr) {
-        return new BiPerformingImpl<T1, T2>(expr);
+        return new BiPerformingImpl<>(expr);
     }
 
     @Internal

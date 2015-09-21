@@ -264,4 +264,13 @@ public class BehaviorExpressionExampleTest {
         })
         .then(it(), is(6));
     }
+
+    @Test
+    public void testName21() throws Exception {
+        given(a("1"), (first ->
+        given(a("2"), (second ->
+        given(a("3"))
+        .when(transforming(third -> first + second + third))
+        .then(it(), is("123"))))));
+    }
 }

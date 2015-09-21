@@ -15,4 +15,7 @@ public interface ContinuedBehavior<F, T1, T2> extends Behavior<F> {
      */
     <S> ThenItMatches<F, T1, T2> then(
             BiFunction<? super T1, ? super T2, S> it, Matcher<? super S> is);
+
+    ThenItMatches<F, T1, T2> then(
+            BiFunction<? super T1, ? super T2, Boolean> pred);
 }
