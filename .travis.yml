@@ -12,21 +12,21 @@ deploy:
   api_key:
     secure: z8HeT0DRcfJFUUfyeVkHhWmJ1gHod9tNJJYD9mj55cUeJE0hh7O4t3DY+HbG9j0H//LckRFNmVu+Bm/mMdR+58wvr4B6BrTYVDEMeMmuKMS5qUEdCBUJCoD/QuRekEPCXmi4PCItdnd87hwC+tEw7FIDhad5aE1TMWBRWyUbCQY=
   file:
-  - bedede-core/build/libs/bedede-core-0.9.jar
-  - bedede-core/build/libs/bedede-core-0.9-javadoc.jar
-  - bedede-core/build/libs/bedede-core-0.9-sources.jar
-  - bedede-state/build/libs/bedede-state-0.9.jar
-  - bedede-state/build/libs/bedede-state-0.9-javadoc.jar
-  - bedede-state/build/libs/bedede-state-0.9-sources.jar
-  - bedede-lib/build/libs/bedede-lib-0.9.jar
-  - bedede-lib/build/libs/bedede-lib-0.9-javadoc.jar
-  - bedede-lib/build/libs/bedede-lib-0.9-sources.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.9.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.9-javadoc.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.9-sources.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.9.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.9-javadoc.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.9-sources.jar
+  - bedede-core/build/libs/bedede-core-0.10.jar
+  - bedede-core/build/libs/bedede-core-0.10-javadoc.jar
+  - bedede-core/build/libs/bedede-core-0.10-sources.jar
+  - bedede-state/build/libs/bedede-state-0.10.jar
+  - bedede-state/build/libs/bedede-state-0.10-javadoc.jar
+  - bedede-state/build/libs/bedede-state-0.10-sources.jar
+  - bedede-lib/build/libs/bedede-lib-0.10.jar
+  - bedede-lib/build/libs/bedede-lib-0.10-javadoc.jar
+  - bedede-lib/build/libs/bedede-lib-0.10-sources.jar
+  - bedede-mockito/build/libs/bedede-mockito-0.10.jar
+  - bedede-mockito/build/libs/bedede-mockito-0.10-javadoc.jar
+  - bedede-mockito/build/libs/bedede-mockito-0.10-sources.jar
+  - bedede-selenium/build/libs/bedede-selenium-0.10.jar
+  - bedede-selenium/build/libs/bedede-selenium-0.10-javadoc.jar
+  - bedede-selenium/build/libs/bedede-selenium-0.10-sources.jar
   skip_cleanup: true
   on:
     repo: thogr/bedede
