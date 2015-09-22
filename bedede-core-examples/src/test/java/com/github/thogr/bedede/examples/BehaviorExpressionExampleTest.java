@@ -269,8 +269,22 @@ public class BehaviorExpressionExampleTest {
     public void testName21() throws Exception {
         given(a("1"), (first ->
         given(a("2"), (second ->
-        given(a("3"))
-        .when(transforming(third -> first + second + third))
-        .then(it(), is("123"))))));
+        given(a(new StringBuffer("3")))
+        .when(performing(it -> it.append(first)))
+        .when(performing(it -> it.append(second)))
+        .then(the -> first, is("1"))
+        .then(the -> second, is("2"))
+        .then(it -> it.toString(), is("312"))))));
+    }
+
+    @Test
+    public void testName22() throws Exception {
+         given(a(new Person()).with(it -> {
+             it.setFirstName("John");
+         }), (person ->
+         given(a("Smith"))
+         .when(performing(it -> person.setFamilyName(it)))
+         .when(retrieving(the -> person.getFullName()))
+         .then(it(), is("John Smith"))));
     }
 }
