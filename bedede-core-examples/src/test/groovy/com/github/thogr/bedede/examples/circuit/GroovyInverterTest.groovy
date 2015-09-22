@@ -42,4 +42,15 @@ class GroovyInverterTest {
         when performing: {i, o -> i.signal = false}
         then expect: {i, o -> o.signal}, is: true
     }
+
+    @Test
+    public void shouldInvertNestedExample() {
+        given (a: new Wire()) { i ->
+            with {i.signal = true}
+            given a: new Wire()
+            when performing: {o -> new Inverter(i, o)}
+            when performing: {i.signal = false}
+            then expect: {o -> o.signal}, is: true
+        }
+    }
 }

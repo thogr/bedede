@@ -1,9 +1,11 @@
 package com.github.thogr.bedede
 
+import java.lang.invoke.MethodHandleImpl.BindCaller.T
+
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 
-import com.github.thogr.bedede.CoreExpressions;
+import com.github.thogr.bedede.core.internal.BasicBehaviorExpressionImpl
 import com.github.thogr.bedede.core.internal.CoreExpressionsImpl
 
 class GroovyCoreExpressions extends CoreExpressions {
@@ -12,11 +14,17 @@ class GroovyCoreExpressions extends CoreExpressions {
 
     def private static current
 
-    def static given(Map spec) {
-        if (spec.a) {
+    def static given(Map spec, Closure closure = null) {
+        if (spec.a && !closure) {
             current = impl.given(CoreExpressions.a(spec.a))
             return current
         }
+        if (spec.a && closure) {
+            current = new BasicBehaviorExpressionImpl<T>(spec.a)
+            current = impl.given(CoreExpressions.a(spec.a), closure)
+            return current
+        }
+
         throw new IllegalArgumentException("Syntax error at 'given'")
     }
 
