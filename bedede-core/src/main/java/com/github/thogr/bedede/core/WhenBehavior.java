@@ -15,11 +15,11 @@ public interface WhenBehavior<T> {
      *   .then(it(), is(equalTo("123")));
      *  </pre>
      * @param <S> the type of object returned by the action
-     * @param expr the the action to be performed, wrapped like:<code> transforming(action) </code>
+     * @param transforming the the action to be performed, wrapped like:<code> transforming(action) </code>
      * @return a new expression where the object in focus is the result of the transformation
      */
     <S> WhenTransforming<T, S> when(
-            Transforming<? super T, ? extends S> expr);
+            Transforming<? super T, ? extends S> transforming);
 
     /**
      * When performing an action on the current object. The action is non-functional,
@@ -30,9 +30,9 @@ public interface WhenBehavior<T> {
      * <pre>
      * when(performing(the -&gt; the.operation()))
      * </pre>
-     * @param expr an action wrapped like: <code>performing(action)</code>
+     * @param performing an action wrapped like: <code>performing(action)</code>
      * @return a new expression where the current object in focus is the same
      */
-    WhenPerforming<T> when(Performing<T> expr);
+    WhenPerforming<T> when(Performing<T> performing);
 
 }
