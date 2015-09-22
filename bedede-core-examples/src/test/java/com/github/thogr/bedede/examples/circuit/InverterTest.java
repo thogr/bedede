@@ -41,4 +41,15 @@ public class InverterTest {
         .when(performing((in, out) -> in.setSignal(false)))
         .then((in, out) -> out.getSignal(), is(true));
     }
+
+    @Test
+    public void shouldInvertNestedExample() {
+        given(a(new Wire()).with(it ->
+            it.setSignal(true)
+        ), in ->
+        given(a(new Wire()))
+        .when(performing(out -> new Inverter(in, out)))
+        .when(performing(the -> in.setSignal(false)))
+        .then(out -> out.getSignal(), is(true)));
+    }
 }

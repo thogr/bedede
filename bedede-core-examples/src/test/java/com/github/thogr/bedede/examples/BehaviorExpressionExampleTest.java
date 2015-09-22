@@ -287,4 +287,18 @@ public class BehaviorExpressionExampleTest {
          .when(retrieving(the -> person.getFullName()))
          .then(it(), is("John Smith"))));
     }
+
+    @Test
+    public void testName23() throws Exception {
+        given(a(new Person()), p1 ->
+        given(a(new Person()), p2 ->
+        given(a(new StringBuffer()))
+        .when(performing(the -> p1.setFirstName("John")))
+        .when(performing(the -> p1.setFamilyName("Smith")))
+        .when(performing(the -> p2.setFirstName("Simon")))
+        .when(performing(the -> p2.setFamilyName(p1.getFamilyName())))
+        .when(performing(it -> it.append(p1.getFullName())))
+        .when(performing(it -> it.append(p2.getFullName())))
+        .then(it -> it.toString(), is("John SmithSimon Smith"))));
+    }
 }
