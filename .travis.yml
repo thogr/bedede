@@ -7,26 +7,31 @@ env:
   - dontRunSelenium=true
   global:
     secure: jrPGZThId7DqFkxpG/CGN8XNz+vBSA5thRbVot2fiRg1fwKDZ1mn7OEjweJJR0TR5ISm/SHO4TbROXKU8ZrlDSlnZhwhycPu02Am8g/BE0W5JmZN03QT21V3LjqL1Mf0PYK75PFRzSHxs+ukcWVSkCXi6R+Z5PKtK4IxUUO4Pss=
+
+before_deploy:
+  - "./gradlew printVersion"
+  - "export RELEASE_VERSION=$(cat .release.version)"
+
 deploy:
   provider: releases
   api_key:
     secure: z8HeT0DRcfJFUUfyeVkHhWmJ1gHod9tNJJYD9mj55cUeJE0hh7O4t3DY+HbG9j0H//LckRFNmVu+Bm/mMdR+58wvr4B6BrTYVDEMeMmuKMS5qUEdCBUJCoD/QuRekEPCXmi4PCItdnd87hwC+tEw7FIDhad5aE1TMWBRWyUbCQY=
   file:
-  - bedede-core/build/libs/bedede-core-0.12.jar
-  - bedede-core/build/libs/bedede-core-0.12-javadoc.jar
-  - bedede-core/build/libs/bedede-core-0.12-sources.jar
-  - bedede-state/build/libs/bedede-state-0.12.jar
-  - bedede-state/build/libs/bedede-state-0.12-javadoc.jar
-  - bedede-state/build/libs/bedede-state-0.12-sources.jar
-  - bedede-lib/build/libs/bedede-lib-0.12.jar
-  - bedede-lib/build/libs/bedede-lib-0.12-javadoc.jar
-  - bedede-lib/build/libs/bedede-lib-0.12-sources.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.12.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.12-javadoc.jar
-  - bedede-mockito/build/libs/bedede-mockito-0.12-sources.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.12.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.12-javadoc.jar
-  - bedede-selenium/build/libs/bedede-selenium-0.12-sources.jar
+  - bedede-core/build/libs/bedede-core-$RELEASE_VERSION.jar
+  - bedede-core/build/libs/bedede-core-$RELEASE_VERSION-javadoc.jar
+  - bedede-core/build/libs/bedede-core-$RELEASE_VERSION-sources.jar
+  - bedede-state/build/libs/bedede-state-$RELEASE_VERSION.jar
+  - bedede-state/build/libs/bedede-state-$RELEASE_VERSION-javadoc.jar
+  - bedede-state/build/libs/bedede-state-$RELEASE_VERSION-sources.jar
+  - bedede-lib/build/libs/bedede-lib-$RELEASE_VERSION.jar
+  - bedede-lib/build/libs/bedede-lib-$RELEASE_VERSION-javadoc.jar
+  - bedede-lib/build/libs/bedede-lib-$RELEASE_VERSION-sources.jar
+  - bedede-mockito/build/libs/bedede-mockito-$RELEASE_VERSION.jar
+  - bedede-mockito/build/libs/bedede-mockito-$RELEASE_VERSION-javadoc.jar
+  - bedede-mockito/build/libs/bedede-mockito-$RELEASE_VERSION-sources.jar
+  - bedede-selenium/build/libs/bedede-selenium-$RELEASE_VERSION.jar
+  - bedede-selenium/build/libs/bedede-selenium-$RELEASE_VERSION-javadoc.jar
+  - bedede-selenium/build/libs/bedede-selenium-$RELEASE_VERSION-sources.jar
   skip_cleanup: true
   on:
     repo: thogr/bedede

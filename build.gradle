@@ -8,7 +8,6 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
-    apply from: rootProject.file('version.gradle')
     sourceCompatibility = 1.8
     group = 'com.github.thogr.bedede'
 
@@ -27,6 +26,14 @@ wrapper {
         def optsEnvVar = "DEFAULT_JVM_OPTS"
         scriptFile.write scriptFile.text.replace("$optsEnvVar=\"\"", "$optsEnvVar=\"$jvmOpts\"")
         batchScript.write batchScript.text.replace("set $optsEnvVar=", "set $optsEnvVar=$jvmOpts")
+    }
+}
+
+task printVersion {
+    doLast {
+        def versionFile = project.file(".release.version")
+        versionFile.delete()
+        versionFile << project.version
     }
 }
 
