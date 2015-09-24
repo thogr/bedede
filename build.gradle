@@ -19,7 +19,7 @@ subprojects {
 }
 
 wrapper {
-    gradleVersion = '2.7-rc-1'
+    gradleVersion = '2.7'
 
     def jvmOpts = "-Xmx1024m"
     inputs.property("jvmOpts", jvmOpts)
