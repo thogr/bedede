@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'net.researchgate:gradle-release:2.2.2'
+    }
+}
+
 apply from: rootProject.file("release.gradle")
 
 allprojects {
