@@ -31,11 +31,6 @@ class GivenBehaviorExpressionImpl<T>
         return performAction(action);
     }
 
-    With<T> performAction(final ActionExpression<? super T> action) {
-        action.perform(getFocusedObject());
-        return new GivenBehaviorExpressionImpl<T>(getFocusedObject());
-    }
-
     @Override
     public <S> Given<T> and(final Behavior<S> expr) {
         return given(expr);

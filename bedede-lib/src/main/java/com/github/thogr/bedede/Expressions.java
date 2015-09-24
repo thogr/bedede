@@ -26,6 +26,8 @@ import com.github.thogr.bedede.core.Given;
 import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.core.Transforming;
+import com.github.thogr.bedede.core.WhenPerforming;
+import com.github.thogr.bedede.core.WhenTransforming;
 import com.github.thogr.bedede.internal.ExpressionsImpl;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
@@ -289,6 +291,31 @@ public final class Expressions {
      */
     public static <T> AnObject<T> an(final T object) {
         return CoreExpressions.a(object);
+    }
+
+
+    /**
+     * See {@link com.github.thogr.bedede.core.WhenBehavior#when(Performing)}
+     * Only permitted nested in the body of the function in {@link #given(AnObject, Function)}.
+     * @param <T> the type of the object in focus
+     * @param performing an action
+     * @return a new expression
+     **/
+    public static <T> WhenPerforming<T> when(final Performing<T> performing) {
+        return CoreExpressions.when(performing);
+    }
+
+    /**
+     * See {@link com.github.thogr.bedede.core.WhenBehavior#when(Transforming)}
+     * Only permitted nested in the body of the function in {@link #given(AnObject, Function)}.
+     * @param <T> the type of the object in focus
+     * @param <S> the type of object returned by the transforming action
+     * @param transforming an action
+     * @return a new expression
+     **/
+    public static <T, S> WhenTransforming<T, S> when(
+            final Transforming<? super T, ? extends S> transforming) {
+        return CoreExpressions.when(transforming);
     }
 
     /**

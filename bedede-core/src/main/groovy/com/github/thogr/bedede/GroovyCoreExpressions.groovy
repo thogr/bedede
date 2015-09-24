@@ -16,12 +16,12 @@ class GroovyCoreExpressions extends CoreExpressions {
 
     def static given(Map spec, Closure closure = null) {
         if (spec.a && !closure) {
-            current = impl.given(CoreExpressions.a(spec.a))
+            current = impl.givenAnObject(CoreExpressions.a(spec.a))
             return current
         }
         if (spec.a && closure) {
             current = new BasicBehaviorExpressionImpl<T>(spec.a)
-            current = impl.given(CoreExpressions.a(spec.a), closure)
+            current = impl.givenNested(CoreExpressions.a(spec.a), closure)
             return current
         }
 

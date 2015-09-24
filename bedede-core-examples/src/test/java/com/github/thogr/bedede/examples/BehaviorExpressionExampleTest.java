@@ -8,6 +8,7 @@ import static com.github.thogr.bedede.CoreExpressions.it;
 import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.CoreExpressions.retrieving;
 import static com.github.thogr.bedede.CoreExpressions.transforming;
+import static com.github.thogr.bedede.CoreExpressions.when;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -300,5 +301,37 @@ public class BehaviorExpressionExampleTest {
         .when(performing(it -> it.append(p1.getFullName())))
         .when(performing(it -> it.append(p2.getFullName())))
         .then(it -> it.toString(), is("John SmithSimon Smith"))));
+    }
+
+    @Test
+    public void testName24() throws Exception {
+        given(a(new Person()), p1 ->
+        when(performing(the -> p1.setFirstName("Carl")))
+        .when(performing(the -> p1.setFamilyName("Smith")))
+        .then(the -> p1.getFullName(), is("Carl Smith")));
+    }
+
+    @Test
+    public void testName25() throws Exception {
+        given(a(new Person()), p1 ->
+        when(performing(the -> p1.setFirstName("Carl")))
+        .when(performing(the -> p1.setFamilyName("Smith")))
+        .when(transforming(it -> p1.getFullName()))
+        .then(it(), is("Carl Smith")));
+    }
+
+    @Test
+    public void testName26() throws Exception {
+        given(a(new Person()), p0 ->
+            when(performing(the -> p0.setFirstName("Jonas")))
+            .when(performing(the -> p0.setFamilyName("Jones")))
+            .when(transforming(it -> p0.getFullName()))
+            .then(it(), is("Jonas Jones"))
+            .then(given(a(new Person()), p1 ->
+                when(performing(the -> p1.setFirstName("Carl")))
+                .when(performing(the -> p1.setFamilyName("Smith")))
+                .when(transforming(it -> p1.getFullName()))
+                .then(it(), is("Carl Smith"))))
+       );
     }
 }

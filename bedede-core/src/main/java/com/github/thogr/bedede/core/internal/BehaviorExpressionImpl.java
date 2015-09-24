@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.core.internal;
 
+import com.github.thogr.bedede.core.ActionExpression;
 import com.github.thogr.bedede.core.Behavior;
 import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.core.Times;
@@ -7,6 +8,7 @@ import com.github.thogr.bedede.core.Transforming;
 import com.github.thogr.bedede.core.WhenBiTransforming;
 import com.github.thogr.bedede.core.WhenPerforming;
 import com.github.thogr.bedede.core.WhenTransforming;
+import com.github.thogr.bedede.core.With;
 
 abstract class BehaviorExpressionImpl<T>
     extends BehaviorImpl<T> implements WhenBiTransforming<T>, Times<T> {
@@ -38,5 +40,10 @@ abstract class BehaviorExpressionImpl<T>
     WhenPerforming<T> whenPerforming(final AbstractPerformer<T> expr) {
         expr.perform(getFocusedObject());
         return new WhenBehaviorExpressionImpl<T>(getFocusedObject(), expr);
+    }
+
+    With<T> performAction(final ActionExpression<? super T> action) {
+        action.perform(getFocusedObject());
+        return new GivenBehaviorExpressionImpl<T>(getFocusedObject());
     }
 }

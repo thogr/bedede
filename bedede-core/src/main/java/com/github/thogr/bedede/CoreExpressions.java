@@ -19,6 +19,8 @@ import com.github.thogr.bedede.core.Given;
 import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.core.Transforming;
+import com.github.thogr.bedede.core.WhenPerforming;
+import com.github.thogr.bedede.core.WhenTransforming;
 import com.github.thogr.bedede.core.internal.CoreExpressionsImpl;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
@@ -46,7 +48,7 @@ public class CoreExpressions {
      * @return the continued behavior expression
      */
     public static <T> Given<T> given(final AnObject<T> anObject) {
-        return impl.given(anObject);
+        return impl.givenAnObject(anObject);
     }
 
     /**
@@ -71,9 +73,8 @@ public class CoreExpressions {
      * @return the resulting behavior
      */
     public static <T,S> Behavior<S> given(final AnObject<T> anObject, final Function<T, Behavior<? extends S>> nested) {
-        return impl.given(anObject, nested);
+        return impl.givenNested(anObject, nested);
     }
-
 
     /**
      * Sets the starting environment for a state-less test, for a more traditional unit test
@@ -85,7 +86,7 @@ public class CoreExpressions {
      * @return the continued behavior expression
      */
     public static <T> Given<T> given(final Behavior<T> expr) {
-        return impl.given(expr);
+        return impl.givenBehavior(expr);
     }
 
     /**
@@ -96,19 +97,19 @@ public class CoreExpressions {
      * @return the mock
      */
     public static <T> T given(final That<T> that) {
-        return impl.given(that);
+        return impl.givenThat(that);
     }
 
     /**
      * Wraps an action that operates on an object into a performing expression.
      * The object originates from a given(object) expression.
      * @see com.github.thogr.bedede.core.BehaviorExpression#when(Performing)
-     * @param expr the action
+     * @param the the action
      * @param <T> the type of object (in focus) the action is operating on
      * @return the wrapped action
      */
-    public static <T> Performing<T> performing(final ActionExpression<T> expr) {
-        return impl.performingAction(expr);
+    public static <T> Performing<T> performing(final ActionExpression<T> the) {
+        return impl.performingAction(the);
     }
 
     /**
@@ -116,14 +117,14 @@ public class CoreExpressions {
      * The objects originates from a given(object1).given(object2)
      * or given(object1).and(object2) expression.
      * @see com.github.thogr.bedede.core.BehaviorExpression#when(Performing)
-     * @param expr the action
+     * @param the the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @return the wrapped action
      */
     public static <T1, T2> BiPerforming<T1, T2> performing(
-            final BiActionExpression<T1, T2> expr) {
-        return impl.performingBiAction(expr);
+            final BiActionExpression<T1, T2> the) {
+        return impl.performingBiAction(the);
     }
 
     /**
@@ -148,25 +149,25 @@ public class CoreExpressions {
      * Wraps an action into a transforming expression.This is an alias for
      * {@link #transforming(Function)}, but with a name that reads better in some situations.
      * @see com.github.thogr.bedede.core.BehaviorExpression#when(Transforming)
-     * @param expr the action
+     * @param it the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T, S> Transforming<T, S> retrieving(final Function<T, S> expr) {
-        return impl.retrieving(expr);
+    public static <T, S> Transforming<T, S> retrieving(final Function<T, S> it) {
+        return impl.retrieving(it);
     }
 
     /**
      * Wraps an action into a transforming expression.
      * @see com.github.thogr.bedede.core.BehaviorExpression#when(Transforming)
-     * @param expr the action
+     * @param it the action
      * @param <T> the type of object (in focus) the action is operating on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
-    public static <T, S> Transforming<T, S> transforming(final Function<T, S> expr) {
-        return impl.transforming(expr);
+    public static <T, S> Transforming<T, S> transforming(final Function<T, S> it) {
+        return impl.transforming(it);
     }
 
     /**
@@ -174,15 +175,15 @@ public class CoreExpressions {
      * This is an alias for {@link #transforming(BiFunction)}, but with a name that reads
      * better in some situations.
      * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransforming)
-     * @param expr the action
+     * @param it the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
     public static <T1, T2, S> BiTransforming<T1, T2, S>
-        retrieving(final BiFunction<T1, T2, S> expr) {
-        return impl.retrieving(expr);
+        retrieving(final BiFunction<T1, T2, S> it) {
+        return impl.retrieving(it);
     }
 
     /**
@@ -190,15 +191,15 @@ public class CoreExpressions {
      * This is an alias for {@link #retrieving(BiFunction)}, but with a name that reads
      * better in some situations.
      * @see com.github.thogr.bedede.core.ContinuedBehaviorExpression#when(BiTransforming)
-     * @param expr the action
+     * @param it the action
      * @param <T1> the type of the first object (in focus) the action operates on
      * @param <T2> the type of the second object (in focus) the action operates on
      * @param <S> the type of object the next expression will be operating on (next in focus)
      * @return the wrapped action
      */
     public static <T1, T2, S> BiTransforming<T1, T2, S>
-        transforming(final BiFunction<T1, T2, S> expr) {
-        return impl.transforming(expr);
+        transforming(final BiFunction<T1, T2, S> it) {
+        return impl.transforming(it);
     }
 
     /**
@@ -268,6 +269,30 @@ public class CoreExpressions {
     }
 
     /**
+     * See {@link com.github.thogr.bedede.core.WhenBehavior#when(Performing)}
+     * Only permitted nested in the body of the function in {@link #given(AnObject, Function)}.
+     * @param <T> the type of the object in focus
+     * @param performing an action
+     * @return a new expression
+     **/
+    public static <T> WhenPerforming<T> when(final Performing<T> performing) {
+        return impl.whenPerforming(performing);
+    }
+
+    /**
+     * See {@link com.github.thogr.bedede.core.WhenBehavior#when(Transforming)}
+     * Only permitted nested in the body of the function in {@link #given(AnObject, Function)}.
+     * @param <T> the type of the object in focus
+     * @param <S> the type of object returned by the transforming action
+     * @param transforming an action
+     * @return a new expression
+     **/
+    public static <T, S> WhenTransforming<T, S> when(
+            final Transforming<? super T, ? extends S> transforming) {
+        return impl.whenTransforming(transforming);
+    }
+
+    /**
      * Alias for {@link org.junit.Assert#assertThat(Object, Matcher)} BDD style
      * @param <T> the type of object (in focus) the action is operating on,
      * the static type accepted by the matcher
@@ -276,7 +301,7 @@ public class CoreExpressions {
      * @return the behavior
      */
     public static <T> Then<T> then(final T it, final Matcher<? super T> is) {
-        return impl.then(it, is);
+        return impl.thenItMatches(it, is);
     }
 
    /**
@@ -286,7 +311,7 @@ public class CoreExpressions {
     * @see Behavior#then(boolean)
     */
     public static Then<Boolean> then(final boolean expr) {
-        return impl.then(expr);
+        return impl.thenTrue(expr);
     }
 
     /**
@@ -298,7 +323,7 @@ public class CoreExpressions {
      * @see Behavior#then(Behavior)
      */
     public static <T> Then<T> then(final Behavior<T> behavior) {
-        return impl.then(behavior);
+        return impl.thenBehavior(behavior);
     }
 
     /**
@@ -313,6 +338,6 @@ public class CoreExpressions {
      * @see Behavior#then(Mocked)
      */
     public static <S> S then(final Mocked<S> mocked) {
-        return impl.then(mocked);
+        return impl.thenMocked(mocked);
     }
 }

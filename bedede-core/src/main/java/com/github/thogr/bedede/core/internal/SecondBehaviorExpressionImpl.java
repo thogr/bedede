@@ -67,10 +67,10 @@ class SecondBehaviorExpressionImpl<F, T1, T2>
     @Override
     public SecondWith<F, T1, T2> with(
             final ActionExpression<? super T2> action) {
-        return performAction(action);
+        return secondPerformAction(action);
     }
 
-    SecondWith<F, T1, T2> performAction(
+    SecondWith<F, T1, T2> secondPerformAction(
             final ActionExpression<? super T2> action) {
         action.perform(second);
         return new SecondBehaviorExpressionImpl<>(getFocusedObject(), first, second);
