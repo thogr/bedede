@@ -30,12 +30,12 @@ public class ExpectingTest {
         given(an(expecting(true, otherwise("left!"))))
         .and(an(expecting(false, otherwise("right!"))))
         .when(transforming((first, second)->first.and(second)))
-        .when(performing(result -> {
-            final Verifiable<BooleanCondition> it = result;
-            it.verify(verifier);
-        }));
+        .when(performing(it -> verify(it)));
         then(theMocked(verifier)).should().verify(anyObject(), eq(otherwise("left!")));
         then(theMocked(verifier)).should().verify(anyObject(), eq(otherwise("right!")));
+    }
 
+    private void verify(final Verifiable<BooleanCondition> it) {
+        it.verify(verifier);
     }
 }
