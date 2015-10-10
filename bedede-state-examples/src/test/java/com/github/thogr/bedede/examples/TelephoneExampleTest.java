@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.StateExpressions.at;
 import static com.github.thogr.bedede.StateExpressions.entry;
 import static com.github.thogr.bedede.StateExpressions.expecting;
@@ -98,7 +99,7 @@ public class TelephoneExampleTest extends BehaviorDriven {
     @Test
     public void shouldSoundCallToneWhenCallingEmergencyNumber() {
         given(WaitingForMoreDigits.afterPressingOneKey(1))
-        .when(user -> user.pressingKeys(1, 2))
+        .when(performing(user -> user.pressingKeys(1, 2)))
         .then(at(Calling.class))
         .then(user -> user.hasDialed("112"));
     }

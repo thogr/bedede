@@ -142,15 +142,15 @@ The `given(S1.class).when(it->it.action()).then(S2.class)` syntax defines an exp
 
 Example:
 ```java
-given(LockedDoorState.class)
+given(at(LockedDoorState.class))
 .when(it -> it.turnsKey())
-.then(UnlockedDoorState.class);
+.then(at(UnlockedDoorState.class));
 ```
 For testing web applications:
 ```java
-given(GoogleSearchPage.class)
+given(at(GoogleSearchPage.class))
 .when(it -> it.searchesFor("Selenium"))
-.then(GoogleResultPage.class)
+.then(at(GoogleResultPage.class))
 .then(it -> it.hasTitle("Selenium"));
 ```
 
@@ -211,16 +211,16 @@ public class DoorExampleTest {
 
     @Test
     public void shouldLockWithCorrectKey() {
-        given(DoorUnlocked.class)
+        given(at(DoorUnlocked.class))
         .when(it -> it.turnsKey(CORRECT_KEY))
-        .then(DoorLocked.class);
+        .then(at(DoorLocked.class));
     }
 
     @Test
     public void shouldNotLockWithWrongKey() {
-        given(DoorUnlocked.class)
+        given(at(DoorUnlocked.class))
         .when(it -> it.turnsKey(WRONG_KEY))
-        .then(DoorUnlocked.class);
+        .then(at(DoorUnlocked.class));
     }
 }
 ```

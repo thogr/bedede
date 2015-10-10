@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.StateExpressions.at;
 import static com.github.thogr.bedede.StateExpressions.given;
 
@@ -25,10 +26,9 @@ public class ExpectedConditionTest {
     @Test
     public void test() {
         given(at(GoogleSearchPage.class))
-        .when(it -> it.searchesFor("Selenium"))
+        .when(performing(it -> it.searchesFor("Selenium")))
         .then(at(GoogleResultPage.class))
         .then(it -> it.hasTitle("Selenium"));
     }
-
 }
 

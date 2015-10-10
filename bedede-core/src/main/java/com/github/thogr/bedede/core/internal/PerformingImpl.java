@@ -32,8 +32,4 @@ final class PerformingImpl<T> extends Performing<T> {
     public Performing<T> twice() {
         return times(2);
     }
-
-    protected static <T> void perform(final AbstractPerformer<T> performer, final T it) {
-        performer.perform(it);
-    }
 }

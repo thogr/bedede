@@ -1,5 +1,6 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.StateExpressions.at;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -58,22 +59,22 @@ public class BehaviorDrivenTest extends BehaviorDriven {
     @Test
     public void shouldVerifyEntryOnWhenOnlyOnceAfterAsuming() {
         assuming(at(Target.class))
-        .when(it -> it.performsAction())
-        .when(it -> it.performsAction());
+        .when(performing(it -> it.performsAction()))
+        .when(performing(it -> it.performsAction()));
         then(entryVerified, is(1));
     }
 
     @Test
     public void shouldNotVerifyEntryOnWhenAfterGiven() {
         given(at(Target.class))
-        .when(it -> it.performsAction());
+        .when(performing(it -> it.performsAction()));
         then(entryVerified, is(1));
     }
 
     @Test
     public void shouldVerifyEntryOnThen() {
         assuming(at(Target.class))
-        .when(it -> it.performsAction())
+        .when(performing(it -> it.performsAction()))
         .then(at(Target.class));
         then(entryVerified, is(2));
     }
@@ -81,7 +82,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
     @Test
     public void shouldVerifyEntryOnThenButNotVerifyEntryOnCondition() {
         assuming(at(Target.class))
-        .when(it -> it.performsAction())
+        .when(performing(it -> it.performsAction()))
         .then(at(Target.class))
         .then(it -> it.hasCondition());
         then(entryVerified, is(2));
@@ -90,7 +91,7 @@ public class BehaviorDrivenTest extends BehaviorDriven {
     @Test
     public void shouldNotVerifyEntryOnCondition() {
         assuming(at(Target.class))
-        .when(it -> it.performsAction())
+        .when(performing(it -> it.performsAction()))
         .then(it -> it.hasCondition());
         then(entryVerified, is(1));
     }

@@ -2,6 +2,7 @@ package com.github.thogr.bedede.state.internal;
 
 import com.github.thogr.bedede.conditions.ExpectingExpression;
 import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.core.Performing;
 import com.github.thogr.bedede.state.Assuming;
 import com.github.thogr.bedede.state.StateBasedWhen;
 import com.github.thogr.bedede.state.ThenExpecting;
@@ -15,6 +16,11 @@ class AssumingImpl<T> extends Assuming<T> {
     @Override
     public StateBasedWhen<T> when(final ActionExpression<T> action) {
         return whenAction(action);
+    }
+
+    @Override
+    public StateBasedWhen<T> when(final Performing<T> action) {
+        return whenPerforming(action);
     }
 
     @Override

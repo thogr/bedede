@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.StateExpressions.at;
 
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class TransitionTest extends BehaviorDriven {
     @Test
     public void exampleOneStatement() throws Exception {
         given(at(State1.class)).
-        when(it->it.moves()).
+        when(performing(it->it.moves())).
         then(at(State2.class));
     }
 
@@ -50,7 +51,7 @@ public class TransitionTest extends BehaviorDriven {
         given(at(State1.class));
 
         assuming(at(State1.class)).
-        when(it->it.moves()).
+        when(performing(it->it.moves())).
         then(at(State2.class));
     }
 
@@ -59,7 +60,8 @@ public class TransitionTest extends BehaviorDriven {
         given(at(State1.class));
 
         assuming(at(State1.class)).
-        when(it->it.moves());
+        when(performing(it->it.moves()));
+
         then(at(State2.class));
     }
 

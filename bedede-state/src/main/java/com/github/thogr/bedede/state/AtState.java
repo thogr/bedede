@@ -4,7 +4,7 @@ import com.github.thogr.bedede.core.internal.Internal;
 import com.github.thogr.bedede.state.internal.WrappedState;
 
 /**
- * A state defined by a class
+ * A reference to a state defined by a class
  * @param <T> the type of the class that defines the state
  */
 public class AtState<T> extends WrappedState<T> {
