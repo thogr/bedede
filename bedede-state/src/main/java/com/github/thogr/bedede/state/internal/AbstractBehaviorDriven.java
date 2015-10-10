@@ -8,6 +8,7 @@ import com.github.thogr.bedede.core.BehaviorExpression;
 import com.github.thogr.bedede.core.Given;
 import com.github.thogr.bedede.core.Then;
 import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.AtState;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.ThenExpecting;
 
@@ -53,7 +54,25 @@ public class AbstractBehaviorDriven {
      * @param target starting point for the coming actions
      * @return an Assuming which has methods to further actions.
      */
+    @Deprecated
     public final <T> Assuming<T> given(final Class<T> target) {
+        return controller.given(target);
+    }
+
+    /**
+     * Sets the starting point for the further actions. If the state is
+     * not the current assumed state it will possibly perform the actions needed to get
+     * there, if the target state class has a declared default Entry.
+     * The default Entry must be a public static field of type Entry&lt;T&gt; in the target
+     * class, where T is the target class type.
+     * If the class has more than one such field, one (and only one) must be annotated
+     * with &#64;DefaultEntry.
+     * @see Entry
+     * @param <T> the type of state
+     * @param target starting point for the coming actions
+     * @return an Assuming which has methods to further actions.
+     */
+    public final <T> Assuming<T> given(final AtState<T> target) {
         return controller.given(target);
     }
 
@@ -91,7 +110,21 @@ public class AbstractBehaviorDriven {
      * @param <T> the type of state
      * @return an Assuming which has methods to further actions.
      */
+    @Deprecated
     public final <T> Assuming<T> assuming(final Class<T> target) {
+        return controller.assuming(target);
+    }
+
+    /**
+     * Sets the starting point for the further actions. This sets the assumed current state.
+     * The validity of this assumption is verified before when any action is performed,
+     * but not until then, by execution the method annotated with &#64;OnEntry in the target
+     * class, if any.
+     * @param target starting point for the coming actions.
+     * @param <T> the type of state
+     * @return an Assuming which has methods to further actions.
+     */
+    public final <T> Assuming<T> assuming(final AtState<T> target) {
         return controller.assuming(target);
     }
 
@@ -103,7 +136,20 @@ public class AbstractBehaviorDriven {
      * @param <T> the type of state
      * @return an Assuming which has methods to further actions.
      */
+    @Deprecated
     public final <T> ThenExpecting<T> then(final Class<T> target) {
+        return controller.thenState(target);
+    }
+
+    /**
+     * Sets the end point for the previous actions. This sets the assumed current state.
+     * The validity of this assumption is verified immediately, by execution the method
+     * annotated with &#64;OnEntry in the target class, if any.
+     * @param target end point for the previous actions
+     * @param <T> the type of state
+     * @return an Assuming which has methods to further actions.
+     */
+    public final <T> ThenExpecting<T> then(final AtState<T> target) {
         return controller.thenState(target);
     }
 

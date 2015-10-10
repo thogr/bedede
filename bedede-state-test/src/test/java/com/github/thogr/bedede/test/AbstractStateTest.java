@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.test;
 
+import static com.github.thogr.bedede.StateExpressions.at;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -62,14 +63,14 @@ public class AbstractStateTest extends BehaviorDriven {
 
     @Test
     public void test1() {
-        given(State1.class);
+        given(at(State1.class));
         assertTrue(state == 1);
         assertTrue(State1.guardCalled);
     }
 
     @Test
     public void test2() {
-        given(State2.class);
+        given(at(State2.class));
         assertTrue(state == 2);
         assertTrue(State2.guardCalled);
     }

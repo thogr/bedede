@@ -51,13 +51,12 @@ public class NestedGivenTest {
         given(a(new Vector<String>()), v1 ->
         when(performing(the -> v1.add("Carl")))
         .then(it -> it.getClass(), is(equalTo(Vector.class))));
-
     }
 
     @Test
     public void itShouldHaveCorrectTypeWhenTransforming() throws Exception {
         given(a(new Vector<String>()).with(it -> it.add("Carl")), v1 ->
-        when(transforming(the -> v1.elementAt(0)))
+        when(transforming(it -> v1.elementAt(0)))
         .then(it -> it.getClass(), is(equalTo(String.class))));
     }
 }

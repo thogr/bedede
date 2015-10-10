@@ -8,6 +8,5 @@ repositories {
 
 dependencies {
     testCompile libraries.hamcrest
-    //testCompile project(":bedede-state")
-    testCompile "com.github.thogr.bedede:bedede-state:0.9"
+    testCompile project(":bedede-state")
 }

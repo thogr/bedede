@@ -7,6 +7,7 @@ import static com.github.thogr.bedede.CoreExpressions.given;
 import static com.github.thogr.bedede.CoreExpressions.it;
 import static com.github.thogr.bedede.CoreExpressions.performing;
 import static com.github.thogr.bedede.CoreExpressions.retrieving;
+import static com.github.thogr.bedede.CoreExpressions.then;
 import static com.github.thogr.bedede.CoreExpressions.transforming;
 import static com.github.thogr.bedede.CoreExpressions.when;
 import static org.hamcrest.Matchers.contains;
@@ -333,5 +334,34 @@ public class BehaviorExpressionExampleTest {
                 .when(transforming(it -> p1.getFullName()))
                 .then(it(), is("Carl Smith"))))
        );
+    }
+
+    @Test
+    public void testName27() throws Exception {
+        given(a(new Named()).with(
+                it -> it.setName("Kalle")), it ->
+        then(it.toString(), is(it.getName())));
+    }
+
+    @Test
+    public void testName28() throws Exception {
+        given(a(new Named()), named ->
+        when(performing(the -> named.setName("Kalle")))
+        .then(the -> named.toString(), is(named.getName())));
+    }
+
+    @Test
+    public void testName29() throws Exception {
+        given(a(new Named("Kalle")), it ->
+        then(it.toString(), is(it.getName())));
+    }
+
+    @Test
+    public void testName30() throws Exception {
+        given(a(new Named("Kalle")), named ->
+        then(named.getName(), is("Kalle"))
+        .then(it(), is(equalTo(named.toString())))
+        .then(the -> named, is(equalTo(new Named(named.getName()))))
+        .then(the -> named.toString(), is(named.getName())));
     }
 }

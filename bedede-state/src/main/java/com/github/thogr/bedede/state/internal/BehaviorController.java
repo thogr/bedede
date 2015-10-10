@@ -32,6 +32,10 @@ public final class BehaviorController {
         this.machine = machine;
     }
 
+    <T> Assuming<T> given(final WrappedState<T> target) {
+        return given(target.getState());
+    }
+
     <T> Assuming<T> given(final Class<T> target) {
         if (!was(target)) {
             return given(EntryFinder.getDefaultEntry(target), target);
@@ -68,6 +72,11 @@ public final class BehaviorController {
         return new AssumingImpl<T>(state, this);
     }
 
+    <T> Assuming<T> assuming(final WrappedState<T> target) {
+        return assuming(target.getState());
+    }
+
+
     <T> StateBasedWhenImpl<T> when(final ActionExpression<T> action, final Class<T> target) {
         perform(action, target);
         return new StateBasedWhenImpl<>(target, this);
@@ -76,6 +85,10 @@ public final class BehaviorController {
     <T> ThenExpecting<T> thenState(final Class<T> state) {
         next(state);
         return new ThenExpectingImpl<>(state, this);
+    }
+
+    <T> ThenExpecting<T> thenState(final WrappedState<T> target) {
+        return thenState(target.getState());
     }
 
     <S, T> ThenExpecting<S> thenExpecting(

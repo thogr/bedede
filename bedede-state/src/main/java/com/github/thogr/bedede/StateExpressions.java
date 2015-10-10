@@ -4,6 +4,7 @@ import com.github.thogr.bedede.conditions.BooleanCondition;
 import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
 import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.AtState;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
 import com.github.thogr.bedede.state.internal.StateExpressionsImpl;
@@ -57,8 +58,17 @@ public class StateExpressions {
      * @param state starting point for the coming actions
      * @return an Assuming which has methods to further actions.
      */
-    public static <T> Assuming<T> given(final Class<T> state) {
-        return impl.given(state);
+    public static <T> Assuming<T> given(final AtState<T> state) {
+        return impl.givenAtState(state);
+    }
+
+    /**
+     * Reference a state class.
+     * @param state the class that defines the state
+     * @return the state reference
+     */
+    public static <T> AtState<T> at(final Class<T> state) {
+        return  impl.atState(state);
     }
 
     /**

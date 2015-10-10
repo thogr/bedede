@@ -2,6 +2,7 @@
 
 package com.github.thogr.bedede.test;
 
+import static com.github.thogr.bedede.StateExpressions.at;
 import static com.github.thogr.bedede.StateExpressions.expecting;
 import static com.github.thogr.bedede.StateExpressions.otherwise;
 
@@ -92,7 +93,7 @@ public class RunnerTest {
             public void run() {
                 System.out.println("test1: running");
 
-                given(State1.class)
+                given(at(State1.class))
                 .then(it -> it.isDone("test1"));
             }
         };
@@ -105,7 +106,7 @@ public class RunnerTest {
             public void run() {
                 System.out.println("test2: running");
 
-                given(State2.class)
+                given(at(State2.class))
                 .when(it -> it.doesSomething())
                 .then(it -> it.hasValue(123));
             }

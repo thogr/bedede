@@ -2,6 +2,8 @@
 
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.StateExpressions.at;
+
 import org.junit.Test;
 
 import com.github.thogr.bedede.BehaviorDriven;
@@ -39,7 +41,7 @@ public class DefiningExampleTest extends BehaviorDriven {
 
     @Test
     public void test0() {
-        given(Moved.class);
+        given(at(Moved.class));
     }
 
     @Test

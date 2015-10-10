@@ -1,12 +1,14 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.StateExpressions.at;
+import static com.github.thogr.bedede.StateExpressions.given;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.github.thogr.bedede.SeleniumExpressions;
-import com.github.thogr.bedede.StateExpressions;
 
 public class ExpectedConditionTest {
 
@@ -22,9 +24,9 @@ public class ExpectedConditionTest {
 
     @Test
     public void test() {
-        StateExpressions.given(GoogleSearchPage.class)
+        given(at(GoogleSearchPage.class))
         .when(it -> it.searchesFor("Selenium"))
-        .then(GoogleResultPage.class)
+        .then(at(GoogleResultPage.class))
         .then(it -> it.hasTitle("Selenium"));
     }
 

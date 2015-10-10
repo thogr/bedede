@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples;
 
+import static com.github.thogr.bedede.StateExpressions.at;
 import static com.github.thogr.bedede.StateExpressions.expecting;
 import static com.github.thogr.bedede.StateExpressions.given;
 import static com.github.thogr.bedede.StateExpressions.otherwise;
@@ -46,7 +47,7 @@ public class BooleanConditionTest {
 
     @Test
     public void example() {
-        given(State1.class)
+        given(at(State1.class))
         .when(it -> it.changesNameTo("Nisse"))
         .then(it -> it.shouldHaveStatus(1))
         .then(it -> it.shouldHaveName("Nisse"));

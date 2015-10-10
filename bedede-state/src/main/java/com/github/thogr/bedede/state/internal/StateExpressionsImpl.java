@@ -6,6 +6,7 @@ import com.github.thogr.bedede.conditions.Expecting;
 import com.github.thogr.bedede.conditions.Otherwise;
 import com.github.thogr.bedede.core.internal.Internal;
 import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.AtState;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.GivenElement;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
@@ -20,9 +21,14 @@ public class StateExpressionsImpl {
     }
 
     @Internal
-    public <T> Assuming<T> given(final Class<T> state) {
+    public <T> Assuming<T> givenAtState(final AtState<T> state) {
         final BehaviorDriver driver = new BehaviorDriver();
         return driver.given(state);
+    }
+
+    @Internal
+    public <T> AtState<T> atState(final Class<T> state) {
+        return AtState.at(state);
     }
 
     @Internal

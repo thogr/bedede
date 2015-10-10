@@ -9,5 +9,14 @@ public interface ThenAnyTarget {
      * @param <T> the type of the target state class
      * @return the continued specification with more verifications
      */
+    @Deprecated
     <T> ThenExpecting<T> then(Class<T> target);
+
+    /**
+     * Verifies the target state.
+     * @param target the target state
+     * @param <T> the type of the target state class
+     * @return the continued specification with more verifications
+     */
+    <T> ThenExpecting<T> then(AtState<T> target);
 }

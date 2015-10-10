@@ -2,6 +2,7 @@ package com.github.thogr.bedede.state.internal;
 
 import com.github.thogr.bedede.conditions.ExpectingExpression;
 import com.github.thogr.bedede.core.ActionExpression;
+import com.github.thogr.bedede.state.AtState;
 import com.github.thogr.bedede.state.StateBasedWhen;
 import com.github.thogr.bedede.state.ThenExpecting;
 
@@ -13,6 +14,11 @@ final class StateBasedWhenImpl<S> extends AbstractWhenImpl<S> implements StateBa
 
     @Override
     public <T> ThenExpecting<T> then(final Class<T> target) {
+        return thenState(target);
+    }
+
+    @Override
+    public <T> ThenExpecting<T> then(final AtState<T> target) {
         return thenState(target);
     }
 

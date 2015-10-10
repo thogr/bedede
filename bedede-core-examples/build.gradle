@@ -7,6 +7,6 @@ repositories {
 
 dependencies {
     testCompile libraries.hamcrest
-    testCompile project(":bedede-core")
-    testCompile project(":bedede-mockito")
+    //testCompile "com.github.thogr.bedede:bedede-lib:0.12.2"
+    testCompile project(':bedede-lib')
 }

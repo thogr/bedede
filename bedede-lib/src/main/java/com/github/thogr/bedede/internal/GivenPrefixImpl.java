@@ -19,7 +19,7 @@ class GivenPrefixImpl implements GivenPrefix {
 
     @Override
     public <T> Assuming<T> at(final Class<T> state) {
-        return StateExpressions.given(state);
+        return StateExpressions.given(StateExpressions.at(state));
     }
 
     @Override

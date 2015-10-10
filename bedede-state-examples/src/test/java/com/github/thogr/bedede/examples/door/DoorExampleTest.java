@@ -1,5 +1,6 @@
 package com.github.thogr.bedede.examples.door;
 
+import static com.github.thogr.bedede.StateExpressions.at;
 import static com.github.thogr.bedede.StateExpressions.entry;
 import static com.github.thogr.bedede.StateExpressions.expecting;
 import static com.github.thogr.bedede.StateExpressions.given;
@@ -99,38 +100,38 @@ public class DoorExampleTest {
 
     @Test
     public void shouldNotLockWithWrongKey() {
-        given(DoorUnlocked.class)
+        given(at(DoorUnlocked.class))
         .when(it -> it.turnsKey(WRONG_KEY))
-        .then(DoorUnlocked.class);
+        .then(at(DoorUnlocked.class));
     }
 
     @Test
     public void shouldNotUnlockWithWrongKey() {
-        given(DoorLocked.class)
+        given(at(DoorLocked.class))
         .when(it -> it.turnsKey(WRONG_KEY))
-        .then(DoorLocked.class);
+        .then(at(DoorLocked.class));
     }
 
     @Test
     public void shouldNotUnlockWithWrongKeyAgain() {
         given(DoorLocked.byLockingWith(CORRECT_KEY))
         .when(it -> it.turnsKey(WRONG_KEY))
-        .then(DoorLocked.class);
+        .then(at(DoorLocked.class));
     }
 
     @Test
     public void shouldNotCloseWhenLocked() throws Exception {
-        given(DoorOpen.class)
+        given(at(DoorOpen.class))
         .when(it -> it.turnsKey(CORRECT_KEY))
         .when(DoorState::close)
-        .then(DoorOpen.class);
+        .then(at(DoorOpen.class));
     }
 
     @Test
     public void shouldCloseWhenWrongKey() throws Exception {
-        given(DoorOpen.class)
+        given(at(DoorOpen.class))
         .when(it -> it.turnsKey(WRONG_KEY))
         .when(DoorState::close)
-        .then(DoorUnlocked.class);
+        .then(at(DoorUnlocked.class));
     }
 }

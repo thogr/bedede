@@ -12,7 +12,7 @@ public abstract class Wrapped<T> {
         return obj;
     }
 
-    static <T> T getWrapped(final Wrapped<T> wrapped) {
+    protected static <T> T getWrapped(final Wrapped<T> wrapped) {
         return wrapped.getWrapped();
     }
 }

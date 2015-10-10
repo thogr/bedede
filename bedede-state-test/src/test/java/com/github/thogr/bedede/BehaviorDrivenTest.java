@@ -1,5 +1,6 @@
 package com.github.thogr.bedede;
 
+import static com.github.thogr.bedede.StateExpressions.at;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 
@@ -37,27 +38,26 @@ public class BehaviorDrivenTest extends BehaviorDriven {
 
     @Test
     public void shouldVerifyEntryOnGivenInitally() {
-        given(Target.class);
+        given(at(Target.class));
         then(entryVerified, is(1));
     }
 
     @Test
     public void shouldVerifyEntryOnGivenOnlyOnce() {
-        given(Target.class);
-        given(Target.class);
+        given(at(Target.class));
+        given(at(Target.class));
         then(entryVerified, is(1));
     }
 
     @Test
     public void shouldNotVerifyEntryOnAssuming() {
-        assuming(Target.class);
-
+        assuming(at(Target.class));
         assertEquals(0, entryVerified);
     }
 
     @Test
     public void shouldVerifyEntryOnWhenOnlyOnceAfterAsuming() {
-        assuming(Target.class)
+        assuming(at(Target.class))
         .when(it -> it.performsAction())
         .when(it -> it.performsAction());
         then(entryVerified, is(1));
@@ -65,31 +65,31 @@ public class BehaviorDrivenTest extends BehaviorDriven {
 
     @Test
     public void shouldNotVerifyEntryOnWhenAfterGiven() {
-        given(Target.class)
+        given(at(Target.class))
         .when(it -> it.performsAction());
         then(entryVerified, is(1));
     }
 
     @Test
     public void shouldVerifyEntryOnThen() {
-        assuming(Target.class)
+        assuming(at(Target.class))
         .when(it -> it.performsAction())
-        .then(Target.class);
+        .then(at(Target.class));
         then(entryVerified, is(2));
     }
 
     @Test
     public void shouldVerifyEntryOnThenButNotVerifyEntryOnCondition() {
-        assuming(Target.class)
+        assuming(at(Target.class))
         .when(it -> it.performsAction())
-        .then(Target.class)
+        .then(at(Target.class))
         .then(it -> it.hasCondition());
         then(entryVerified, is(2));
     }
 
     @Test
     public void shouldNotVerifyEntryOnCondition() {
-        assuming(Target.class)
+        assuming(at(Target.class))
         .when(it -> it.performsAction())
         .then(it -> it.hasCondition());
         then(entryVerified, is(1));

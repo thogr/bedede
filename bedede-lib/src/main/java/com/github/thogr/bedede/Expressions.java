@@ -32,6 +32,7 @@ import com.github.thogr.bedede.internal.ExpressionsImpl;
 import com.github.thogr.bedede.mocks.Mocked;
 import com.github.thogr.bedede.mocks.That;
 import com.github.thogr.bedede.state.Assuming;
+import com.github.thogr.bedede.state.AtState;
 import com.github.thogr.bedede.state.Entry;
 import com.github.thogr.bedede.state.GivenElement;
 import com.github.thogr.bedede.state.internal.Defining.DefiningEntry;
@@ -411,8 +412,17 @@ public final class Expressions {
      * @param state starting point for the coming actions
      * @return an Assuming which has methods to further actions.
      */
-    public static <T> Assuming<T> given(final Class<T> state) {
+    public static <T> Assuming<T> given(final AtState<T> state) {
         return StateExpressions.given(state);
+    }
+
+    /**
+     * Reference a state class.
+     * @param state the class that defines the state
+     * @return the state reference
+     */
+    public static <T> AtState<T> at(final Class<T> state) {
+        return  StateExpressions.at(state);
     }
 
     /**
